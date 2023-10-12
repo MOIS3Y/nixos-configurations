@@ -73,7 +73,7 @@
     ```bash
     mkfs.ext4 -L nixos /dev/vg0/root
     mkfs.ext4 -L home /dev/vg0/home
-    mkfs.ext4 -L docker /dev/vg0/home
+    mkfs.ext4 -L docker /dev/vg0/docker
     mkswap -L swap /dev/vg0/swap
     ``` 
     
