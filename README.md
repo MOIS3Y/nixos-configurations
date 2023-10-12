@@ -38,7 +38,7 @@
     nvme0n1        259:0    0 210,0G  0 disk
     ├─nvme0n1p1    259:1    0    10G  0 part
     └─nvme0n1p2    259:2    0   200G  0 part
-      ├─vg0-nixos  254:0    0    30G  0 lvm 
+      ├─vg0-root   254:0    0    30G  0 lvm 
       ├─vg0-home   254:1    0    30G  0 lvm 
       └─vg0-swap   254:4    0    10G  0 lvm
     ```
@@ -66,23 +66,27 @@
     lvcreate -L30G -n nixos vg0
     lvcreate -L30G -n home vg0
     lvcreate -L10G -n swap vg0
+    lvcreate -L20G -n docker vg0
     ```
     
     4.3. Create filesystem:
     ```bash
-    mkfs.ext4 -L nixos /dev/vg0/nixos
+    mkfs.ext4 -L nixos /dev/vg0/root
     mkfs.ext4 -L home /dev/vg0/home
+    mkfs.ext4 -L docker /dev/vg0/home
     mkswap -L swap /dev/vg0/swap
     ``` 
     
     4.4. Mount:
     ```bash
-    mkdir -p /mnt/{boot,home}
+    mkdir -p /mnt/{boot,home,var}
+    mkdir -p /mnt/var/lib/docker
     mkdir -p /mnt/boot/efi
     
     mount /dev/disk/by-label/nixos /mnt
     mount /dev/disk/by-label/EFI /mnt/boot/efi
     mount /dev/disk/by-label/home /mnt/home
+    mount /dev/disk/by-label/docker /mnt/var/lib/docker
     swapon /dev/disk/by-label/swap
     # See final result:
     lsblk
@@ -96,7 +100,7 @@
 
 6. Install nixos from flake:
     ```bash
-    nixos-install --flake github:MOIS3Y/dotfiles-nixos#honor --impure
+    nixos-install --flake github:MOIS3Y/nixos-configurations#honor-wlr-w09 --impure
     ```
 7. Fix GRUB (I have this trouble) after install:
     ```bash
@@ -106,6 +110,7 @@
 8. Umount:
     ```bash
     umount /mnt/boot/efi
+    umount /mnt/var/lib/docker
     umount /mnt/home
     umount /mnt
     swapoff --all
