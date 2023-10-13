@@ -12,6 +12,7 @@
     ./hardware-configuration.nix  # honor-vlr-w09
     ./boot
     ./environment
+    ./fonts
     ./i18n
     ./networking
     ./nix
