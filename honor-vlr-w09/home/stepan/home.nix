@@ -1,9 +1,12 @@
 # █░█ █▀█ █▀▄▀█ █▀▀ ▄▄ █▀▄▀█ ▄▀█ █▄░█ ▄▀█ █▀▀ █▀▀ █▀█ ▀
 # █▀█ █▄█ █░▀░█ ██▄ ░░ █░▀░█ █▀█ █░▀█ █▀█ █▄█ ██▄ █▀▄ ▄
-# -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+# -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 { config, pkgs, ... }: {
   home.username = "stepan";
   home.homeDirectory = "/home/stepan";
+  home.sessionVariables = {
+    GTK_THEME = io.elementary.stylesheet.blueberry:dark;
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -18,8 +21,11 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  xsession.enable = true;
+
   imports = [
-    ./dconf.nix
-    ./pkgs.nix
+    ./config
+    ./pkgs
+    ./programs
   ];
 }

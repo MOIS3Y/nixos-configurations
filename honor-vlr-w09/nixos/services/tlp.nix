@@ -4,6 +4,6 @@
 
 {config, pkgs, ...}: {
   services.tlp = {
-    enable = true;
+    enable = false;
   };
 }

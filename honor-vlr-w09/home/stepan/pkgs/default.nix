@@ -1,20 +1,32 @@
 # █▀█ █▄▀ █▀▀ █▀ ▀
 # █▀▀ █░█ █▄█ ▄█ ▄
-# -- -- -- -- -- -- 
+# -- -- -- -- -- -
+
 { config, pkgs, ... }: {
   home.packages = with pkgs; [   
     catppuccin-kvantum
-    catppuccin-cursors                            
+    catppuccin-papirus-folders
     firefox
     flameshot
+    gnome.dconf-editor
+    inkscape
     jetbrains.pycharm-community
     linphone
     mattermost-desktop
+    nmap
+    pavucontrol
     poetry
+    rofi
+    rofi-bluetooth
+    rofi-power-menu
+    rofi-systemd
+    rofi-vpn
     telegram-desktop
+    vault
     virt-manager
     vlc
     vscode
+    wezterm
     zoom-us
   ];
 }

@@ -20,7 +20,41 @@
         "type": "github"
       }
     },
+    "i3lock-color-wrapper": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1697549803,
+        "narHash": "sha256-aamId6/7vfaXvC7O4BiU41jaWfmUkTyVw10cepR4g6k=",
+        "owner": "MOIS3Y",
+        "repo": "i3lock-color-wrapper",
+        "rev": "bc8f81c51e03b8ebf8680eb65400591a2c7aa488",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MOIS3Y",
+        "repo": "i3lock-color-wrapper",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1697379843,
+        "narHash": "sha256-RcnGuJgC2K/UpTy+d32piEoBXq2M+nVFzM3ah/ZdJzg=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "12bdeb01ff9e2d3917e6a44037ed7df6e6c3df9d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1696879762,
         "narHash": "sha256-Ud6bH4DMcYHUDKavNMxAhcIpDGgHMyL/yaDEAVSImQY=",
@@ -36,10 +70,46 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1697379843,
+        "narHash": "sha256-RcnGuJgC2K/UpTy+d32piEoBXq2M+nVFzM3ah/ZdJzg=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "12bdeb01ff9e2d3917e6a44037ed7df6e6c3df9d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "i3lock-color-wrapper": "i3lock-color-wrapper",
+        "nixpkgs": "nixpkgs_2",
+        "xidlehook-caffeine": "xidlehook-caffeine"
+      }
+    },
+    "xidlehook-caffeine": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1697609413,
+        "narHash": "sha256-acDf/lEQgb5mMWEPEy9hW5gG1dBS+2Qrl6HWRHVE1wI=",
+        "owner": "MOIS3Y",
+        "repo": "xidlehook-caffeine",
+        "rev": "6687c43a92b7d35509abecdb5e4a5a0536496537",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MOIS3Y",
+        "repo": "xidlehook-caffeine",
+        "type": "github"
       }
     }
   },

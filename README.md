@@ -35,12 +35,13 @@
     I am using nvme disk (/dev/nvme0n1) with GPT partition label: 
     ```bash
     # Final result:
-    nvme0n1        259:0    0 210,0G  0 disk
-    ├─nvme0n1p1    259:1    0    10G  0 part
-    └─nvme0n1p2    259:2    0   200G  0 part
-      ├─vg0-root   254:0    0    30G  0 lvm 
-      ├─vg0-home   254:1    0    30G  0 lvm 
-      └─vg0-swap   254:4    0    10G  0 lvm
+    nvme0n1          259:0    0 210,0G  0 disk
+    ├─nvme0n1p1      259:1    0     2G  0 part
+    └─nvme0n1p2      259:2    0   200G  0 part
+      ├─vg0-root     254:0    0    30G  0 lvm 
+      ├─vg0-home     254:1    0    30G  0 lvm
+      ├─vg0-docker   254:1    0    20G  0 lvm 
+      └─vg0-swap     254:4    0    10G  0 lvm
     ```
     
     4.1. Create partitions
@@ -63,15 +64,15 @@
     ```bash
     pvcreate /dev/nvme0n1p2
     vgcreate vg0 /dev/nvme0n1p2
-    lvcreate -L30G -n nixos vg0
+    lvcreate -L30G -n root vg0
     lvcreate -L30G -n home vg0
-    lvcreate -L10G -n swap vg0
     lvcreate -L20G -n docker vg0
+    lvcreate -L10G -n swap vg0
     ```
     
     4.3. Create filesystem:
     ```bash
-    mkfs.ext4 -L nixos /dev/vg0/root
+    mkfs.ext4 -L root /dev/vg0/root
     mkfs.ext4 -L home /dev/vg0/home
     mkfs.ext4 -L docker /dev/vg0/docker
     mkswap -L swap /dev/vg0/swap
@@ -83,7 +84,7 @@
     mkdir -p /mnt/var/lib/docker
     mkdir -p /mnt/boot/efi
     
-    mount /dev/disk/by-label/nixos /mnt
+    mount /dev/disk/by-label/root /mnt
     mount /dev/disk/by-label/EFI /mnt/boot/efi
     mount /dev/disk/by-label/home /mnt/home
     mount /dev/disk/by-label/docker /mnt/var/lib/docker
@@ -100,7 +101,10 @@
 
 6. Install nixos from flake:
     ```bash
+    # laptop:
     nixos-install --flake github:MOIS3Y/nixos-configurations#honor-wlr-w09 --impure
+    # workstation:
+    nixos-install --flake github:MOIS3Y/nixos-configurations#msi-z390-a-pro --impure
     ```
 7. Fix GRUB (I have this trouble) after install:
     ```bash
