@@ -28,11 +28,24 @@
       };
     };
     iconTheme = {
-      name = "Catppuccin-papirus-folders";
+      name = "Papirus-Dark";
       package = pkgs.catppuccin-papirus-folders.override {
         accent = "blue";
         flavor = "mocha";  
       };
+    };
+    font = {
+      name = "Inter";
+      package = pkgs.inter;
+      size = 11;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+      gtk-decoration-layout = "menu:";
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+      gtk-decoration-layout = "menu:";
     };
   };
 }

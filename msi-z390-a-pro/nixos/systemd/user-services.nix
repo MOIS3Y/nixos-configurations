@@ -33,5 +33,17 @@
         '';
       };
     };
+    nm-applet = {
+      description = "Network Manager applet";
+      wantedBy = [ "network-online.target" "graphical-session.target" ];
+      wants = [ "network-online.target" "graphical-session.target" ];
+      after = [ "network-online.target" "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+      };
+    };
+    # ... add more user.services here:
   };
 }
