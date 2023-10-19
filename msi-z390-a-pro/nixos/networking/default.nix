@@ -4,7 +4,7 @@
 
 {config, pkgs, ...}: {
 
-  networking.hostName = "honor";
+  networking.hostName = "workstation";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

@@ -4,11 +4,12 @@
 
 {config, pkgs, ...}: {
   
-  boot.kernelParams = [ "quiet" ];
-  boot.consoleLogLevel = 3;
+  # boot.kernelParams = [ "quiet" ];
+  # boot.consoleLogLevel = 3;
   
   imports = [
     ./loader.nix
-    ./plymouth.nix
+    # ./plymouth.nix
   ];
 }
+

@@ -12,7 +12,7 @@
       devices = ["nodev"];
       efiSupport = true;
       useOSProber = true;
-      configurationLimit = 3;
+      configurationLimit = 5;
       gfxmodeEfi = "1920x1080";
       theme = pkgs.fetchzip {
         name = "grub-theme-msi";

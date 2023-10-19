@@ -4,14 +4,14 @@
 
 { config, pkgs, ... }: 
   let
-    extrapkgs = pkgs.callPackage ../extrapkgs {};
+    extra-pkgs = pkgs.callPackage ../extrapkgs {};
   in {
   services.xserver = {
     enable = true;
     displayManager = { 
       sddm = { 
         enable = true;
-        theme = "${extrapkgs.sugar-candy}";
+        theme = "${extra-pkgs.sugar-candy}";
       };
     };
     windowManager = {

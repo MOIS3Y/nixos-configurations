@@ -13,6 +13,7 @@
     systemPackages = with pkgs; [
       # Default pkgs:
       adw-gtk3
+      at-spi2-atk  # require for polkit-gnome-authentication-agent-1
       bottom
       brightnessctl
       catppuccin-cursors
@@ -38,8 +39,6 @@
       wget
       xidlehook
       xkb-switch
-      # Tray icons:
-      indicator-application-gtk3
       # QT5 styles:
       libsForQt5.qt5ct
       libsForQt5.qtstyleplugin-kvantum

@@ -11,7 +11,9 @@
       after = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        ExecStart = ''
+          ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
+        '';
       };
     };
     xidlehook = {
