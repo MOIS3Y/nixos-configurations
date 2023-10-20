@@ -5,5 +5,6 @@
 { config, pkgs, ... }: {
     imports = [
         ./bluetooth.nix
+        ./xpadneo.nix
     ];
 }
