@@ -5,5 +5,8 @@
 { config, pkgs, ... }: {
   imports = [
     ./git.nix
-  ];    
+    ./lf.nix
+    ./lsd.nix
+    ./zsh.nix
+  ];
 }

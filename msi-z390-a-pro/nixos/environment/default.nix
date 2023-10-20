@@ -16,7 +16,7 @@
       at-spi2-atk  # require for polkit-gnome-authentication-agent-1
       bottom
       brightnessctl
-      catppuccin-cursors
+      catppuccin-cursors.mochaBlue
       catppuccin-kvantum
       catppuccin-papirus-folders
       curl
@@ -24,7 +24,7 @@
       gradience
       gparted
       htop
-      i3lock-color
+      imv
       jq
       libnotify
       ncdu
@@ -34,17 +34,13 @@
       picom
       (python311.withPackages(ps: with ps; [ requests psutil ]))
       python311Packages.pip
-      (ranger.override { imagePreviewSupport = true; })
       rsync
       tree
       unzip
-      ueberzug
       wget
-      w3m
       xdg-utils
       xidlehook
       xkb-switch
-      xdragon
       # QT5 styles:
       libsForQt5.qt5ct
       libsForQt5.qtstyleplugin-kvantum

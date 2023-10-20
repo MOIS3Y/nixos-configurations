@@ -8,10 +8,14 @@
   in {
   services.xserver = {
     enable = true;
-    displayManager = { 
+    displayManager = {
       sddm = { 
         enable = true;
+        autoNumlock = true;
         theme = "${extra-pkgs.sugar-candy}";
+        settings = {
+          Theme = { CursorTheme = "Catppuccin-Mocha-Blue-Cursors"; };
+        };
       };
     };
     windowManager = {

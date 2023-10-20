@@ -24,9 +24,10 @@
       "video/*" = [ "vlc.dekstop" ];
       "image/*" = [ "imv.desktop" ];
       "application/json" = browser;
-      "application/pdf" = [ "org.pwmt.zathura.desktop.desktop" ];
+      "application/pdf" = [ "firefox.desktop" ];
       "x-scheme-handler/discord" = [ "discord.desktop" ];
       "x-scheme-handler/tg" = [ "telegramdesktop.desktop" ];
+      "x-scheme-handler/mattermost" = [ "Mattermost.desktop" ];
     };
 in {
   xdg = {
