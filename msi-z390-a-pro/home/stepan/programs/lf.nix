@@ -8,6 +8,7 @@
     settings = {
       drawbox = true;
       icons = true;
+      ignorecase = true;
     };
     commands = {
       dragon-out = ''%${pkgs.xdragon}/bin/xdragon -a -x "$fx"'';
@@ -23,6 +24,7 @@
     keybindings = {
       xx = "dragon-out";
       mk = "mkdir";
+      xD = "delete";
       "<enter>" = "open";
       # ... add more keybindings here:
     };

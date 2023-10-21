@@ -16,6 +16,7 @@
     # Extra:
     i3lock-color-wrapper.url = "github:MOIS3Y/i3lock-color-wrapper";
     xidlehook-caffeine.url = "github:MOIS3Y/xidlehook-caffeine";
+    nix-gaming.url = "github:fufexan/nix-gaming";
   };
   
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -24,8 +25,13 @@
       lib = nixpkgs.lib;
       pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
       extrapkgs = {
+        # power managment:
         i3lock-run = inputs.i3lock-color-wrapper.packages."${system}".i3lock-color-wrapper;
         xidlehook-caffeine = inputs.xidlehook-caffeine.packages."${system}".xidlehook-caffeine;
+        # gaming:
+        proton-ge = inputs.nix-gaming.packages.${system}.proton-ge;
+        wine-tkg = inputs.nix-gaming.packages.${system}.wine-tkg;
+        wine-ge = inputs.nix-gaming.packages.${system}.wine-ge;
       };
       specialArgs = { inherit system; inherit inputs; inherit extrapkgs; };
     in {
