@@ -61,6 +61,7 @@
       };
       "stepan@msi-z390-a-pro" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = { inherit inputs; inherit extrapkgs; };
         modules = [
           ./msi-z390-a-pro/home/stepan/home.nix
         ];

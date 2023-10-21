@@ -2,8 +2,9 @@
 # █▀▀ █░█ █▄█ ▄█ ▄
 # -- -- -- -- -- -
 
-{ config, pkgs, ... }: {
-  home.packages = with pkgs; [   
+{ config, pkgs, extrapkgs, ... }: {
+  home.packages = with pkgs; [
+    # Default:
     catppuccin-kvantum
     catppuccin-papirus-folders
     dconf
@@ -13,6 +14,8 @@
     inkscape
     jetbrains.pycharm-community
     linphone
+    lutris
+    # (lutris.override { extraPkgs = pkgs: with extrapkgs; [ wine-ge ]; })
     mattermost-desktop
     nmap
     pavucontrol
@@ -30,5 +33,7 @@
     wezterm
     xdg-utils
     zoom-us
+    # Extra:
+    extrapkgs.wine-ge
   ];
 }

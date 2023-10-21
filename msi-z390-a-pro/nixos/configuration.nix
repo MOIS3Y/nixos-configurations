@@ -11,6 +11,7 @@
   imports = [
     ./hardware-configuration.nix  # honor-vlr-w09
     ./boot
+    ./console
     ./environment
     ./fonts
     ./hardware

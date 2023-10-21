@@ -8,7 +8,7 @@
     stepan = {
       isNormalUser = true;
       description = "Stepan Zhukovsky";
-      extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" "input" ];
       shell = pkgs.zsh;
       packages = with pkgs; [
         virt-manager

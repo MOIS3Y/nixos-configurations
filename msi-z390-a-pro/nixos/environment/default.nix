@@ -27,7 +27,6 @@
       imv
       jq
       libnotify
-      (lutris.override { extraPkgs = pkgs: with extrapkgs; [ wine-tkg wine-ge ]; })
       ncdu
       ntfs3g
       neofetch
@@ -51,8 +50,6 @@
       # Extra-pkgs:
       extrapkgs.i3lock-run
       extrapkgs.xidlehook-caffeine
-      extrapkgs.wine-tkg
-      extrapkgs.wine-ge
     ];
   };
 }
