@@ -37,6 +37,7 @@ in {
       createDirectories = true;
       extraConfig = {
         XDG_DEVELOPMENT_DIR = "${config.xdg.userDirs.documents}/Dev";
+        XDG_GAMES_DIR = "${config.home.homeDirectory}/Games";
       };
     };
     mimeApps = {

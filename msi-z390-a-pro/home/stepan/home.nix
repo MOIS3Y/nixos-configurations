@@ -22,6 +22,8 @@
 
   imports = [
     ./config
+    ./nix
+    ./nixpkgs
     ./pkgs
     ./programs
   ];
