@@ -48,6 +48,11 @@
         inherit specialArgs;
         modules = [
           ./msi-z390-a-pro/nixos/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.stepan = import ./msi-z390-a-pro/home/stepan/home.nix;
+          }
         ];
       };
       # ... add more hosts here:
@@ -57,13 +62,6 @@
         inherit pkgs;
         modules = [
           ./honor-vlr-w09/home/stepan/home.nix
-        ];
-      };
-      "stepan@msi-z390-a-pro" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = { inherit inputs; inherit extrapkgs; };
-        modules = [
-          ./msi-z390-a-pro/home/stepan/home.nix
         ];
       };
       # ... add more users here:

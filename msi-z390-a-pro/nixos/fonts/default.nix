@@ -10,6 +10,7 @@
       noto-fonts-emoji
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
       roboto
+      ubuntu_font_family
     ];
     fontconfig = {
       enable = true;
@@ -21,8 +22,8 @@
       subpixel.lcdfilter = "default";
       defaultFonts = {
         emoji = [ "Noto Color Emoji" ];
-        sansSerif = [ "DejaVu Sans" ];  # default
-        serif = [ "DejaVu Serif" ];  # default
+        sansSerif = [ "Ubuntu" ];  # default DejaVu Sans
+        serif = [ "Ubuntu" ];  # default DejaVu Serif
         monospace = [ "JetBrainsMono" ];
       };
     };

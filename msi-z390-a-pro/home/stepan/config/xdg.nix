@@ -28,6 +28,8 @@
       "x-scheme-handler/discord" = [ "discord.desktop" ];
       "x-scheme-handler/tg" = [ "telegramdesktop.desktop" ];
       "x-scheme-handler/mattermost" = [ "Mattermost.desktop" ];
+
+      "inode/directory" = [ "lf.desktop" ];
     };
 in {
   xdg = {

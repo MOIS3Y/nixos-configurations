@@ -14,6 +14,7 @@
       # Default pkgs:
       adw-gtk3
       at-spi2-atk  # require for polkit-gnome-authentication-agent-1
+      appimage-run
       bottom
       brightnessctl
       catppuccin-cursors.mochaBlue
@@ -50,6 +51,7 @@
       # Extra-pkgs:
       extrapkgs.i3lock-run
       extrapkgs.xidlehook-caffeine
+      (lutris.override { extraPkgs = pkgs: with extrapkgs; [ wine-ge ]; })
     ];
   };
 }

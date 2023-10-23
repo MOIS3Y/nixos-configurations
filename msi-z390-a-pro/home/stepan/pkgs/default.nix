@@ -10,22 +10,19 @@
     dconf
     firefox
     flameshot
-    gnome.dconf-editor
     inkscape
     jetbrains.pycharm-community
     linphone
-    lutris
-    # (lutris.override { extraPkgs = pkgs: with extrapkgs; [ wine-ge ]; })
     mattermost-desktop
     nmap
     pavucontrol
     poetry
-    rofi
     rofi-bluetooth
     rofi-power-menu
     rofi-systemd
     rofi-vpn
     telegram-desktop
+    transmission-gtk
     vault
     virt-manager
     vlc
@@ -33,7 +30,5 @@
     wezterm
     xdg-utils
     zoom-us
-    # Extra:
-    extrapkgs.wine-ge
   ];
 }

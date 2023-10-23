@@ -28,10 +28,9 @@
       };
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.catppuccin-papirus-folders.override {
-        accent = "blue";
-        flavor = "mocha";  
+      name = "Tela-circle-blue-dark";
+      package = pkgs.tela-circle-icon-theme.override {
+        allColorVariants = true;
       };
     };
     font = {
