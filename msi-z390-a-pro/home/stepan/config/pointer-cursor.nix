@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+# █▀█ █▀█ █ █▄░█ ▀█▀ █▀▀ █▀█ ▄▄ █▀▀ █░█ █▀█ █▀ █▀█ █▀█ ▀
+# █▀▀ █▄█ █ █░▀█ ░█░ ██▄ █▀▄ ░░ █▄▄ █▄█ █▀▄ ▄█ █▄█ █▀▄ ▄
+# -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+
+{ config, pkgs, ... }: {
     home.pointerCursor = {
       name = "Catppuccin-Mocha-Blue-Cursors";
       package = pkgs.catppuccin-cursors.mochaBlue;

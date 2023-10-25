@@ -33,25 +33,18 @@
       neofetch
       neovim
       picom
-      (python311.withPackages(ps: with ps; [ requests psutil ]))
+      python311
       python311Packages.pip
       rsync
       tree
       unzip
       wget
       xdg-utils
-      xidlehook
       xkb-switch
       # QT5 styles:
       libsForQt5.qt5ct
       libsForQt5.qtstyleplugin-kvantum
       libsForQt5.qt5.qtgraphicaleffects
-      # Home managment:
-      home-manager
-      # Extra-pkgs:
-      extrapkgs.i3lock-run
-      extrapkgs.xidlehook-caffeine
-      (lutris.override { extraPkgs = pkgs: with extrapkgs; [ wine-ge ]; })
     ];
   };
 }
