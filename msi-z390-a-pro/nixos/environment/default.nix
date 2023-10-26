@@ -28,6 +28,11 @@
       imv
       jq
       libnotify
+      (lutris.override {
+        extraPkgs = pkgs: with pkgs; [
+          winePackages.unstableFull
+        ];
+      })
       ncdu
       ntfs3g
       neofetch

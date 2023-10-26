@@ -15,7 +15,6 @@
     inkscape
     jetbrains.pycharm-community
     linphone
-    lutris
     mattermost-desktop
     nmap
     pavucontrol

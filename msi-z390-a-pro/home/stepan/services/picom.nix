@@ -49,7 +49,11 @@
     activeOpacity = 1.0;
     inactiveOpacity = 1.0;
     menuOpacity = 1.0;
-    opacityRules = ["70:class_g = 'splash'"];
+    opacityRules = [
+      "70:class_g = 'splash'"
+      "100:class_g = 'org.wezfurlong.wezterm' && focused"
+      "60:class_g = 'org.wezfurlong.wezterm' && !focused"
+    ];
 
     wintypes = {
       tooltip = {
