@@ -4,6 +4,7 @@
 
 { config, pkgs, ... }: {
   imports = [
+    ./alacritty.nix
     ./eww.nix
     ./git.nix
     ./lf.nix

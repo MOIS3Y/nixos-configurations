@@ -12,6 +12,7 @@
     eww  # TODO: enable in programs after configure
     firefox
     flameshot
+    helix
     inkscape
     jetbrains.pycharm-community
     linphone

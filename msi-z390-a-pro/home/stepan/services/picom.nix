@@ -53,6 +53,8 @@
       "70:class_g = 'splash'"
       "100:class_g = 'org.wezfurlong.wezterm' && focused"
       "60:class_g = 'org.wezfurlong.wezterm' && !focused"
+      "100:class_g = 'Alacritty' && focused"
+      "60:class_g = 'Alacritty' && !focused"
     ];
 
     wintypes = {
