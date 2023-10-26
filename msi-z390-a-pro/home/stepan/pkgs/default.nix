@@ -31,7 +31,6 @@
     virt-manager
     vlc
     vscode
-    wezterm
     xdg-utils
     zoom-us
     # Extra-pkgs:

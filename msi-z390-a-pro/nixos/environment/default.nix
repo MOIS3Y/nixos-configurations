@@ -20,6 +20,7 @@
       catppuccin-cursors.mochaBlue
       catppuccin-kvantum
       catppuccin-papirus-folders
+      cmatrix
       curl
       git
       gradience
@@ -37,6 +38,7 @@
       ntfs3g
       neofetch
       neovim
+      nitch
       picom
       python311
       python311Packages.pip
