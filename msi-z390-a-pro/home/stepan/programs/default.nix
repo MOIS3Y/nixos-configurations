@@ -11,6 +11,7 @@
     ./mangohud.nix
     ./rofi.nix
     ./ssh.nix
+    ./wezterm.nix
     ./zsh.nix
   ];
 }
