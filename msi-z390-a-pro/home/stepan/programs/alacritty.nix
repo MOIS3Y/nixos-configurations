@@ -40,46 +40,46 @@
       };
       colors = {
         primary = {
-          background = "#1E1E2E";
+          background = "#11111B";
           foreground = "#CDD6F4";        # text
           dim_foreground = "#CDD6F4";    # text
           bright_foreground = "#CDD6F4"; # text
         };
         cursor = {
-          text = "#1E1E2E";   # base
+          text = "#11111B";   # base
           cursor = "#B4BEFE"; # rosewater
         };
         #.......
         vi_mode_cursor = {
-          text = "#1E1E2E";   # base
+          text = "#11111B";   # base
           cursor = "#B4BEFE"; # lavender
         };
         search = {
           matches = {
-            foreground = "#1E1E2E"; # base
+            foreground = "#11111B"; # base
             background = "#A6ADC8"; # subtext0
           };
           focused_match = {
-            foreground = "#1E1E2E"; # base
+            foreground = "#11111B"; # base
             background = "#A6E3A1"; # green
           };
           footer_bar = {
-            foreground = "#1E1E2E"; # base
+            foreground = "#11111B"; # base
             background = "#A6ADC8"; # subtext0
           };
         };
         hints = {
           start = {
-            foreground = "#1E1E2E"; # base
+            foreground = "#11111B"; # base
             background = "#F9E2AF"; # yellow
           };
           end = {
-            foreground = "#1E1E2E"; # base
+            foreground = "#11111B"; # base
             background = "#A6ADC8"; # subtext0
           };
         };
         selection = {
-          text = "#1E1E2E";       # base
+          text = "#11111B";       # base
           background = "#F5E0DC"; # rosewater
         };
         normal = {
