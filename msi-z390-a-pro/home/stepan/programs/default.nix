@@ -7,6 +7,7 @@
     ./alacritty.nix
     ./eww.nix
     ./git.nix
+    ./helix.nix
     ./lf.nix
     ./lsd.nix
     ./mangohud.nix
