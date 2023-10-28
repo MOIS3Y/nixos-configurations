@@ -31,6 +31,8 @@
     virt-manager
     vlc
     vscode
+    wine
+    winetricks
     wireguard-tools
     xdg-utils
     zoom-us
