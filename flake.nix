@@ -23,12 +23,7 @@
       system = "x86_64-linux";
       lib = nixpkgs.lib;
       pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
-      extrapkgs = {
-        # power managment:
-        i3lock-run = inputs.i3lock-color-wrapper.packages."${system}".i3lock-color-wrapper;
-        xidlehook-caffeine = inputs.xidlehook-caffeine.packages."${system}".xidlehook-caffeine;
-      };
-      specialArgs = { inherit system; inherit inputs; inherit extrapkgs; };
+      specialArgs = { inherit system; inherit inputs; };
     in {
     nixosConfigurations = {
       # laptop:
@@ -44,10 +39,11 @@
         modules = [
           ./msi-z390-a-pro/nixos/configuration.nix
           home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.stepan = import ./msi-z390-a-pro/home/stepan/home.nix;
-            home-manager.extraSpecialArgs = { inherit extrapkgs; };
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.stepan = import ./msi-z390-a-pro/home/stepan/home.nix;
+            };
           }
         ];
       };

@@ -2,7 +2,7 @@
 # █░█ █ █▄▀ █▄▄ ██▄ █▀█ █▄█ █▄█ █░█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, extrapkgs, ... }: {
+{ config, pkgs, ... }: {
   services.xidlehook = {
     enable = true;
     detect-sleep = true;
@@ -14,15 +14,17 @@
     timers = [
       {
         delay = 600;
-        command = ''
-          ${pkgs.dunst}/bin/dunstify \
+        command = with pkgs; ''
+          ${dunst}/bin/dunstify \
             "Power" "Computer will suspend very soon because of inactivity" \
             -u normal
         '';
       }
       {
         delay = 10;
-        command = "${extrapkgs.i3lock-run}/bin/i3lock-run -s catppuccin_mocha -f Inter";
+        command = with pkgs; ''
+          ${extrapkgs.i3lock-run}/bin/i3lock-run -s catppuccin_mocha -f Inter
+        '';
       }
       {
         delay = 60;

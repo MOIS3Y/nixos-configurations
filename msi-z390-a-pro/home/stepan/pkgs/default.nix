@@ -2,7 +2,7 @@
 # █▀▀ █░█ █▄█ ▄█ ▄
 # -- -- -- -- -- -
 
-{ config, pkgs, extrapkgs, ... }: {
+{ config, pkgs, ... }: {
   home.packages = with pkgs; [
     # Default:
     catppuccin-kvantum
@@ -12,7 +12,6 @@
     eww  # TODO: enable in programs after configure
     firefox
     flameshot
-    helix
     inkscape
     jetbrains.pycharm-community
     linphone
@@ -32,6 +31,7 @@
     virt-manager
     vlc
     vscode
+    wireguard-tools
     xdg-utils
     zoom-us
     # Extra-pkgs:
