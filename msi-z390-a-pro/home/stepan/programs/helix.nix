@@ -46,10 +46,14 @@
           center = [ "file-base-name" ];
           right = [
               "diagnostics"
+              "version-control"
               "selections"
               "position"
-              "file-encoding"
+              "total-line-numbers"
+              "separator"
               "file-line-ending"
+              "separator"
+              "file-encoding"
               "file-type"
           ];
           separator = "│";
