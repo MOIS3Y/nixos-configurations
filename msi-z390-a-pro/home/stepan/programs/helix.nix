@@ -5,6 +5,12 @@
 { config, pkgs, ... }: {
   programs.helix = {
     enable = true;
+    extraPackages = with pkgs; [
+      lua-language-server
+      marksman
+      nodePackages.bash-language-server
+      vscode-langservers-extracted
+    ];
     themes = {
       catppuccin_mocha_transparent = {
         inherits = "catppuccin_mocha";
@@ -80,14 +86,57 @@
       language = [
         {
           name = "nix";
+          scope = "source.nix";
+          injection-regex = "nix";
+          file-types = [ "nix" ];
+          shebangs = [ ];
+          roots = [ ];
+          comment-token = "#";
+          indent = { tab-width = 2; unit = "  "; };
           auto-format = false;
           language-server = {
             name = "nil";
             command = "${pkgs.nil}/bin/nil";
-            nix.config = {};  # <-- important I don’t know why(
+            config.nix = {};
           };
         }
-        # ... add nore LSP here:
+        {
+          name = "python";
+          scope = "source.python";
+          injection-regex = "python";
+          file-types = [ "py" ];
+          shebangs = [ "python" "python3" ];
+          roots = [ "pyproject.toml" "setup.py" "poetry.lock" ".git" ];
+          indent = { tab-width = 4; unit = "    "; };
+          language-server = {
+            name = "pylsp";
+            auto-format = false;
+            command = "${pkgs.python311Packages.python-lsp-server}/bin/pylsp";
+            config.pylsp.plugins = {
+              flake8 = {
+                enabled = true;
+                ignore = [ "E501" ];
+                lineLength = 80;
+              };
+              autopep8 = { enabled = false; };
+              mccabe = { enabled = false; };
+              pycodestyle = { enabled = false; };
+              pyflakes = { enabled = false; };
+              pylint = { enabled = false; };
+              yapf = { enabled = false; };
+              ruff = { enabled = false; };
+            };
+          };
+        }
+        {
+          name = "html";
+          language-server = {
+            name = "emmet-ls";
+            command = "${pkgs.emmet-ls}/bin/emmet-ls";
+            args = [ "--stdio" ];
+          };
+        }
+        # ... add nore languages here:
       ];
     };
   };
