@@ -8,5 +8,6 @@
     ./gtk.nix
     ./pointer-cursor.nix
     ./xdg.nix
+    ./xresources.nix
   ];
 }

@@ -19,6 +19,12 @@
         port = 22;
         hostname = "ssh.ispsystem.net";
       };
+      "gitlab-dev.ispsystem.net" = {
+        identityFile = "${ispkeys}/ISP_ecdsa";
+        identitiesOnly = true;
+        port = 22;
+        hostname = "gitlab-dev.ispsystem.net";
+      };
       "services.isptech.ru" = {
         user = "admserv";
         identityFile = "${ispkeys}/ISP_ecdsa";

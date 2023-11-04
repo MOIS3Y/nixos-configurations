@@ -8,6 +8,7 @@
     ./eww.nix
     ./git.nix
     ./helix.nix
+    # ./khal.nix
     ./lf.nix
     ./lsd.nix
     ./mangohud.nix

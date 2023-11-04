@@ -5,6 +5,8 @@
 { config, pkgs, ... }: {
   home.packages = with pkgs; [
     # Default:
+    arandr
+    amdgpu_top
     catppuccin-kvantum
     catppuccin-papirus-folders
     dconf
@@ -15,9 +17,11 @@
     inkscape
     jetbrains.pycharm-community
     linphone
+    lua
     mattermost-desktop
     nmap
     pavucontrol
+    plank
     poetry
     protonup-qt
     rofi-bluetooth
@@ -31,6 +35,7 @@
     virt-manager
     vlc
     vscode
+    vrrtest
     wine
     winetricks
     wireguard-tools

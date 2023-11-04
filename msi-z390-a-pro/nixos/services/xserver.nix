@@ -28,8 +28,13 @@
         ];
       };
     };
+    videoDrivers = [ "amdgpu" ];
     layout = "us,ru";
     xkbOptions = "grp:alt_shift_toggle";
     xkbVariant = "";
+    deviceSection = ''
+      Option "DRI" "3"
+      Option "VariableRefresh" "true"
+    '';
   };
 }
