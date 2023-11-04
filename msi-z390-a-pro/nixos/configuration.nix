@@ -9,7 +9,7 @@
 { config, pkgs, ... }: {
 
   imports = [
-    ./hardware-configuration.nix  # honor-vlr-w09
+    ./hardware-configuration.nix  # msi-z390-a-pro
     ./boot
     ./console
     ./environment
