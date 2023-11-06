@@ -16,13 +16,13 @@
         inherit (config.lib.formats.rasi) mkLiteral;
       in {
         "*" = {
-          bg-col = mkLiteral "#1e1e2e" ;
-          bg-col-light = mkLiteral "#1e1e2e" ;
-          border-col = mkLiteral "#1e1e2e" ;
-          selected-col = mkLiteral "#1e1e2e" ;
+          bg-col = mkLiteral "#11111b" ;
+          bg-col-light = mkLiteral "#11111b" ;
+          border-col = mkLiteral "#11111b" ;
+          selected-col = mkLiteral "#11111b" ;
           blue = mkLiteral "#89b4fa" ;
           fg-col = mkLiteral "#cdd6f4" ;
-          fg-col2 = mkLiteral "#f38ba8" ;
+          fg-col2 = mkLiteral "#89b4fa" ;
           grey = mkLiteral "#6c7086" ;
         };
         "element-text, element-icon , mode-switcher" = {
@@ -66,7 +66,7 @@
             border = mkLiteral "0px 0px 0px";
             padding = mkLiteral "6px 0px 0px";
             margin = mkLiteral "10px 0px 0px 20px";
-            columns = 1;
+            columns = 2;
             background-color = mkLiteral "@bg-col";
         };
         element = {
