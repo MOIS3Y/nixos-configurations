@@ -18,6 +18,7 @@
     jetbrains.pycharm-community
     linphone
     lua
+    lm_sensors
     mattermost-desktop
     nmap
     pavucontrol
