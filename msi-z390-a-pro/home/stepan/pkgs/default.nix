@@ -22,7 +22,6 @@
     mattermost-desktop
     nmap
     pavucontrol
-    plank
     poetry
     protonup-qt
     rofi-bluetooth

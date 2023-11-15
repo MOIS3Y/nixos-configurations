@@ -87,6 +87,35 @@
       };
     };
     languages = {
+      language-server = {
+        nil = {
+          command = "${pkgs.nil}/bin/nil";
+          config = {};
+        };
+        pylsp = {
+          auto-format = false;
+          command = "${pkgs.python311Packages.python-lsp-server}/bin/pylsp";
+          config.pylsp.plugins = {
+            flake8 = {
+              enabled = true;
+              ignore = [ "E501" ];
+              lineLength = 80;
+            };
+            autopep8 = { enabled = false; };
+            mccabe = { enabled = false; };
+            pycodestyle = { enabled = false; };
+            pyflakes = { enabled = false; };
+            pylint = { enabled = false; };
+            yapf = { enabled = false; };
+            ruff = { enabled = false; };
+          };
+        };
+        emmet-ls = {
+          command = "${pkgs.emmet-ls}/bin/emmet-ls";
+          args = [ "--stdio" ];
+        };
+        # add more LSP servers here ...
+      };
       language = [
         {
           name = "nix";
@@ -98,11 +127,7 @@
           comment-token = "#";
           indent = { tab-width = 2; unit = "  "; };
           auto-format = false;
-          language-server = {
-            name = "nil";
-            command = "${pkgs.nil}/bin/nil";
-            config.nix = {};
-          };
+          language-servers = [ "nil" ];
         }
         {
           name = "python";
@@ -112,33 +137,11 @@
           shebangs = [ "python" "python3" ];
           roots = [ "pyproject.toml" "setup.py" "poetry.lock" ".git" ];
           indent = { tab-width = 4; unit = "    "; };
-          language-server = {
-            name = "pylsp";
-            auto-format = false;
-            command = "${pkgs.python311Packages.python-lsp-server}/bin/pylsp";
-            config.pylsp.plugins = {
-              flake8 = {
-                enabled = true;
-                ignore = [ "E501" ];
-                lineLength = 80;
-              };
-              autopep8 = { enabled = false; };
-              mccabe = { enabled = false; };
-              pycodestyle = { enabled = false; };
-              pyflakes = { enabled = false; };
-              pylint = { enabled = false; };
-              yapf = { enabled = false; };
-              ruff = { enabled = false; };
-            };
-          };
+          language-servers = [ "pylsp" ]; 
         }
         {
           name = "html";
-          language-server = {
-            name = "emmet-ls";
-            command = "${pkgs.emmet-ls}/bin/emmet-ls";
-            args = [ "--stdio" ];
-          };
+          language-servers = [ "emmet-ls" ];
         }
         # ... add nore languages here:
       ];
