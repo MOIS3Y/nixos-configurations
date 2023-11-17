@@ -14,6 +14,7 @@
     eww  # TODO: enable in programs after configure
     firefox
     flameshot
+    gimp
     inkscape
     jetbrains.pycharm-community
     linphone
