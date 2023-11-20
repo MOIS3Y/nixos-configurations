@@ -11,7 +11,6 @@
       ignorecase = true;
     };
     commands = {
-      dragon-out = ''%${pkgs.xdragon}/bin/xdragon -a -x "$fx"'';
       editor-open = ''$$EDITOR $f'';
       mkdir = ''
         ''${{
@@ -22,47 +21,11 @@
       '';
     };
     keybindings = {
-      xx = "dragon-out";
       mk = "mkdir";
       xD = "delete";
       "<enter>" = "open";
       # ... add more keybindings here:
     };
-    extraConfig = # ! thx: https://github.com/vimjoyer/lf-nix-video
-    let 
-      previewer = with pkgs; writeShellScriptBin "pv.sh" ''
-        file=$1
-        w=$2
-        h=$3
-        x=$4
-        y=$5
-        # ? intercepts the file and checks the type if img - is using kitty:
-        if [[ "$( ${file}/bin/file -Lb --mime-type "$file")" =~ ^image ]]; then
-            ${kitty}/bin/kitty \
-              +kitten icat \
-              --silent \
-              --stdin no \
-              --transfer-mode file \
-              --place "''${w}x''${h}@''${x}x''${y}" "$file" < /dev/null > /dev/tty
-            exit 1
-        fi
-        # ? otherwise uses pistol:
-        ${pistol}/bin/pistol "$file"
-      '';
-      cleaner = with pkgs; writeShellScriptBin "clean.sh" ''
-        ${kitty}/bin/kitty \
-          +kitten icat \
-          --clear \
-          --stdin no \
-          --silent \
-          --transfer-mode file < /dev/null > /dev/tty
-      '';
-    in 
-    ''
-      set cleaner ${cleaner}/bin/clean.sh
-      set previewer ${previewer}/bin/pv.sh
-      setlocal ${config.xdg.userDirs.pictures}/isp sortby 'time' 
-    '';
   };
   xdg.configFile."lf/icons".source = pkgs.writeText "lf-icons" ''
     # ? source: https://github.com/gokcehan/lf/blob/master/etc/icons.example

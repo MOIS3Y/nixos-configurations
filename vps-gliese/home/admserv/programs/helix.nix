@@ -5,12 +5,7 @@
 { config, pkgs, ... }: {
   programs.helix = {
     enable = true;
-    extraPackages = with pkgs; [
-      lua-language-server
-      marksman
-      nodePackages.bash-language-server
-      vscode-langservers-extracted
-    ];
+    extraPackages = with pkgs; [];
     themes = {
       catppuccin_mocha_transparent = {
         inherits = "catppuccin_mocha";
@@ -92,28 +87,6 @@
           command = "${pkgs.nil}/bin/nil";
           config = {};
         };
-        pylsp = {
-          auto-format = false;
-          command = "${pkgs.python311Packages.python-lsp-server}/bin/pylsp";
-          config.pylsp.plugins = {
-            flake8 = {
-              enabled = true;
-              ignore = [ "E501" ];
-              lineLength = 80;
-            };
-            autopep8 = { enabled = false; };
-            mccabe = { enabled = false; };
-            pycodestyle = { enabled = false; };
-            pyflakes = { enabled = false; };
-            pylint = { enabled = false; };
-            yapf = { enabled = false; };
-            ruff = { enabled = false; };
-          };
-        };
-        emmet-ls = {
-          command = "${pkgs.emmet-ls}/bin/emmet-ls";
-          args = [ "--stdio" ];
-        };
         # add more LSP servers here ...
       };
       language = [
@@ -128,20 +101,6 @@
           indent = { tab-width = 2; unit = "  "; };
           auto-format = false;
           language-servers = [ "nil" ];
-        }
-        {
-          name = "python";
-          scope = "source.python";
-          injection-regex = "python";
-          file-types = [ "py" ];
-          shebangs = [ "python" "python3" ];
-          roots = [ "pyproject.toml" "setup.py" "poetry.lock" ".git" ];
-          indent = { tab-width = 4; unit = "    "; };
-          language-servers = [ "pylsp" ]; 
-        }
-        {
-          name = "html";
-          language-servers = [ "emmet-ls" ];
         }
         # ... add nore languages here:
       ];
