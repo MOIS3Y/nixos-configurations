@@ -2,7 +2,7 @@
 # █▀█ █▄█ █░▀░█ ██▄ ░░ █░▀░█ █▀█ █░▀█ █▀█ █▄█ ██▄ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 { config, pkgs, ... }: {
-  home.username = "stepan";
+  home.username = "admserv";
   home.homeDirectory = "/home/admserv";
 
   # This value determines the Home Manager release that your

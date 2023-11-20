@@ -56,7 +56,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.stepan = import ./vps-gliese/home/admserv/home.nix;
+              users.admserv = import ./vps-gliese/home/admserv/home.nix;
             };
           }
         ];
