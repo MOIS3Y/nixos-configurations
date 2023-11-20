@@ -7,6 +7,7 @@
     ./fstrim.nix
     ./openssh.nix
     ./strongswan.nix
+    ./upower.nix
     ./xserver.nix
   ];
 }

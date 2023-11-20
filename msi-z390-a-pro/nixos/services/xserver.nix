@@ -19,7 +19,12 @@
       };
     };
     windowManager = {
-      awesome.enable = true;
+      awesome = {
+        enable = true;
+        luaModules = [
+          pkgs.lua52Packages.lgi
+        ];
+      };
       qtile = { 
         enable = true;
         extraPackages = python3Packages: with python3Packages; [
