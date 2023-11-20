@@ -47,6 +47,20 @@
           }
         ];
       };
+      # dev:
+      vps-gliese = lib.nixosSystem {
+        inherit specialArgs;
+        modules = [
+          ./vps-gliese/nixos/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.stepan = import ./vps-gliese/home/admserv/home.nix;
+            };
+          }
+        ];
+      };
       # ... add more hosts here:
     };
     homeConfigurations = {
