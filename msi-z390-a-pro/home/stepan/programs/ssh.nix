@@ -59,10 +59,10 @@
         hostname = "git.zhukovsky.me";
       };
       "gliese" = {
-        user = "admdns";
+        user = "admserv";
         identityFile = "${self}/GLIESE_ecdsa";
         port = 22;
-        hostname = "94.103.94.187";
+        hostname = "91.201.113.181";
       };
       "solar" = {
         user = "admserv";
