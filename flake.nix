@@ -30,19 +30,19 @@
       honor-wlr-w09 = lib.nixosSystem {
         inherit specialArgs;
         modules = [
-          ./honor-vlr-w09/nixos/configuration.nix
+          ./hosts/honor-vlr-w09/configuration.nix
         ];
       };
       # workstation:
       msi-z390-a-pro = lib.nixosSystem {
         inherit specialArgs;
         modules = [
-          ./msi-z390-a-pro/nixos/configuration.nix
+          ./hosts/msi-z390-a-pro/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.stepan = import ./msi-z390-a-pro/home/stepan/home.nix;
+              users.stepan = import ./homes/stepan_workstation/home.nix;
             };
           }
         ];
@@ -51,12 +51,12 @@
       vps-gliese = lib.nixosSystem {
         inherit specialArgs;
         modules = [
-          ./vps-gliese/nixos/configuration.nix
+          ./hosts/vps-gliese/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.admserv = import ./vps-gliese/home/admserv/home.nix;
+              users.admserv = import ./homes/admserv_gliese/home.nix;
             };
           }
         ];
@@ -67,7 +67,7 @@
       "stepan@honor-vlr-w09" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./honor-vlr-w09/home/stepan/home.nix
+          ./homes/stepan_laptop/home.nix
         ];
       };
       # ... add more users here:
