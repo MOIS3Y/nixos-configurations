@@ -120,6 +120,8 @@
         "window_type = 'tooltip'"
         "window_type = 'utility'"
         "window_type = 'unknown'"
+        "window_type = 'dropdown_menu'"  # fix kvantum borders
+        "window_type = 'popup_menu'"     # fix kvantum borders
         "class_g = 'firefox' && window_type != 'normal'"
         "class_g = 'slop'"
       ];

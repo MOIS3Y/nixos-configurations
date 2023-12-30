@@ -11,6 +11,7 @@
     catppuccin-papirus-folders
     dconf
     dnsutils
+    docker-compose
     eww  # TODO: enable in programs after configure
     firefox
     flameshot

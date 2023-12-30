@@ -6,26 +6,8 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Catppuccin-Mocha-Standard-Blue-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = [ 
-          "blue" 
-          # "flamingo"
-          # "green"
-          # "lavender"
-          # "maroon" 
-          # "mauve" 
-          # "peach"
-          # "pink"
-          # "red"
-          # "rosewater"
-          # "sapphire"
-          # "sky"
-          # "teal"
-          # "yellow"
-          ];
-        variant = "mocha";
-      };
+      name = "adw-gtk3";
+      package = pkgs.adw-gtk3;
     };
     iconTheme = {
       name = "Tela-circle-blue-dark";
@@ -34,16 +16,14 @@
       };
     };
     font = {
-      name = "Inter";
-      package = pkgs.inter;
+      name = "Ubuntu";
+      package = pkgs.ubuntu_font_family;
       size = 11;
     };
     gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
       gtk-decoration-layout = "menu:";
     };
     gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
       gtk-decoration-layout = "menu:";
     };
   };
