@@ -13,6 +13,7 @@
       # Default pkgs:
       bottom
       curl
+      docker-compose
       git
       htop
       jq
