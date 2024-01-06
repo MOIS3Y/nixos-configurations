@@ -61,6 +61,20 @@
           }
         ];
       };
+      # lab:
+      vps-allsave = lib.nixosSystem {
+        inherit specialArgs;
+        modules = [
+          ./hosts/vps-allsave/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.admserv = import ./homes/admserv_allsave/home.nix;
+            };
+          }
+        ];
+      };
       # ... add more hosts here:
     };
     homeConfigurations = {
