@@ -21,6 +21,7 @@
     };
     shellAliases = {
       docker = "sudo docker";
+      docker-compose = "sudo docker-compose";
     };
     oh-my-zsh = {
       enable = true;

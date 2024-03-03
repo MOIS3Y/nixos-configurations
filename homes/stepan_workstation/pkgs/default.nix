@@ -15,9 +15,11 @@
     eww  # TODO: enable in programs after configure
     firefox
     flameshot
+    gettext
     gimp
     inkscape
     jetbrains.pycharm-community
+    lapce
     linphone
     lua
     lm_sensors
@@ -30,6 +32,7 @@
     rofi-power-menu
     rofi-systemd
     rofi-vpn
+    sassc
     sqlitebrowser
     telegram-desktop
     transmission-gtk

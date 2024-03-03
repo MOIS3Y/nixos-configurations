@@ -34,9 +34,11 @@
       };
     };
     videoDrivers = [ "amdgpu" ];
-    layout = "us,ru";
-    xkbOptions = "grp:alt_shift_toggle";
-    xkbVariant = "";
+    xkb = {
+      variant = "";
+      options = "grp:alt_shift_toggle";
+      layout = "us,ru";
+    };
     deviceSection = ''
       Option "DRI" "3"
       Option "VariableRefresh" "true"
