@@ -28,6 +28,7 @@
     ./services
     ./systemd
     ./wayland
+    ./xorg
   ];
 
   # Set colorScheme
