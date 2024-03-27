@@ -5,7 +5,7 @@
 { config, pkgs, extrapkgs, ... }: {
   environment = {
     variables = {
-      "QT_QPA_PLATFORMTHEME"= "qt5ct";
+      # "QT_QPA_PLATFORMTHEME"= "qt5ct";
       "PYTHONDONTWRITEBYTECODE" = "1";
     };
     shells = [ pkgs.bash pkgs.zsh ];
@@ -18,7 +18,7 @@
       bottom
       brightnessctl
       catppuccin-cursors.mochaBlue
-      catppuccin-kvantum
+      # catppuccin-kvantum
       catppuccin-papirus-folders
       cmatrix
       curl
@@ -49,8 +49,8 @@
       xdg-utils
       xkb-switch
       # QT5 styles:
-      libsForQt5.qt5ct
-      libsForQt5.qtstyleplugin-kvantum
+      # libsForQt5.qt5ct
+      # libsForQt5.qtstyleplugin-kvantum
       libsForQt5.qt5.qtgraphicaleffects
     ];
   };

@@ -21,10 +21,12 @@
   xsession.enable = true;
 
   imports = [
+    ./colors
     ./config
     ./pkgs
     ./programs
     ./services
     ./systemd
+    ./wayland
   ];
 }

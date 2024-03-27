@@ -14,6 +14,6 @@
     LC_NUMERIC = "ru_RU.UTF-8";
     LC_PAPER = "ru_RU.UTF-8";
     LC_TELEPHONE = "ru_RU.UTF-8";
-    LC_TIME = "ru_RU.UTF-8";
+    LC_TIME = "en_GB.UTF-8";
   };
 }

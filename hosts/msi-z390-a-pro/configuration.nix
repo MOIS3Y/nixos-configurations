@@ -21,6 +21,7 @@
     ./nixpkgs
     ./programs
     ./services
+    ./security
     ./sound
     ./systemd
     ./users

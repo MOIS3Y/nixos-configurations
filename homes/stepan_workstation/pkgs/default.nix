@@ -17,7 +17,9 @@
     flameshot
     gettext
     gimp
+    gnumake
     inkscape
+    imv
     jetbrains.pycharm-community
     lapce
     linphone
@@ -28,6 +30,8 @@
     pavucontrol
     poetry
     protonup-qt
+    pulseaudio
+    ripgrep
     rofi-bluetooth
     rofi-power-menu
     rofi-systemd
@@ -36,7 +40,7 @@
     sqlitebrowser
     telegram-desktop
     transmission-gtk
-    vault
+    vault 
     virt-manager
     vlc
     vscode
@@ -44,7 +48,9 @@
     wine
     winetricks
     wireguard-tools
+    wireplumber
     xdg-utils
+    xwaylandvideobridge
     zoom-us
     # Extra-pkgs:
     extrapkgs.i3lock-run

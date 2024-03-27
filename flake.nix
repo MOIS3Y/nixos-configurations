@@ -14,8 +14,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Extra:
-    i3lock-color-wrapper.url = "github:MOIS3Y/i3lock-color-wrapper";
-    xidlehook-caffeine.url = "github:MOIS3Y/xidlehook-caffeine";
+    i3lock-color-wrapper = {
+      url = "github:MOIS3Y/i3lock-color-wrapper";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    xidlehook-caffeine = {
+      url = "github:MOIS3Y/xidlehook-caffeine";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hypridle = {
+      url = "github:hyprwm/hypridle";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-colors = {
+      url = "github:misterio77/nix-colors";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.base16-schemes.follows = "base16-schemes";
+    };
   };
   
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -24,6 +39,7 @@
       lib = nixpkgs.lib;
       pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
       specialArgs = { inherit system; inherit inputs; };
+      extraSpecialArgs = { inherit system; inherit inputs; };
     in {
     nixosConfigurations = {
       # laptop:
@@ -40,6 +56,7 @@
           ./hosts/msi-z390-a-pro/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
+              inherit extraSpecialArgs;
               useGlobalPkgs = true;
               useUserPackages = true;
               users.stepan = import ./homes/stepan_workstation/home.nix;
