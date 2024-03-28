@@ -3,5 +3,7 @@
 # -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
 { config, pkgs, ... }: {
-  services.network-manager-applet.enable = true;
+  imports = [
+    ../../_shared/services/nm-applet.nix
+  ];
 }
