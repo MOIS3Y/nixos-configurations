@@ -30,7 +30,8 @@
 
       "audio/*" = [ "vlc.desktop" ];
       "video/*" = [ "vlc.dekstop" ];
-      "image/*" = [ "imv.desktop" ];
+      "image/png" = [ "imv.desktop" ];
+      "image/jpeg" = [ "imv.desktop" ];
 
       "inode/directory" = [ "lf.desktop" ];
     };

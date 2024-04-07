@@ -16,9 +16,11 @@
     wlogout = "${pkgs.wlogout}/bin/wlogout";
     notify-send = "${pkgs.libnotify}/bin/notify-send";
     rg = "${pkgs.ripgrep}/bin/rg";
-    # ? sound and brightness managment (see dunst.nix - scripts there) 
-    volumectl = "dunst-volume";
-    microphonectl = "dunst-microphone";
+    volumectl = "${pkgs.avizo}/bin/volumectl";
+    wofi = "${pkgs.wofi}/bin/wofi";
+    wofi-toggle = with pkgs; writeShellScript "wofi-toggle" ''
+      pgrep wofi >/dev/null 2>&1 && pkill wofi || ${wofi} --show drun
+    '';
     waybar-dunst-status = with pkgs; writeShellScript "waybar-dunst-status" ''
       COUNT="$(${dunstctl} count waiting)"
       ENABLED=""
@@ -55,7 +57,7 @@
           "hyprland/workspaces"
           "custom/swallow"
           "idle_inhibitor"
-          "custom/dunst"
+          "custom/notification"
           "tray"
         ];
         modules-center = [];
@@ -73,6 +75,7 @@
         "custom/logo" = {
           tooltip = false;
           format = " ";
+          on-click = "${wofi-toggle}";
         };
         "hyprland/workspaces" = {
           window-rewrite = {};  # ? fix [warning] Waybar/discussions/2816
@@ -157,26 +160,45 @@
             default = ["󰕿" "󰖀" "󰕾"];
           };
           tooltip-format = "{desc}, {volume}";
-          on-click = "${volumectl} -t";
-          on-scroll-up = "${volumectl} -i 5";
-          on-scroll-down = "${volumectl} -d 5";
+          on-click = "${volumectl} toggle-mute";
+          on-scroll-up = "${volumectl} up";
+          on-scroll-down = "${volumectl} down";
         };
         "pulseaudio#microphone" = {
           tooltip = false;
           format = "{format_source}";
           format-source = "󰍬 {volume}";
           format-source-muted = "󰍭 Mute";
-          on-click = "${microphonectl} --default-source -t";
-          on-scroll-up = "${microphonectl} --default-source -i 5";
-          on-scroll-down = "${microphonectl} --default-source -d 5";
+          on-click = "${volumectl} -m toggle-mute";
+          on-scroll-up = "${volumectl} -m up";
+          on-scroll-down = "${volumectl} -m down";
         };
-        "custom/dunst" = {
-            tooltip = false;
-            return-type = "str";
-            format = "{}";
-            exec = "${waybar-dunst-status}";
-            on-click = "${dunstctl} set-paused toggle";
-            restart-interval = 1;
+        # "custom/dunst" = {
+        #     tooltip = false;
+        #     return-type = "str";
+        #     format = "{}";
+        #     exec = "${waybar-dunst-status}";
+        #     on-click = "${dunstctl} set-paused toggle";
+        #     restart-interval = 1;
+        # };
+        "custom/notification" = {
+          exec = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
+          return-type = "json";
+          format = "{icon}";
+          format-icons = {
+            notification = "󰂚";
+            none = "󰂜";
+            dnd-notification = "󰂛";
+            dnd-none = "󰪑";
+            inhibited-notification = "󰂛";
+            inhibited-none = "󰪑";
+            dnd-inhibited-notification = "󰂛";
+            dnd-inhibited-none = "󰪑";
+          };
+          on-click = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
+          on-click-right = "${pkgs.swaynotificationcenter}/bin/swaync-client -d -sw";
+          tooltip = true;
+          escape = true;
         };
         "custom/power" = {
           tooltip = false;
@@ -247,7 +269,8 @@
 
       #custom-swallow,
       #idle_inhibitor,
-      #custom-dunst {
+      #custom-dunst,
+      #custom-notification {
         all: initial; /* Remove GTK theme values (waybar #1351) */
         min-width: 0; /* Fix weird spacing in materia (waybar #450) */
         border-radius: 6px;

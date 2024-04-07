@@ -13,6 +13,10 @@
       # ${networkmanagerapplet}/bin/nm-applet &
       # ${blueman}/bin/blueman-applet &
     '';
+    wofi = "${pkgs.wofi}/bin/wofi";
+    wofi-toggle = with pkgs; writeShellScript "wofi-toggle" ''
+      pgrep wofi >/dev/null 2>&1 && pkill wofi || ${wofi} --show drun
+    '';
   in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -24,7 +28,7 @@
       "$mod" = "SUPER";
       #! -- -- -- --  -- -- apps -- -- -- -- -- -- --  #
       "$terminal" = "${pkgs.wezterm}/bin/wezterm";
-      "$launcher" = "${pkgs.wofi}/bin/wofi";
+      "$launcher" = "${wofi-toggle}";
       "$browser" = "${pkgs.firefox}/bin/firefox";
       "$filebrowser" = "${pkgs.wezterm}/bin/wezterm -e ${pkgs.lf}/bin/lf";
       "$vscode" = "${pkgs.vscode}/bin/code";
@@ -101,6 +105,15 @@
       layerrule = [
         # make some windows bg bluring
         "blur, logout_dialog"  #  wlogout
+        # "blur, ^(swaync-control-center)$"
+        # "ignorealpha 0.5, ^(swaync-control-center)$"
+
+        "blur,            swaync-control-center"
+        "blur,            swaync-notification-window"
+        "ignorezero,      swaync-control-center"
+        "ignorezero,      swaync-notification-window"
+        "ignorealpha 0.5, swaync-control-center"
+        "ignorealpha 0.5, swaync-notification-window"
       ];
       #! -- -- -- -- -- keybindings -- -- -- -- -- #
       bind = [
