@@ -9,9 +9,23 @@
     packages = [ pkgs.terminus_font ];
     keyMap = "us";
     colors = [
-      # catppucin mocha:
-      "1e1e2e" "f38ba8" "a6e3a1" "fab387" "89b4fa" "cba6f7" "94e2d5" "e4e6e7"
-      "6c7086" "f38ba8" "a6e3a1" "fab387" "89b4fa" "cba6f7" "94e2d5" "f2f4f5" 
+      "${config.colorScheme.palette.base00}"
+      "${config.colorScheme.palette.base08}"
+      "${config.colorScheme.palette.base0B}"
+      "${config.colorScheme.palette.base09}"
+      "${config.colorScheme.palette.base0D}"
+      "${config.colorScheme.palette.base0E}"
+      "${config.colorScheme.palette.base0C}"
+      "${config.colorScheme.palette.base05}"
+
+      "${config.colorScheme.palette.base03}"
+      "${config.colorScheme.palette.base08}"
+      "${config.colorScheme.palette.base0B}"
+      "${config.colorScheme.palette.base09}"
+      "${config.colorScheme.palette.base0D}"
+      "${config.colorScheme.palette.base0E}"
+      "${config.colorScheme.palette.base0C}"
+      "${config.colorScheme.palette.base05}"
     ];
   };
 }

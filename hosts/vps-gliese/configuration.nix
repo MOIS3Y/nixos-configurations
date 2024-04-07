@@ -9,7 +9,8 @@
 { config, pkgs, ... }: {
 
   imports = [
-    ./hardware-configuration.nix  # msi-z390-a-pro
+    ../../modules/colors
+    ./hardware-configuration.nix  # default vps
     ./boot
     ./console
     ./environment
@@ -23,6 +24,9 @@
     ./virtualisation
   ];
 
+  # Set colorScheme
+  colorSchemeName = "catppuccin_mocha";
+
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
@@ -32,5 +36,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.11";
 }

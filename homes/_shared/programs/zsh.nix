@@ -6,7 +6,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     dotDir = ".config/zsh";
     history = {
@@ -21,6 +21,7 @@
     };
     shellAliases = {
       docker = "sudo docker";
+      docker-compose = "sudo docker-compose";
     };
     oh-my-zsh = {
       enable = true;

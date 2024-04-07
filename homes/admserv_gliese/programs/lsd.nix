@@ -3,8 +3,7 @@
 # -- -- -- -- 
 
 { config, pkgs, ... }: {
-  programs.lsd = {
-    enable = true;
-    enableAliases = true;
-  };
+  imports = [
+    ../../_shared/programs/lsd.nix
+  ];
 }

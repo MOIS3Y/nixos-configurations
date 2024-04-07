@@ -3,9 +3,7 @@
 # -- -- -- --
 
 { config, pkgs, ... }: {
-  programs.git = {
-    enable = true;
-    userName = "MOIS3Y";
-    userEmail = "stepan@zhukovsky.me";
-  };
+  imports = [
+    ../../_shared/programs/git.nix
+  ];
 }

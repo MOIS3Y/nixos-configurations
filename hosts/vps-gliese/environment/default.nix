@@ -13,6 +13,7 @@
       # Default pkgs:
       bottom
       curl
+      docker-compose
       git
       htop
       jq
@@ -20,7 +21,6 @@
       neofetch
       neovim
       nitch
-      picom
       python311
       python311Packages.pip
       rsync
