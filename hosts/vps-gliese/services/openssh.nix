@@ -7,15 +7,17 @@
     enable = true;
     startWhenNeeded = true;
     allowSFTP = true;
-    PermitRootLogin = "no";
-    PasswordAuthentication = false;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+      LogLevel = "INFO";
+    };
     listenAddresses = [
       {
         addr = "0.0.0.0";
         port = 22;  # default
       }
     ];
-    LogLevel = "INFO";
     banner = ''
       █▀▀ █░░ █ █▀▀ █▀ █▀▀
       █▄█ █▄▄ █ ██▄ ▄█ ██▄
