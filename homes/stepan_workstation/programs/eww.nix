@@ -3,7 +3,7 @@
 # -- -- -- -- -- -
 
 { config, pkgs, ... }: {
-  programs.eww = {
-    enable = false;
-  };
+  imports = [
+    ../../_shared/programs/eww.nix
+  ];
 }

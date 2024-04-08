@@ -3,7 +3,7 @@
 # -- -- -- -- -- -- -- -- -- -- -- -- 
 
 { config, pkgs, ... }: {
-  imports = [
-    ../../_shared/programs/mangohud.nix
-  ];
+  programs.mangohud = {
+    enable = true;
+  };
 }
