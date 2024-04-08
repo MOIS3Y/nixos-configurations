@@ -19,7 +19,7 @@
           "/run/current-system/kernel-modules/lib/modules:/lib/modules:ro"
         ];
         environmentFiles = [
-          config.sops.secrets.ipsec-vpn-server-env.path;
+          config.sops.secrets.ipsec-vpn-server-env.path
         ];
         extraOptions = [
           "--privileged"
