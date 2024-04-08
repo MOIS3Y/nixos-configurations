@@ -9,6 +9,7 @@
       isNormalUser = true;
       description = "Stepan Zhukovsky";
       extraGroups = [ "wheel" ];
+      hashedPasswordFile = config.sops.secrets.admserv-password.path;
       shell = pkgs.zsh;
       packages = with pkgs; [];
       openssh.authorizedKeys.keys = [

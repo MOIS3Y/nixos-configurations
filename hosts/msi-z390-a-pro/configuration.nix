@@ -23,6 +23,7 @@
     ./programs
     ./services
     ./security
+    ./sops
     ./sound
     ./systemd
     ./users

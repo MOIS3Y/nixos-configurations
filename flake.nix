@@ -28,8 +28,11 @@
     };
     nix-colors = {
       url = "github:misterio77/nix-colors";
-      inputs.nixpkgs.follows = "nixpkgs";
       # inputs.base16-schemes.follows = "base16-schemes";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   

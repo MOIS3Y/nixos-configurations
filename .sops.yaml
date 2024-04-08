@@ -1,0 +1,12 @@
+#   █▀ █▀█ █▀█ █▀ ▀
+# ▄ ▄█ █▄█ █▀▀ ▄█ ▄
+# -- -- -- -- -- --
+
+keys:
+  - &primary age1uvex8azae53776k8evjfucu4l04qtxmletxttpeedxuu3ggmt32qtn8jnh
+creation_rules:
+  - path_regex: secrets/primary/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *primary
+

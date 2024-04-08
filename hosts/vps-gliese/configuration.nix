@@ -20,6 +20,7 @@
     ./nixpkgs
     ./programs
     ./services
+    ./sops
     ./users
     ./virtualisation
   ];

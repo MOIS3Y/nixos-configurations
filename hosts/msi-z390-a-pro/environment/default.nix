@@ -13,6 +13,7 @@
     systemPackages = with pkgs; [
       # Default pkgs:
       adw-gtk3
+      age
       at-spi2-atk  # require for polkit-gnome-authentication-agent-1
       appimage-run
       bottom
@@ -43,6 +44,8 @@
       python311
       python311Packages.pip
       rsync
+      sops
+      ssh-to-age
       tree
       unzip
       wget
