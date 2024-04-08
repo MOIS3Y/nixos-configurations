@@ -14,4 +14,7 @@
     sopsFile = ../../../secrets/primary/secrets.yaml;
     neededForUsers = true;
   };
+  sops.secrets.ipsec-vpn-server-env = {
+    sopsFile = ../../../secrets/primary/ipsec-vpn-server-env.yaml;
+  };
 }

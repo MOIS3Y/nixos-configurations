@@ -6,5 +6,6 @@
 
   imports = [
     ./docker.nix
+    ./oci-containers.nix
   ];
 }
