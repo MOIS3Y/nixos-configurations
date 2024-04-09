@@ -67,6 +67,21 @@
           }
         ];
       };
+      # general:
+      vps-solar = lib.nixosSystem {
+        inherit specialArgs;
+        modules = [
+          ./hosts/vps-solar/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              inherit extraSpecialArgs;
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.admserv = import ./homes/admserv_solar/home.nix;
+            };
+          }
+        ];
+      };
       # dev:
       vps-gliese = lib.nixosSystem {
         inherit specialArgs;
@@ -74,6 +89,7 @@
           ./hosts/vps-gliese/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
+              inherit extraSpecialArgs;
               useGlobalPkgs = true;
               useUserPackages = true;
               users.admserv = import ./homes/admserv_gliese/home.nix;
