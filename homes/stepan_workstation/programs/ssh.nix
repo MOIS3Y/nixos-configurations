@@ -65,13 +65,13 @@
         user = "admserv";
         identityFile = "${self}/GLIESE_ecdsa";
         port = 22;
-        hostname = "91.201.113.181";
+        hostname = "gliese.zhukovsky.me";
       };
       "solar" = {
         user = "admserv";
         identityFile = "${self}/SOLAR_ecdsa";
         port = 2222;
-        hostname = "188.120.255.34";
+        hostname = "solar.zhukovsky.me";
       };
       # ... add more matchers here:
     };
