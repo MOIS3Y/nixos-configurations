@@ -4,14 +4,14 @@
 
 { inputs, config, pkgs, ... }: {
   imports = [
-    inputs.sops-nix.nixosModules.sops
+    ../../_shared/sops
   ];
-  # default:
-  sops.defaultSopsFile = ../../../secrets/primary/secrets.yaml;
-  sops.age.keyFile = /opt/secrets/age/keys.txt;
-  # secrets:
-  sops.secrets.admserv-password = {
-    sopsFile = ../../../secrets/primary/secrets.yaml;
-    neededForUsers = true;
+  defaultHostSopsFile = ../../../secrets/hosts/vps-gliese/secrets.yaml;
+  sops = {
+    secrets = {
+      admserv-password = {
+        neededForUsers = true;
+      };
+    };
   };
 }

@@ -6,10 +6,10 @@
   imports = [
     ../../_shared/sops
   ];
-  defaultHostSopsFile = ../../../secrets/hosts/vps-solar/secrets.yaml;
+  defaultHostSopsFile = ../../../secrets/hosts/desktop-workstation/secrets.yaml;
   sops = {
     secrets = {
-      admserv-password = {
+      stepan-password = {
         neededForUsers = true;
       };
     };

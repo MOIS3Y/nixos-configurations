@@ -2,11 +2,84 @@
 # ▄ ▄█ █▄█ █▀▀ ▄█ ▄
 # -- -- -- -- -- --
 
+# The public keys of each host for encryption are formed from
+# /etc/ssh/ssh_host_ed25519_key
+
+# This means that when reinstalling the host or reconfiguring sshd,
+# the key will change and will not be able to decipher the secret. 
+# When reinstalling, you need to replace the public key here with the current one.
+# In order not to lose access to secret files, there is a primary key.
+# ! The primary key can decrypt any secret and must be stored in a safe place
+# ! Ideally, it can be printed and provided with a QR code for quick copying.
+# ! Never store the primary key on one of the machines described in the config.
+
+# For greater security, each host or user has its own directory and *.yaml secret files
+# This is done intentionally so that if a host is compromised it will not affect others.
+
+# Below is the current hierarchy of secret files:
+
+# ./secrets
+# ├── homes
+# │   ├── admserv
+# │   ├── └── secrets.yaml
+# │   └── stepan
+# │       └── secrets.yaml
+# └── hosts
+#     ├── desktop-laptop
+#     │   └── secrets.yaml
+#     ├── desktop-workstation
+#     │   └── secrets.yaml
+#     ├── vps-allsave
+#     │   └── secrets.yaml
+#     ├── vps-gliese
+#     │   └── secrets.yaml
+#     └── vps-solar
+#         └── secrets.yaml
+# -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
 keys:
-  - &primary age1uvex8azae53776k8evjfucu4l04qtxmletxttpeedxuu3ggmt32qtn8jnh
+  # main:
+  - &primary age1df4m0wxzkvhvapgsls3fjfqjh3flck8t5ex7acnktmcuawvmhq4qu6nlpe
+  # desktop:
+  - &workstation age1chg5v8qvt38w46ezt3f2h6x2e7wr8w2pchhukkdpmg0v3lqgsd5qrt5mus
+  - &laptop age1uvex8azae53776k8evjfucu4l04qtxmletxttpeedxuu3ggmt32qtn8jnh
+  # vps:
+  - &allsave age1rrsynr4y9d0n57q4ahjrukr5azspj954l4lndxx8e75njr0queksrctnv8
+  - &gliese age1ghu59nllm5qrntw8e96ngy5gtua4wshyr6gnph8706y2s7r6eu9sphqysd
+  - &solar age1q37xtvlgnx4k39nyqqtqgkuarr3xvsyj80knuvenjcq0tfa9ksaqg0gdww
+  # user:
+  - &stepan age1j20yg5zx3rjjt868phm72qaw2vetd23egux5v62plr06lwwfhg5s6tyjkn
 creation_rules:
-  - path_regex: secrets/primary/[^/]+\.(yaml|json|env|ini)$
+  # hosts:
+  - path_regex: secrets/hosts/desktop-laptop/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:
       - *primary
-
+      - *laptop
+  - path_regex: secrets/hosts/desktop-workstation/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *primary
+      - *workstation
+  - path_regex: secrets/hosts/vps-allsave/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *primary
+      - *allsave
+  - path_regex: secrets/hosts/vps-gliese/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *primary
+      - *gliese
+  - path_regex: secrets/hosts/vps-solar/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *primary
+      - *solar
+  # users:
+  - path_regex: secrets/homes/stepan/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *primary
+      - *stepan

@@ -45,18 +45,16 @@
       extraSpecialArgs = { inherit system; inherit inputs; };
     in {
     nixosConfigurations = {
-      # laptop:
-      honor-wlr-w09 = lib.nixosSystem {
+      desktop-laptop = lib.nixosSystem {
         inherit specialArgs;
         modules = [
-          ./hosts/honor-vlr-w09/configuration.nix
+          ./hosts/desktop-laptop/configuration.nix
         ];
       };
-      # workstation:
-      msi-z390-a-pro = lib.nixosSystem {
+      desktop-workstation = lib.nixosSystem {
         inherit specialArgs;
         modules = [
-          ./hosts/msi-z390-a-pro/configuration.nix
+          ./hosts/desktop-workstation/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
               inherit extraSpecialArgs;
@@ -67,7 +65,6 @@
           }
         ];
       };
-      # general:
       vps-solar = lib.nixosSystem {
         inherit specialArgs;
         modules = [
@@ -82,7 +79,6 @@
           }
         ];
       };
-      # dev:
       vps-gliese = lib.nixosSystem {
         inherit specialArgs;
         modules = [
@@ -97,7 +93,6 @@
           }
         ];
       };
-      # lab:
       vps-allsave = lib.nixosSystem {
         inherit specialArgs;
         modules = [
@@ -112,15 +107,6 @@
         ];
       };
       # ... add more hosts here:
-    };
-    homeConfigurations = {
-      "stepan@honor-vlr-w09" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./homes/stepan_laptop/home.nix
-        ];
-      };
-      # ... add more users here:
     };
   };
 }

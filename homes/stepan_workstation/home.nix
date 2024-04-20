@@ -26,6 +26,7 @@
     ./pkgs
     ./programs
     ./services
+    ./sops
     ./systemd
     ./wayland
     ./xorg
