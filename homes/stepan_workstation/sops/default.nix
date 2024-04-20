@@ -9,6 +9,7 @@
   defaultUserSopsFile = ../../../secrets/homes/stepan/secrets.yaml;
   sops = {
     secrets = {
+      # ssh-keys:
       "private-keys/self/allsave" = { 
         path = "${config.home.homeDirectory}/.ssh/self/allsave"; 
       };
@@ -52,6 +53,10 @@
       "public-keys/misc/github" = { 
         path = "${config.home.homeDirectory}/.ssh/misc/github.pub"; 
       };
+      # google calendar fetchers:
+      "google-calendar/fetch-id" = {};
+      "google-calendar/fetch-secret" = {};
+      # ... add more secrets here:
     };
   };
 }

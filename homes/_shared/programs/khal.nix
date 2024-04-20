@@ -16,7 +16,6 @@
           readOnly = false;
           type = "discover";
         };
-        # # see https://github.com/nix-community/home-manager/issues/4675#issuecomment-1967853432
         local = {
           type = "filesystem";
           fileExt = ".ics";
@@ -26,11 +25,11 @@
         };
         vdirsyncer =
         let
-          googleCalendarFetchId = with pkgs; writeShellScriptBin "gcfid" ''
-            cat 
+          googleCalendarFetchId = with pkgs; writeShellScript "gcfid" ''
+            cat ${config.sops.secrets."google-calendar/fetch-id".path}
           '';
-          googleCalendarFetchSecret = with pkgs; writeShellScriptBin "gcfs" ''
-            cat 
+          googleCalendarFetchSecret = with pkgs; writeShellScript "gcfs" ''
+            cat ${config.sops.secrets."google-calendar/fetch-secret".path}
           '';
         in {
           enable = true;
