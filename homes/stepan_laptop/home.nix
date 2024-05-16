@@ -4,9 +4,6 @@
 { config, pkgs, ... }: {
   home.username = "stepan";
   home.homeDirectory = "/home/stepan";
-  home.sessionVariables = {
-    GTK_THEME = io.elementary.stylesheet.blueberry:dark;
-  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -24,8 +21,18 @@
   xsession.enable = true;
 
   imports = [
+    ../../modules/colors
     ./config
     ./pkgs
     ./programs
+    ./services
+    ./sops
+    ./systemd
+    ./wayland
+    ./xorg
   ];
+
+  # Set colorScheme
+  colorSchemeName = "catppuccin_mocha";
+
 }

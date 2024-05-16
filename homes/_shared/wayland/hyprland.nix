@@ -38,11 +38,26 @@
       env = [
         "WLR_NO_HARDWARE_CURSORS,1"  # ? If your cursor becomes invisible
         "NIXOS_OZONE_WL,1"           # ? Hint electron apps to use wayland
+        "GDK_SCALE,2"
+        "XCURSOR_SIZE,26"
       ];
       #! -- -- -- --  -- -- monitors -- -- -- -- -- -- #
       monitor = [
         "DP-1,1920x1080@144,0x0,1"
         ",preferred,auto,1"
+      ];
+      #! -- -- -- --  -- -- workspace -- -- -- -- -- -- #
+      workspace = [
+        "1"
+        "2"
+        "3"
+        "4"
+        "5"
+        "6"
+        "7"
+        "8"
+        "9,monitor:HDMI-A-1"
+        "10,monitor:HDMI-A-1"
       ];
       #! -- -- -- --  -- -- general -- -- -- -- -- --  #
       general = {
@@ -195,6 +210,10 @@
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
       ];
+      #! -- -- -- -- -- xwayland -- -- -- -- -- #
+      xwayland = {
+        force_zero_scaling = true;
+      };
     };
   };
 }

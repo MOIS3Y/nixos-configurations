@@ -19,11 +19,14 @@
     ./nix
     ./nixpkgs
     ./programs
+    ./security
     ./services
     ./sound
+    ./sops
     ./systemd
     ./users
     ./virtualisation
+    ./xdg
   ];
 
   # Set your time zone.

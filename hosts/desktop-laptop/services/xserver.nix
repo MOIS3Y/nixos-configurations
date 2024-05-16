@@ -4,26 +4,37 @@
 
 { config, pkgs, ... }: 
   let
-    extrapkgs = pkgs.callPackage ../extrapkgs {};
+    extra-pkgs = pkgs.callPackage ../extrapkgs {};
   in {
   services.xserver = {
     enable = true;
     displayManager = { 
       sddm = { 
-        enable = false;
-        theme = "${extrapkgs.sugar-candy}";
+        enable = true;
+        autoNumlock = true;
+        theme = "${extra-pkgs.sugar-candy}";
+        settings = {
+          Theme = { CursorTheme = "Catppuccin-Mocha-Blue-Cursors"; };
+        };
       };
       lightdm = {
-        enable = true;
+        enable = false;
       };
     };
-    desktopManager.pantheon = {
-        enable = true;
+    desktopManager = {
+      pantheon = {
+        enable = false;
         extraWingpanelIndicators = [ pkgs.wingpanel-indicator-ayatana ];
         extraSwitchboardPlugs = [ pkgs.pantheon-tweaks ];
+      };
     };
     windowManager = {
-      awesome.enable = true;
+      awesome = {
+        enable = true;
+        luaModules = [
+          pkgs.lua52Packages.lgi
+        ];
+      };
       qtile = { 
         enable = true;
         extraPackages = python3Packages: with python3Packages; [
@@ -32,9 +43,11 @@
         ];
       };
     };
-    layout = "us,ru";
-    xkbOptions = "grp:alt_shift_toggle";
-    xkbVariant = "";
+    xkb = {
+      variant = "";
+      options = "grp:alt_shift_toggle";
+      layout = "us,ru";
+    };
     libinput = {
       enable = true;
       touchpad.naturalScrolling = true;

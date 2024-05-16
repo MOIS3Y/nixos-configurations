@@ -35,8 +35,8 @@
     # pull icons file
     lfIcons = builtins.fetchurl rec {
       name = "lf-icons-${sha256}.txt";
-      url = "https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example";
-      sha256 = "0141nzyjr3mybkbn9p0wwv5l0d0scdc2r7pl8s1lgh11wi2l771x";
+      url = "https://raw.githubusercontent.com/gokcehan/lf/6cabb0e8e43c8a374fcb1e0d4225141f478ce212/etc/icons.example";
+      sha256 = "12cwy6kfa2wj7nzffaxn5bka21yjqa5sx38nzdhyg1dq0c6jnjkk";
     };
   in {
   programs.lf = {

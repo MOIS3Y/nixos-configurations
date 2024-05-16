@@ -6,8 +6,8 @@
   let
     nixLogo = builtins.fetchurl rec {
       name = "Logo-${sha256}.svg";
-      url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/master/logo/nix-snowflake.svg";
-      sha256 = "14mbpw8jv1w2c5wvfvj8clmjw0fi956bq5xf9s2q3my14far0as8";
+      url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/56b7a5788005a3eaecb5298f0dbed0f7d1573abc/logo/nix-snowflake-colours.svg";
+      sha256 = "1cifj774r4z4m856fva1mamnpnhsjl44kw3asklrc57824f5lyz3";
     };
     # bin tools:
     pamixer = "${pkgs.pamixer}/bin/pamixer";

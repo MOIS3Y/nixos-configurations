@@ -3,30 +3,47 @@
 # -- -- -- -- -- -
 
 { config, pkgs, ... }: {
-  home.packages = with pkgs; [   
+  home.packages = with pkgs; [
+    # Default:
+    arandr
     catppuccin-kvantum
     catppuccin-papirus-folders
+    dconf
+    dnsutils
+    docker-compose
+    eww  # TODO: enable in programs after configure
     firefox
     flameshot
-    gnome.dconf-editor
+    gettext
+    gnumake
     inkscape
-    jetbrains.pycharm-community
+    imv
     linphone
+    lua
+    lm_sensors
     mattermost-desktop
     nmap
     pavucontrol
     poetry
-    rofi
+    pulseaudio
+    ripgrep
     rofi-bluetooth
     rofi-power-menu
-    rofi-systemd
-    rofi-vpn
+    sassc
+    sqlitebrowser
     telegram-desktop
-    vault
+    transmission-gtk
+    vault 
     virt-manager
     vlc
     vscode
-    wezterm
+    wireguard-tools
+    wireplumber
+    xdg-utils
+    xwaylandvideobridge
     zoom-us
+    # Extra-pkgs:
+    extrapkgs.i3lock-run
+    extrapkgs.xidlehook-caffeine
   ];
 }

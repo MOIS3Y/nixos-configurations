@@ -43,7 +43,7 @@ keys:
   - &primary age1df4m0wxzkvhvapgsls3fjfqjh3flck8t5ex7acnktmcuawvmhq4qu6nlpe
   # desktop:
   - &workstation age1chg5v8qvt38w46ezt3f2h6x2e7wr8w2pchhukkdpmg0v3lqgsd5qrt5mus
-  - &laptop age1uvex8azae53776k8evjfucu4l04qtxmletxttpeedxuu3ggmt32qtn8jnh
+  - &laptop age19jkshqf6qmk7kcjr5ux9agvfckcdt2gtntqn5njqlycmu73p2v2qhyqf8m
   # vps:
   - &allsave age1rrsynr4y9d0n57q4ahjrukr5azspj954l4lndxx8e75njr0queksrctnv8
   - &gliese age1ghu59nllm5qrntw8e96ngy5gtua4wshyr6gnph8706y2s7r6eu9sphqysd

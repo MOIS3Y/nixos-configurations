@@ -3,11 +3,7 @@
 # -- -- -- -- -- -- -- -- -- -- -- --
 
 {config, pkgs, ...}: {
-  boot.plymouth = {
-  enable = true;
-  themePackages = [
-    (pkgs.catppuccin-plymouth.override { variant = "mocha"; })
+  imports = [
+    ../../_shared/boot/plymouth.nix
   ];
-  theme = "catppuccin-mocha";
-  };
 }

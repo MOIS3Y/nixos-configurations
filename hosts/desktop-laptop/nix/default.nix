@@ -4,9 +4,12 @@
 
 { config, pkgs, ...}: {
   nix = {
-    package = pkgs.nixUnstable;
+    package = pkgs.nix;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    settings = {
+      trusted-users = [ "stepan" ];
+    };
   };
 }

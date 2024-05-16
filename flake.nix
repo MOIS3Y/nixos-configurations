@@ -49,6 +49,14 @@
         inherit specialArgs;
         modules = [
           ./hosts/desktop-laptop/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              inherit extraSpecialArgs;
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.stepan = import ./homes/stepan_laptop/home.nix;
+            };
+          }
         ];
       };
       desktop-workstation = lib.nixosSystem {

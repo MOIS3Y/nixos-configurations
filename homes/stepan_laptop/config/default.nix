@@ -1,6 +1,13 @@
-{config, pkgs, ...}: {
-    imports = [
-        ./dconf.nix
-        ./pointer-cursor.nix
-    ];
+# █▀▀ █▀█ █▄░█ █▀▀ █ █▀▀ ▀
+# █▄▄ █▄█ █░▀█ █▀░ █ █▄█ ▄
+# -- -- -- -- -- -- -- -- 
+
+{ config, pkgs, ... }: {
+  imports = [
+    ./dconf.nix
+    ./gtk.nix
+    ./pointer-cursor.nix
+    ./qt.nix
+    ./xdg.nix
+  ];
 }
