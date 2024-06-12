@@ -27,7 +27,7 @@
         ];
       };
     };
-    videoDrivers = [ "amdgpu" ];
+    videoDrivers = [ "amdgpu" "intel" ];
     xkb = {
       variant = "";
       options = "grp:alt_shift_toggle";
@@ -37,5 +37,6 @@
       Option "DRI" "3"
       Option "VariableRefresh" "true"
     '';
+    exportConfiguration = true;
   };
 }
