@@ -13,6 +13,9 @@
       # ${networkmanagerapplet}/bin/nm-applet &
       # ${blueman}/bin/blueman-applet &
     '';
+    # bin tools:
+    volumectl = "${pkgs.avizo}/bin/volumectl";
+    lightctl = "${pkgs.avizo}/bin/lightctl";
     wofi = "${pkgs.wofi}/bin/wofi";
     wofi-toggle = with pkgs; writeShellScript "wofi-toggle" ''
       pgrep wofi >/dev/null 2>&1 && pkill wofi || ${wofi} --show drun
@@ -38,7 +41,6 @@
       env = [
         "WLR_NO_HARDWARE_CURSORS,1"  # ? If your cursor becomes invisible
         "NIXOS_OZONE_WL,1"           # ? Hint electron apps to use wayland
-        "GDK_SCALE,2"
         "XCURSOR_SIZE,26"
       ];
       #! -- -- -- --  -- -- monitors -- -- -- -- -- -- #
@@ -93,6 +95,11 @@
           natural_scroll = true;
           tap-to-click = true;
         };
+      };
+      #! -- -- -- --  -- -- gestures -- -- -- -- -- -- #
+      gestures = {
+        workspace_swipe = true;
+        workspace_swipe_fingers = 3;
       };
       #! -- -- -- --  -- -- misc -- -- -- -- -- -- - #
       misc = {
@@ -178,13 +185,13 @@
           # --------------- #
           #  - HARDWARE -   #
           # --------------- #
-          # sound and brightness managment (see dunst.nix - scripts there) 
-          ",XF86MonBrightnessUp,   exec, dunst-brightness set +5%"
-          ",XF86MonBrightnessDown, exec, dunst-brightness set 5%-"
-          ",XF86AudioRaiseVolume,  exec, dunst-volume -i 5"
-          ",XF86AudioLowerVolume,  exec, dunst-volume -d 5"
-          ",XF86AudioMute,         exec, dunst-volume -t"
-          ",XF86AudioMicMute,      exec, dunst-microphone -t"
+          # sound and brightness managment
+          ",XF86MonBrightnessUp,   exec, ${lightctl} up"
+          ",XF86MonBrightnessDown, exec, ${lightctl} down"
+          ",XF86AudioRaiseVolume,  exec, ${volumectl} -u up"
+          ",XF86AudioLowerVolume,  exec, ${volumectl} -u down"
+          ",XF86AudioMute,         exec, ${volumectl} toggle-mute"
+          ",XF86AudioMicMute,      exec, ${volumectl} -m toggle-mute"
         ]
         ++ (
           # workspaces
