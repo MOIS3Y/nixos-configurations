@@ -5,6 +5,6 @@
 { config, pkgs, ... }: {
 
   imports = [
-    ./pam.nix
+    ../../_shared/security
   ];
 }

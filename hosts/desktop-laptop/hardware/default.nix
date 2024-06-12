@@ -4,6 +4,6 @@
 
 { config, pkgs, ... }: {
     imports = [
-        ./bluetooth.nix
+        ../../_shared/hardware/bluetooth.nix
     ];
 }

@@ -5,6 +5,13 @@
 { config, pkgs, ... }: {
   services.xserver = {
     enable = true;
+    desktopManager = {
+      pantheon = {
+        enable = false;
+        extraWingpanelIndicators = [ pkgs.wingpanel-indicator-ayatana ];
+        extraSwitchboardPlugs = [ pkgs.pantheon-tweaks ];
+      };
+    };
     windowManager = {
       awesome = {
         enable = true;

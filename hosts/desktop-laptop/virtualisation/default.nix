@@ -3,9 +3,7 @@
 # -- -- -- -- -- -- -- -- -- --
 
 { config, pkgs, ... }: {
-
   imports = [
-    ./docker.nix
-    ./libvirtd.nix
+    ../../_shared/virtualisation 
   ];
 }
