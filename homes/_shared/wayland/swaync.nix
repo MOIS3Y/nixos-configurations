@@ -3,15 +3,12 @@
 # -- -- -- -- -- -- -- -- -- 
 
 { config, pkgs, ... }: {
-  imports = [
-    ../../../modules/swaync
-  ];
   services.swaync = {
     enable = true;
-    systemd.enable = true;
-    systemd.target = "graphical-session.target";
-    schema = "${pkgs.swaynotificationcenter}/etc/xdg/swaync/configSchema.json";
-
+    # systemd.enable = true;
+    # systemd.target = "graphical-session.target";
+    # ? does not exist in default HV module
+    # schema = "${pkgs.swaynotificationcenter}/etc/xdg/swaync/configSchema.json";
     settings = {
       # General settings
       cssPriority = "user";

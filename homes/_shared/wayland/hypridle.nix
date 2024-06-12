@@ -18,40 +18,38 @@
     swaylock = "${pkgs.swaylock-effects}/bin/swaylock";
     hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   in {
-  
-  imports = [
-    inputs.hypridle.homeManagerModules.hypridle
-  ];
-
   services.hypridle = {
     enable = true;
     package = pkgs.hypridle;
-    lockCmd = "${swaylock}";
-    # unlockCmd = "${notify-send} 'unlock!'";
-    # beforeSleepCmd = "${notify-send} 'Zzz'";
-    afterSleepCmd = "${swaylock}";
-    # ignoreDbusInhibit = false;  # ? false is default value
-
-    listeners = [
-      {
-        timeout = 600;
-        onTimeout = "${notify-send} 'The device will soon be blocked due to inactivity!'";
-        onResume = "${notify-send} 'Welcome back!'";
-      }
-      {
-        timeout = 660;
-        onTimeout = "${swaylock}";
-      }
-      {
-        timeout = 720;
-        onTimeout = "${hyprctl} dispatch dpms off";
-        onResume = "${hyprctl} dispatch dpms on";
-      }
-      {
-        timeout = 900;
-        onTimeout = "${pkgs.systemd}/bin/systemctl suspend";
-      }
-      # add more listeners hrere ...
-    ];
+    settings = {
+      general = {
+        lock_cmd = "${swaylock}";
+        # unlock_cmd = "${notify-send} 'unlock!'";
+        # before_sleep_cmd = "${notify-send} 'Zzz'";
+        after_sleep_cmd = "${swaylock}";
+        # ignore_dbus_inhibit = false;  # ? false is default value
+      };
+      listeners = [
+        {
+          timeout = 600;
+          onTimeout = "${notify-send} 'The device will soon be blocked due to inactivity!'";
+          onResume = "${notify-send} 'Welcome back!'";
+        }
+        {
+          timeout = 660;
+          onTimeout = "${swaylock}";
+        }
+        {
+          timeout = 720;
+          onTimeout = "${hyprctl} dispatch dpms off";
+          onResume = "${hyprctl} dispatch dpms on";
+        }
+        {
+          timeout = 900;
+          onTimeout = "${pkgs.systemd}/bin/systemctl suspend";
+        }
+        # add more listeners hrere ...
+      ];
+    };
   };
 }

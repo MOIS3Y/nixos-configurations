@@ -2,22 +2,9 @@
 # █░█ ▄█ ██▄ █▀▄ ▀▄▀ ██▄ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, ... }: 
-  let
-    extra-pkgs = pkgs.callPackage ../extrapkgs {};
-  in {
+{ config, pkgs, ... }: {
   services.xserver = {
     enable = true;
-    displayManager = {
-      sddm = { 
-        enable = true;
-        autoNumlock = true;
-        theme = "${extra-pkgs.sugar-candy}";
-        settings = {
-          Theme = { CursorTheme = "Catppuccin-Mocha-Blue-Cursors"; };
-        };
-      };
-    };
     windowManager = {
       awesome = {
         enable = true;

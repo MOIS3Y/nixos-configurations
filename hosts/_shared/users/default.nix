@@ -4,6 +4,6 @@
 
 { config, pkgs, ...}: {
   imports = [
-    ../../_shared/users
+    ./users.nix
   ];
 }

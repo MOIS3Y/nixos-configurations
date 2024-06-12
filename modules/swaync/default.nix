@@ -2,6 +2,8 @@
 # ▄█ ▀▄▀▄▀ █▀█ ░█░ █░▀█ █▄▄ ▄
 # -- -- -- -- -- -- -- -- -- 
 
+# ! Deprecated, now available as default HM module
+
 {
   pkgs,
   lib,

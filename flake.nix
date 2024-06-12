@@ -22,10 +22,6 @@
       url = "github:MOIS3Y/xidlehook-caffeine";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hypridle = {
-      url = "github:hyprwm/hypridle";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-colors = {
       url = "github:misterio77/nix-colors";
       # inputs.base16-schemes.follows = "base16-schemes";
