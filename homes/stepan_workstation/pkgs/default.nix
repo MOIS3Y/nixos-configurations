@@ -7,8 +7,10 @@
     # Default:
     arandr
     amdgpu_top
+    amberol
     catppuccin-kvantum
     catppuccin-papirus-folders
+    celluloid
     dconf
     dnsutils
     docker-compose
@@ -53,6 +55,7 @@
     xwaylandvideobridge
     zoom-us
     # Extra-pkgs:
+    extrapkgs.aladdin4nix
     extrapkgs.i3lock-run
     extrapkgs.xidlehook-caffeine
   ];

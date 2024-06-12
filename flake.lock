@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "aladdin4nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1716117502,
+        "narHash": "sha256-TsqDtWsNsR4SoGg0OiEG6B51G4OV5EVf9lqjloilNgg=",
+        "owner": "MOIS3Y",
+        "repo": "aladdin4nix",
+        "rev": "883cfe949422eaf1ae21fc500cf2b5c2f2d945df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MOIS3Y",
+        "repo": "aladdin4nix",
+        "type": "github"
+      }
+    },
     "base16-schemes": {
       "flake": false,
       "locked": {
@@ -298,6 +318,7 @@
     },
     "root": {
       "inputs": {
+        "aladdin4nix": "aladdin4nix",
         "home-manager": "home-manager",
         "hypridle": "hypridle",
         "i3lock-color-wrapper": "i3lock-color-wrapper",
