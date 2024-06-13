@@ -4,9 +4,7 @@
 
 { config, pkgs, ... }: {
   imports = [
-    ./blueman-applet.nix
-    # ./cbatticon.nix
-    ./dunst.nix
-    ./nm-applet.nix
+    ../../_shared/services/blueman-applet.nix
+    ../../_shared/services/nm-applet.nix
   ];
 }

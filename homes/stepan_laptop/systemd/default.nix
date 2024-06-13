@@ -4,6 +4,6 @@
 
 { config, pkgs, ... }: {
   imports = [
-    ./tray-target.nix
+    ../../_shared/systemd/tray-target.nix
   ];
 }
