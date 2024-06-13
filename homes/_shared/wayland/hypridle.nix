@@ -14,6 +14,7 @@
         ${systemd}/bin/systemctl suspend
       fi
     '';
+    pgrep = "${pkgs.procps}/bin/pgrep";
     notify-send = "${pkgs.libnotify}/bin/notify-send";
     swaylock = "${pkgs.swaylock-effects}/bin/swaylock";
     hyprctl = "${pkgs.hyprland}/bin/hyprctl";
@@ -23,30 +24,30 @@
     package = pkgs.hypridle;
     settings = {
       general = {
-        lock_cmd = "${swaylock}";
+        lock_cmd = "${pgrep} swaylock || ${swaylock}";
         # unlock_cmd = "${notify-send} 'unlock!'";
         # before_sleep_cmd = "${notify-send} 'Zzz'";
         after_sleep_cmd = "${swaylock}";
         # ignore_dbus_inhibit = false;  # ? false is default value
       };
-      listeners = [
+      listener = [
         {
           timeout = 600;
-          onTimeout = "${notify-send} 'The device will soon be blocked due to inactivity!'";
+          on-timeout = "${notify-send} 'The device will soon be blocked due to inactivity!'";
           onResume = "${notify-send} 'Welcome back!'";
         }
         {
           timeout = 660;
-          onTimeout = "${swaylock}";
+          on-timeout = "${swaylock}";
         }
         {
           timeout = 720;
-          onTimeout = "${hyprctl} dispatch dpms off";
-          onResume = "${hyprctl} dispatch dpms on";
+          on-timeout = "${hyprctl} dispatch dpms off";
+          on-resume = "${hyprctl} dispatch dpms on";
         }
         {
           timeout = 900;
-          onTimeout = "${pkgs.systemd}/bin/systemctl suspend";
+          on-timeout = "${pkgs.systemd}/bin/systemctl suspend";
         }
         # add more listeners hrere ...
       ];
