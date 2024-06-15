@@ -82,6 +82,7 @@
       "x-scheme-handler/discord" = [ "discord.desktop" ];
       "x-scheme-handler/tg" = [ "telegramdesktop.desktop" ];
       "x-scheme-handler/mattermost" = [ "Mattermost.desktop" ];
+      "x-scheme-handler/magnet" = [ "transmission-gtk.desktop" ];
       "x-scheme-handler/steam" = [ "steam.desktop" ];
 
       "compressed/*" = file-roller;

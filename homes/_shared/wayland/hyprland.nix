@@ -33,7 +33,8 @@
       "$terminal" = "${pkgs.wezterm}/bin/wezterm";
       "$launcher" = "${wofi-toggle}";
       "$browser" = "${pkgs.firefox}/bin/firefox";
-      "$filebrowser" = "${pkgs.wezterm}/bin/wezterm -e ${pkgs.lf}/bin/lf";
+      # "$filebrowser" = "${pkgs.wezterm}/bin/wezterm -e ${pkgs.lf}/bin/lf";
+      "$filebrowser" = "${pkgs.gnome.nautilus}/bin/nautilus";
       "$vscode" = "${pkgs.vscode}/bin/code";
       "$screenshot" = "${hyprScreenshot}/bin/hypr-screenshot";
       "$lockscreen" = "${pkgs.swaylock-effects}/bin/swaylock";
@@ -120,9 +121,12 @@
         "float,       class:^(nm-connection-editor)"
         "float,       class:^(.blueman-manager-wrapped)"
         "float,       class:^(zoom)"
+        "float,       class:^(org.gnome.Calculator)"
         # disable blur
         "noblur,      class:^(vlc)"
         "noblur,      class:^(zoom)"
+        # size
+        "size 350 700,class:^(org.gnome.Calculator)"
       ];
       layerrule = [
         # make some windows bg bluring

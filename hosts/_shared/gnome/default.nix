@@ -9,7 +9,6 @@
   services.dleyna-renderer.enable = true;
   services.geoclue2.enable = true;
   services.geoclue2.enableDemoAgent = false; # GNOME has its own geoclue agent
-  services.sysprof.enable = true;
 
   # services:
   services.gnome = {
@@ -20,11 +19,6 @@
     gnome-online-accounts.enable = true;
     gnome-online-miners.enable = true;
     tracker-miners.enable = true;
-    gnome-settings-daemon.enable = true;
-    gnome-user-share.enable = true;
-    glib-networking.enable = true;
-    rygel.enable = true;
-    core-os-services.enable = true;  # if I foget something:)
   };
   # programs:
   programs = {
@@ -34,22 +28,14 @@
   };
   # pkgs:
   environment.systemPackages = with pkgs; [
-    glib # for gsettings program
     at-spi2-atk  # required for polkit-gnome-authentication-agent-1
     gnome.adwaita-icon-theme  # required for most gnome apps
     gnome-online-accounts-gtk
-    gnome.gnome-backgrounds
-    gnome.gnome-bluetooth
     gnome.nautilus
     gnome.gnome-calendar
     gnome.gnome-calculator
-    gnome.gnome-control-center
     gnome.gnome-weather
-  ] ++ lib.optionals config.services.flatpak.enable [
-      # Since PackageKit Nix support is not there yet,
-      # only install gnome-software if flatpak is enabled.
-      gnome-software
-    ];
+  ];
   # daemons:
   systemd.user.services = { 
     polkit-gnome-authentication-agent-1 = {
