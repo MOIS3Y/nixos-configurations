@@ -3,19 +3,19 @@
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
 { config, pkgs, extrapkgs, ... }: {
-  systemd.user.services = { 
-    polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = ''
-          ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
-        '';
-      };
-    };
+  # systemd.user.services = { 
+  #   polkit-gnome-authentication-agent-1 = {
+  #     description = "polkit-gnome-authentication-agent-1";
+  #     wantedBy = [ "graphical-session.target" ];
+  #     wants = [ "graphical-session.target" ];
+  #     after = [ "graphical-session.target" ];
+  #     serviceConfig = {
+  #       Type = "simple";
+  #       ExecStart = ''
+  #         ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
+  #       '';
+  #     };
+  #   };
     # indicatorapp = {
     #   description = "indicator-application-gtk3";
     #   wantedBy = pkgs.lib.mkForce [];
@@ -52,5 +52,5 @@
     # };
 
     # ... add more user.services here:
-  };
+  # };
 }

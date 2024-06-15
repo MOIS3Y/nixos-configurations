@@ -8,28 +8,21 @@
     arandr
     amdgpu_top
     amberol
-    catppuccin-kvantum
-    catppuccin-papirus-folders
     celluloid
-    dconf
-    dnsutils
-    docker-compose
     eww  # TODO: enable in programs after configure
     firefox
     flameshot
-    gettext
     gimp
     gnumake
+    gradience
     inkscape
-    imv
-    jetbrains.pycharm-community
-    lapce
     linphone
-    lua
-    lm_sensors
+    (lutris.override {
+      extraPkgs = pkgs: with pkgs; [
+        winePackages.unstableFull
+      ];
+    })
     mattermost-desktop
-    nmap
-    pavucontrol
     poetry
     protonup-qt
     pulseaudio
@@ -43,7 +36,6 @@
     telegram-desktop
     transmission-gtk
     vault 
-    virt-manager
     vlc
     vscode
     vrrtest
@@ -51,7 +43,6 @@
     winetricks
     wireguard-tools
     wireplumber
-    xdg-utils
     xwaylandvideobridge
     zoom-us
     # Extra-pkgs:

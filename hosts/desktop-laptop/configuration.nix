@@ -13,6 +13,7 @@
     ./boot
     ./environment
     ./fonts
+    ./gnome
     ./hardware
     ./i18n
     ./networking

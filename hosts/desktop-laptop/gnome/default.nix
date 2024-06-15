@@ -4,6 +4,6 @@
 
 { config, pkgs, extrapkgs, ... }: {
   imports = [
-    ../../_shared/environment
+    ../../_shared/gnome
   ];
 }
