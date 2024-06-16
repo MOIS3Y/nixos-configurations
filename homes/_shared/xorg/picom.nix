@@ -2,7 +2,7 @@
 # █▀▀ █ █▄▄ █▄█ █░▀░█ ▄
 # -- -- -- -- -- -- -- 
 
-{config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   services.picom = {
     enable = true;
     backend = "glx";
@@ -139,4 +139,10 @@
       log-level = "warn";
     };
   };
+  # override systemd unit:
+  systemd.user.services.picom.Service.Restart = lib.mkForce "always";
+  systemd.user.services.picom.Service.RestartSec = lib.mkForce 90;
+  systemd.user.services.picom.Service.ExecCondition = lib.mkForce [
+    "${pkgs.bash}/bin/bash -c '! [ -v WAYLAND_DISPLAY ] || exit -1'"
+  ];
 }

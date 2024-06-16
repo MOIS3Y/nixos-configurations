@@ -2,7 +2,7 @@
 # █░█ █ █▄▀ █▄▄ ██▄ █▀█ █▄█ █▄█ █░█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   services.xidlehook = {
     enable = true;
     detect-sleep = true;
@@ -32,4 +32,10 @@
       }
     ];
   };
+  # override systemd unit:
+  systemd.user.services.xidlehook.Service.Restart = lib.mkForce "always";
+  systemd.user.services.xidlehook.Service.RestartSec = lib.mkForce 90;
+  systemd.user.services.xidlehook.Service.ExecCondition = lib.mkForce [
+    "${pkgs.bash}/bin/bash -c '! [ -v WAYLAND_DISPLAY ] || exit -1'"
+  ];
 }
