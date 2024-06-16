@@ -122,11 +122,11 @@
             on-scroll      = 1;
             on-click-right = "mode";
             format = {
-              months   = "<span color='#89b4fa'><b>{}</b></span>";
-              days     = "<span color='#cdd6f4'><b>{}</b></span>";
-              weeks    = "<span color='#b4befe'><b>{}</b></span>";
-              weekdays = "<span color='#cba6f7'><b>{}</b></span>";
-              today    = "<span color='#f38ba8'><b><u>{}</u></b></span>";
+              months   = "<span color='#${config.colorScheme.palette.base0D}'><b>{}</b></span>";
+              days     = "<span color='#${config.colorScheme.palette.base05}'><b>{}</b></span>";
+              weeks    = "<span color='#${config.colorScheme.palette.base07}'><b>{}</b></span>";
+              weekdays = "<span color='#${config.colorScheme.palette.base0E}'><b>{}</b></span>";
+              today    = "<span color='#${config.colorScheme.palette.base08}'><b><u>{}</u></b></span>";
             };
           };
           actions = {
@@ -209,7 +209,7 @@
     };
     style = ''
       window#waybar {
-        background-color: #11111b;
+        background-color: #${config.colorScheme.palette.base00};
         transition-property: background-color;
         transition-duration: 0.5s;
         font-size: 13px;
@@ -239,32 +239,32 @@
         padding: 3px 14px;
         margin: 6px 3px;
         border-radius: 6px;
-        color: #cdd6f4;
+        color: #${config.colorScheme.palette.base05};
         transition: 0.5s;
       }
 
       #workspaces button.persistent {
-        background-color: #89b4fa;
-        color: #1e1e2e;
+        background-color: #${config.colorScheme.palette.base0D};
+        color: #${config.colorScheme.palette.base00};
       }
       #workspaces button.empty {
-        background-color: #1e1e2e;
-        color: #cdd6f4;
+        background-color: #${config.colorScheme.palette.base01};
+        color: #${config.colorScheme.palette.base05};
       }
       #workspaces button.active {
-        color: #1e1e2e;
-        background-color: #cdd6f4;
+        color: #${config.colorScheme.palette.base00};
+        background-color: #${config.colorScheme.palette.base05};
       }
       #workspaces button.urgent {
-        background-color: #f38ba8;
-        color: #1e1e2e;
+        background-color: #${config.colorScheme.palette.base08};
+        color: #${config.colorScheme.palette.base00};
       }
 
       #workspaces button:hover {
       box-shadow: inherit;
       text-shadow: inherit;
-      color: #1e1e2e;
-      background-color: #bac2de;
+      color: #${config.colorScheme.palette.base01};
+      background-color: #${config.colorScheme.palette.base05};
       }
 
       #custom-swallow,
@@ -279,8 +279,8 @@
         padding-right: 14px;
         padding-left: 10px;
         margin: 6px 3px;
-        color: #cdd6f4;
-        background-color: #1e1e2e;
+        color: #${config.colorScheme.palette.base05};
+        background-color: #${config.colorScheme.palette.base01};
       }
 
       #tray {
@@ -289,8 +289,8 @@
         border-radius: 6px;
         margin: 6px 3px;
         padding: 3px 12px;
-        background-color: #1e1e2e;
-        color: #181825;
+        background-color: #${config.colorScheme.palette.base01};
+        color: #${config.colorScheme.palette.base01};
       }
 
       #custom-weather,
@@ -309,8 +309,8 @@
         padding: 2px 10px;
         margin: 6px 3px;
         border-radius: 4px;
-        background-color: #1e1e2e;
-        color: #181825;
+        background-color: #${config.colorScheme.palette.base01};
+        color: #${config.colorScheme.palette.base00};
         font-family: JetBrainsMono, monospace;
         font-size: 14px;
       }
@@ -327,22 +327,22 @@
 
       #custom-weather,
       #custom-todo {
-        color: #cdd6f4;
-        background-color: #1e1e2e;
+        color: #${config.colorScheme.palette.base05};
+        background-color:#${config.colorScheme.palette.base00};
       }
 
       #custom-swallow {
-        color: #cdd6f4;
+        color: #${config.colorScheme.palette.base05};
       }
 
       #battery {
-        background-color: #f38ba8;
+        background-color: #${config.colorScheme.palette.base08};
       }
 
       @keyframes blink {
         to {
-          background-color: #f38ba8;
-          color: #181825;
+          background-color: #${config.colorScheme.palette.base08};
+          color: #${config.colorScheme.palette.base00};
         }
       }
 
@@ -350,8 +350,8 @@
       .critical,
       .urgent,
       #battery.critical:not(.charging) {
-        background-color: #f38ba8;
-        color: #181825;
+        background-color: #${config.colorScheme.palette.base08};
+        color: #${config.colorScheme.palette.base00};
         animation-name: blink;
         animation-duration: 0.5s;
         animation-timing-function: linear;
@@ -360,51 +360,51 @@
       }
 
       #cpu {
-        background-color: #f38ba8;
+        background-color: #${config.colorScheme.palette.base08};
       }
 
       #memory {
-        background-color: #fab387;
+        background-color: #${config.colorScheme.palette.base09};
       }
 
       #pulseaudio.microphone {
-        background-color: #f9e2af;
+        background-color: #${config.colorScheme.palette.base0A};
       }
 
       #pulseaudio {
-        background-color: #a6e3a1;
+        background-color: #${config.colorScheme.palette.base0B};
       }
 
       #language {
-        background-color: #94e2d5;
+        background-color: #${config.colorScheme.palette.base0C};
       }
 
       #clock.date {
-        background-color: #89b4fa;
+        background-color: #${config.colorScheme.palette.base0D};
       }
 
       #clock {
-        background-color: #cba6f7;
+        background-color: #${config.colorScheme.palette.base0E};
       }
 
       #custom-power {
-        background-color: #f2cdcd;
+        background-color: #${config.colorScheme.palette.base0F};
       }
 
       tooltip {
         font-family: Ubuntu, Inter, sans-serif;
         border-radius: 8px;
-        border-color: #1e1e2e;
+        border-color: #${config.colorScheme.palette.base01};
         padding: 20px;
         margin: 30px;
-        color: #cdd6f4;
-        background-color: #11111b;
+        color: #${config.colorScheme.palette.base05};
+        background-color: #${config.colorScheme.palette.base00};
       }
 
       tooltip label {
         font-family: Ubuntu, Inter, sans-serif;
         padding: 20px;
-        color: #cdd6f4;
+        color: #${config.colorScheme.palette.base05};
       }
     '';
   };

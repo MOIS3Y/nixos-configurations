@@ -62,22 +62,22 @@
         background-color: rgba(12, 12, 12, 0.1);
       }
       button {
-        color: #cdd6f4;
+        color: #${config.colorScheme.palette.base05};
         font-size:20px;
         background-repeat: no-repeat;
         background-position: center;
         background-size: 25%;
         border-style: solid;
         background-color: rgba(12, 12, 12, 0.3);
-        border: 3px solid #cdd6f4;
+        border: 3px solid #${config.colorScheme.palette.base05};
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       }
       button:focus,
       button:active,
       button:hover {
-          color: #89b4fa;
+          color: #${config.colorScheme.palette.base0D};
         background-color: rgba(12, 12, 12, 0.5);
-        border: 3px solid #89b4fa;
+        border: 3px solid #${config.colorScheme.palette.base0D};
       }
       /* 
       ----------------------------------------------------- 

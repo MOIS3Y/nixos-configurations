@@ -20,6 +20,10 @@
     wofi-toggle = with pkgs; writeShellScript "wofi-toggle" ''
       pgrep wofi >/dev/null 2>&1 && pkill wofi || ${wofi} --show drun
     '';
+    # color aliases:
+    color_inactive = "${config.colorScheme.palette.base00}";
+    color_up = "${config.colorScheme.palette.base0D}";
+    color_down = "${config.colorScheme.palette.base0E}";
   in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -68,8 +72,8 @@
         no_border_on_floating = false;
         gaps_in = 4;
         gaps_out = 8;
-        "col.inactive_border" = "rgba(11111bff)";
-        "col.active_border" = "rgba(89b4faff) rgba(cba6f7ff) 60deg";
+        "col.inactive_border" = "rgba(${color_inactive}ff)";
+        "col.active_border" = "rgba(${color_up}ff) rgba(${color_down}ff) 60deg";
         resize_on_border = true;
       };
       #! -- -- -- --  -- -- decoration -- -- -- -- --  #

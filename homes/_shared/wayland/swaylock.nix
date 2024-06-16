@@ -42,33 +42,33 @@
 
       # color = "00000000";
 
-      bs-hl-color = "#f38ba8";
-      key-hl-color = "#cba6f7";
+      bs-hl-color = "#${config.colorScheme.palette.base08}";
+      key-hl-color = "#${config.colorScheme.palette.base0E}";
       
-      caps-lock-bs-hl-color = "#fab387";
-      caps-lock-key-hl-color = "#fab387";
+      caps-lock-bs-hl-color = "#${config.colorScheme.palette.base09}";
+      caps-lock-key-hl-color = "#${config.colorScheme.palette.base09}";
 
-      inside-color = "#1e1e2e";
-      inside-clear-color = "#1e1e2e";
-      inside-ver-color = "#1e1e2e";
-      inside-wrong-color = "#1e1e2e";
+      inside-color = "#${config.colorScheme.palette.base01}";
+      inside-clear-color = "#${config.colorScheme.palette.base01}";
+      inside-ver-color = "#${config.colorScheme.palette.base01}";
+      inside-wrong-color = "#${config.colorScheme.palette.base01}";
 
-      line-color = "#11111b";
-      line-ver-color = "#11111b";
-      line-clear-color = "#11111b";
-      line-wrong-color = "#11111b";
+      line-color = "#${config.colorScheme.palette.base00}";
+      line-ver-color = "#${config.colorScheme.palette.base00}";
+      line-clear-color = "#${config.colorScheme.palette.base00}";
+      line-wrong-color = "#${config.colorScheme.palette.base00}";
 
-      ring-color = "#181825";
-      ring-clear-color = "#cba6f7";
-      ring-ver-color = "#cba6f7";
-      ring-wrong-color = "#f38ba8";
+      ring-color = "#${config.colorScheme.palette.base02}";
+      ring-clear-color = "#${config.colorScheme.palette.base08}";
+      ring-ver-color = "#${config.colorScheme.palette.base08}";
+      ring-wrong-color = "#${config.colorScheme.palette.base08}";
 
       separator-color = "00000000";
 
-      text-color = "#cdd6f4";
-      text-clear-color = "#cdd6f4";
-      text-ver-color = "#cdd6f4";
-      text-wrong-color = "#f38ba8";
+      text-color = "#${config.colorScheme.palette.base05}";
+      text-clear-color = "#${config.colorScheme.palette.base05}";
+      text-ver-color = "#${config.colorScheme.palette.base05}";
+      text-wrong-color = "#${config.colorScheme.palette.base08}";
     };
   };
 }
