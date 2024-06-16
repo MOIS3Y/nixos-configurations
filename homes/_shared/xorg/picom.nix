@@ -145,4 +145,13 @@
   systemd.user.services.picom.Service.ExecCondition = lib.mkForce [
     "${pkgs.bash}/bin/bash -c '! [ -v WAYLAND_DISPLAY ] || exit -1'"
   ];
+  # override systemd-xdg-autostart-generator:
+  # ? it's a hack, we don't need to autostart app-picom, we start it by .service
+  xdg.configFile = {
+  "autostart/picom.desktop".text = (
+    builtins.readFile "${pkgs.picom}/etc/xdg/autostart/picom.desktop"
+    ) + ''
+      Hidden=true
+    '';
+  };
 }
