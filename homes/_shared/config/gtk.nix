@@ -29,12 +29,12 @@
       @define-color headerbar_border_color #${config.colorScheme.palette.base03};
       @define-color headerbar_backdrop_color @window_bg_color;
       @define-color headerbar_shade_color rgba(0, 0, 0, 0.36);
-      @define-color card_bg_color #${config.colorScheme.palette.base02};
+      @define-color card_bg_color #${config.colorScheme.palette.base00};
       @define-color card_fg_color #${config.colorScheme.palette.base05};
       @define-color card_shade_color rgba(0, 0, 0, 0.36);
-      @define-color dialog_bg_color #${config.colorScheme.palette.base02};
+      @define-color dialog_bg_color #${config.colorScheme.palette.base00};
       @define-color dialog_fg_color #${config.colorScheme.palette.base05};
-      @define-color popover_bg_color #${config.colorScheme.palette.base02};
+      @define-color popover_bg_color #${config.colorScheme.palette.base00};
       @define-color popover_fg_color #${config.colorScheme.palette.base05};
       @define-color shade_color rgba(0,0,0,0.36);
       @define-color scrollbar_outline_color rgba(0,0,0,0.5);
