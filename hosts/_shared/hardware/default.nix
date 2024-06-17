@@ -3,10 +3,11 @@
 # -- -- -- -- -- -- -- -- -- -- -- --
 
 { config, pkgs, ... }: {
-    imports = [
-        ./bluetooth.nix
-        ./opengl.nix
-        ./openrgb.nix
-        ./xpadneo.nix
-    ];
+  imports = [
+    ./bluetooth.nix
+    ./intel.nix
+    ./opengl.nix
+    ./openrgb.nix
+    ./xpadneo.nix
+  ];
 }
