@@ -7,6 +7,7 @@
     ../../_shared/wayland/avizo.nix
     ../../_shared/wayland/hypridle.nix
     ../../_shared/wayland/hyprland.nix
+    ../../_shared/wayland/pkgs.nix
     ../../_shared/wayland/swappy.nix
     ../../_shared/wayland/swaylock.nix
     ../../_shared/wayland/swaync.nix
