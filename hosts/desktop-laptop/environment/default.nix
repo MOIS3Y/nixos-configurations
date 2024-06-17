@@ -11,6 +11,7 @@
     ../../_shared/environment/systemPackages/desktop.nix
     ../../_shared/environment/systemPackages/lua.nix
     ../../_shared/environment/systemPackages/managment.nix
+    ../../_shared/environment/systemPackages/monitoring.nix
     ../../_shared/environment/systemPackages/network.nix
     ../../_shared/environment/systemPackages/python.nix
     ../../_shared/environment/systemPackages/security.nix
