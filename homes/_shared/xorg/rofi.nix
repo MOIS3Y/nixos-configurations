@@ -11,19 +11,18 @@
     ];
     terminal = "${pkgs.wezterm}/bin/wezterm";
     location = "center";
-    theme =  # catppuccin mocha:
-      let
+    theme = let
         inherit (config.lib.formats.rasi) mkLiteral;
       in {
         "*" = {
-          bg-col = mkLiteral "#11111b" ;
-          bg-col-light = mkLiteral "#11111b" ;
-          border-col = mkLiteral "#11111b" ;
-          selected-col = mkLiteral "#11111b" ;
-          blue = mkLiteral "#89b4fa" ;
-          fg-col = mkLiteral "#cdd6f4" ;
-          fg-col2 = mkLiteral "#89b4fa" ;
-          grey = mkLiteral "#6c7086" ;
+          bg-col = mkLiteral "#${config.colorScheme.palette.base00}" ;
+          bg-col-light = mkLiteral "#${config.colorScheme.palette.base00}" ;
+          border-col = mkLiteral "#${config.colorScheme.palette.base00}" ;
+          selected-col = mkLiteral "#${config.colorScheme.palette.base00}" ;
+          blue = mkLiteral "#${config.colorScheme.palette.base0D}" ;
+          fg-col = mkLiteral "#${config.colorScheme.palette.base05}" ;
+          fg-col2 = mkLiteral "#${config.colorScheme.palette.base0D}" ;
+          grey = mkLiteral "#${config.colorScheme.palette.base03}" ;
         };
         "element-text, element-icon , mode-switcher" = {
             background-color = mkLiteral "inherit";

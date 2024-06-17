@@ -13,7 +13,9 @@
     Service = {
       ExecStart = with pkgs; [ ''
         ${xss-lock}/bin/xss-lock --session ''${XDG_SESSION_ID} \
-        -- ${extrapkgs.i3lock-run}/bin/i3lock-run -s catppuccin_mocha -f Inter
+        -- ${extrapkgs.i3lock-run}/bin/i3lock-run \
+        -s ${config.colorScheme.name} \
+        -f Ubuntu
       '' ];
       ExecStartPre = [ "${pkgs.xorg.xset}/bin/xset s off s noblank -dpms" ];
       Restart = "always";

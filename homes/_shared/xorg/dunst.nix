@@ -94,14 +94,14 @@ let
         horizontal_padding = 8;
         text_icon_padding = 0;
         frame_width = 1;
-        frame_color = "#1e1e2e";
+        frame_color = "#${config.colorScheme.palette.base01}";
         gap_size = 8;
         separator_color = "frame";
         sort = "yes";
         font = "Ubuntu Regular 9";
         line_height = 0;
         markup = "full";
-        format = "<span size='x-large' font_desc='monospace 9' weight='bold' foreground='#cdd6f4'>%a</span>\\n%s\\n%b";
+        format = "<span size='x-large' font_desc='monospace 9' weight='bold' foreground='#${config.colorScheme.palette.base05}'>%a</span>\\n%s\\n%b";
         alignment = "left";
         vertical_alignment = "center";
         show_age_threshold = 60;
@@ -140,22 +140,22 @@ let
         per_monitor_dpi = false;
       };
       urgency_low = {
-        background = "#11111b";
-        foreground = "#cdd6f4";
-        highlight = "#cba6f7";
+        background = "#${config.colorScheme.palette.base00}";
+        foreground = "#${config.colorScheme.palette.base05}";
+        highlight = "#${config.colorScheme.palette.base0E}";
         timeout = 10;
       };
       urgency_normal = {
-        background = "#11111b";
-        foreground = "#cdd6f4";
-        highlight = "#cba6f7";
+        background = "#${config.colorScheme.palette.base00}";
+        foreground = "#${config.colorScheme.palette.base05}";
+        highlight = "#${config.colorScheme.palette.base0E}";
         timeout = 10;
       };
       urgency_critical = {
-        background = "#11111b";
-        foreground = "#cdd6f4";
-        frame_color = "#f38ba8";
-        highlight = "#cba6f7";
+        background = "#${config.colorScheme.palette.base00}";
+        foreground = "#${config.colorScheme.palette.base05}";
+        frame_color = "#${config.colorScheme.palette.base08}";
+        highlight = "#${config.colorScheme.palette.base0E}";
         timeout = 0;
       };
     };

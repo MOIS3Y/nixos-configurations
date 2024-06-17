@@ -2,7 +2,20 @@
 # █░█ █ █▄▀ █▄▄ ██▄ █▀█ █▄█ █▄█ █░█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: 
+  let
+    notify = with pkgs; ''
+      ${dunst}/bin/dunstify \
+        "Power" "Computer will suspend very soon because of inactivity" \
+        -u normal
+      '';
+    locker = with pkgs; ''
+        ${extrapkgs.i3lock-run}/bin/i3lock-run \
+        -s ${config.colorScheme.name} \
+        -f Ubuntu
+      '';
+    suspend = "${pkgs.systemd}/bin/systemctl suspend";
+  in {
   services.xidlehook = {
     enable = true;
     detect-sleep = true;
@@ -14,21 +27,15 @@
     timers = [
       {
         delay = 600;
-        command = with pkgs; ''
-          ${dunst}/bin/dunstify \
-            "Power" "Computer will suspend very soon because of inactivity" \
-            -u normal
-        '';
+        command = "${notify}";
       }
       {
         delay = 10;
-        command = with pkgs; ''
-          ${extrapkgs.i3lock-run}/bin/i3lock-run -s catppuccin_mocha -f Inter
-        '';
+        command = "${locker}";
       }
       {
         delay = 60;
-        command = "systemctl suspend";
+        command = "${suspend}";
       }
     ];
   };

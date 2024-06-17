@@ -12,39 +12,39 @@
     Xft.hintstyle: hintfull
     Xft.lcdfilter: lcddefault
 
-    *background: #1E1E2E
-    *foreground: #CDD6F4
+    *background: #${config.colorScheme.palette.base01}
+    *foreground: #${config.colorScheme.palette.base05}
 
     ! black
-    *color0: #45475A
-    *color8: #585B70
+    *color0: #${config.colorScheme.palette.base02}
+    *color8: #${config.colorScheme.palette.base03}
 
     ! red
-    *color1: #F38BA8
-    *color9: #F38BA8
+    *color1: #${config.colorScheme.palette.base08}
+    *color9: #${config.colorScheme.palette.base08}
 
     ! green
-    *color2: #A6E3A1
-    *color10: #A6E3A1
+    *color2: #${config.colorScheme.palette.base0B}
+    *color10: #${config.colorScheme.palette.base0B}
 
     ! yellow
-    *color3: #F9E2AF
-    *color11: #F9E2AF
+    *color3: #${config.colorScheme.palette.base0A}
+    *color11: #${config.colorScheme.palette.base0A}
 
     ! blue
-    *color4: #89B4FA
-    *color12: #89B4FA
+    *color4: #${config.colorScheme.palette.base0D}
+    *color12: #${config.colorScheme.palette.base0D}
 
     ! magenta
-    *color5: #F5C2E7
-    *color13: #F5C2E7
+    *color5: #${config.colorScheme.palette.base0E}
+    *color13: #${config.colorScheme.palette.base0E}
 
     ! cyan
-    *color6: #94E2D5
-    *color14: #94E2D5
+    *color6: #${config.colorScheme.palette.base0C}
+    *color14: #${config.colorScheme.palette.base0C}
 
     ! white
-    *color7: #BAC2DE
-    *color15: #A6ADC8
+    *color7: #${config.colorScheme.palette.base05}
+    *color15: #${config.colorScheme.palette.base05}
   '';
 }
