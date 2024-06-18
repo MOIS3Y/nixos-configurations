@@ -126,7 +126,7 @@
       }
 
       #entry:selected #text {
-        color: @mauve;
+        color: #${config.colorScheme.palette.base0D};
       }
 
       #entry:drop(active) {
