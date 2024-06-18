@@ -4,7 +4,8 @@
 
 {config, pkgs, ...}:
   let
-    wlogoutIconsDir = "${pkgs.wlogout}/share/wlogout/icons";
+    # wlogoutIconsDir = "${pkgs.wlogout}/share/wlogout/icons";
+    wlogoutIconsDir = "${pkgs.extrapkgs.assets4nix}/share/icons/wlogout";
     wlogoutHyprExit = with pkgs; writeShellScriptBin "hypr-exit" ''
       sleep 1
       killall -9 Hyprland sleep 2
