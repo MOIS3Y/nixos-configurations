@@ -9,9 +9,6 @@
     '';
     startupScript = with pkgs; writeShellScriptBin "hypr-startup" ''
       ${waybar}/bin/waybar &
-      # ? now they start by systemd modules (HM-modules)
-      # ${networkmanagerapplet}/bin/nm-applet &
-      # ${blueman}/bin/blueman-applet &
     '';
     # bin tools:
     volumectl = "${pkgs.avizo}/bin/volumectl";
@@ -108,7 +105,7 @@
       };
       #! -- -- -- --  -- -- misc -- -- -- -- -- -- - #
       misc = {
-        disable_hyprland_logo = false;
+        disable_hyprland_logo = true;
         swallow_regex = "^(org.wezfurlong.wezterm)$";
         vrr = 1;
         
