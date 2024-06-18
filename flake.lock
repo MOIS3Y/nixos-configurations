@@ -20,6 +20,26 @@
         "type": "github"
       }
     },
+    "assets4nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1718717577,
+        "narHash": "sha256-yrre7FvGIsrPqWx46Zb+PkgNoB0aSydlDPr29+LhaeQ=",
+        "owner": "MOIS3Y",
+        "repo": "assets4nix",
+        "rev": "a091e9f4dc326e7c2c601fcb5a177d09fefc4afb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MOIS3Y",
+        "repo": "assets4nix",
+        "type": "github"
+      }
+    },
     "base16-schemes": {
       "flake": false,
       "locked": {
@@ -276,12 +296,34 @@
     "root": {
       "inputs": {
         "aladdin4nix": "aladdin4nix",
+        "assets4nix": "assets4nix",
         "home-manager": "home-manager",
         "i3lock-color-wrapper": "i3lock-color-wrapper",
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs",
+        "sddmSugarCandy4Nix": "sddmSugarCandy4Nix",
         "sops-nix": "sops-nix",
         "xidlehook-caffeine": "xidlehook-caffeine"
+      }
+    },
+    "sddmSugarCandy4Nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1718710990,
+        "narHash": "sha256-bEbf33sYt6ZiX9hTpA8/0BPY3DR0DRGhrWtpiM781ro=",
+        "owner": "MOIS3Y",
+        "repo": "sddmSugarCandy4Nix",
+        "rev": "7b0f38b06f620e66d239a8076d994568b4e34ce5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MOIS3Y",
+        "repo": "sddmSugarCandy4Nix",
+        "type": "github"
       }
     },
     "sops-nix": {

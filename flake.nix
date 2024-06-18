@@ -34,6 +34,14 @@
       url = "github:MOIS3Y/aladdin4nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    assets4nix = {
+      url = "github:MOIS3Y/assets4nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sddmSugarCandy4Nix = {
+      url = "github:MOIS3Y/sddmSugarCandy4Nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
