@@ -9,8 +9,10 @@
 { config, pkgs, ... }: {
 
   imports = [
+    ../../modules/colors
     ./hardware-configuration.nix  # honor-vlr-w09
     ./boot
+    ./console
     ./environment
     ./fonts
     ./gnome
@@ -29,6 +31,9 @@
     ./virtualisation
     ./xdg
   ];
+
+  # Set colorScheme
+  colorSchemeName = "catppuccin_mocha";
 
   # Set your time zone.
   time.timeZone = "Asia/Chita";
