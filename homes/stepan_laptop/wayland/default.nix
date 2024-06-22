@@ -20,4 +20,8 @@
     # useful pkgs:
     ../../_shared/wayland/pkgs
   ];
+  # override waybar:
+  programs.waybar.excludeWidgets = [
+    "custom/ddcutil"
+  ];
 }

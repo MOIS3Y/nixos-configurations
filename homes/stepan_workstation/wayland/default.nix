@@ -21,5 +21,8 @@
     ../../_shared/wayland/pkgs
   ];
   # override waybar:
-  programs.waybar.excludeWidgets = [ "battery" ];
+  programs.waybar.excludeWidgets = [
+    "battery"
+    "group/group-backlight"
+  ];
 }

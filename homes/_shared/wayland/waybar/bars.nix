@@ -31,6 +31,7 @@
       "group/group-audio"
       "pulseaudio#microphone"
       "group/group-backlight"
+      "custom/ddcutil"
       "hyprland/language"
       "tray"
       "battery"

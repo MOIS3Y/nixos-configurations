@@ -98,6 +98,17 @@
     tooltip = true;
     escape = true;
   };
+  "custom/ddcutil" = {
+    format = "{icon} {percentage}%";
+    format-icons = ["󰋙" "󰫃" "󰫄" "󰫅" "󰫆" "󰫇" "󰫈"];
+    tooltip = false;
+    exec = "${scripts.ddcutil-fast}";
+    on-scroll-up = "${scripts.ddcutil-up}";
+    on-scroll-down = "${scripts.ddcutil-down}";
+    on-click = "${scripts.ddcutil-bright}";
+    on-click-right = "${scripts.ddcutil-dark}";
+    return-type = "json";
+  };
   "group/group-apps" = {
     orientation = "inherit";
     drawer = {

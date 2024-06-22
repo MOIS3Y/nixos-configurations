@@ -157,6 +157,7 @@
     #clock,
     #cpu,
     #custom-notification,
+    #custom-ddcutil,
     #disk,
     #idle_inhibitor,
     #language,
@@ -281,6 +282,10 @@
     #clock {
       background-color: #${config.colorScheme.palette.base05};
       color: #${config.colorScheme.palette.base00};
+    }
+
+    #custom-ddcutil {
+      background-color: #${config.colorScheme.palette.base09};
     }
 
     #custom-swallow {
