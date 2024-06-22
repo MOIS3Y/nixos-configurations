@@ -15,9 +15,9 @@
         padding = 20;
         border-radius = 16;
         border-width = 1;
-        block-height = 15;
+        block-height = 9;
         block-spacing = 4;
-        block-count = 10;
+        block-count = 18;
         fade-in = "0.2";
         fade-out = "0.5";
         background = "#${config.colorScheme.palette.base00}";

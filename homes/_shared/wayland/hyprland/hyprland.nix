@@ -8,7 +8,7 @@
       ${grim}/bin/grim -g "$(${slurp}/bin/slurp -w 0)" - | ${swappy}/bin/swappy -f -
     '';
     startupScript = with pkgs; writeShellScriptBin "hypr-startup" ''
-      ${waybar}/bin/waybar &
+      # add startup apps here ...
     '';
     # bin tools:
     volumectl = "${pkgs.avizo}/bin/volumectl";

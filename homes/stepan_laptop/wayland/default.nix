@@ -4,16 +4,20 @@
 
 { config, pkgs, ... }: {
   imports = [
-    ../../_shared/wayland/avizo.nix
-    ../../_shared/wayland/hypridle.nix
-    ../../_shared/wayland/hyprpaper.nix
-    ../../_shared/wayland/hyprland.nix
-    ../../_shared/wayland/pkgs.nix
-    ../../_shared/wayland/swappy.nix
-    ../../_shared/wayland/swaylock.nix
-    ../../_shared/wayland/swaync.nix
-    ../../_shared/wayland/waybar.nix
-    ../../_shared/wayland/wlogout.nix
-    ../../_shared/wayland/wofi.nix
+    # hypr staff:
+    ../../_shared/wayland/hyprland/hypridle.nix
+    ../../_shared/wayland/hyprland/hyprpaper.nix
+    ../../_shared/wayland/hyprland/hyprland.nix
+    # waybar stuf:
+    ../../_shared/wayland/waybar/waybar.nix
+    # managment services and apps:
+    ../../_shared/wayland/managment/avizo.nix
+    ../../_shared/wayland/managment/swappy.nix
+    ../../_shared/wayland/managment/swaylock.nix
+    ../../_shared/wayland/managment/swaync.nix
+    ../../_shared/wayland/managment/wlogout.nix
+    ../../_shared/wayland/managment/wofi.nix
+    # useful pkgs:
+    ../../_shared/wayland/pkgs
   ];
 }

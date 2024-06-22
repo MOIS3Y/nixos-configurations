@@ -40,7 +40,7 @@
       # };
 
       # Control center settings
-      control-center-positionX = "right";
+      control-center-positionX = "left";
       control-center-positionY = "top";
       control-center-margin-top = 4;
       control-center-margin-bottom = 4;
