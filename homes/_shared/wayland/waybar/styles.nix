@@ -245,12 +245,22 @@
         }
     }
 
+    #disk.docker.warning,
+    #disk.games.warning,
+    #disk.home.warning,
+    #disk.kvm.warning,
+    #disk.nix.warning,
     #disk.warning,
     #battery.warning:not(.charging) {
         background-color: #${config.colorScheme.palette.base0A};
         color: #${config.colorScheme.palette.base00};
     }
 
+    #disk.docker.critical,
+    #disk.games.critical,
+    #disk.home.critical,
+    #disk.kvm.critical,
+    #disk.nix.critical,
     #disk.critical,
     #battery.critical:not(.charging) {
         background-color: #${config.colorScheme.palette.base08};

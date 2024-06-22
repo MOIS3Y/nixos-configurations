@@ -255,7 +255,7 @@
   pulseaudio = {
     tooltip = false;
     format = "{icon} {volume}%";
-    format-bluetooth = "{icon} {volume} 󰂯";
+    format-bluetooth = "{icon} {volume}% 󰂯";
     format-muted = "󰖁 Mute";
     format-icons = {
       headphone = "";
