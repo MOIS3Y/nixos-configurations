@@ -15,6 +15,7 @@
         aladdin4nix = inputs.aladdin4nix.packages."${pkgs.system}".aladdin4nix;
         assets4nix = inputs.assets4nix.packages."${pkgs.system}".assets4nix;
         sddm-sugar-candy = inputs.sddmSugarCandy4Nix.packages."${pkgs.system}".sddm-sugar-candy;
+        nvchad = inputs.nvchad4nix.packages."${pkgs.system}".nvchad;
       in {
         extrapkgs = {
           inherit i3lock-run;
@@ -22,6 +23,7 @@
           inherit aladdin4nix;
           inherit assets4nix;
           inherit sddm-sugar-candy;
+          inherit nvchad;
         };
       })
     ];
