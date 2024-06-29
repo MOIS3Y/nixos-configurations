@@ -42,6 +42,14 @@
       url = "github:MOIS3Y/sddmSugarCandy4Nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvchad4nix = {
+      url = "github:MOIS3Y/nvchad4nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nvchad-on-steroids = {
+      url = "github:MOIS3Y/nvchad-on-steroids";
+      flake = false;
+    };
   };
   
   outputs = { self, nixpkgs, home-manager, ... }@inputs:

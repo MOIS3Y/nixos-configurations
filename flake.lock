@@ -243,6 +243,42 @@
         "type": "github"
       }
     },
+    "nvchad-on-steroids": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1719554862,
+        "narHash": "sha256-XrcetpDLR+RaKhGwPwVTZTakYEUZRr18Us7YGZuaO34=",
+        "owner": "MOIS3Y",
+        "repo": "nvchad-on-steroids",
+        "rev": "b38d8864336ce62e6fa0246aef0d1c7a32569e89",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MOIS3Y",
+        "repo": "nvchad-on-steroids",
+        "type": "github"
+      }
+    },
+    "nvchad4nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1719653055,
+        "narHash": "sha256-BIpIXljONvsLVTDnkU/XrCQ0ug/ur+TckRneMD5bQcc=",
+        "owner": "MOIS3Y",
+        "repo": "nvchad4nix",
+        "rev": "a540d30cee14541691d20df97beb76a39e529e54",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MOIS3Y",
+        "repo": "nvchad4nix",
+        "type": "github"
+      }
+    },
     "poetry2nix": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -301,6 +337,8 @@
         "i3lock-color-wrapper": "i3lock-color-wrapper",
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs",
+        "nvchad-on-steroids": "nvchad-on-steroids",
+        "nvchad4nix": "nvchad4nix",
         "sddmSugarCandy4Nix": "sddmSugarCandy4Nix",
         "sops-nix": "sops-nix",
         "xidlehook-caffeine": "xidlehook-caffeine"

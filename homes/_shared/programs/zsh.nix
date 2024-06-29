@@ -16,10 +16,11 @@
     };
     sessionVariables = {
       PATH = "/home/${config.home.username}/.local/bin:$PATH";
-      EDITOR = "nvim";
+      EDITOR = "nvchad";
       VISUAL = "code";
     };
     shellAliases = {
+      nvim = "nvchad";
       docker = "sudo docker";
       docker-compose = "sudo docker-compose";
     };

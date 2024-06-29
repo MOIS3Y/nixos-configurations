@@ -12,6 +12,7 @@
     ../../_shared/programs/lf.nix
     ../../_shared/programs/lsd.nix
     ../../_shared/programs/mangohud.nix
+    ../../_shared/programs/nvchad.nix
     ../../_shared/programs/ssh.nix
     ../../_shared/programs/wezterm.nix
     ../../_shared/programs/zsh.nix
