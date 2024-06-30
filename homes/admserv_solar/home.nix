@@ -18,10 +18,13 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  xsession.enable = true;
+  xsession.enable = false;
 
   imports = [
+    ../../modules/colors
     ./pkgs
     ./programs
   ];
+  # Set colorScheme
+  colorSchemeName = "catppuccin_mocha";
 }
