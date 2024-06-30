@@ -7,10 +7,17 @@
     ../../_shared/environment/variables.nix
     ../../_shared/environment/shells.nix
     ../../_shared/environment/pathsToLink.nix
-    ../../_shared/environment/systemPackages/common.nix
-    ../../_shared/environment/systemPackages/managment.nix
-    ../../_shared/environment/systemPackages/monitoring.nix
-    ../../_shared/environment/systemPackages/network.nix
-    ../../_shared/environment/systemPackages/security.nix
+  ];
+  # ? Too small disk size
+  environment.systemPackages = with pkgs; [
+    bottom
+    curl
+    dnsutils
+    git
+    htop
+    ncdu
+    neovim
+    nitch 
+    wget  
   ];
 }
