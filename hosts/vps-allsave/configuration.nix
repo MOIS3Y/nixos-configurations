@@ -9,6 +9,7 @@
 { config, pkgs, ... }: {
 
   imports = [
+    ../../modules/colors
     ./hardware-configuration.nix  # vps-allsave
     ./boot
     ./console
@@ -22,6 +23,9 @@
     ./users
     ./virtualisation
   ];
+
+  # Set colorScheme
+  colorSchemeName = "catppuccin_mocha";
 
   # Set your time zone.
   time.timeZone = "Asia/Chita";
