@@ -123,6 +123,7 @@
           ./hosts/vps-allsave/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
+              inherit extraSpecialArgs;
               useGlobalPkgs = true;
               useUserPackages = true;
               users.admserv = import ./homes/admserv_allsave/home.nix;
