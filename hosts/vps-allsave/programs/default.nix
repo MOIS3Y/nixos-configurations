@@ -4,6 +4,6 @@
 
 {config, pkgs, ...}: {
   imports = [
-    ./zsh.nix
+    ../../_shared/programs/zsh.nix
   ];
 }
