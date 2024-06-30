@@ -2,10 +2,8 @@
 # █░▀█ █ █░█ █▀▀ █░█ █▄█ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, inputs, ... }: {
-  nixpkgs = { 
-    config = {
-      allowUnfree = true;
-    };
-  };
+{ config, pkgs, ... }: {
+  imports = [
+    ../../_shared/nixpkgs/vps.nix
+  ];
 }

@@ -2,14 +2,8 @@
 # █░▀█ █ █░█ ▄
 # -- -- -- -- --
 
-{ config, pkgs, ...}: {
-  nix = {
-    package = pkgs.nix;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-    settings = {
-      trusted-users = [ "admserv" ];
-    };
-  };
+{ config, pkgs, ... }: {
+  imports = [
+    ../../_shared/nix/vps.nix
+  ];
 }
