@@ -11,11 +11,11 @@
       splash = false;
       splash_offset = 2.0;
       preload = [
-        "${pkgs.extrapkgs.assets4nix}/share/wallpapers/nixos/${config.colorScheme.name}.png"
+        "${pkgs.extrapkgs.assets4nix}/share/wallpapers/hexagon/${config.colorScheme.name}.png"
         # add more here ...
       ];
       wallpaper = [
-        ",${pkgs.extrapkgs.assets4nix}/share/wallpapers/nixos/${config.colorScheme.name}.png"
+        ",${pkgs.extrapkgs.assets4nix}/share/wallpapers/hexagon/${config.colorScheme.name}.png"
         # ? above for all monitors
       ];
     };
