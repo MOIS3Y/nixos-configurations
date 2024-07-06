@@ -50,6 +50,10 @@
       url = "github:MOIS3Y/nvchad-on-steroids";
       flake = false;
     };
+    kvlibadwaita = {
+      url = "github:MOIS3Y/KvLibadwaita?ref=gradience";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   
   outputs = { self, nixpkgs, home-manager, ... }@inputs:

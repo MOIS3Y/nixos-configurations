@@ -2,7 +2,7 @@
 # ▀▀█ ░█░ ▄
 # -- -- -- 
 
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
   let
     qtConf = ''
       [Appearance]
@@ -35,10 +35,18 @@
         ignored_applications=@Invalid()  
   '';
   in {
+    imports = [
+      inputs.kvlibadwaita.homeManagerModule
+  ];
   qt = {
     enable = true;
     platformTheme.name = "qtct";
     style.name = "kvantum";
+    kvlibadwaita = {
+      enable = true;
+      auto = true;
+      theme = "${config.colorScheme.name}";
+    };
   };
   # qt5ct
   xdg.configFile = {
@@ -51,13 +59,5 @@
     "qt6ct/qt6ct.conf".text = ''
       ${qtConf}
     '';
-  };
-  # kvantum
-  xdg.configFile = {
-    "Kvantum/kvantum.kvconfig".text = ''
-      [General]
-      theme=ColloidNordDark
-    '';
-    "Kvantum/ColloidNord".source = "${pkgs.colloid-kde}/share/Kvantum/ColloidNord";
   };
 }

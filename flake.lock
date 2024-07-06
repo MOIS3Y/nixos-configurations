@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1718717577,
-        "narHash": "sha256-yrre7FvGIsrPqWx46Zb+PkgNoB0aSydlDPr29+LhaeQ=",
+        "lastModified": 1719850672,
+        "narHash": "sha256-WGmmkiGKQsMDoPsvBNmFaJMZllMdZwYK06EOXf+Y6fc=",
         "owner": "MOIS3Y",
         "repo": "assets4nix",
-        "rev": "a091e9f4dc326e7c2c601fcb5a177d09fefc4afb",
+        "rev": "8e58ca36f26dd8e686ce4b95e6adfd25032bec01",
         "type": "github"
       },
       "original": {
@@ -130,6 +130,27 @@
       "original": {
         "owner": "MOIS3Y",
         "repo": "i3lock-color-wrapper",
+        "type": "github"
+      }
+    },
+    "kvlibadwaita": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1720277189,
+        "narHash": "sha256-GhYf//TrA+yWAIws/KTlx1V+ocb6QtxwH5uvnOFSqCY=",
+        "owner": "MOIS3Y",
+        "repo": "KvLibadwaita",
+        "rev": "856ed01f26348d0f8a054b05c34c40f43a7bfbd4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MOIS3Y",
+        "ref": "gradience",
+        "repo": "KvLibadwaita",
         "type": "github"
       }
     },
@@ -335,6 +356,7 @@
         "assets4nix": "assets4nix",
         "home-manager": "home-manager",
         "i3lock-color-wrapper": "i3lock-color-wrapper",
+        "kvlibadwaita": "kvlibadwaita",
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs",
         "nvchad-on-steroids": "nvchad-on-steroids",
