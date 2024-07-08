@@ -88,7 +88,7 @@
         padding: 10px;
         border: none;
         border-radius: 0.6em;
-        color: @text;
+        color: #${config.colorScheme.palette.base05};
         background-color: #${config.colorScheme.palette.base01};
         animation: fadeIn 0.5s ease-in-out both;
       }
