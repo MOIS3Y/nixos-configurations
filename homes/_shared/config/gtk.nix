@@ -91,6 +91,12 @@
       name = "gtk.css";
       text = "${extraCss}";
     };
+    variant = "${config.colorScheme.variant}";
+    themeName = "${
+      if variant == "dark" then "Tela-circle-blue-dark"
+      else
+        "Tela-circle-blue"
+    }";
   in {
   gtk = {
     enable = true;
@@ -100,7 +106,7 @@
       package = pkgs.adw-gtk3;
     };
     iconTheme = {
-      name = "Tela-circle-blue-dark";
+      name = "${themeName}";
       package = pkgs.tela-circle-icon-theme.override {
         allColorVariants = true;
       };
