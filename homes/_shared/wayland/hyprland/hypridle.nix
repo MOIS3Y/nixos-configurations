@@ -18,16 +18,17 @@
     notify-send = "${pkgs.libnotify}/bin/notify-send";
     swaylock = "${pkgs.swaylock-effects}/bin/swaylock";
     hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+    hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
   in {
   services.hypridle = {
     enable = true;
     package = pkgs.hypridle;
     settings = {
       general = {
-        lock_cmd = "${pgrep} swaylock || ${swaylock}";
+        lock_cmd = "${pgrep} hyprlock || ${hyprlock}";
         # unlock_cmd = "${notify-send} 'unlock!'";
         # before_sleep_cmd = "${notify-send} 'Zzz'";
-        after_sleep_cmd = "${swaylock}";
+        after_sleep_cmd = "${hyprlock}";
         # ignore_dbus_inhibit = false;  # ? false is default value
       };
       listener = [
@@ -38,7 +39,7 @@
         }
         {
           timeout = 660;
-          on-timeout = "${swaylock}";
+          on-timeout = "${hyprlock}";
         }
         {
           timeout = 720;
