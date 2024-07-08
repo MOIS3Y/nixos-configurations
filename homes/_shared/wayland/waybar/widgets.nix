@@ -228,12 +228,17 @@
       weeks-pos      = "right";
       on-scroll      = 1;
       on-click-right = "mode";
-      format = {
-        months   = "<span color='#${config.colorScheme.palette.base0D}'><b>{}</b></span>";
-        days     = "<span color='#${config.colorScheme.palette.base05}'><b>{}</b></span>";
-        weeks    = "<span color='#${config.colorScheme.palette.base07}'><b>{}</b></span>";
-        weekdays = "<span color='#${config.colorScheme.palette.base0E}'><b>{}</b></span>";
-        today    = "<span color='#${config.colorScheme.palette.base08}'><b><u>{}</u></b></span>";
+      format = let
+        # ? bold looks ugly on light mode
+        variant = "${config.colorScheme.variant}";
+        bold-or-thin = "${if variant == "dark" then "<b>{}</b>" else "{}"}";
+        bold-or-thin-underline = "${if variant == "dark" then "<b><u>{}</u></b>" else "<u>{}</u>"}";
+      in {
+        months   = "<span color='#${config.colorScheme.palette.base0D}'>${bold-or-thin}</span>";
+        days     = "<span color='#${config.colorScheme.palette.base05}'>${bold-or-thin}</span>";
+        weeks    = "<span color='#${config.colorScheme.palette.base07}'>${bold-or-thin}</span>";
+        weekdays = "<span color='#${config.colorScheme.palette.base0E}'>${bold-or-thin}</span>";
+        today    = "<span color='#${config.colorScheme.palette.base08}'>${bold-or-thin-underline}</span>";
       };
     };
     actions = {

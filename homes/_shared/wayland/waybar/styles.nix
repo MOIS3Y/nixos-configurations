@@ -9,6 +9,7 @@
       url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/56b7a5788005a3eaecb5298f0dbed0f7d1573abc/logo/nix-snowflake-colours.svg";
       sha256 = "1cifj774r4z4m856fva1mamnpnhsjl44kw3asklrc57824f5lyz3";
     };
+    variant = "${config.colorScheme.variant}";
   in {
   primary = ''
     /* -----------------------------------------------------
@@ -71,7 +72,11 @@
       padding: 3px 3px;
       border-radius: 15px;
       border: 0px;
-      background-color: #${config.colorScheme.palette.base01};
+      background-color: #${
+        if variant == "dark" then config.colorScheme.palette.base01
+        else
+          config.colorScheme.palette.base02
+      };
     }
 
     #workspaces button {
@@ -100,8 +105,16 @@
       color: #${config.colorScheme.palette.base0D};
     }
     #workspaces button.empty {
-      background-color: #${config.colorScheme.palette.base02};
-      color: #${config.colorScheme.palette.base02};
+      background-color: #${
+        if variant == "dark" then config.colorScheme.palette.base02
+        else
+          config.colorScheme.palette.base04
+      };
+      color: #${
+        if variant == "dark" then config.colorScheme.palette.base02
+        else
+          config.colorScheme.palette.base04
+      };
     }
     #workspaces button.active {
       color: #${config.colorScheme.palette.base0D};
@@ -337,7 +350,13 @@
     }
 
     #tray {
-      background-color: #${config.colorScheme.palette.base01};
+      background-color: #${
+        # ? workaround tray icons always light
+        # ? see: https://github.com/Alexays/Waybar/issues/2639
+        if variant == "dark" then config.colorScheme.palette.base01
+        else
+          config.colorScheme.palette.base05
+      };
       color: #${config.colorScheme.palette.base05};
     }
 
