@@ -8,7 +8,8 @@
     ../../_shared/wayland/hyprland/hypridle.nix
     ../../_shared/wayland/hyprland/hyprpaper.nix
     ../../_shared/wayland/hyprland/hyprland.nix
-    # waybar stuf:
+    ../../_shared/wayland/hyprland/hyprlock.nix
+    # waybar stuff:
     ../../_shared/wayland/waybar/waybar.nix
     # managment services and apps:
     ../../_shared/wayland/managment/avizo.nix
