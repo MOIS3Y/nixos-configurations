@@ -28,7 +28,7 @@
         lock_cmd = "${pgrep} hyprlock || ${hyprlock}";
         # unlock_cmd = "${notify-send} 'unlock!'";
         # before_sleep_cmd = "${notify-send} 'Zzz'";
-        after_sleep_cmd = "${hyprlock}";
+        after_sleep_cmd = "${pgrep} hyprlock || ${hyprlock}";
         # ignore_dbus_inhibit = false;  # ? false is default value
       };
       listener = [
