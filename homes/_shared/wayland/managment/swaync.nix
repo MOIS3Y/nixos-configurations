@@ -5,10 +5,6 @@
 { config, pkgs, ... }: {
   services.swaync = {
     enable = true;
-    # systemd.enable = true;
-    # systemd.target = "graphical-session.target";
-    # ? does not exist in default HV module
-    # schema = "${pkgs.swaynotificationcenter}/etc/xdg/swaync/configSchema.json";
     settings = {
       # General settings
       cssPriority = "user";
@@ -23,8 +19,8 @@
 
       # Layer settings
       layer-shell = true;
-      layer = "overlay";
-      control-center-layer = "overlay";
+      # layer = "overlay";
+      # control-center-layer = "overlay";
 
       # Notification settings
       positionX = "center";
@@ -35,9 +31,6 @@
       notification-body-image-height = 100;
       notification-body-image-width = 200;
       notification-window-width = 300;
-      # notification-visibility = {
-
-      # };
 
       # Control center settings
       control-center-positionX = "left";
@@ -79,27 +72,34 @@
     };
 
     # Custom style
-    style = ''
+    style = let
+      variant = "${config.colorScheme.variant}";
+      dark01 = "rgba(12, 12, 12, 0.1)";
+      light01 = "rgba(255, 255, 255, 0.1)";
+      dark04 = "rgba(12, 12, 12, 0.4)";
+      light04 = "rgba(255, 255, 255, 0.4)";
+    in ''
       @define-color background #${config.colorScheme.palette.base00};
-      @define-color background-alt rgba(255, 255, 255, 0.05);
-      @define-color background-focus rgba(255, 255, 255, 0.1);
+      @define-color background-alt ${if variant == "dark" then dark01 else light01};
+      @define-color background-focus ${if variant == "dark" then dark04 else light04};
 
       @define-color border #${config.colorScheme.palette.base02};
       
-      @define-color red #${config.colorScheme.palette.base08};
-      @define-color orange #${config.colorScheme.palette.base09};
-      @define-color yellow #${config.colorScheme.palette.base0A};
-      @define-color green #${config.colorScheme.palette.base0B};
-      @define-color blue #${config.colorScheme.palette.base0D};
-      @define-color gray #${config.colorScheme.palette.base01};
-      @define-color black #${config.colorScheme.palette.base00};
-      @define-color white #${config.colorScheme.palette.base05};
+      @define-color base00 #${config.colorScheme.palette.base00};
+      @define-color base01 #${config.colorScheme.palette.base01};
+      @define-color base02 #${config.colorScheme.palette.base02};
+      @define-color base03 #${config.colorScheme.palette.base03};
+      @define-color base04 #${config.colorScheme.palette.base04};
+      @define-color base05 #${config.colorScheme.palette.base05};
+      @define-color base08 #${config.colorScheme.palette.base08};
+      @define-color base09 #${config.colorScheme.palette.base09};
+      @define-color base0A #${config.colorScheme.palette.base0A};
+      @define-color base0B #${config.colorScheme.palette.base0B};
+      @define-color base0D #${config.colorScheme.palette.base0D};
 
       * {
         all: unset;
-        font:
-          11pt Inter,
-          sans-serif;
+        font: 14px Ubuntu, Inter, sans-serif;
         transition: 200ms;
       }
 
@@ -107,12 +107,13 @@
       progress,
       progressbar,
       trough {
-        border: 1px solid @border;
-        border-radius: 16px;
+        border: 1px @border;
+        border-radius: 15px;
+        padding: 0.11rem;
       }
 
       trough {
-        background: @background-alt;
+        background: @base01;
       }
 
       .notification.low,
@@ -122,27 +123,27 @@
 
       .notification.low progress,
       .notification.normal progress {
-        background: @blue;
+        background: @base0D;
       }
 
       .notification.critical {
-        border: 1px solid @red;
+        border: 1px solid @base08;
       }
 
       .notification.critical progress {
-        background: @red;
+        background: @base08;
       }
 
       .summary {
-        color: @white;
+        color: @base05;
       }
 
       .body {
-        color: alpha(@white, 0.7);
+        color: alpha(@base05, 0.7);
       }
 
       .time {
-        color: alpha(@white, 0.7);
+        color: alpha(@base05, 0.7);
       }
 
       .app-icon,
@@ -152,7 +153,7 @@
       }
 
       .notification-action {
-        color: @white;
+        color: @base05;
         background: @background-alt;
         border: 1px solid @border;
         border-radius: 8px;
@@ -161,37 +162,35 @@
 
       .notification-action:hover {
         background: @background-focus;
-        color: @white;
+        color: @base05;
       }
 
       .notification-action:active {
-        background: @blue;
-        color: @white;
+        background: @base0D;
+        color: @base05;
       }
 
       .close-button {
         margin: 0.5rem;
         padding: 0.25rem;
-        border-radius: 8px;
-        color: @black;
-        background: @red;
+        border-radius: 15px;
+        color: @base05;
+        background: @base01;
       }
 
       .close-button:hover {
-        background: lighter(@red);
-        color: lighter(@black);
+        background: @base02;
       }
 
       .close-button:active {
-        background: @red;
-        color: @background;
+        background: @base02;
       }
 
       /*** Notifications ***/
       .floating-notifications.background .notification-row .notification-background {
         background: @background;
         border-radius: 16px;
-        color: @white;
+        color: @base05;
         margin: 0.25rem;
         padding: 0;
       }
@@ -232,7 +231,7 @@
       .notification-group .notification-group-buttons,
       .notification-group .notification-group-headers {
         margin: 0.5rem;
-        color: @white;
+        color: @base05;
       }
 
       .notification-group .notification-group-headers {
@@ -240,11 +239,11 @@
       }
 
       .notification-group .notification-group-headers .notification-group-icon {
-        color: @white;
+        color: @base05;
       }
 
       .notification-group .notification-group-headers .notification-group-header {
-        color: @white;
+        color: @base05;
       }
 
       .notification-group .notification-group-buttons {
@@ -280,7 +279,7 @@
         background: @background;
         border: 1px solid @border;
         border-radius: 16px;
-        color: @white;
+        color: @base05;
         padding: 1rem;
       }
 
@@ -291,7 +290,7 @@
       .control-center .notification-row .notification-background {
         background: @background-alt;
         border-radius: 8px;
-        color: @white;
+        color: @base05;
         margin: 0.5rem;
       }
 
@@ -319,18 +318,18 @@
 
       .control-center .notification-row .notification-background:hover {
         background: @background-focus;
-        color: @white;
+        color: @base05;
       }
 
       .control-center .notification-row .notification-background:active {
-        background: @blue;
-        color: @white;
+        background: @base0D;
+        color: @base05;
       }
 
       /*** Widgets ***/
       /* Title widget */
       .widget-title {
-        color: @white;
+        color: @base05;
         margin: 0.5rem;
       }
 
@@ -339,20 +338,20 @@
       }
 
       .widget-title > button {
-        background: @background-alt;
+        background: @base01;
         border: 1px solid @border;
         border-radius: 8px;
-        color: @white;
+        color: @base05;
         padding: 0.5rem;
       }
 
       .widget-title > button:hover {
-        background: @background-focus;
+        background: @base02;
       }
 
       /* DND Widget */
       .widget-dnd {
-        color: @white;
+        color: @base05;
         margin: 0.5rem;
       }
 
@@ -363,7 +362,7 @@
       .widget-dnd > switch {
         background: @background-alt;
         border: 1px solid @border;
-        border-radius: 8px;
+        border-radius: 15px;
       }
 
       .widget-dnd > switch:hover {
@@ -371,23 +370,23 @@
       }
 
       .widget-dnd > switch:checked {
-        background: @blue;
-        color: @black;
+        background: @base0D;
+        color: @base00;
       }
 
       .widget-dnd > switch slider {
-        background: @background-focus;
-        border-radius: 8px;
-        padding: 0.25rem;
+        background: @base01;
+        border-radius: 15px;
+        padding: 0.11rem;
+        margin: 0.11rem;
       }
 
       /* Mpris widget */
       .widget-mpris {
-        color: @white;
+        color: ${if variant == "dark" then "@base05" else "@base01"};
       }
 
       .widget-mpris .widget-mpris-player {
-        background: @background-alt;
         border: 1px solid @border;
         border-radius: 8px;
         margin: 0.5rem;
