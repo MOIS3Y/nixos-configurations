@@ -5,7 +5,7 @@
 { config, pkgs, lib, ... }: {
   xdg.portal = {
     enable = true;
-    wlr.enable = lib.mkDefault true;
+    wlr.enable = lib.mkDefault false;
     config = {
       common.default = "*";
     };

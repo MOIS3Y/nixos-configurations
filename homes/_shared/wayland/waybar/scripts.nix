@@ -6,12 +6,12 @@
   let
     # tools:
     browser = "${lib.getExe pkgs.firefox}";  #TODO: use from global conf
-    calc = "${pkgs.gnome.gnome-calculator}/bin/gnome-calculator";
+    calc = "${pkgs.gnome-calculator}/bin/gnome-calculator";
     brightnessctl = "${lib.getExe pkgs.brightnessctl}";
     ddcutil = "${lib.getExe pkgs.ddcutil}";
     pamixer = "${lib.getExe pkgs.pamixer}";
     hyprctl = "${pkgs.hyprland}/bin/hyprctl";
-    nautilus = "${lib.getExe pkgs.gnome.nautilus}";  #TODO: use from global conf
+    nautilus = "${lib.getExe pkgs.nautilus}";  #TODO: use from global conf
     notify-send = "${lib.getExe pkgs.libnotify}";
     rg = "${lib.getExe pkgs.ripgrep}";
     terminal = "${lib.getExe pkgs.wezterm}";  #TODO: use from global conf

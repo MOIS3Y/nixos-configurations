@@ -5,8 +5,8 @@
 { config, pkgs, ... }: {
   imports = [
     ./bluetooth.nix
+    ./graphics.nix
     ./intel.nix
-    ./opengl.nix
     ./openrgb.nix
     ./xpadneo.nix
   ];

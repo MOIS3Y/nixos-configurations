@@ -29,11 +29,11 @@
   # pkgs:
   environment.systemPackages = with pkgs; [
     at-spi2-atk  # required for polkit-gnome-authentication-agent-1
-    gnome.adwaita-icon-theme  # required for most gnome apps
+    adwaita-icon-theme  # required for most gnome apps
+    nautilus
+    gnome-calculator
+    gnome-calendar
     gnome-online-accounts-gtk
-    gnome.nautilus
-    gnome.gnome-calendar
-    gnome.gnome-calculator
     gnome.gnome-weather
   ];
   # daemons:
@@ -57,7 +57,7 @@
       after = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = with pkgs.gnome; ''
+        ExecStart = with pkgs; ''
           ${evolution-data-server}/libexec/evolution-data-server/evolution-alarm-notify
         '';
       };

@@ -6,7 +6,7 @@
   home.packages = with pkgs; [
     celluloid
     delfin
-    transmission-gtk
+    transmission_4-gtk
     tremotesf
     vlc
   ];

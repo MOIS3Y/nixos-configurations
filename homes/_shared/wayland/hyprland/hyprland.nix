@@ -35,7 +35,7 @@
       "$launcher" = "${wofi-toggle}";
       "$browser" = "${pkgs.firefox}/bin/firefox";
       # "$filebrowser" = "${pkgs.wezterm}/bin/wezterm -e ${pkgs.lf}/bin/lf";
-      "$filebrowser" = "${pkgs.gnome.nautilus}/bin/nautilus";
+      "$filebrowser" = "${pkgs.nautilus}/bin/nautilus";
       "$vscode" = "${pkgs.vscode}/bin/code";
       "$screenshot" = "${hyprScreenshot}/bin/hypr-screenshot";
       "$lockscreen" = "${pkgs.swaylock-effects}/bin/swaylock";
