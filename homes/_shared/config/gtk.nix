@@ -4,43 +4,43 @@
 
 { config, pkgs, lib, ... }:
   let
-    extraCss = ''
-      @define-color accent_color #${config.colorScheme.palette.base0E};
-      @define-color accent_bg_color#${config.colorScheme.palette.base0D};
-      @define-color accent_fg_color #${config.colorScheme.palette.base00};
-      @define-color destructive_color #${config.colorScheme.palette.base00};
-      @define-color destructive_bg_color #${config.colorScheme.palette.base08};
-      @define-color destructive_fg_color #${config.colorScheme.palette.base00};
-      @define-color success_color #${config.colorScheme.palette.base0B};
-      @define-color success_bg_color #${config.colorScheme.palette.base0C};
-      @define-color success_fg_color #${config.colorScheme.palette.base00};
-      @define-color warning_color #${config.colorScheme.palette.base09};
-      @define-color warning_bg_color #${config.colorScheme.palette.base0A};
-      @define-color warning_fg_color #${config.colorScheme.palette.base00};
-      @define-color error_color #${config.colorScheme.palette.base08};
-      @define-color error_bg_color #${config.colorScheme.palette.base08};
-      @define-color error_fg_color #${config.colorScheme.palette.base00};
-      @define-color window_bg_color #${config.colorScheme.palette.base01};
-      @define-color window_fg_color #${config.colorScheme.palette.base05};
-      @define-color view_bg_color #${config.colorScheme.palette.base00};
-      @define-color view_fg_color #${config.colorScheme.palette.base05};
-      @define-color headerbar_bg_color #${config.colorScheme.palette.base00};
-      @define-color headerbar_fg_color #${config.colorScheme.palette.base05};
-      @define-color headerbar_border_color #${config.colorScheme.palette.base03};
+    extraCss = with config.colorScheme.palette; ''
+      @define-color accent_color #${base0E};
+      @define-color accent_bg_color#${base0D};
+      @define-color accent_fg_color #${base00};
+      @define-color destructive_color #${base00};
+      @define-color destructive_bg_color #${base08};
+      @define-color destructive_fg_color #${base00};
+      @define-color success_color #${base0B};
+      @define-color success_bg_color #${base0C};
+      @define-color success_fg_color #${base00};
+      @define-color warning_color #${base09};
+      @define-color warning_bg_color #${base0A};
+      @define-color warning_fg_color #${base00};
+      @define-color error_color #${base08};
+      @define-color error_bg_color #${base08};
+      @define-color error_fg_color #${base00};
+      @define-color window_bg_color #${base01};
+      @define-color window_fg_color #${base05};
+      @define-color view_bg_color #${base00};
+      @define-color view_fg_color #${base05};
+      @define-color headerbar_bg_color #${base00};
+      @define-color headerbar_fg_color #${base05};
+      @define-color headerbar_border_color #${base03};
       @define-color headerbar_backdrop_color @window_bg_color;
       @define-color headerbar_shade_color rgba(0, 0, 0, 0.36);
-      @define-color card_bg_color #${config.colorScheme.palette.base00};
-      @define-color card_fg_color #${config.colorScheme.palette.base05};
+      @define-color card_bg_color #${base00};
+      @define-color card_fg_color #${base05};
       @define-color card_shade_color rgba(0, 0, 0, 0.36);
-      @define-color dialog_bg_color #${config.colorScheme.palette.base00};
-      @define-color dialog_fg_color #${config.colorScheme.palette.base05};
-      @define-color popover_bg_color #${config.colorScheme.palette.base00};
-      @define-color popover_fg_color #${config.colorScheme.palette.base05};
+      @define-color dialog_bg_color #${base00};
+      @define-color dialog_fg_color #${base05};
+      @define-color popover_bg_color #${base00};
+      @define-color popover_fg_color #${base05};
       @define-color shade_color rgba(0,0,0,0.36);
       @define-color scrollbar_outline_color rgba(0,0,0,0.5);
-      @define-color sidebar_bg_color #${config.colorScheme.palette.base01};
-      @define-color sidebar_fg_color #${config.colorScheme.palette.base05};
-      @define-color sidebar_backdrop_color #${config.colorScheme.palette.base01};
+      @define-color sidebar_bg_color #${base01};
+      @define-color sidebar_fg_color #${base05};
+      @define-color sidebar_backdrop_color #${base01};
       @define-color blue_1 #99c1f1;
       @define-color blue_2 #62a0ea;
       @define-color blue_3 #3584e4;
@@ -91,8 +91,7 @@
       name = "gtk.css";
       text = "${extraCss}";
     };
-    variant = "${config.colorScheme.variant}";
-    themeName = "${
+    themeName = with config.colorScheme; "${
       if variant == "dark" then "Tela-circle-blue-dark"
       else
         "Tela-circle-blue"

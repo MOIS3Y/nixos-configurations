@@ -21,6 +21,8 @@
   xsession.enable = true;
 
   imports = [
+    ../../modules/apps
+    ../../modules/assets
     ../../modules/colors
     ./config
     ./pkgs
@@ -31,8 +33,4 @@
     ./wayland
     ./xorg
   ];
-
-  # Set colorScheme
-  colorSchemeName = "catppuccin_mocha";
-
 }

@@ -15,7 +15,7 @@
 # ```
 # -- -- -- -- -- - -- -- -- -- -- --
 
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: with config.colorScheme.palette; {
   programs.swaylock = {
     enable = true;
     package = pkgs.swaylock-effects;
@@ -33,7 +33,7 @@
       show-failed-attempts = false;
       hide-keyboard-layout = true;
 
-      font = "Inter";
+      font = "Ubuntu";
       timestr = "%T";
       datestr = "%a, %e %b %Y";
       # fade-in = "0.2";
@@ -42,33 +42,33 @@
 
       # color = "00000000";
 
-      bs-hl-color = "#${config.colorScheme.palette.base08}";
-      key-hl-color = "#${config.colorScheme.palette.base0E}";
+      bs-hl-color = "#${base08}";
+      key-hl-color = "#${base0E}";
       
-      caps-lock-bs-hl-color = "#${config.colorScheme.palette.base09}";
-      caps-lock-key-hl-color = "#${config.colorScheme.palette.base09}";
+      caps-lock-bs-hl-color = "#${base09}";
+      caps-lock-key-hl-color = "#${base09}";
 
-      inside-color = "#${config.colorScheme.palette.base01}";
-      inside-clear-color = "#${config.colorScheme.palette.base01}";
-      inside-ver-color = "#${config.colorScheme.palette.base01}";
-      inside-wrong-color = "#${config.colorScheme.palette.base01}";
+      inside-color = "#${base01}";
+      inside-clear-color = "#${base01}";
+      inside-ver-color = "#${base01}";
+      inside-wrong-color = "#${base01}";
 
-      line-color = "#${config.colorScheme.palette.base00}";
-      line-ver-color = "#${config.colorScheme.palette.base00}";
-      line-clear-color = "#${config.colorScheme.palette.base00}";
-      line-wrong-color = "#${config.colorScheme.palette.base00}";
+      line-color = "#${base00}";
+      line-ver-color = "#${base00}";
+      line-clear-color = "#${base00}";
+      line-wrong-color = "#${base00}";
 
-      ring-color = "#${config.colorScheme.palette.base02}";
-      ring-clear-color = "#${config.colorScheme.palette.base08}";
-      ring-ver-color = "#${config.colorScheme.palette.base08}";
-      ring-wrong-color = "#${config.colorScheme.palette.base08}";
+      ring-color = "#${base02}";
+      ring-clear-color = "#${base08}";
+      ring-ver-color = "#${base08}";
+      ring-wrong-color = "#${base08}";
 
       separator-color = "00000000";
 
-      text-color = "#${config.colorScheme.palette.base05}";
-      text-clear-color = "#${config.colorScheme.palette.base05}";
-      text-ver-color = "#${config.colorScheme.palette.base05}";
-      text-wrong-color = "#${config.colorScheme.palette.base08}";
+      text-color = "#${base05}";
+      text-clear-color = "#${base05}";
+      text-ver-color = "#${base05}";
+      text-wrong-color = "#${base08}";
     };
   };
 }

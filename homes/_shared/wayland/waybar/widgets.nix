@@ -2,18 +2,15 @@
 # ▀▄▀▄▀ █ █▄▀ █▄█ ██▄ ░█░ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }:
-  let
-    scripts = import ./scripts.nix { inherit config; inherit pkgs; inherit lib;};
-  in {
+{ config, pkgs, lib, ... }: with config.apps.scripts.waybar; {
   "hyprland/workspaces" = {
     window-rewrite = {};  # ? fix [warning] Waybar/discussions/2816
     format = "{icon}";
     all-outputs = true;
     active-only = false;
     persistent-workspaces = { "*" = 8; };
-    on-scroll-up = "${scripts.hyprctl} dispatch workspace e+1";
-    on-scroll-down = "${scripts.hyprctl} dispatch workspace e-1";
+    on-scroll-up = "${switch-workspaces-to-right}";
+    on-scroll-down = "${switch-workspaces-to-left}";
   };
   # ! doesn't work propertly on Hyprland (waiting...)
   # ? see https://github.com/hyprwm/Hyprland/discussions/1094
@@ -40,36 +37,36 @@
   "custom/logo" = {
     tooltip = false;
     format = " ";
-    on-click = "${scripts.wofi-toggle}";
+    on-click = "${launcher-toggle}";
   };
   "custom/filemanager" = {
     tooltip = false;
-    on-click = "${scripts.file-manager-toggle}";
+    on-click = "${config.apps.filemanager}";
     format = "󱂵  Files";
   };
   "custom/browser" = {
     tooltip = false;
-    on-click = "${scripts.browser}";
+    on-click = "${config.apps.browser}";
     format = "󰈹  Browser";
   };
   "custom/calc" = {
     tooltip = false;
-    on-click = "${scripts.calc}";
+    on-click = "${calc}";
     format = "󰃬  Calc";
   };
   "custom/terminal" = {
     tooltip = false;
-    on-click = "${scripts.terminal}";
+    on-click = "${config.apps.terminal}";
     format = "  Terminal";
   };
   "custom/swallow" = {
     tooltip = false;
-    on-click = "${scripts.hyprctl-swallow}";
+    on-click = "${hyprctl-swallow}";
     format = "󰊰 ";
   };
   "custom/power" = {
     tooltip = false;
-    on-click = "${scripts.wlogout}";
+    on-click = "${logout}";
     format = "";
   };
   idle_inhibitor = {
@@ -80,7 +77,7 @@
     };
   };
   "custom/notification" = {
-    exec = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
+    exec = "${notification-get}";
     return-type = "json";
     format = "{icon}";
     format-icons = {
@@ -93,8 +90,8 @@
       dnd-inhibited-notification = "󰂛";
       dnd-inhibited-none = "󰪑";
     };
-    on-click = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
-    on-click-right = "${pkgs.swaynotificationcenter}/bin/swaync-client -d -sw";
+    on-click = "${notification-center}";
+    on-click-right = "${notification-dnd}";
     tooltip = true;
     escape = true;
   };
@@ -102,11 +99,11 @@
     format = "{icon} {percentage}%";
     format-icons = ["󰋙" "󰫃" "󰫄" "󰫅" "󰫆" "󰫇" "󰫈"];
     tooltip = false;
-    exec = "${scripts.ddcutil-fast}";
-    on-scroll-up = "${scripts.ddcutil-up}";
-    on-scroll-down = "${scripts.ddcutil-down}";
-    on-click = "${scripts.ddcutil-bright}";
-    on-click-right = "${scripts.ddcutil-dark}";
+    exec = "${ddcutil-fast}";
+    on-scroll-up = "${ddcutil-up}";
+    on-scroll-down = "${ddcutil-down}";
+    on-click = "${ddcutil-bright}";
+    on-click-right = "${ddcutil-dark}";
     return-type = "json";
   };
   "group/group-apps" = {
@@ -189,8 +186,8 @@
     format-icons = ["󰋙" "󰫃" "󰫄" "󰫅" "󰫆" "󰫇" "󰫈"];
     reverse-scrolling = true;
     reverse-mouse-scrolling = false;
-    on-scroll-up = "${scripts.brightnessctl} s +1%";
-    on-scroll-down = "${scripts.brightnessctl} s 1%-";
+    on-scroll-up = "${brightness-up}";
+    on-scroll-down = "${brightness-down}";
   };
   "backlight/slider" = {
     orientation = "horizontal";
@@ -272,24 +269,20 @@
       default = ["󰕿" "󰖀" "󰕾"];
     };
     tooltip-format = "{desc}, {volume}";
-    on-click = "${scripts.volumectl} toggle-mute";
+    on-click = "${volume-mute}";
     reverse-scrolling = true;
     reverse-mouse-scrolling = false;
-    # on-scroll-up = "${scripts.volumectl} up";
-    # on-scroll-down = "${scripts.volumectl} down";
   };
   "pulseaudio#microphone" = {
     tooltip = false;
     format = "{format_source}";
     format-source = "󰍬 {volume}%";
     format-source-muted = "󰍭 Mute";
-    on-click = "${scripts.volumectl} -m toggle-mute";
-    # on-scroll-up = "${scripts.volumectl} -m up 1";
-    # on-scroll-down = "${scripts.volumectl} -m down 1";
+    on-click = "${mic-mute}";
     reverse-scrolling = true;
     reverse-mouse-scrolling = false;
-    on-scroll-up = "${pkgs.pamixer}/bin/pamixer --default-source -i 1";
-    on-scroll-down = "${pkgs.pamixer}/bin/pamixer --default-source -d 1";
+    on-scroll-up = "${mic-up}";
+    on-scroll-down = "${mic-down}";
   };
   "pulseaudio/slider" = {
     orientation = "horizontal";

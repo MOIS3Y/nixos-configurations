@@ -2,45 +2,10 @@
 # ▄█ ▄█ █▀█ ▄
 # -- -- -- --
 
-{ config, pkgs, ... }:
-  let
-    go-cert = "${config.home.homeDirectory}/.ssh/ispsystem/go-cert.pub";
-    cert-ssh = with pkgs; writeShellScriptBin "cert-ssh" ''
-      export VAULT_ADDR="https://vault.ispsystem.net:8200"
-
-      _SECRET_KEY=${config.sops.secrets."private-keys/ispsystem/go".path}
-      _PUBLIC_KEY=@${config.sops.secrets."public-keys/ispsystem/go".path}
-      _CRT_FILE=${go-cert}
-
-      get_vault_crt() {
-        local public_key=$1
-        local crt_file=$2
-        ${pkgs.vault}/bin/vault login -method=oidc
-        if [ ! -f $crt_file ]; then
-          touch $crt_file
-        fi
-        ${pkgs.vault}/bin/vault write -field=signed_key ssh/sign/support \
-        public_key=$public_key valid_principals=root > $crt_file
-      }
-
-      set_ssh_agent() {
-        local secret_key=$1
-        ${pkgs.openssh}/bin/ssh-add -D
-        ${pkgs.openssh}/bin/ssh-add $secret_key
-      }
-
-      main() {
-        get_vault_crt $_PUBLIC_KEY $_CRT_FILE
-        set_ssh_agent $_SECRET_KEY
-      }
-      # RUN IT:
-      main
-    '';
-  in {
+{ config, pkgs, ... }: {
   home.file."${config.home.homeDirectory}/.local/bin/cert-ssh" = {
-    source = "${cert-ssh}/bin/cert-ssh";
+    source = "${config.apps.scripts.ssh.cert-ssh}";
   };
-
   programs.ssh = {
     enable = true;
     extraOptionOverrides = {
@@ -51,7 +16,7 @@
       "isp" = {
         user = "s.zhukovskii";
         identityFile = config.sops.secrets."private-keys/ispsystem/go".path;
-        certificateFile = "${go-cert}";
+        certificateFile = "${config.home.homeDirectory}/.ssh/ispsystem/go-cert.pub";
         port = 22;
         hostname = "ssh.ispsystem.net";
       };

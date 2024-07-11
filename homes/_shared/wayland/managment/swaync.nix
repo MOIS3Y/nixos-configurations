@@ -72,30 +72,30 @@
     };
 
     # Custom style
-    style = let
+    style = with config.colorScheme.palette; let
       variant = "${config.colorScheme.variant}";
       dark01 = "rgba(12, 12, 12, 0.1)";
       light01 = "rgba(255, 255, 255, 0.1)";
       dark04 = "rgba(12, 12, 12, 0.4)";
       light04 = "rgba(255, 255, 255, 0.4)";
     in ''
-      @define-color background #${config.colorScheme.palette.base00};
+      @define-color background #${base00};
       @define-color background-alt ${if variant == "dark" then dark01 else light01};
       @define-color background-focus ${if variant == "dark" then dark04 else light04};
 
-      @define-color border #${config.colorScheme.palette.base02};
+      @define-color border #${base02};
       
-      @define-color base00 #${config.colorScheme.palette.base00};
-      @define-color base01 #${config.colorScheme.palette.base01};
-      @define-color base02 #${config.colorScheme.palette.base02};
-      @define-color base03 #${config.colorScheme.palette.base03};
-      @define-color base04 #${config.colorScheme.palette.base04};
-      @define-color base05 #${config.colorScheme.palette.base05};
-      @define-color base08 #${config.colorScheme.palette.base08};
-      @define-color base09 #${config.colorScheme.palette.base09};
-      @define-color base0A #${config.colorScheme.palette.base0A};
-      @define-color base0B #${config.colorScheme.palette.base0B};
-      @define-color base0D #${config.colorScheme.palette.base0D};
+      @define-color base00 #${base00};
+      @define-color base01 #${base01};
+      @define-color base02 #${base02};
+      @define-color base03 #${base03};
+      @define-color base04 #${base04};
+      @define-color base05 #${base05};
+      @define-color base08 #${base08};
+      @define-color base09 #${base09};
+      @define-color base0A #${base0A};
+      @define-color base0B #${base0B};
+      @define-color base0D #${base0D};
 
       * {
         all: unset;

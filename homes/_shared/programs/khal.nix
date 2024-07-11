@@ -23,15 +23,7 @@
         remote = {
           type = "google_calendar";
         };
-        vdirsyncer =
-        let
-          googleCalendarFetchId = with pkgs; writeShellScript "gcfid" ''
-            cat ${config.sops.secrets."google-calendar/fetch-id".path}
-          '';
-          googleCalendarFetchSecret = with pkgs; writeShellScript "gcfs" ''
-            cat ${config.sops.secrets."google-calendar/fetch-secret".path}
-          '';
-        in {
+        vdirsyncer = with config.apps.scripts.khal; {
           enable = true;
           tokenFile = "${config.xdg.dataHome}/calendars/google_token_file";
           collections = [ "from a" "from b" ];

@@ -11,12 +11,12 @@
       splash = false;
       splash_offset = 2.0;
       preload = [
-        "${pkgs.extrapkgs.assets4nix}/share/wallpapers/hexagon/${config.colorScheme.name}.png"
+        "${config.assets.wallpaper}"
         # add more here ...
       ];
       wallpaper = [
-        ",${pkgs.extrapkgs.assets4nix}/share/wallpapers/hexagon/${config.colorScheme.name}.png"
-        # ? above for all monitors
+        ",${config.assets.wallpaper}"
+        # ? above <,> mean for all monitors
       ];
     };
   };

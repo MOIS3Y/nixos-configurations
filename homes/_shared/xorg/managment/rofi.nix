@@ -9,20 +9,20 @@
       rofi-calc
       rofi-emoji
     ];
-    terminal = "${pkgs.wezterm}/bin/wezterm";
+    terminal = "${config.apps.terminal}";
     location = "center";
-    theme = let
-        inherit (config.lib.formats.rasi) mkLiteral;
-      in {
+    theme = let 
+      inherit (config.lib.formats.rasi) mkLiteral; 
+    in with config.colorScheme.palette; {
         "*" = {
-          bg-col = mkLiteral "#${config.colorScheme.palette.base00}" ;
-          bg-col-light = mkLiteral "#${config.colorScheme.palette.base00}" ;
-          border-col = mkLiteral "#${config.colorScheme.palette.base00}" ;
-          selected-col = mkLiteral "#${config.colorScheme.palette.base00}" ;
-          blue = mkLiteral "#${config.colorScheme.palette.base0D}" ;
-          fg-col = mkLiteral "#${config.colorScheme.palette.base05}" ;
-          fg-col2 = mkLiteral "#${config.colorScheme.palette.base0D}" ;
-          grey = mkLiteral "#${config.colorScheme.palette.base03}" ;
+          bg-col = mkLiteral "#${base00}" ;
+          bg-col-light = mkLiteral "#${base00}" ;
+          border-col = mkLiteral "#${base00}" ;
+          selected-col = mkLiteral "#${base00}" ;
+          accent = mkLiteral "#${base0D}" ;
+          fg-col = mkLiteral "#${base05}" ;
+          fg-col2 = mkLiteral "#${base0D}" ;
+          grey = mkLiteral "#${base03}" ;
         };
         "element-text, element-icon , mode-switcher" = {
             background-color = mkLiteral "inherit";
@@ -45,7 +45,7 @@
           padding = mkLiteral "2px";
         };
         prompt = {
-            background-color = mkLiteral "@blue";
+            background-color = mkLiteral "@accent";
             padding = mkLiteral "6px";
             text-color = mkLiteral "@bg-col";
             border-radius = mkLiteral "3px";
@@ -92,7 +92,7 @@
         };
         "button selected" = {
           background-color = mkLiteral "@bg-col";
-          text-color = mkLiteral "@blue";
+          text-color = mkLiteral "@accent";
         };
     };
     extraConfig = {
@@ -100,7 +100,7 @@
       lines = 5;
       font = "JetBrains Mono Nerd Font 12";
       show-icons = true;
-      icon-theme = "Tela-circle-blue-dark";
+      icon-theme = "${config.gtk.iconTheme.name}";
       drun-display-format = "{icon} {name}";
       location = 0;
       disable-history = false;
@@ -112,4 +112,10 @@
       sidebar-mode = true;
     };
   };
+  home.packages = with pkgs; [
+    rofi-bluetooth
+    rofi-power-menu
+    rofi-systemd
+    rofi-vpn
+  ];
 }

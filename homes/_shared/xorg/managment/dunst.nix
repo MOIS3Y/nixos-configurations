@@ -2,74 +2,16 @@
 # █▄▀ █▄█ █░▀█ ▄█ ░█░ ▄
 # -- -- -- -- -- -- -- 
 
-{ config, pkgs, ... }:
-let
-  notify-send = "${pkgs.libnotify}/bin/notify-send";
-  pamixer = "${pkgs.pamixer}/bin/pamixer";
-  brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
-
-  dunst-volume = with pkgs; writeShellScriptBin "dunst-volume" ''
-    ${pamixer} "$@"
-    volume="$(${pamixer} --get-volume-human)"
-
-    if [ "$volume" = "muted" ]; then
-        ${notify-send} -r 69 \
-          -a "Volume" \
-          "Muted" \
-          --expire-time=888 \
-          --urgency=low
-    else
-        ${notify-send} -r 69 \
-          -a "Volume" "Currently at $volume" \
-          -h int:value:"$volume" \
-          --expire-time=888 \
-          --urgency=low
-    fi
-  '';
-
-  dunst-microphone = with pkgs; writeShellScriptBin "dunst-microphone" ''
-    ${pamixer} --default-source "$@"
-    mic="$(${pamixer} --default-source --get-volume-human)"
-
-    if [ "$mic" = "muted" ]; then
-        ${notify-send} -r 69 \
-          -a "Microphone" \
-          "Muted" \
-          --expire-time=888 \
-          --urgency=low
-    else
-      ${notify-send} -r 69 \
-        -a "Microphone" "Currently at $mic" \
-        -h int:value:"$mic" \
-        --expire-time=888 \
-        --urgency=low
-    fi
-  '';
-
-  dunst-brightness = with pkgs; writeShellScriptBin "dunst-brightness" ''
-
-      ${brightnessctl} "$@"
-      brightness=$(echo $(($(${brightnessctl} g) * 100 / $(${brightnessctl} m))))
-
-      ${notify-send} -r 69 \
-          -a "Brightness" "Currently at $brightness%" \
-          -h int:value:"$brightness" \
-          --expire-time=888 \
-          --urgency=low
-    '';
-  in {
-  #?Add to $PATH, it might call late to show current volume
-  home.packages = [ dunst-volume dunst-microphone dunst-brightness ];
-
+{ config, pkgs, ... }: {
   services.dunst = {
     enable = true;
     iconTheme = {
-      name = "Tela-circle-dark";
-      package = pkgs.tela-circle-icon-theme;
+      name = config.gtk.iconTheme.name;
+      package = config.gtk.iconTheme.package;
       size = "32x32";
     };
-    settings = {
-      global = {
+    settings = with config.colorScheme.palette; {
+      global =  {
         # Display:
         monitor = 0;
         follow = "mouse";
@@ -94,14 +36,14 @@ let
         horizontal_padding = 8;
         text_icon_padding = 0;
         frame_width = 1;
-        frame_color = "#${config.colorScheme.palette.base01}";
+        frame_color = "#${base01}";
         gap_size = 8;
         separator_color = "frame";
         sort = "yes";
         font = "Ubuntu Regular 9";
         line_height = 0;
         markup = "full";
-        format = "<span size='x-large' font_desc='monospace 9' weight='bold' foreground='#${config.colorScheme.palette.base05}'>%a</span>\\n%s\\n%b";
+        format = "<span size='x-large' font_desc='monospace 9' weight='bold' foreground='#${base05}'>%a</span>\\n%s\\n%b";
         alignment = "left";
         vertical_alignment = "center";
         show_age_threshold = 60;
@@ -113,11 +55,11 @@ let
         # Icons:
         enable_recursive_icon_lookup = true;
         icon_position = "left";
-        icon_theme = "Tela-circle-dark";
-        icon_path =
+        icon_theme = "${config.gtk.iconTheme.name}";
+        icon_path = with config.gtk.iconTheme;
           let
-            status = "${pkgs.tela-circle-icon-theme}/share/icons/Tela-circle-dark/16/status/";
-            devices = "${pkgs.tela-circle-icon-theme}/share/icons/Tela-circle-dark/16/devices/";
+            status = "${package}/share/icons/${name}/16/status/";
+            devices = "${package}/share/icons/${name}/16/devices/";
           in
           "${status}:${devices}";
         # History:
@@ -140,24 +82,30 @@ let
         per_monitor_dpi = false;
       };
       urgency_low = {
-        background = "#${config.colorScheme.palette.base00}";
-        foreground = "#${config.colorScheme.palette.base05}";
-        highlight = "#${config.colorScheme.palette.base0E}";
+        background = "#${base00}";
+        foreground = "#${base05}";
+        highlight = "#${base0E}";
         timeout = 10;
       };
       urgency_normal = {
-        background = "#${config.colorScheme.palette.base00}";
-        foreground = "#${config.colorScheme.palette.base05}";
-        highlight = "#${config.colorScheme.palette.base0E}";
+        background = "#${base00}";
+        foreground = "#${base05}";
+        highlight = "#${base0E}";
         timeout = 10;
       };
       urgency_critical = {
-        background = "#${config.colorScheme.palette.base00}";
-        foreground = "#${config.colorScheme.palette.base05}";
-        frame_color = "#${config.colorScheme.palette.base08}";
-        highlight = "#${config.colorScheme.palette.base0E}";
+        background = "#${base00}";
+        foreground = "#${base05}";
+        frame_color = "#${base08}";
+        highlight = "#${base0E}";
         timeout = 0;
       };
     };
   };
+  #?Add to $PATH, it might call late to show current volume
+  home.packages = with config.apps.scripts.dunst; [
+    dunst-volume
+    dunst-microphone
+    dunst-brightness 
+  ];
 }

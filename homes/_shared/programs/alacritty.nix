@@ -11,15 +11,17 @@
         TERM = "xterm-256color";
       };
       live_config_reload = true;
-      cursor.style = {
-        shape = "Underline";
-        blinking = "On";
+      cursor = {
         unfocused_hollow = false;
+        style = {
+          shape = "Underline";
+          blinking = "On";
+        };
       };
       window = {
         padding.x = 25;
         padding.y = 25;
-        opacity = 0.4;
+        opacity = 0.6;
         title = "Alacritty";
         dynamic_title = true;
       };
@@ -38,79 +40,79 @@
           style = "Italic";
         };
       };
-      colors = {
+      colors = with config.colorScheme.palette; {
         primary = {
-          background = "#11111B";
-          foreground = "#CDD6F4";        # text
-          dim_foreground = "#CDD6F4";    # text
-          bright_foreground = "#CDD6F4"; # text
+          background = "#${base00}";
+          foreground = "#${base05}";
+          dim_foreground = "#${base05}";
+          bright_foreground = "#${base05}";
         };
         cursor = {
-          text = "#11111B";   # base
-          cursor = "#B4BEFE"; # rosewater
+          text = "#${base00}";
+          cursor = "#${base05}";
         };
         #.......
         vi_mode_cursor = {
-          text = "#11111B";   # base
-          cursor = "#B4BEFE"; # lavender
+          text = "#${base00}";
+          cursor = "#${base05}";
         };
         search = {
           matches = {
-            foreground = "#11111B"; # base
-            background = "#A6ADC8"; # subtext0
+            foreground = "#${base00}";
+            background = "#${base04}";
           };
           focused_match = {
-            foreground = "#11111B"; # base
-            background = "#A6E3A1"; # green
+            foreground = "#${base00}";
+            background = "#${base0B}";
           };
-          footer_bar = {
-            foreground = "#11111B"; # base
-            background = "#A6ADC8"; # subtext0
-          };
+          # footer_bar = {
+          #   foreground = "#${base00}";
+          #   background = "#${base02}";
+          # };
         };
         hints = {
           start = {
-            foreground = "#11111B"; # base
-            background = "#F9E2AF"; # yellow
+            foreground = "#${base00}";
+            background = "#${base0A}";
           };
           end = {
-            foreground = "#11111B"; # base
-            background = "#A6ADC8"; # subtext0
+            foreground = "#${base00}";
+            background = "#${base02}";
           };
         };
         selection = {
-          text = "#11111B";       # base
-          background = "#F5E0DC"; # rosewater
+          text = "#${base00}";
+          background = "#${base06}";
         };
         normal = {
-          black = "#45475A";   # surface1
-          red = "#F38BA8";     # red
-          green = "#A6E3A1";   # green
-          yellow = "#F9E2AF";  # yellow
-          blue = "#89B4FA";    # blue
-          magenta = "#F5C2E7"; # pink
-          cyan = "#94E2D5";    # teal
-          white = "#BAC2DE";   # subtext1
+          black = "#${base01}";
+          red = "#${base08}";
+          green = "#${base0B}";
+          yellow = "#${base0A}";
+          blue = "#${base0D}";
+          magenta = "#${base0E}";
+          cyan = "#${base0C}";
+          white = "#${base06}";
         };
         bright = {
-          black = "#585B70";   # surface2
-          red = "#F38BA8";     # red
-          green = "#A6E3A1";   # green
-          yellow = "#F9E2AF";  # yellow
-          blue = "#89B4FA";    # blue
-          magenta = "#F5C2E7"; # pink
-          cyan = "#94E2D5";    # teal
-          white = "#A6ADC8";   # subtext0
+          black = "#${base04}";
+          red = "#${base05}";
+          green = "#${base0B}";
+          yellow = "#${base0A}";
+          blue = "#${base0D}";
+          magenta = "#${base0E}";
+          cyan = "#${base0C}";
+          white = "#${base06}";
         };
         dim = {
-          black = "#45475A";   # surface1
-          red = "#F38BA8";     # red
-          green = "#A6E3A1";   # green
-          yellow = "#F9E2AF";  # yellow
-          blue = "#89B4FA";    # blue
-          magenta = "#F5C2E7"; # pink
-          cyan = "#94E2D5";    # teal
-          white = "#BAC2DE";   # subtext1
+          black = "#${base01}";
+          red = "#${base05}";
+          green = "#${base0B}";
+          yellow = "#${base0A}";
+          blue = "#${base0D}";
+          magenta = "#${base0E}";
+          cyan = "#${base0C}";
+          white = "#${base06}";
         };
       };
     };

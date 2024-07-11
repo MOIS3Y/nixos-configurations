@@ -10,14 +10,14 @@
       sha256 = "1cifj774r4z4m856fva1mamnpnhsjl44kw3asklrc57824f5lyz3";
     };
     variant = "${config.colorScheme.variant}";
-  in {
+  in with config.colorScheme.palette; {
   primary = ''
     /* -----------------------------------------------------
     *  Window
     * ----------------------------------------------------- */
 
     window#waybar {
-      background-color: #${config.colorScheme.palette.base00};
+      background-color: #${base00};
       transition-property: background-color;
       transition-duration: 0.5s;
       font-size: 13px;
@@ -54,8 +54,8 @@
       padding-right: 14px;
       padding-left: 10px;
       margin: 7px 3px;
-      color: #${config.colorScheme.palette.base05};
-      background-color: #${config.colorScheme.palette.base01};
+      color: #${base05};
+      background-color: #${base01};
     }
 
     #custom-swallow {
@@ -72,11 +72,7 @@
       padding: 3px 3px;
       border-radius: 15px;
       border: 0px;
-      background-color: #${
-        if variant == "dark" then config.colorScheme.palette.base01
-        else
-          config.colorScheme.palette.base02
-      };
+      background-color: #${if variant == "dark" then base01 else base02};
     }
 
     #workspaces button {
@@ -101,28 +97,20 @@
     }
 
     #workspaces button.persistent {
-      background-color: #${config.colorScheme.palette.base0D};
-      color: #${config.colorScheme.palette.base0D};
+      background-color: #${base0D};
+      color: #${base0D};
     }
     #workspaces button.empty {
-      background-color: #${
-        if variant == "dark" then config.colorScheme.palette.base02
-        else
-          config.colorScheme.palette.base04
-      };
-      color: #${
-        if variant == "dark" then config.colorScheme.palette.base02
-        else
-          config.colorScheme.palette.base04
-      };
+      background-color: #${if variant == "dark" then base02 else base04};
+      color: #${if variant == "dark" then base02 else base04};
     }
     #workspaces button.active {
-      color: #${config.colorScheme.palette.base0D};
-      background-color: #${config.colorScheme.palette.base0D};
+      color: #${base0D};
+      background-color: #${base0D};
     }
     #workspaces button.urgent {
-      background-color: #${config.colorScheme.palette.base08};
-      color: #${config.colorScheme.palette.base08};
+      background-color: #${base08};
+      color: #${base08};
       animation-name: blink;
       animation-duration: 0.5s;
       animation-timing-function: linear;
@@ -133,8 +121,8 @@
     #workspaces button:hover {
     box-shadow: inherit;
     text-shadow: inherit;
-    color: #${config.colorScheme.palette.base0D};
-    background-color: #${config.colorScheme.palette.base0D};
+    color: #${base0D};
+    background-color: #${base0D};
     }
 
     /* -----------------------------------------------------
@@ -144,21 +132,21 @@
     #taskbar {
       all: initial; /* Remove GTK theme values (waybar #1351) */
       min-width: 0; /* Fix weird spacing in materia (waybar #450) */
-      background-color: #${config.colorScheme.palette.base00};
-      color: #${config.colorScheme.palette.base05};
+      background-color: #${base00};
+      color: #${base05};
     }
 
     #taskbar button {
       margin:7px 3px 7px 3px;
       padding: 0px 9px 0px 9px;
       border-radius: 15px;
-      background-color: #${config.colorScheme.palette.base01};
-      color: #${config.colorScheme.palette.base05};    
+      background-color: #${base01};
+      color: #${base05};    
     }
 
     #taskbar button.active {
-      background-color: #${config.colorScheme.palette.base0D};
-      color: #${config.colorScheme.palette.base01};
+      background-color: #${base0D};
+      color: #${base01};
     }
 
   /* -----------------------------------------------------
@@ -181,8 +169,8 @@
       margin:7px 3px 7px 3px;
       padding: 0px 9px 0px 9px;
       border-radius: 15px;
-      background-color: #${config.colorScheme.palette.base00};
-      color: #${config.colorScheme.palette.base00};
+      background-color: #${base00};
+      color: #${base00};
       font-family: JetBrainsMono, monospace;
       font-size: 14px;
     }
@@ -193,8 +181,8 @@
       margin:7px 3px 7px 3px;
       padding: 0px 9px 0px 9px;
       border-radius: 15px;
-      background-color: #${config.colorScheme.palette.base00};
-      color: #${config.colorScheme.palette.base00};
+      background-color: #${base00};
+      color: #${base00};
     }
 
     #custom-power {
@@ -203,8 +191,8 @@
       margin-right: 16px;
       margin-left: 5px;
       font-size: 18px;
-      background-color: #${config.colorScheme.palette.base00};
-      color: #${config.colorScheme.palette.base0F};
+      background-color: #${base00};
+      color: #${base0F};
     }
 
   /* -----------------------------------------------------
@@ -234,7 +222,7 @@
         min-height: 12px;
         min-width: 80px;
         border-radius: 5px;
-        background-color: #${config.colorScheme.palette.base01};
+        background-color: #${base01};
     }
 
     highlight {
@@ -247,14 +235,14 @@
   * ----------------------------------------------------- */
 
     #battery.charging, #battery.plugged {
-        color: #${config.colorScheme.palette.base00};
-        background-color: #${config.colorScheme.palette.base0B};
+        color: #${base00};
+        background-color: #${base0B};
     }
 
     @keyframes blink {
         to {
-            background-color: #${config.colorScheme.palette.base01};
-            color: #${config.colorScheme.palette.base05};
+            background-color: #${base01};
+            color: #${base05};
         }
     }
 
@@ -265,8 +253,8 @@
     #disk.nix.warning,
     #disk.warning,
     #battery.warning:not(.charging) {
-        background-color: #${config.colorScheme.palette.base0A};
-        color: #${config.colorScheme.palette.base00};
+        background-color: #${base0A};
+        color: #${base00};
     }
 
     #disk.docker.critical,
@@ -276,8 +264,8 @@
     #disk.nix.critical,
     #disk.critical,
     #battery.critical:not(.charging) {
-        background-color: #${config.colorScheme.palette.base08};
-        color: #${config.colorScheme.palette.base00};
+        background-color: #${base08};
+        color: #${base00};
         animation-name: blink;
         animation-duration: 0.5s;
         animation-timing-function: linear;
@@ -286,37 +274,37 @@
     }
 
     #battery {
-      background-color: #${config.colorScheme.palette.base01};
-      color: #${config.colorScheme.palette.base05};
+      background-color: #${base01};
+      color: #${base05};
     }
 
     #backlight {
-      background-color: #${config.colorScheme.palette.base09};
+      background-color: #${base09};
     }
 
     #backlight-slider highlight {
-      background-color: #${config.colorScheme.palette.base09};
+      background-color: #${base09};
     }
 
     #cpu {
-      background-color: #${config.colorScheme.palette.base0E};
+      background-color: #${base0E};
     }
 
     #clock {
-      background-color: #${config.colorScheme.palette.base05};
+      background-color: #${base05};
       color: #${config.colorScheme.palette.base00};
     }
 
     #custom-ddcutil {
-      background-color: #${config.colorScheme.palette.base09};
+      background-color: #${base09};
     }
 
     #custom-swallow {
-      color: #${config.colorScheme.palette.base05};
+      color: #${base05};
     }
 
     #disk {
-      background-color: #${config.colorScheme.palette.base0C};
+      background-color: #${base0C};
     }
 
     #disk.docker,
@@ -324,55 +312,53 @@
     #disk.home,
     #disk.kvm,
     #disk.nix {
-      background-color: #${config.colorScheme.palette.base01};
+      background-color: #${base01};
       color: #${config.colorScheme.palette.base05};
     }
 
     #language {
-      background-color: #${config.colorScheme.palette.base08};
+      background-color: #${base08};
       color: #${config.colorScheme.palette.base00};
     }
 
     #memory {
-      background-color: #${config.colorScheme.palette.base0D};
+      background-color: #${base0D};
     }
 
     #pulseaudio.microphone {
-      background-color: #${config.colorScheme.palette.base0A};
+      background-color: #${base0A};
     }
 
     #pulseaudio {
-      background-color: #${config.colorScheme.palette.base0B};
+      background-color: #${base0B};
     }
 
     #pulseaudio-slider highlight {
-      background-color: #${config.colorScheme.palette.base0B};
+      background-color: #${base0B};
     }
 
     #tray {
-      background-color: #${
+      /*  
         # ? workaround tray icons always light
         # ? see: https://github.com/Alexays/Waybar/issues/2639
-        if variant == "dark" then config.colorScheme.palette.base01
-        else
-          config.colorScheme.palette.base05
-      };
-      color: #${config.colorScheme.palette.base05};
+      */
+      background-color: #${if variant == "dark" then base01 else base05};
+      color: #${base05};
     }
 
     #idle_inhibitor {
       margin-left: 5px;
       margin-right: 5px;
       padding-left: 4px;
-      background-color: #${config.colorScheme.palette.base00};
-      color: #${config.colorScheme.palette.base05};
+      background-color: #${base00};
+      color: #${base05};
     }
 
     #custom-notification {
       margin-left: 5px;
       margin-right: 5px;
-      background-color: #${config.colorScheme.palette.base00};
-      color: #${config.colorScheme.palette.base05};
+      background-color: #${base00};
+      color: #${base05};
     }
 
   /* -----------------------------------------------------
@@ -382,17 +368,17 @@
     tooltip {
       font-family: Ubuntu, Inter, sans-serif;
       border-radius: 8px;
-      border-color: #${config.colorScheme.palette.base01};
+      border-color: #${base01};
       padding: 20px;
       margin: 30px;
-      color: #${config.colorScheme.palette.base05};
-      background-color: #${config.colorScheme.palette.base00};
+      color: #${base05};
+      background-color: #${base00};
     }
 
     tooltip label {
       font-family: Ubuntu, Inter, sans-serif;
       padding: 20px;
-      color: #${config.colorScheme.palette.base05};
+      color: #${base05};
     }
   '';
 }

@@ -2,12 +2,7 @@
 # ▄█ ▀▄▀▄▀ █▀█ █▀▀ █▀▀ ░█░ ▄
 # -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, lib, ... }:
-  let
-    homeDir = "${config.home.homeDirectory}";
-    xdgConf = "${config.xdg.configHome}";
-    boolToString = lib.trivial.boolToString;
-  in {
+{ config, pkgs, lib, ... }: {
   options = {
     earlyExit = lib.mkOption {
       default = false;
@@ -19,15 +14,15 @@
     };
   };
   config = {
-    home.file."${xdgConf}/swappy/config".text = ''
+    home.file."${config.xdg.configHome}/swappy/config".text = ''
       [Default]
-      save_dir=${homeDir}/Pictures/Screenshots
+      save_dir=${config.home.homeDirectory}/Pictures/Screenshots
       save_filename_format=%Y-%m-%d-%H-%M-%S.png
       show_panel=false
       line_size=3
       text_size=20
       text_font=sans-serif
-      early_exit=${boolToString config.earlyExit}
+      early_exit=${lib.trivial.boolToString config.earlyExit}
     '';
     home.packages = with pkgs; [
       grim

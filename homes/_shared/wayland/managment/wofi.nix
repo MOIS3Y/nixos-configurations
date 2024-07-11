@@ -12,14 +12,14 @@
       always_parse_args = true;
       allow_images = true;
       show_all = false;
-      term = "${pkgs.wezterm}/bin/wezterm";
+      term = "${config.apps.terminal}";
       hide_scroll = true;
       print_command = true;
       insensitive = true;
       prompt = "";
       columns = 2;
     };
-    style = ''
+    style = with config.colorScheme.palette; ''
       * {
         font-family: 'Ubuntu', monospace;
         font-size: 14px;
@@ -29,9 +29,9 @@
       window {
         margin: 0px;
         padding: 10px;
-        border: 0.10em solid #${config.colorScheme.palette.base0D};
+        border: 0.10em solid #${base0D};
         border-radius: 0.6em;
-        background-color: #${config.colorScheme.palette.base00};
+        background-color: #${base00};
         animation: slideIn 0.5s ease-in-out both;
       }
 
@@ -51,7 +51,7 @@
         margin: 5px;
         padding: 10px;
         border: none;
-        background-color: #${config.colorScheme.palette.base00};
+        background-color: #${base00};
         animation: fadeIn 0.5s ease-in-out both;
       }
 
@@ -71,7 +71,7 @@
         margin: 5px;
         padding: 10px;
         border: none;
-        background-color: #${config.colorScheme.palette.base00};
+        background-color: #${base00};
       }
 
       /* Scroll */
@@ -79,7 +79,7 @@
         margin: 0px;
         padding: 10px;
         border: none;
-        background-color: #${config.colorScheme.palette.base00};
+        background-color: #${base00};
       }
 
       /* Input */
@@ -88,49 +88,49 @@
         padding: 10px;
         border: none;
         border-radius: 0.6em;
-        color: #${config.colorScheme.palette.base05};
-        background-color: #${config.colorScheme.palette.base01};
+        color: #${base05};
+        background-color: #${base01};
         animation: fadeIn 0.5s ease-in-out both;
       }
 
       #input image {
           border: none;
-          color: #${config.colorScheme.palette.base08};
+          color: #${base08};
       }
 
       #input * {
-        outline: 4px solid #${config.colorScheme.palette.base08}!important;
+        outline: 4px solid #${base08}!important;
       }
 
       /* Text */
       #text {
         margin: 5px;
         border: none;
-        color: #${config.colorScheme.palette.base05};
+        color: #${base05};
         animation: fadeIn 0.5s ease-in-out both;
       }
 
       #entry {
         border-radius: 0.6em;
-        background-color: #${config.colorScheme.palette.base00};
+        background-color: #${base00};
       }
 
       #entry arrow {
         border: none;
-        color: #${config.colorScheme.palette.base0D};
+        color: #${base0D};
       }
 
       /* Selected Entry */
       #entry:selected {
-        border: 0.11em solid #${config.colorScheme.palette.base0D};
+        border: 0.11em solid #${base0D};
       }
 
       #entry:selected #text {
-        color: #${config.colorScheme.palette.base0D};
+        color: #${base0D};
       }
 
       #entry:drop(active) {
-        background-color: #${config.colorScheme.palette.base0D}!important;
+        background-color: #${base0D}!important;
       }
     '';
   };

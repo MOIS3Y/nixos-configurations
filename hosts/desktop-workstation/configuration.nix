@@ -9,6 +9,7 @@
 { config, pkgs, ... }: {
 
   imports = [
+    ../../modules/assets
     ../../modules/colors
     ./hardware-configuration.nix  # msi-z390-a-pro
     ./boot
@@ -31,9 +32,6 @@
     ./virtualisation
     ./xdg
   ];
-
-  # Set colorScheme
-  colorSchemeName = "catppuccin_mocha";
 
   # Set your time zone.
   time.timeZone = "Asia/Chita";

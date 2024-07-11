@@ -9,10 +9,10 @@
     # ? see: https://github.com/heyjuvi/avizo/issues/60
     package = pkgs.avizo.overrideAttrs (final: prev: {
       patchPhase = ''
-        cp ${pkgs.extrapkgs.assets4nix}/share/icons/avizo/${config.colorScheme.name}/* data/images/
+        cp ${config.assets.icons}/avizo/${config.colorScheme.name}/* data/images/
       '';
     });
-    settings = {
+    settings = with config.colorScheme.palette; {
       default = {
         # image-opacity=DOUBLE;
         # progress="0.1";
@@ -27,13 +27,12 @@
         block-count = 18;
         fade-in = "0.2";
         fade-out = "0.5";
-        background = "#${config.colorScheme.palette.base00}";
-        border-color = "#${config.colorScheme.palette.base01}";
-        bar-fg-color = "#${config.colorScheme.palette.base05}";
-        bar-bg-color = "#${config.colorScheme.palette.base02}";
+        background = "#${base00}";
+        border-color = "#${base01}";
+        bar-fg-color = "#${base05}";
+        bar-bg-color = "#${base02}";
         time = 2;
         # monitor = INT;
-        #image-base-dir = "${pkgs.extrapkgs.assets4nix}/share/icons/avizo/${config.colorScheme.name}";
       };
     };
   };

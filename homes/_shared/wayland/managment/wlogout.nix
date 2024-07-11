@@ -2,58 +2,52 @@
 # ▀▄▀▄▀ █▄▄ █▄█ █▄█ █▄█ █▄█ ░█░ ▄
 # -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }: let
-  # bin tools:
-  systemctl = "${pkgs.systemd}/bin/systemctl";
-  wayland-logout = "${lib.getExe pkgs.wayland-logout}";
-  swaylock = "${lib.getExe pkgs.swaylock-effects}";
-  hyprlock = "${lib.getExe pkgs.hyprlock}";
-  in {
-  programs.wlogout = {
+{ config, pkgs, lib, ... }: {
+  programs.wlogout = with config.apps.scripts.wlogout; {
     enable = true;
     layout = [
       {
         label = "lock";
-        action = "sleep 0.5; ${hyprlock}";
+        action = "${lock}";
         text = "Lock";
         keybind = "l";
       }
       {
         label = "hibernate";
-        action = "sleep 1; ${systemctl} hibernate";
+        action = "${hibernate}";
         text = "Hibernate";
         keybind = "h";
       }
       {
         label = "logout";
-        action = "sleep 1; ${wayland-logout}";
+        action = "${logout}";
         text = "Exit";
         keybind = "e";
       }
       {
         label = "shutdown";
-        action = "sleep 1; ${systemctl} poweroff";
+        action = "${shutdown}";
         text = "Shutdown";
         keybind = "s";
       }
       {
         label = "suspend";
-        action = "sleep 1; ${systemctl} suspend";
+        action = "${suspend}";
         text = "Suspend";
         keybind = "u";
       }
       {
         label = "reboot";
-        action = "sleep 1; ${systemctl} reboot";
+        action = "${reboot}";
         text = "Reboot";
         keybind = "r";
       }
     ];
-    style = let
+    style = with config.colorScheme.palette; let
       # shortcuts:
       cs = "${config.colorScheme.name}";
       variant = "${config.colorScheme.variant}";
-      wlogoutIconsDir = "${pkgs.extrapkgs.assets4nix}/share/icons/wlogout/${cs}";
+      wlogoutIconsDir = "${config.assets.icons}/wlogout/${cs}";
 
       dark01 = "rgba(12, 12, 12, 0.1)";
       light01 = "rgba(255, 255, 255, 0.1)";
@@ -76,22 +70,22 @@
         background-color: ${window-bg-color};
       }
       button {
-        color: #${config.colorScheme.palette.base05};
+        color: #${base05};
         font-size:20px;
         background-repeat: no-repeat;
         background-position: center;
         background-size: 25%;
         border-style: solid;
         background-color: ${btn-bg-color};
-        border: 3px solid #${config.colorScheme.palette.base05};
+        border: 3px solid #${base05};
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       }
       button:focus,
       button:active,
       button:hover {
-        color: #${config.colorScheme.palette.base0D};
+        color: #${base0D};
         background-color: ${btn-focus-color};
-        border: 3px solid #${config.colorScheme.palette.base0D};
+        border: 3px solid #${base0D};
       }
       /* 
       ----------------------------------------------------- 

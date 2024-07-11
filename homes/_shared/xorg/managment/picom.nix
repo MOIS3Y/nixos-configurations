@@ -143,7 +143,7 @@
   systemd.user.services.picom.Service.Restart = lib.mkForce "always";
   systemd.user.services.picom.Service.RestartSec = lib.mkForce 90;
   systemd.user.services.picom.Service.ExecCondition = lib.mkForce [
-    "${pkgs.bash}/bin/bash -c '! [ -v WAYLAND_DISPLAY ] || exit -1'"
+    "${lib.getExe pkgs.bash} -c '! [ -v WAYLAND_DISPLAY ] || exit -1'"
   ];
   # override systemd-xdg-autostart-generator:
   # ? it's a hack, we don't need to autostart app-picom, we start it by .service

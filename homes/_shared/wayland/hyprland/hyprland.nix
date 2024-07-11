@@ -2,43 +2,23 @@
 # █▀█ ░█░ █▀▀ █▀▄ █▄▄ █▀█ █░▀█ █▄▀ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, ... }:
-  let
-    hyprScreenshot = with pkgs; writeShellScriptBin "hypr-screenshot" ''
-      ${grim}/bin/grim -g "$(${slurp}/bin/slurp -w 0)" - | ${swappy}/bin/swappy -f -
-    '';
-    startupScript = with pkgs; writeShellScriptBin "hypr-startup" ''
-      # add startup apps here ...
-    '';
-    # bin tools:
-    volumectl = "${pkgs.avizo}/bin/volumectl";
-    lightctl = "${pkgs.avizo}/bin/lightctl";
-    wofi = "${pkgs.wofi}/bin/wofi";
-    wofi-toggle = with pkgs; writeShellScript "wofi-toggle" ''
-      pgrep wofi >/dev/null 2>&1 && pkill wofi || ${wofi} --show drun
-    '';
-    # color aliases:
-    color_inactive = "${config.colorScheme.palette.base00}";
-    color_up = "${config.colorScheme.palette.base0D}";
-    color_down = "${config.colorScheme.palette.base0E}";
-  in {
+{ config, pkgs, ... }: {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
     settings = {
       #! -- -- -- -- -- -- autostart -- -- -- -- -- -- #
-      exec-once = "${startupScript}/bin/hypr-startup";
+      exec-once = "${config.apps.scripts.hyprland.startup}";
       #! -- -- -- -- -- -- modifiers -- -- -- -- -- -- #
       "$mod" = "SUPER";
       #! -- -- -- --  -- -- apps -- -- -- -- -- -- --  #
-      "$terminal" = "${pkgs.wezterm}/bin/wezterm";
-      "$launcher" = "${wofi-toggle}";
-      "$browser" = "${pkgs.firefox}/bin/firefox";
-      # "$filebrowser" = "${pkgs.wezterm}/bin/wezterm -e ${pkgs.lf}/bin/lf";
-      "$filebrowser" = "${pkgs.nautilus}/bin/nautilus";
-      "$vscode" = "${pkgs.vscode}/bin/code";
-      "$screenshot" = "${hyprScreenshot}/bin/hypr-screenshot";
-      "$lockscreen" = "${pkgs.swaylock-effects}/bin/swaylock";
+      "$terminal" = "${config.apps.terminal}";
+      "$launcher" = "${config.apps.scripts.hyprland.launcher-toggle}";
+      "$browser" = "${config.apps.browser}";
+      "$filemanager" = "${config.apps.filemanager}";
+      "$visual-text-editor" = "${config.apps.visual-text-editor}";
+      "$screenshot" = "${config.apps.scripts.hyprland.screenshot}";
+      "$lockscreen" = "${config.apps.lockscreen}";
       #! -- -- -- --  -- -- environment -- -- -- -- -- #
       env = [
         "WLR_NO_HARDWARE_CURSORS,1"  # ? If your cursor becomes invisible
@@ -64,13 +44,13 @@
         "10,monitor:HDMI-A-1"
       ];
       #! -- -- -- --  -- -- general -- -- -- -- -- --  #
-      general = {
+      general = with config.colorScheme.palette; {
         border_size = 1;
         no_border_on_floating = false;
         gaps_in = 4;
         gaps_out = 8;
-        "col.inactive_border" = "rgba(${color_inactive}ff)";
-        "col.active_border" = "rgba(${color_up}ff) rgba(${color_down}ff) 60deg";
+        "col.inactive_border" = "rgba(${base00}ff)";
+        "col.active_border" = "rgba(${base0D}ff) rgba(${base0E}ff) 60deg";
         resize_on_border = true;
       };
       #! -- -- -- --  -- -- decoration -- -- -- -- --  #
@@ -138,7 +118,7 @@
         # "ignorezero,      swaync-notification-window"
       ];
       #! -- -- -- -- -- keybindings -- -- -- -- -- #
-      bind = [
+      bind = with config.apps.scripts.hyprland; [
           # ------------ #
           #  - GENERAL - #
           # ------------ #
@@ -173,8 +153,8 @@
           "$mod, RETURN, exec, $terminal"
           "$mod, m,      exec, $launcher"
           "$mod, b,      exec, $browser"
-          "$mod, f,      exec, $filebrowser"
-          "$mod, v,      exec, $vscode"
+          "$mod, f,      exec, $filemanager"
+          "$mod, v,      exec, $visual-text-editor"
           ",     Print,  exec, $screenshot"
           # --------------- #
           #  - WORKSPACES - #
@@ -186,12 +166,12 @@
           #  - HARDWARE -   #
           # --------------- #
           # sound and brightness managment
-          ",XF86MonBrightnessUp,   exec, ${lightctl} up"
-          ",XF86MonBrightnessDown, exec, ${lightctl} down"
-          ",XF86AudioRaiseVolume,  exec, ${volumectl} -u up"
-          ",XF86AudioLowerVolume,  exec, ${volumectl} -u down"
-          ",XF86AudioMute,         exec, ${volumectl} toggle-mute"
-          ",XF86AudioMicMute,      exec, ${volumectl} -m toggle-mute"
+          ",XF86MonBrightnessUp,   exec, ${brightness-up}"
+          ",XF86MonBrightnessDown, exec, ${brightness-down}"
+          ",XF86AudioRaiseVolume,  exec, ${volume-up}"
+          ",XF86AudioLowerVolume,  exec, ${volume-down}"
+          ",XF86AudioMute,         exec, ${volume-mute}"
+          ",XF86AudioMicMute,      exec, ${mic-mute}"
         ]
         ++ (
           # workspaces
