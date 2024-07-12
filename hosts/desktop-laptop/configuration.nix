@@ -6,7 +6,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   imports = [
     ../../modules/assets
     ../../modules/colors
@@ -67,7 +67,7 @@
   };
 
   sops = {
-    defaultHostSopsFile = ../../../secrets/hosts/desktop-laptop/secrets.yaml;
+    defaultHostSopsFile = ../../secrets/hosts/desktop-laptop/secrets.yaml;
     secrets = {
       stepan-password = {
         neededForUsers = true;
@@ -76,7 +76,7 @@
     };
   };
 
-  networking.hostName = lib.mkForce "workstation";
+  networking.hostName = lib.mkForce "laptop";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
