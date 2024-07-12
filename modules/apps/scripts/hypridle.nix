@@ -2,7 +2,7 @@
 # █▀█ ░█░ █▀▀ █▀▄ █ █▄▀ █▄▄ ██▄ ▄
 # -- -- -- -- -- -- -- -- - -- --
 
-{ pkgs, utils, ... }: with utils; rec {
+{ config, pkgs, utils, ... }: with utils; rec {
   send-notify = pkgs.writeShellScript "hypridle-send-notify.sh" ''
     print_msg() {
       printf "\n"
@@ -23,7 +23,7 @@
     }
 
     main() {
-      ${paplay} ${pkgs.extrapkgs.assets4nix}/share/sounds/alarm/answer-quickly.mp3
+      ${paplay} ${config.assets.sounds}/alarm/answer-quickly.mp3
       idle_msg
     }
 

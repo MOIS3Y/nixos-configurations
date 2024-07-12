@@ -25,8 +25,7 @@
   hyprctl = "${hyprland}/bin/hyprctl";
   hyprlock = "${getExe hyprlock}";
   # I
-  # TODO: move it to pkgs.extra.i3lock-run
-  i3lock-run = "${pkgs.extrapkgs.i3lock-run}/bin/i3lock-run";
+  i3lock-run = "${pkgs.extra.i3lock-run}/bin/i3lock-run";
   # K
   kitty = "${getExe kitty}";
   # L

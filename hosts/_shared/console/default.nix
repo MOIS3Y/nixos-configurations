@@ -8,24 +8,24 @@
     font = "${pkgs.terminus_font}/share/consolefonts/ter-k16n.psf.gz";  # RU
     packages = [ pkgs.terminus_font ];
     keyMap = "us";
-    colors = [
-      "${config.colorScheme.palette.base00}"
-      "${config.colorScheme.palette.base08}"
-      "${config.colorScheme.palette.base0B}"
-      "${config.colorScheme.palette.base09}"
-      "${config.colorScheme.palette.base0D}"
-      "${config.colorScheme.palette.base0E}"
-      "${config.colorScheme.palette.base0C}"
-      "${config.colorScheme.palette.base05}"
+    colors = with config.colorScheme.palette; [
+      "${base00}"
+      "${base08}"
+      "${base0B}"
+      "${base09}"
+      "${base0D}"
+      "${base0E}"
+      "${base0C}"
+      "${base05}"
 
-      "${config.colorScheme.palette.base03}"
-      "${config.colorScheme.palette.base08}"
-      "${config.colorScheme.palette.base0B}"
-      "${config.colorScheme.palette.base09}"
-      "${config.colorScheme.palette.base0D}"
-      "${config.colorScheme.palette.base0E}"
-      "${config.colorScheme.palette.base0C}"
-      "${config.colorScheme.palette.base05}"
+      "${base03}"
+      "${base08}"
+      "${base0B}"
+      "${base09}"
+      "${base0D}"
+      "${base0E}"
+      "${base0C}"
+      "${base05}"
     ];
   };
 }

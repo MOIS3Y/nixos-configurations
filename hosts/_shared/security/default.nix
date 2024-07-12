@@ -3,9 +3,7 @@
 # -- -- -- -- -- -- -- -- -- -- 
 
 { config, pkgs, ... }: {
-
-  imports = [
-    ./pam.nix
-    ./polkit.nix
-  ];
+  security.polkit = {
+    enable = true;
+  };
 }

@@ -6,35 +6,80 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
-
+{ config, pkgs, lib, ... }: {
   imports = [
     ../../modules/assets
     ../../modules/colors
+    ../../modules/grub
+
+    ../_shared/boot
+    ../_shared/console
+    ../_shared/desktop
+    ../_shared/environment
+    ../_shared/fonts
+    ../_shared/hardware
+    ../_shared/i18n
+    ../_shared/networking
+    ../_shared/nix
+    ../_shared/nixpkgs
+    ../_shared/programs
+    ../_shared/security
+    ../_shared/services
+    ../_shared/sops
+    ../_shared/sound
+    ../_shared/time
+    ../_shared/users
+    ../_shared/virtualisation
+    ../_shared/xdg
+
     ./hardware-configuration.nix  # msi-z390-a-pro
-    ./boot
-    ./console
-    ./environment
-    ./fonts
-    ./gnome
-    ./hardware
-    ./i18n
-    ./networking
-    ./nix
-    ./nixpkgs
-    ./programs
-    ./services
-    ./security
-    ./sops
-    ./sound
-    ./systemd
-    ./users
-    ./virtualisation
-    ./xdg
   ];
 
-  # Set your time zone.
-  time.timeZone = "Asia/Chita";
+  host = {
+    boot = {
+      grubTheme = "msi";
+    };
+    hardware = {
+      cpu = "intel";
+      gpu = true;
+      updateMicrocode = true;
+      ddcci = true;
+      openRGB = false;
+    };
+    virtualisation = {
+      docker = {
+        enable = true;
+        startWhenNeeded = true;
+      };
+      libvirtd = {
+        enable = true;
+        startWhenNeeded = true;
+      };
+    };
+  };
+
+  desktop = {
+    xorg.enable = false;
+    wayland.enable = true;
+    games = {
+      enable = true;
+      externalStorage = {
+        enable = true;
+      };
+    };
+  };
+
+  sops = {
+    defaultHostSopsFile = ../../secrets/hosts/desktop-workstation/secrets.yaml;
+    secrets = {
+      stepan-password = {
+        neededForUsers = true;
+      };
+      # add more secrets here ...
+    };
+  };
+
+  networking.hostName = lib.mkForce "workstation";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

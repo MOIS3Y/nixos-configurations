@@ -6,7 +6,7 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
   ];
-  options = {
+  options.sops = {
     defaultHostSopsFile = lib.mkOption {
       type = lib.types.path;
       example = secrets/secrets.yaml;
@@ -15,7 +15,7 @@
   };
   config = {
     sops = {
-      defaultSopsFile = config.defaultHostSopsFile;
+      defaultSopsFile = config.sops.defaultHostSopsFile;
     };
   };
 }

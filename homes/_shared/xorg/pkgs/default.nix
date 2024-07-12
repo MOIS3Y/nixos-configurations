@@ -8,7 +8,7 @@
     flameshot
     xkb-switch
     # Extra-pkgs:
-    extrapkgs.i3lock-run
-    extrapkgs.xidlehook-caffeine
+    extra.i3lock-run
+    extra.xidlehook-caffeine
   ];
 }

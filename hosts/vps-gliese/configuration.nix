@@ -7,29 +7,100 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }: {
-
   imports = [
     ../../modules/colors
-    ./hardware-configuration.nix  # default vps
-    ./boot
-    ./console
-    ./environment
-    ./i18n
-    ./networking
-    ./nix
-    ./nixpkgs
-    ./programs
-    ./services
-    ./sops
-    ./users
-    ./virtualisation
+    ../../modules/grub
+  
+    ../_shared/console
+    ../_shared/environment
+    ../_shared/hardware
+    ../_shared/i18n
+    ../_shared/nix
+    ../_shared/nixpkgs
+    ../_shared/programs
+    ../_shared/services
+    ../_shared/sops
+    ../_shared/time
+    ../_shared/users
+    ../_shared/virtualisation
+
+    ./hardware-configuration.nix # virtual
   ];
 
-  # Set colorScheme
-  colorSchemeName = "catppuccin_mocha";
+  host = {
+    boot = {
+      grubTheme = "nixos";
+    };
+    hardware = {
+      updateMicrocode = false;
+      bluetooth = false;
+      graphics = false;
+    };
+    virtualisation = {
+      docker = {
+        enable = true;
+        oci-containers = [ "portainer-agent" ];
+      };
+    };
+    users = [ "admserv" ];
+  };
 
-  # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
+  boot.loader.grub = {
+    device = "/dev/vda";
+    configurationLimit = 7;
+  };
+
+  environment.systemPackages = with pkgs; lib.mkForce [
+    bottom
+    curl
+    dnsutils
+    git
+    htop
+    ncdu
+    neovim
+    nitch 
+    wget  
+  ];
+
+  networking = {
+    hostName = "gliese";
+    interfaces = {
+      ens3.ipv4.addresses = [{
+        address = "89.110.70.126";
+        prefixLength = 24;
+      }];
+    };
+    defaultGateway = "89.110.70.1";
+    nameservers = [ "8.8.8.8" "1.1.1.1" ];
+    firewall = { 
+      enable = false;
+    };
+  };
+
+  nix.settings.trusted-users = lib.mkForce [ "admserv" ];
+  nixpkgs.overlays = lib.mkForce [];
+
+  services.fstrim.enable = lib.mkForce false;
+  services.openssh.banner = ''
+    █▀▀ █░░ █ █▀▀ █▀ █▀▀
+    █▄█ █▄▄ █ ██▄ ▄█ ██▄
+  '';
+
+  sops = {
+    defaultHostSopsFile = ../../secrets/hosts/vps-gliese/secrets.yaml;
+    secrets = {
+      admserv-password = {
+        neededForUsers = true;
+      };
+      # add more secrets here ...
+    };
+  };
+
+  users.users.admserv.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGtpBAY/JGXUQ8tGhgxvPoffWcK9jNY/B/YmasmN6Ykv gliese.zhukovsky.me"
+  ];
+
+  time.timeZone = lib.mkForce "Europe/Amsterdam";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

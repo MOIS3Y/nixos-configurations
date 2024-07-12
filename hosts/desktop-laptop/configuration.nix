@@ -7,36 +7,76 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }: {
-
   imports = [
+    ../../modules/assets
     ../../modules/colors
+    ../../modules/grub
+
+    ../_shared/boot
+    ../_shared/console
+    ../_shared/desktop
+    ../_shared/environment
+    ../_shared/fonts
+    ../_shared/hardware
+    ../_shared/i18n
+    ../_shared/networking
+    ../_shared/nix
+    ../_shared/nixpkgs
+    ../_shared/programs
+    ../_shared/security
+    ../_shared/services
+    ../_shared/sops
+    ../_shared/sound
+    ../_shared/time
+    ../_shared/users
+    ../_shared/virtualisation
+    ../_shared/xdg
+
     ./hardware-configuration.nix  # honor-vlr-w09
-    ./boot
-    ./console
-    ./environment
-    ./fonts
-    ./gnome
-    ./hardware
-    ./i18n
-    ./networking
-    ./nix
-    ./nixpkgs
-    ./programs
-    ./security
-    ./services
-    ./sound
-    ./sops
-    ./systemd
-    ./users
-    ./virtualisation
-    ./xdg
   ];
 
-  # Set colorScheme
-  colorSchemeName = "catppuccin_mocha";
+  host = {
+    boot = {
+      grubTheme = "huawei";
+    };
+    hardware = {
+      cpu = "intel";
+      updateMicrocode = true;
+    };
+    virtualisation = {
+      docker = {
+        enable = true;
+        startWhenNeeded = true;
+      };
+      libvirtd = {
+        enable = true;
+        startWhenNeeded = true;
+      };
+    };
+  };
 
-  # Set your time zone.
-  time.timeZone = "Asia/Chita";
+  desktop = {
+    xorg.enable = false;
+    wayland.enable = true;
+    games = {
+      enable = true;
+      externalStorage = {
+        enable = false;
+      };
+    };
+  };
+
+  sops = {
+    defaultHostSopsFile = ../../../secrets/hosts/desktop-laptop/secrets.yaml;
+    secrets = {
+      stepan-password = {
+        neededForUsers = true;
+      };
+      # add more secrets here ...
+    };
+  };
+
+  networking.hostName = lib.mkForce "workstation";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

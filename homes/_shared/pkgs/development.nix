@@ -15,6 +15,6 @@
     vault 
     vscode
     # Extra-pkgs:
-    extrapkgs.aladdin4nix
+    extra.aladdin4nix
   ];
 }

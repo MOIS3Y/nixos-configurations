@@ -6,30 +6,96 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
-
+{ config, pkgs, lib, ... }: {
   imports = [
     ../../modules/colors
-    ./hardware-configuration.nix  # vps-allsave
-    ./boot
-    ./console
-    ./environment
-    ./i18n
-    ./networking
-    ./nix
-    ./nixpkgs
-    ./programs
-    ./services
-    ./sops
-    ./users
-    ./virtualisation
+    ../../modules/grub
+
+    ../_shared/console
+    ../_shared/environment
+    ../_shared/fonts
+    ../_shared/hardware
+    ../_shared/i18n
+    ../_shared/nix
+    ../_shared/nixpkgs
+    ../_shared/programs
+    ../_shared/services
+    ../_shared/sops
+    ../_shared/time
+    ../_shared/users
+    ../_shared/virtualisation
+
+    ./hardware-configuration.nix
   ];
 
-  # Set colorScheme
-  colorSchemeName = "catppuccin_mocha";
+  host = {
+    boot = {
+      grubTheme = "gigabyte";
+    };
+    hardware = {
+      cpu = "amd";
+      updateMicrocode = true;
+      bluetooth = false;
+      graphics = false;
+    };
+    virtualisation = {
+      docker = {
+        enable = true;
+      };
+      libvirtd = {
+        enable = false;  # TODO: enable after configure storage
+      };
+    };
+    users = [ "admserv" ];
+  };
 
-  # Set your time zone.
-  time.timeZone = "Asia/Chita";
+  boot = {
+    loader.grub = {
+      device = "/dev/disk/by-id/ata-HP_SSD_S650_120GB_HASA12100101184";
+      configurationLimit = 7;
+    };
+    swraid = {
+      enable = true;
+      mdadmConf = ''
+        ARRAY /dev/md0 level=raid1 num-devices=2 metadata=0.90 UUID=8bb2622a:203030e8:ac926b66:e55a92b1
+        ARRAY /dev/md1 level=raid1 num-devices=2 metadata=1.2 name=allsave:1 UUID=1408f414:46bd022f:a3be13b0:c1560046
+        ARRAY /dev/md2 level=raid1 num-devices=2 metadata=1.2 name=allsave:2 UUID=4db185fa:54cf0828:89ed0f44:1b63382a
+        ARRAY /dev/md3 level=raid1 num-devices=2 metadata=1.2 name=allsave:3 UUID=14c9d6da:2e618286:df380868:d8d07f27
+      '';
+    };
+  };
+
+  networking = {
+    hostName = "allsave";
+    networkmanager = {
+      enable = true;
+      appendNameservers = [ "8.8.8.8" ];
+    };
+    firewall = { 
+      enable = false;
+    };
+  };
+
+  nix.settings.trusted-users = lib.mkForce [ "admserv" ];
+
+  services.openssh.banner = ''
+    ▄▀█ █░░ █░░ █▀ ▄▀█ █░█ █▀▀
+    █▀█ █▄▄ █▄▄ ▄█ █▀█ ▀▄▀ ██▄
+  '';
+
+  sops = {
+    defaultHostSopsFile = ../../secrets/hosts/vps-allsave/secrets.yaml;
+    secrets = {
+      admserv-password = {
+        neededForUsers = true;
+      };
+      # add more secrets here ...
+    };
+  };
+
+  users.users.admserv.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIN8ntFxD/6St6f8I9U+W+uqw9tQZQk6nxSBkaYpB5QN home server"
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

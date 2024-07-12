@@ -6,30 +6,115 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
-
+{ config, pkgs, lib, ... }: {
   imports = [
     ../../modules/colors
-    ./hardware-configuration.nix  # default vps
-    ./boot
-    ./console
-    ./environment
-    ./i18n
-    ./networking
-    ./nix
-    ./nixpkgs
-    ./programs
-    ./services
-    ./sops
-    ./users
-    ./virtualisation
+    ../../modules/grub
+
+    ../_shared/console
+    ../_shared/environment
+    ../_shared/fonts
+    ../_shared/hardware
+    ../_shared/i18n
+    ../_shared/nix
+    ../_shared/nixpkgs
+    ../_shared/programs
+    ../_shared/services
+    ../_shared/sops
+    ../_shared/time
+    ../_shared/users
+    ../_shared/virtualisation
+
+    ./hardware-configuration.nix # virtual
   ];
 
-  # Set colorScheme
-  colorSchemeName = "catppuccin_mocha";
+  host = {
+    boot = {
+      grubTheme = "nixos";
+    };
+    hardware = {
+      updateMicrocode = false;
+      bluetooth = false;
+      graphics = false;
+    };
+    virtualisation = {
+      docker = {
+        enable = true;
+        oci-containers = [ "portainer-agent" ];
+      };
+    };
+    users = [ "admserv" ];
+  };
 
-  # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
+  boot.loader.grub = {
+    device = "/dev/vda";
+    configurationLimit = 7;
+  };
+
+  environment.systemPackages = with pkgs; lib.mkForce [
+    age
+    bottom
+    curl
+    dnsutils
+    docker-compose
+    nitch
+    git
+    htop
+    jq
+    neovim
+    ncdu
+    nitch
+    rsync
+    sops
+    ssh-to-age
+    tree
+    unzip
+    wget
+  ];
+
+  networking = {
+    hostName = "solar";
+    interfaces = {
+      ens3.ipv4.addresses = [{
+        address = "89.110.68.134";
+        prefixLength = 24;
+      }];
+    };
+    defaultGateway = "89.110.68.1";
+    nameservers = [ "8.8.8.8" "1.1.1.1" ];
+    firewall = { 
+      enable = false;
+    };
+  };
+
+  nix.settings.trusted-users = lib.mkForce [ "admserv" ];
+  nixpkgs.overlays = lib.mkForce [];
+
+  services.fstrim.enable = lib.mkForce false;
+  services.openssh.listenAddresses = lib.mkForce [{
+    addr = "0.0.0.0";
+    port = 2222;
+  }];
+  services.openssh.banner = ''
+    █▀ █▀█ █░░ ▄▀█ █▀█
+    ▄█ █▄█ █▄▄ █▀█ █▀▄
+  '';
+
+  sops = {
+    defaultHostSopsFile = ../../secrets/hosts/vps-solar/secrets.yaml;
+    secrets = {
+      admserv-password = {
+        neededForUsers = true;
+      };
+      # add more secrets here ...
+    };
+  };
+
+  users.users.admserv.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM2uRkkbZ7Z9Zc0WHIZCBRBU8EylvBHoR7lB6sldtJp8 stepan@zhukovsky.me"
+  ];
+
+  time.timeZone = lib.mkForce "Europe/Amsterdam";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
