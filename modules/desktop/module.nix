@@ -7,10 +7,16 @@
 in {
   options.desktop = with lib; {
     wayland = {
-      enable = mkEnableOption "Enable wayland environment";
+      enable = mkEnableOption "Enable wayland setup";
     };
     xorg = {
-      enable = mkEnableOption "Enable x11 environment";
+      enable = mkEnableOption "Enable x11 setup";
+    };
+    laptop = {
+      enable = mkEnableOption "Enable laptop setup";
+    };
+    games = {
+      enable = mkEnableOption "Enable games setup";
     };
   };
   config = {};
