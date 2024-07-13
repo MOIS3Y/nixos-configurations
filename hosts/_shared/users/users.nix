@@ -9,13 +9,10 @@
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "input" "i2c" ];
     hashedPasswordFile = config.sops.secrets.stepan-password.path;
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      firefox
-      libnotify
-      pavucontrol
-      virt-manager
-      xdg-utils
-    ];
+    packages = with pkgs; [] ++ ( if config.host.virtualisation.libvirtd.enable
+      then [ virt-manager ]
+      else []
+    );
   };
   admserv = {
     isNormalUser = true;

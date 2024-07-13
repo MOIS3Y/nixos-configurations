@@ -42,6 +42,14 @@
       tty-clock
       wget
       unzip
-    ];
+    ] ++ (if config.desktop.enable
+      then [
+        firefox
+        libnotify
+        pavucontrol
+        xdg-utils
+      ] 
+      else []
+    );
   };
 }
