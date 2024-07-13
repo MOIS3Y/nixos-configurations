@@ -10,6 +10,7 @@
   imports = [
     ../../modules/assets
     ../../modules/colors
+    ../../modules/desktop
     ../../modules/grub
 
     ../_shared/boot
@@ -34,7 +35,7 @@
 
     ./hardware-configuration.nix  # honor-vlr-w09
   ];
-
+  # Override _shared configuration:
   host = {
     boot = {
       grubTheme = "huawei";
@@ -56,8 +57,6 @@
   };
 
   desktop = {
-    xorg.enable = false;
-    wayland.enable = true;
     games = {
       enable = true;
       externalStorage = {
