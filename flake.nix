@@ -74,7 +74,7 @@
               inherit extraSpecialArgs;
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.stepan = import ./homes/stepan_laptop/home.nix;
+              users.stepan = import ./homes/stepan/home.nix;
             };
           }
         ];
@@ -88,7 +88,7 @@
               inherit extraSpecialArgs;
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.stepan = import ./homes/stepan_workstation/home.nix;
+              users.stepan = import ./homes/stepan/home.nix;
             };
           }
         ];
@@ -102,7 +102,7 @@
               inherit extraSpecialArgs;
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.admserv = import ./homes/admserv_solar/home.nix;
+              users.admserv = import ./homes/admserv/home.nix;
             };
           }
         ];
@@ -116,7 +116,7 @@
               inherit extraSpecialArgs;
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.admserv = import ./homes/admserv_gliese/home.nix;
+              users.admserv = import ./homes/admserv/home.nix;
             };
           }
         ];
@@ -130,7 +130,7 @@
               inherit extraSpecialArgs;
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.admserv = import ./homes/admserv_allsave/home.nix;
+              users.admserv = import ./homes/admserv/home.nix;
             };
           }
         ];
