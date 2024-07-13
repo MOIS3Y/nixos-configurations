@@ -25,12 +25,26 @@ in {
             attrs
             (attrsOf valueType)
           ]) // {
-            description = "";
+            description = "Attrs with preconfigured scripts";
           };
         in valueType;
       default = scripts;
-      description = ''
-      '';
+      description = "Preconfigured scripts";
+    };
+    utils = mkOption {
+      type = with types;
+        let
+          valueType = nullOr (oneOf [
+            str
+            path
+            attrs
+            (attrsOf valueType)
+          ]) // {
+            description = "Attrs with preconfigured utils";
+          };
+        in valueType;
+      default = utils;
+      description = "Preconfigured utils";
     };
     terminal = mkOption {
       type = with types; oneOf [
