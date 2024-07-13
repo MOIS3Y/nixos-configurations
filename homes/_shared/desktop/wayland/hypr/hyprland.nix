@@ -13,6 +13,7 @@
       "$mod" = "SUPER";
       #! -- -- -- --  -- -- apps -- -- -- -- -- -- --  #
       "$terminal" = "${config.apps.terminal}";
+      "$spare-terminal" = "${config.apps.spare-terminal}";
       "$launcher" = "${config.apps.scripts.hyprland.launcher-toggle}";
       "$browser" = "${config.apps.browser}";
       "$filemanager" = "${config.apps.filemanager}";
@@ -86,7 +87,7 @@
       #! -- -- -- --  -- -- misc -- -- -- -- -- -- - #
       misc = {
         disable_hyprland_logo = true;
-        swallow_regex = "^(org.wezfurlong.wezterm)$";
+        swallow_regex = "^(Alacritty|kitty|org.wezfurlong.wezterm)$";
         vrr = 1;
         
       };
@@ -151,6 +152,7 @@
           #  - APPS -  #
           # ---------- # 
           "$mod, RETURN, exec, $terminal"
+          "$mod, t,      exec, $spare-terminal"
           "$mod, m,      exec, $launcher"
           "$mod, b,      exec, $browser"
           "$mod, f,      exec, $filemanager"

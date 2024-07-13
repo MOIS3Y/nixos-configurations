@@ -6,7 +6,8 @@
   utils = pkgs.callPackage ./utils { };
   scripts = pkgs.callPackage ./scripts { inherit config utils; };
   apps = with utils; {
-    terminal = wezterm;
+    terminal = kitty;
+    spare-terminal = wezterm;
     browser =  firefox;
     launcher = wofi;
     lockscreen = hyprlock;
@@ -32,6 +33,14 @@ in {
       '';
     };
     terminal = mkOption {
+      type = with types; oneOf [
+        str
+        path
+      ];
+      default = apps.terminal;
+      description = "default terminal";
+    };
+    spare-terminal = mkOption {
       type = with types; oneOf [
         str
         path
