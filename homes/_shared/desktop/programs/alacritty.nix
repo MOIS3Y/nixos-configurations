@@ -21,7 +21,7 @@
       window = {
         padding.x = 25;
         padding.y = 25;
-        opacity = 0.6;
+        opacity = 0.8;
         title = "Alacritty";
         dynamic_title = true;
       };
