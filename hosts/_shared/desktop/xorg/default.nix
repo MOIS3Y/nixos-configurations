@@ -77,5 +77,7 @@ in {
         };
       };
     };
+    # ? needed for awesomeWM sound scripts (pactl)
+    environment.systemPackages = [ pulseaudio ]; 
   };
 }

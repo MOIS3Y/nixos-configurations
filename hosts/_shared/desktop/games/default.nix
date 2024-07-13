@@ -7,7 +7,6 @@
   extraPackages = [];
 in {
   options.desktop.games = with lib; {
-    enable = mkEnableOption "Enable games setup";
     xpadneo = mkOption {
       type = types.bool;
       default = true;
