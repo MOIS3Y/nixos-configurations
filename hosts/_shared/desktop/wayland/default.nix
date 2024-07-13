@@ -2,19 +2,12 @@
 # ▀▄▀▄▀ █▀█ ░█░ █▄▄ █▀█ █░▀█ █▄▀ ▄
 # -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, lib, ... }: let
-  cfg = config.desktop.wayland;
-in {
-  options.desktop.wayland = with lib; {
-    enable = mkEnableOption "Enable wayland environment";
+{ config, pkgs, lib, ... }: lib.mkIf config.desktop.wayland.enable {
+  programs.hyprland = {
+    enable = true;  
   };
-  config = with pkgs; with lib; mkIf cfg.enable {
-    programs.hyprland = {
-      enable = true;  
-    };
-    security.pam.services = {
-      swaylock = {};  # ! require for swaylock
-      hyprlock = {};  # ! require for hyprlock
-    };
+  security.pam.services = {
+    swaylock = {};  # ! require for swaylock
+    hyprlock = {};  # ! require for hyprlock
   };
 }

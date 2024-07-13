@@ -10,6 +10,7 @@
   imports = [
     ../../modules/assets
     ../../modules/colors
+    ../../modules/desktop
     ../../modules/grub
 
     ../_shared/boot
@@ -34,7 +35,7 @@
 
     ./hardware-configuration.nix  # msi-z390-a-pro
   ];
-
+  # Override _shared configuration:
   host = {
     boot = {
       grubTheme = "msi";
@@ -59,8 +60,6 @@
   };
 
   desktop = {
-    xorg.enable = false;
-    wayland.enable = true;
     games = {
       enable = true;
       externalStorage = {

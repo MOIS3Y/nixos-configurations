@@ -22,7 +22,6 @@
   };
 in {
   options.desktop.xorg = with lib; {
-    enable = mkEnableOption "Enable X11 environment";
     touchpad = mkEnableOption "Enable touchpad support services";
     windowManager = mkOption {
       type = with types; listOf (enum [ "awesome" "qtile" ]);

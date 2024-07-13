@@ -4,12 +4,12 @@
 
 { config, pkgs, ... }: {
   imports = [
-    ./dm
-    ./fixes
-    ./games
-    ./gnome
-    ./laptop
-    ./wayland
-    ./xorg
+    ./module.nix
   ];
+
+  # ? current desktop config for all devices:
+  desktop = {
+    xorg.enable = false;
+    wayland.enable = true;
+  };
 }
