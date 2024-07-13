@@ -16,7 +16,7 @@
     ];
     systemPackages = with pkgs; [
       age
-      # appimage-run
+      appimage-run
       bottom
       cmatrix
       curl
@@ -25,7 +25,6 @@
       git
       htop
       jq
-      # imv
       lm_sensors
       ncdu
       # ! neofetch breaks the build since Jul 10 2024
@@ -35,8 +34,6 @@
       nitch
       nmap
       ntfs3g
-      # (lua.withPackages(ps: with ps; [ luarocks ]))
-      # (python3.withPackages(ps: with ps; [ pip ]))
       rsync
       ripgrep
       sops
