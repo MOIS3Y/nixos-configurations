@@ -18,7 +18,7 @@
     khal.enable = mkForce false;
     lf.enable = mkForce false;
     nvchad.enable = mkForce false;
-    ssh.enable = mkForce = false;
+    ssh.enable = mkForce false;
   };
 
   # Let Home Manager install and manage itself.
