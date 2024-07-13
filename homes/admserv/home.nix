@@ -14,15 +14,15 @@
   };
 
   programs = with lib; {
+    # Let Home Manager install and manage itself.
+    home-manager.enable = true;
+    # Disable apps:
     helix.enable = mkForce false;
     khal.enable = mkForce false;
     lf.enable = mkForce false;
     nvchad.enable = mkForce false;
     ssh.enable = mkForce false;
   };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
