@@ -2,7 +2,20 @@
 # █░█ █▀█ █▀█ █▄▄ ▄
 # -- -- -- -- -- --
 
-{ config, pkgs, ... }: {
+# ! I don't use it now because it lacks functionality.
+# ! I don’t import the module; it needs refactoring and splitting.
+# ! The configuration is working, its use in its current form will affect other users
+
+# ! Current calendar gnome-calendar
+
+{ config, pkgs, ... }: let
+  googleCalendarFetchId = pkgs.writeShellScript "khal-gcfid.sh" ''
+    ${cat} ${config.sops.secrets."google-calendar/fetch-id".path}
+  '';
+  googleCalendarFetchSecret = pkgs.writeShellScript "khal-gcfs.sh" ''
+    ${cat} ${config.sops.secrets."google-calendar/fetch-secret".path}
+  '';
+in {
   accounts.calendar = {
     basePath = "${config.xdg.dataHome}/calendars";
     accounts = {
@@ -23,7 +36,7 @@
         remote = {
           type = "google_calendar";
         };
-        vdirsyncer = with config.desktop.scripts.khal; {
+        vdirsyncer = {
           enable = true;
           tokenFile = "${config.xdg.dataHome}/calendars/google_token_file";
           collections = [ "from a" "from b" ];

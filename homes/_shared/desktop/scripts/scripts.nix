@@ -4,7 +4,6 @@
 
 { config, pkgs, ... }: with pkgs; {
   # common:
-  khal = callPackage ./khal.nix { inherit config; };
   lf = callPackage ./lf.nix { inherit config; };
   # wayland:
   hypridle = callPackage ./hypridle.nix { inherit config; };
