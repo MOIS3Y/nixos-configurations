@@ -2,7 +2,7 @@
 # █▀█ ░█░ █▀▀ █▀▄ █ █▄▀ █▄▄ ██▄ ▄
 # -- -- -- -- -- -- -- -- - -- --
 
-{ config, pkgs, utils, ... }: with utils; rec {
+{ config, pkgs, ... }: with config.desktop.utils; rec {
   send-notify = pkgs.writeShellScript "hypridle-send-notify.sh" ''
     print_msg() {
       printf "\n"

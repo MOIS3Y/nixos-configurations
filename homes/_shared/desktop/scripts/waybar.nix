@@ -2,7 +2,7 @@
 # ▀▄▀▄▀ █▀█ ░█░ █▄█ █▀█ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, utils, ... }: with utils; {
+{ config, pkgs, ... }: with config.desktop.utils; {
   launcher-toggle = pkgs.writeShellScript "waybar-launcher-toggle.sh" ''
     # TODO: automatic launcher detection
     ${pgrep} wofi >/dev/null 2>&1 && ${pkill} wofi || ${wofi} --show drun

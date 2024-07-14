@@ -3,7 +3,7 @@
 # -- -- -- -- -- -- -- -- -- -- -
 
 { config, pkgs, lib, ... }: lib.mkIf config.desktop.wayland.enable {
-  programs.wlogout = with config.apps.scripts.wlogout; {
+  programs.wlogout = with config.desktop.scripts.wlogout; {
     enable = true;
     layout = [
       {

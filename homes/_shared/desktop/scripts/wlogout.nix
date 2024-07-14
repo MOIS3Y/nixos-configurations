@@ -2,7 +2,7 @@
 # ▀▄▀▄▀ █▄▄ █▄█ █▄█ █▄█ █▄█ ░█░ ▄
 # -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, utils, ...}: with utils; {
+{ config, pkgs, ... }: with config.desktop.utils; {
   lock = "${sleep} 0.5; ${hyprlock}";
   hibernate = "${sleep} 1; ${systemctl} hibernate";
   logout = "${sleep} 1; ${wayland-logout}";

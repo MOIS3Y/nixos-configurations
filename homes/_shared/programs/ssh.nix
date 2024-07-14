@@ -3,9 +3,6 @@
 # -- -- -- --
 
 { config, pkgs, ... }: {
-  home.file."${config.home.homeDirectory}/.local/bin/cert-ssh" = {
-    source = "${config.apps.scripts.ssh.cert-ssh}";
-  };
   programs.ssh = {
     enable = true;
     extraOptionOverrides = {

@@ -8,18 +8,18 @@
     xwayland.enable = true;
     settings = {
       #! -- -- -- -- -- -- autostart -- -- -- -- -- -- #
-      exec-once = "${config.apps.scripts.hyprland.startup}";
+      exec-once = "${config.desktop.scripts.hyprland.startup}";
       #! -- -- -- -- -- -- modifiers -- -- -- -- -- -- #
       "$mod" = "SUPER";
       #! -- -- -- --  -- -- apps -- -- -- -- -- -- --  #
-      "$terminal" = "${config.apps.terminal}";
-      "$spare-terminal" = "${config.apps.spare-terminal}";
-      "$launcher" = "${config.apps.scripts.hyprland.launcher-toggle}";
-      "$browser" = "${config.apps.browser}";
-      "$filemanager" = "${config.apps.filemanager}";
-      "$visual-text-editor" = "${config.apps.visual-text-editor}";
-      "$screenshot" = "${config.apps.scripts.hyprland.screenshot}";
-      "$lockscreen" = "${config.apps.lockscreen}";
+      "$terminal" = "${config.desktop.apps.terminal}";
+      "$spare-terminal" = "${config.desktop.apps.spare-terminal}";
+      "$launcher" = "${config.desktop.scripts.hyprland.launcher-toggle}";
+      "$browser" = "${config.desktop.apps.browser}";
+      "$filemanager" = "${config.desktop.apps.filemanager}";
+      "$visual-text-editor" = "${config.desktop.apps.visual-text-editor}";
+      "$screenshot" = "${config.desktop.scripts.hyprland.screenshot}";
+      "$lockscreen" = "${config.desktop.apps.lockscreen}";
       #! -- -- -- --  -- -- environment -- -- -- -- -- #
       env = [
         "WLR_NO_HARDWARE_CURSORS,1"  # ? If your cursor becomes invisible
@@ -119,7 +119,7 @@
         # "ignorezero,      swaync-notification-window"
       ];
       #! -- -- -- -- -- keybindings -- -- -- -- -- #
-      bind = with config.apps.scripts.hyprland; [
+      bind = with config.desktop.scripts.hyprland; [
           # ------------ #
           #  - GENERAL - #
           # ------------ #

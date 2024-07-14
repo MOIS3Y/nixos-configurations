@@ -10,7 +10,7 @@
       PartOf = [ "graphical-session.target" ];
     };
     Install = { WantedBy = [ "graphical-session.target" ]; };
-    Service = with config.apps.scripts.xss-lock; {
+    Service = with config.desktop.scripts.xss-lock; {
       ExecStart = "${lock}";
       ExecStartPre = "${dpms-off}";
       Restart = "always";

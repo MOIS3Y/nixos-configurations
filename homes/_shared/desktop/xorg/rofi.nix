@@ -9,7 +9,7 @@
       rofi-calc
       rofi-emoji
     ];
-    terminal = "${config.apps.terminal}";
+    terminal = "${config.desktop.apps.terminal}";
     location = "center";
     theme = let 
       inherit (config.lib.formats.rasi) mkLiteral; 

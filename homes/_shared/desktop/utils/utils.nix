@@ -2,7 +2,7 @@
 # █▄█ ░█░ █ █▄▄ ▄█ ▄
 # -- -- -- -- -- -- 
 
-{ pkgs, ... }: with pkgs; with pkgs.lib; {
+{ pkgs, lib, ... }: with pkgs; with lib; {
   # A
   awk = "${gawk}/bin/awk";
   # B

@@ -23,7 +23,7 @@
         remote = {
           type = "google_calendar";
         };
-        vdirsyncer = with config.apps.scripts.khal; {
+        vdirsyncer = with config.desktop.scripts.khal; {
           enable = true;
           tokenFile = "${config.xdg.dataHome}/calendars/google_token_file";
           collections = [ "from a" "from b" ];

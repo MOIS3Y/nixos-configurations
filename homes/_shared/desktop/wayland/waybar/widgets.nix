@@ -2,7 +2,7 @@
 # ▀▄▀▄▀ █ █▄▀ █▄█ ██▄ ░█░ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }: with config.apps.scripts.waybar; {
+{ config, pkgs, lib, ... }: with config.desktop.scripts.waybar; {
   "hyprland/workspaces" = {
     window-rewrite = {};  # ? fix [warning] Waybar/discussions/2816
     format = "{icon}";
@@ -41,12 +41,12 @@
   };
   "custom/filemanager" = {
     tooltip = false;
-    on-click = "${config.apps.filemanager}";
+    on-click = "${config.desktop.apps.filemanager}";
     format = "󱂵  Files";
   };
   "custom/browser" = {
     tooltip = false;
-    on-click = "${config.apps.browser}";
+    on-click = "${config.desktop.apps.browser}";
     format = "󰈹  Browser";
   };
   "custom/calc" = {
@@ -56,7 +56,7 @@
   };
   "custom/terminal" = {
     tooltip = false;
-    on-click = "${config.apps.terminal}";
+    on-click = "${config.desktop.apps.terminal}";
     format = "  Terminal";
   };
   "custom/swallow" = {

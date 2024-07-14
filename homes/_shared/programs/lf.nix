@@ -17,7 +17,7 @@ in {
       icons = true;
       ignorecase = true;
     };
-    commands = with config.apps.scripts.lf; {
+    commands = with config.desktop.scripts.lf; {
       inherit
       dragon-out
       editor-open
@@ -30,7 +30,7 @@ in {
       "<enter>" = "open";
       # ... add more keybindings here:
     };
-    extraConfig = with config.apps.scripts.lf; ''
+    extraConfig = with config.desktop.scripts.lf; ''
       set cleaner ${cleaner}
       set previewer ${previewer}
       setlocal ${config.xdg.userDirs.pictures}/isp sortby 'time' 

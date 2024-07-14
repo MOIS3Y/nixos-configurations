@@ -3,7 +3,7 @@
 # -- -- -- -- -- -- -- -- - -- --
 
 { config, pkgs, lib, ... }: lib.mkIf config.desktop.wayland.enable {
-  services.hypridle = with config.apps.scripts.hypridle; {
+  services.hypridle = with config.desktop.scripts.hypridle; {
     enable = true;
     package = pkgs.hypridle;
     settings = {

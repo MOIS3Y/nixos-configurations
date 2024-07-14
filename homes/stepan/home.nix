@@ -4,10 +4,9 @@
 
 { config, pkgs, ... }: {
   imports = [
-    ../../modules/apps
     ../../modules/assets
-    ../../modules/desktop
     ../../modules/colors
+    ../../modules/desktop
     
     ../_shared/desktop
     ../_shared/programs
@@ -22,6 +21,18 @@
   sops = {
     defaultUserSopsFile = ../../secrets/homes/stepan/secrets.yaml;
     sharedSecrets = "stepan";  # ? override default secrets option
+  };
+
+  desktop = {
+    apps = with config.desktop.utils; {
+      terminal = kitty;
+      spare-terminal = wezterm;
+      browser = firefox;
+      filemanager = nautilus;
+      launcher = wofi;
+      lockscreen = hyprlock;
+      visual-text-editor = vscode;
+    };
   };
 
   # Let Home Manager install and manage itself.

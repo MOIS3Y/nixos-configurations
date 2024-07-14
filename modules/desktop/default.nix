@@ -9,7 +9,7 @@
 
   # ? current desktop config for all desktop devices:
   desktop = {
-    xorg.enable = false;
+    xorg.enable = true;
     wayland.enable = true;
   };
 }

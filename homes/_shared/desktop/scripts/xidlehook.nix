@@ -2,7 +2,7 @@
 # █░█ █ █▄▀ █▄▄ ██▄ █▀█ █▄█ █▄█ █░█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, utils, ... }: with utils; {
+{ config, pkgs, ... }: with config.desktop.utils; {
   primary-display = "${xrandr} | ${awk} '/ primary/{print $1}'";
   notify = ''
     ${dunstify} \

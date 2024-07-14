@@ -2,7 +2,7 @@
 # █▄▀ █▄█ █░▀█ ▄█ ░█░ ▄
 # -- -- -- -- -- -- -- 
 
-{ pkgs, utils, ...}: with utils; {
+{ config, pkgs, ... }: with config.desktop.utils; {
   dunst-volume = pkgs.writeShellScriptBin "dunst-volume.sh" ''
     ${pamixer} "$@"
     volume="$(${pamixer} --get-volume-human)"

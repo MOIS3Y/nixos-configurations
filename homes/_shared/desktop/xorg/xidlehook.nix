@@ -3,7 +3,7 @@
 # -- -- -- -- -- -- -- -- -- -- -- --
 
 { config, pkgs, lib, ... }: lib.mkIf config.desktop.xorg.enable {
-  services.xidlehook = with config.apps.scripts.xidlehook; {
+  services.xidlehook = with config.desktop.scripts.xidlehook; {
     enable = true;
     detect-sleep = true;
     not-when-audio = true;

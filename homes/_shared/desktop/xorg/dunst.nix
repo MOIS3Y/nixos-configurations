@@ -103,7 +103,7 @@
     };
   };
   #?Add to $PATH, it might call late to show current volume
-  home.packages = with config.apps.scripts.dunst; [
+  home.packages = with config.desktop.scripts.dunst; [
     dunst-volume
     dunst-microphone
     dunst-brightness 

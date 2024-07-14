@@ -2,7 +2,7 @@
 # █▄▄ █▀░ ▄
 # -- -- -- 
 
-{ config, pkgs, utils, ... }: with utils; {
+{ config, pkgs, ... }: with config.desktop.utils; {
   previewer =  pkgs.writeShellScript "lf-kitty-preview.sh" ''
     file=$1
     w=$2

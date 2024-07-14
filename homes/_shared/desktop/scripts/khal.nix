@@ -2,7 +2,7 @@
 # █░█ █▀█ █▀█ █▄▄ ▄
 # -- -- -- -- -- --
 
-{ config, pkgs, utils, ... }: with utils; {
+{ config, pkgs, ... }: with config.desktop.utils; {
   googleCalendarFetchId = pkgs.writeShellScript "khal-gcfid.sh" ''
     ${cat} ${config.sops.secrets."google-calendar/fetch-id".path}
   '';

@@ -2,7 +2,7 @@
 # █░█ ▄█ ▄█ ░░ █▄▄ █▄█ █▄▄ █░█ ▄
 # -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, utils, ... }: with utils; {
+{ config, pkgs, ... }: with config.desktop.utils; {
   lock = ''
     ${xss-lock} --session ''${XDG_SESSION_ID} \
     -- ${i3lock-run} -s ${config.colorScheme.name} -f Ubuntu

@@ -12,7 +12,7 @@
       always_parse_args = true;
       allow_images = true;
       show_all = false;
-      term = "${config.apps.terminal}";
+      term = "${config.desktop.apps.terminal}";
       hide_scroll = true;
       print_command = true;
       insensitive = true;
