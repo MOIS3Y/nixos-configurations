@@ -9,6 +9,7 @@
     ./games
     ./gnome
     ./laptop
+    ./pkgs
     ./wayland
     ./xorg
   ];

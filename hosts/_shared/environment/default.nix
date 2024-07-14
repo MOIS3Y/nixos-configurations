@@ -16,7 +16,6 @@
     ];
     systemPackages = with pkgs; [
       age
-      appimage-run
       bottom
       cmatrix
       curl
@@ -42,14 +41,6 @@
       tty-clock
       wget
       unzip
-    ] ++ (if config.desktop.enable
-      then [
-        firefox
-        libnotify
-        pavucontrol
-        xdg-utils
-      ] 
-      else []
-    );
+    ];
   };
 }
