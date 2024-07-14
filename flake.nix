@@ -56,84 +56,82 @@
     };
   };
   
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      lib = nixpkgs.lib;
-      pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
-      specialArgs = { inherit system; inherit inputs; };
-      extraSpecialArgs = { inherit system; inherit inputs; };
-    in {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
+    system = "x86_64-linux";
+    lib = nixpkgs.lib;
+    pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+    # Default desktop configurations:
+    desktopConf = {
+      pc = {
+        enable = true;
+        laptop.enable = false;
+      };
+      laptop = {
+        enable = true;
+        laptop.enable = true;
+      };
+      server = {
+        enable = false;
+        laptop.enable = false;
+      };
+    };
+    # override nixosSystem func for create my NixOS and HM configurations:
+    mkNixosSystem = host: lib.nixosSystem {
+      specialArgs = {
+        inherit system inputs;
+        desktop = lib.attrsets.attrByPath [ host.type ] "server" desktopConf;
+      };
+      modules = [
+        host.configuration
+        home-manager.nixosModules.home-manager {
+          home-manager = {
+            extraSpecialArgs = {
+              inherit system inputs;
+              desktop = lib.attrsets.attrByPath [ host.type ] "server" desktopConf;
+            };
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users = host.users;
+          };
+        }            
+      ];
+    };
+  in {
     nixosConfigurations = {
-      desktop-laptop = lib.nixosSystem {
-        inherit specialArgs;
-        modules = [
-          ./hosts/desktop-laptop/configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              inherit extraSpecialArgs;
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.stepan = import ./homes/stepan/home.nix;
-            };
-          }
-        ];
+      desktop-laptop = mkNixosSystem {
+        configuration = ./hosts/desktop-laptop/configuration.nix;
+        type = "laptop";
+        users = {
+          stepan = ./homes/stepan/home.nix;
+        };
       };
-      desktop-workstation = lib.nixosSystem {
-        inherit specialArgs;
-        modules = [
-          ./hosts/desktop-workstation/configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              inherit extraSpecialArgs;
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.stepan = import ./homes/stepan/home.nix;
-            };
-          }
-        ];
+      desktop-workstation = mkNixosSystem {
+      configuration = ./hosts/desktop-workstation/configuration.nix;
+        type = "pc";
+        users = {
+          stepan = ./homes/stepan/home.nix;
+        };
       };
-      vps-solar = lib.nixosSystem {
-        inherit specialArgs;
-        modules = [
-          ./hosts/vps-solar/configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              inherit extraSpecialArgs;
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.admserv = import ./homes/admserv/home.nix;
-            };
-          }
-        ];
+      vps-allsave = mkNixosSystem {
+        configuration = ./hosts/vps-allsave/configuration.nix;
+        type = "server";
+        users = {
+          admserv = ./homes/admserv/home.nix;
+        };
       };
-      vps-gliese = lib.nixosSystem {
-        inherit specialArgs;
-        modules = [
-          ./hosts/vps-gliese/configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              inherit extraSpecialArgs;
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.admserv = import ./homes/admserv/home.nix;
-            };
-          }
-        ];
+      vps-gliese = mkNixosSystem {
+        configuration = ./hosts/vps-gliese/configuration.nix;
+        type = "server";
+        users = {
+          admserv = ./homes/admserv/home.nix;
+        };
       };
-      vps-allsave = lib.nixosSystem {
-        inherit specialArgs;
-        modules = [
-          ./hosts/vps-allsave/configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              inherit extraSpecialArgs;
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.admserv = import ./homes/admserv/home.nix;
-            };
-          }
-        ];
+      vps-solar = mkNixosSystem {
+        configuration = ./hosts/vps-solar/configuration.nix;
+        type = "server";
+        users = {
+          admserv = ./homes/admserv/home.nix;
+        };
       };
       # ... add more hosts here:
     };
