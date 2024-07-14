@@ -32,12 +32,4 @@
   '';
   # commands:
   dragon-out = ''%${xdragon} -a -x "$fx"'';
-  editor-open = ''$$EDITOR $f'';
-  mkdir = ''
-    ''${{
-      printf "Directory Name: "s
-      read DIR
-      mkdir $DIR
-    }}
-  '';
 }

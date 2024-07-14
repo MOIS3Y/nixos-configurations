@@ -2,6 +2,9 @@
 # █▄▄ █▀░ ▄
 # -- -- -- 
 
+# ! Minimal general configuration.
+# ! Extensions (previewer, dragon) are configured in desktop/programs/lf.nix
+
 { config, pkgs, ... }: let
   # pull icons file
   lfIcons = builtins.fetchurl rec {
@@ -17,24 +20,22 @@ in {
       icons = true;
       ignorecase = true;
     };
-    commands = with config.desktop.scripts.lf; {
-      inherit
-      dragon-out
-      editor-open
-      mkdir;
+    commands = {
+      editor-open = ''$$EDITOR $f'';
+      mkdir = ''
+        ''${{
+          printf "Directory Name: "s
+          read DIR
+          mkdir $DIR
+        }}
+      '';
     };
     keybindings = {
-      xx = "dragon-out";
       mk = "mkdir";
       xD = "delete";
       "<enter>" = "open";
       # ... add more keybindings here:
     };
-    extraConfig = with config.desktop.scripts.lf; ''
-      set cleaner ${cleaner}
-      set previewer ${previewer}
-      setlocal ${config.xdg.userDirs.pictures}/isp sortby 'time' 
-    '';
   };
   xdg.configFile."lf/icons".source = lfIcons;  # enable icons
 }
