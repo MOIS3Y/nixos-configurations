@@ -97,6 +97,12 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIN8ntFxD/6St6f8I9U+W+uqw9tQZQk6nxSBkaYpB5QN home server"
   ];
 
+  # Legacy host configuration engine path:
+  # TODO: move it default path /var/lib/docker
+  virtualisation.docker.daemon.settings = {
+    data-root = "/services/docker/engine";
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
