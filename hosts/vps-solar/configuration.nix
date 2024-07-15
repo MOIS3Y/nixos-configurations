@@ -11,9 +11,6 @@
     ../../modules/colors
 
     ../_shared/console
-    ../_shared/nix
-    ../_shared/nixpkgs
-    ../_shared/programs
 
     ./hardware-configuration.nix # virtual
   ];
@@ -44,6 +41,8 @@
     ];
   };
 
+  i18n.defaultLocale = "en_US.UTF-8";
+
   networking = {
     hostName = "solar";
     interfaces = {
@@ -59,8 +58,17 @@
     };
   };
 
-  nix.settings.trusted-users = lib.mkForce [ "admserv" ];
-  nixpkgs.overlays = lib.mkForce [];
+  nix = {
+    package = pkgs.nix;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    settings = {
+      trusted-users = [ "admserv" ];
+    };
+  };
+
+  nixpkgs.config.allowUnfree = true;
 
   services.openssh = {
     enable = true;
@@ -102,7 +110,6 @@
 
   virtualisation.docker.enable = true;
 
-  i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "Europe/Amsterdam";
 
   # This value determines the NixOS release from which the default
