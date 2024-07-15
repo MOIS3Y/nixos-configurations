@@ -17,7 +17,6 @@ in {
   };
   config = with lib; {
     users = {
-      mutableUsers = false;
       users = attrsets.getAttrs config.host.users (
         import ./users.nix { inherit config pkgs;}
       );

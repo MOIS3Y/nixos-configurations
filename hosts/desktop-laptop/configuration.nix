@@ -67,12 +67,7 @@
 
   sops = {
     defaultHostSopsFile = ../../secrets/hosts/desktop-laptop/secrets.yaml;
-    secrets = {
-      stepan-password = {
-        neededForUsers = true;
-      };
-      # add more secrets here ...
-    };
+    secrets = {};
   };
 
   networking.hostName = lib.mkForce "laptop";

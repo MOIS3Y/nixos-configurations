@@ -20,7 +20,6 @@
     ../_shared/nixpkgs
     ../_shared/programs
     ../_shared/services
-    ../_shared/sops
     ../_shared/time
     ../_shared/users
     ../_shared/virtualisation
@@ -99,16 +98,6 @@
     █▀ █▀█ █░░ ▄▀█ █▀█
     ▄█ █▄█ █▄▄ █▀█ █▀▄
   '';
-
-  sops = {
-    defaultHostSopsFile = ../../secrets/hosts/vps-solar/secrets.yaml;
-    secrets = {
-      admserv-password = {
-        neededForUsers = true;
-      };
-      # add more secrets here ...
-    };
-  };
 
   users.users.admserv.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM2uRkkbZ7Z9Zc0WHIZCBRBU8EylvBHoR7lB6sldtJp8 stepan@zhukovsky.me"

@@ -70,12 +70,7 @@
 
   sops = {
     defaultHostSopsFile = ../../secrets/hosts/desktop-workstation/secrets.yaml;
-    secrets = {
-      stepan-password = {
-        neededForUsers = true;
-      };
-      # add more secrets here ...
-    };
+    secrets = {};
   };
 
   networking.hostName = lib.mkForce "workstation";

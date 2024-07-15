@@ -19,7 +19,6 @@
     ../_shared/nixpkgs
     ../_shared/programs
     ../_shared/services
-    ../_shared/sops
     ../_shared/time
     ../_shared/users
     ../_shared/virtualisation
@@ -85,16 +84,6 @@
     █▀▀ █░░ █ █▀▀ █▀ █▀▀
     █▄█ █▄▄ █ ██▄ ▄█ ██▄
   '';
-
-  sops = {
-    defaultHostSopsFile = ../../secrets/hosts/vps-gliese/secrets.yaml;
-    secrets = {
-      admserv-password = {
-        neededForUsers = true;
-      };
-      # add more secrets here ...
-    };
-  };
 
   users.users.admserv.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGtpBAY/JGXUQ8tGhgxvPoffWcK9jNY/B/YmasmN6Ykv gliese.zhukovsky.me"

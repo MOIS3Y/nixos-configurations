@@ -20,7 +20,6 @@
     ../_shared/nixpkgs
     ../_shared/programs
     ../_shared/services
-    ../_shared/sops
     ../_shared/time
     ../_shared/users
     ../_shared/virtualisation
@@ -82,16 +81,6 @@
     ▄▀█ █░░ █░░ █▀ ▄▀█ █░█ █▀▀
     █▀█ █▄▄ █▄▄ ▄█ █▀█ ▀▄▀ ██▄
   '';
-
-  sops = {
-    defaultHostSopsFile = ../../secrets/hosts/vps-allsave/secrets.yaml;
-    secrets = {
-      admserv-password = {
-        neededForUsers = true;
-      };
-      # add more secrets here ...
-    };
-  };
 
   users.users.admserv.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIN8ntFxD/6St6f8I9U+W+uqw9tQZQk6nxSBkaYpB5QN home server"
