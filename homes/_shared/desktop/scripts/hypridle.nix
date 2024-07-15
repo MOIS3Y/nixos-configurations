@@ -23,7 +23,7 @@
     }
 
     main() {
-      ${paplay} ${config.assets.sounds}/alarm/answer-quickly.mp3
+      ${paplay} ${config.desktop.assets.sounds}/alarm/answer-quickly.mp3
       idle_msg
     }
 

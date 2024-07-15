@@ -9,7 +9,7 @@
     # ? see: https://github.com/heyjuvi/avizo/issues/60
     package = pkgs.avizo.overrideAttrs (final: prev: {
       patchPhase = ''
-        cp ${config.assets.icons}/avizo/${config.colorScheme.name}/* data/images/
+        cp ${config.desktop.assets.icons}/avizo/${config.colorScheme.name}/* data/images/
       '';
     });
     settings = with config.colorScheme.palette; {

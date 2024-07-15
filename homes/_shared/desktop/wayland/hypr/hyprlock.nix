@@ -10,7 +10,7 @@
         {
           monitor = "";
           color = "rgb(${base00})";
-          path = "${config.assets.background}";
+          path = "${config.desktop.assets.background}";
           blur_size = 4;
           blur_passes = 3;
         }
@@ -90,7 +90,7 @@
       image = [
         {
           monitor = "";
-          path = "${config.assets.icons}/hyprlock/${config.colorScheme.name}.png";
+          path = "${config.desktop.assets.icons}/hyprlock/${config.colorScheme.name}.png";
           size = 270; # lesser side if not 1:1 ratio
           rounding = "-1";
           border_size = 3;

@@ -3,13 +3,14 @@
 # -- -- -- --- -- -- -- -- --
 
 { inputs, config, pkgs, lib, ... }: let
+  cfg = config.desktop.assets;
   assets = inputs.assets4nix.packages."${pkgs.system}".assets4nix;
   cs = config.colorScheme.name;
 in {
-  options.assets = with lib; {
+  options.desktop.assets = with lib; {
     package = mkOption {
       type = types.package;
-      default = defaultPackage;
+      default = assets;
       defaultText = literalExpression "pkgs.assets4nix";
       description = "package containing resources (wallpaper, icons, sounds)";
     };
@@ -28,6 +29,22 @@ in {
       ];
       default = "${assets}/share/images/backgrounds/hexagon/${cs}.png";
       description = "default background image";
+    };
+    wallpapers = mkOption {
+      type = with types; oneOf [
+        str
+        path
+      ];
+      default = "${assets}/share/images/wallpapers";
+      description = "short path to wallpapers into an assets package";
+    };
+    backgrounds = mkOption {
+      type = with types; oneOf [
+        str
+        path
+      ];
+      default = "${assets}/share/images/backgrounds";
+      description = "short path to backgrounds into an assets package";
     };
     icons = mkOption {
       type = with types; oneOf [

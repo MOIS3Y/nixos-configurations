@@ -47,7 +47,7 @@
       # shortcuts:
       cs = "${config.colorScheme.name}";
       variant = "${config.colorScheme.variant}";
-      wlogoutIconsDir = "${config.assets.icons}/wlogout/${cs}";
+      wlogoutIconsDir = "${config.desktop.assets.icons}/wlogout/${cs}";
 
       dark01 = "rgba(12, 12, 12, 0.1)";
       light01 = "rgba(255, 255, 255, 0.1)";
