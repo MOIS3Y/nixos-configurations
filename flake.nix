@@ -112,7 +112,7 @@
           stepan = ./homes/stepan/home.nix;
         };
       };
-      vps-allsave = mkNixosSystem {
+      server-allsave = mkNixosSystem {
         configuration = ./hosts/server-allsave/configuration.nix;
         type = "server";
         users = {
