@@ -20,7 +20,6 @@
       VISUAL = "code";
     };
     shellAliases = {
-      nvim = "nvchad";
       docker = "sudo docker";
       docker-compose = "sudo docker-compose";
     };
