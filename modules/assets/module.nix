@@ -70,6 +70,14 @@ in {
       default = "${assets}/share/sounds/system/all-eyes-on-me.mp3";
       description = "short path to sounds into an assets package";
     };
+    warning-notification = mkOption {
+      type = with types; oneOf [
+        str
+        path
+      ];
+      default = "${assets}/share/sounds/alarm/answer-quickly.mp3";
+      description = "short path to sounds into an assets package";
+    };
   };
   config = {};
 }
