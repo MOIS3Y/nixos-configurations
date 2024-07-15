@@ -54,7 +54,7 @@
           color = "rgb(${base05})";
           font_size = 72;
           font_family = "Ubuntu";
-          position = "-100, -40";
+          position = "-100, 50";
           halign = "right";
           valign = "bottom";
           shadow_passes = 5;
