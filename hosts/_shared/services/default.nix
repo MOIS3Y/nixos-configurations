@@ -4,9 +4,6 @@
 
 { config, pkgs, ... }: {
   services = {
-    fstrim = {
-      enable = true;
-    };
     openssh = {
       enable = true;
       startWhenNeeded = true;

@@ -74,7 +74,6 @@
   nix.settings.trusted-users = lib.mkForce [ "admserv" ];
   nixpkgs.overlays = lib.mkForce [];
 
-  services.fstrim.enable = lib.mkForce false;
   services.openssh.listenAddresses = lib.mkForce [{
     addr = "0.0.0.0";
     port = 2222;

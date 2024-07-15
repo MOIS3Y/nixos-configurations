@@ -85,5 +85,7 @@ in {
       ++ optionals (cfg.motherboard == "intel") [ "i2c-i801" ]
     );
     services.udev.packages = mkIf cfg.ddcci [ ddcutil ]; #! MSI Monitor, Model:G2712
+    # SSD:
+    services.fstrim.enable = true; 
   };
 }
