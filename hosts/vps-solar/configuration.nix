@@ -12,7 +12,6 @@
 
     ../_shared/console
     ../_shared/environment
-    ../_shared/fonts
     ../_shared/nix
     ../_shared/nixpkgs
     ../_shared/programs
