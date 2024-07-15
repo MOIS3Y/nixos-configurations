@@ -14,21 +14,9 @@
     ../_shared/nix
     ../_shared/nixpkgs
     ../_shared/programs
-    ../_shared/users
-    ../_shared/virtualisation
 
     ./hardware-configuration.nix # virtual
   ];
-
-  host = {
-    virtualisation = {
-      docker = {
-        enable = true;
-        oci-containers = [ "portainer-agent" ];
-      };
-    };
-    users = [ "admserv" ];
-  };
 
   boot.loader.grub = {
     device = "/dev/vda";
@@ -89,9 +77,24 @@
     '';
   };
 
-  users.users.admserv.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGtpBAY/JGXUQ8tGhgxvPoffWcK9jNY/B/YmasmN6Ykv gliese.zhukovsky.me"
-  ];
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users = {
+    users = { 
+      admserv = {
+        isNormalUser = true;
+        description = "Stepan Zhukovsky";
+        extraGroups = [ "wheel" ];
+        shell = pkgs.zsh;
+        packages = with pkgs; [];
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGtpBAY/JGXUQ8tGhgxvPoffWcK9jNY/B/YmasmN6Ykv gliese.zhukovsky.me"
+        ];
+      };
+      # ... add more users here
+    };
+  };
+
+  virtualisation.docker.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "Europe/Amsterdam";
