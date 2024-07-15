@@ -6,7 +6,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ inputs, config, pkgs, ... }: {
   imports = [
     ../../modules/colors
 
@@ -31,7 +31,7 @@
       git
       htop
       jq
-      neovim
+      extra.nvchad
       ncdu
       nitch
       rsync
@@ -69,6 +69,13 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+    (final: prev:{
+      extra = {
+        nvchad = inputs.nvchad4nix.packages."${pkgs.system}".nvchad;
+      };
+    })
+  ];
 
   programs.zsh.enable = true;
   
