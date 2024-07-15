@@ -53,13 +53,13 @@
       hostname = "git.zhukovsky.me";
     };
     "gliese" = {
-      user = "admserv";
+      user = "admvps";
       identityFile = config.sops.secrets."private-keys/self/gliese".path;
       port = 22;
       hostname = "gliese.zhukovsky.me";
     };
     "solar" = {
-      user = "admserv";
+      user = "admvps";
       identityFile = config.sops.secrets."private-keys/self/solar".path;
       port = 2222;
       hostname = "solar.zhukovsky.me";
