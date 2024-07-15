@@ -11,7 +11,6 @@
     ../../modules/colors
 
     ../_shared/console
-    ../_shared/environment
     ../_shared/nix
     ../_shared/nixpkgs
     ../_shared/programs
@@ -36,23 +35,26 @@
     configurationLimit = 7;
   };
 
-  environment.systemPackages = with pkgs; lib.mkForce [
-    bottom
-    curl
-    dnsutils
-    docker-compose
-    nitch
-    git
-    htop
-    jq
-    neovim
-    ncdu
-    nitch
-    rsync
-    tree
-    unzip
-    wget
-  ];
+  environment = {
+    shells = [ pkgs.bash pkgs.zsh ];
+    systemPackages = with pkgs; lib.mkForce [
+      bottom
+      curl
+      dnsutils
+      docker-compose
+      nitch
+      git
+      htop
+      jq
+      neovim
+      ncdu
+      nitch
+      rsync
+      tree
+      unzip
+      wget
+    ];
+  };
 
   networking = {
     hostName = "solar";

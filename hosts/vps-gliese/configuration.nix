@@ -11,7 +11,6 @@
     ../../modules/colors
   
     ../_shared/console
-    ../_shared/environment
     ../_shared/nix
     ../_shared/nixpkgs
     ../_shared/programs
@@ -36,17 +35,20 @@
     configurationLimit = 7;
   };
 
-  environment.systemPackages = with pkgs; lib.mkForce [
-    bottom
-    curl
-    dnsutils
-    git
-    htop
-    ncdu
-    neovim
-    nitch 
-    wget  
-  ];
+  environment = {
+    shells = [ pkgs.bash pkgs.zsh ];
+    systemPackages = with pkgs; lib.mkForce [
+      bottom
+      curl
+      dnsutils
+      git
+      htop
+      ncdu
+      neovim
+      nitch
+      wget
+    ];
+  };
 
   networking = {
     hostName = "gliese";
