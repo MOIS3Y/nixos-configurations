@@ -79,8 +79,8 @@
     startWhenNeeded = true;
     allowSFTP = true;
     settings = {
-      PermitRootLogin = "yes";  # TODO: disable after deploy
-      PasswordAuthentication = true;  # TODO: disable after deploy
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
       LogLevel = "INFO";
     };
     listenAddresses = [
