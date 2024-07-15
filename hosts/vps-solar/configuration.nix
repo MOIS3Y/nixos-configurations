@@ -9,7 +9,6 @@
 { config, pkgs, lib, ... }: {
   imports = [
     ../../modules/colors
-    ../../modules/grub
 
     ../_shared/console
     ../_shared/environment
@@ -26,9 +25,6 @@
   ];
 
   host = {
-    boot = {
-      grubTheme = "nixos";
-    };
     virtualisation = {
       docker = {
         enable = true;
