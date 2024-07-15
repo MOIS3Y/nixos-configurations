@@ -28,7 +28,6 @@
     ../_shared/services
     ../_shared/sops
     ../_shared/sound
-    ../_shared/time
     ../_shared/users
     ../_shared/virtualisation
     ../_shared/xdg
@@ -71,6 +70,8 @@
   };
 
   networking.hostName = lib.mkForce "laptop";
+
+  time.timeZone = "Asia/Chita";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

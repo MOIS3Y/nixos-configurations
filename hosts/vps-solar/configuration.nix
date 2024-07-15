@@ -15,7 +15,6 @@
     ../_shared/nix
     ../_shared/nixpkgs
     ../_shared/programs
-    ../_shared/time
     ../_shared/users
     ../_shared/virtualisation
 
@@ -99,7 +98,7 @@
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";
-  time.timeZone = lib.mkForce "Europe/Amsterdam";
+  time.timeZone = "Europe/Amsterdam";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
