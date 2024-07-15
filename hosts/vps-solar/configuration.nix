@@ -70,6 +70,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  programs.zsh.enable = true;
+  
   services.openssh = {
     enable = true;
     startWhenNeeded = true;
