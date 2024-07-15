@@ -39,7 +39,6 @@
   };
 
   environment.systemPackages = with pkgs; lib.mkForce [
-    age
     bottom
     curl
     dnsutils
@@ -52,8 +51,6 @@
     ncdu
     nitch
     rsync
-    sops
-    ssh-to-age
     tree
     unzip
     wget

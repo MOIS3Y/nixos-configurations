@@ -15,7 +15,6 @@
       "/libexec"
     ];
     systemPackages = with pkgs; [
-      age
       bottom
       cmatrix
       curl
@@ -35,8 +34,6 @@
       ntfs3g
       rsync
       ripgrep
-      sops
-      ssh-to-age
       tree
       tty-clock
       wget
