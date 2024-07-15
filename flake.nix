@@ -113,7 +113,7 @@
         };
       };
       vps-allsave = mkNixosSystem {
-        configuration = ./hosts/vps-allsave/configuration.nix;
+        configuration = ./hosts/server-allsave/configuration.nix;
         type = "server";
         users = {
           admserv = ./homes/admserv/home.nix;
@@ -123,14 +123,14 @@
         configuration = ./hosts/vps-gliese/configuration.nix;
         type = "server";
         users = {
-          admserv = ./homes/admserv/home.nix;
+          admvps = ./homes/admvps/home.nix;
         };
       };
       vps-solar = mkNixosSystem {
         configuration = ./hosts/vps-solar/configuration.nix;
         type = "server";
         users = {
-          admserv = ./homes/admserv/home.nix;
+          admvps = ./homes/admvps/home.nix;
         };
       };
       # ... add more hosts here:

@@ -6,7 +6,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ../../modules/colors
 
@@ -22,7 +22,7 @@
 
   environment = {
     shells = [ pkgs.bash pkgs.zsh ];
-    systemPackages = with pkgs; lib.mkForce [
+    systemPackages = with pkgs; [
       bottom
       curl
       dnsutils
@@ -96,7 +96,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     users = { 
-      admserv = {
+      admvps = {
         isNormalUser = true;
         description = "Stepan Zhukovsky";
         extraGroups = [ "wheel" ];

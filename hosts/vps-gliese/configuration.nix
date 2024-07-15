@@ -24,7 +24,7 @@
 
   environment = {
     shells = [ pkgs.bash pkgs.zsh ];
-    systemPackages = with pkgs; lib.mkForce [
+    systemPackages = with pkgs; [
       bottom
       curl
       dnsutils
@@ -90,7 +90,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     users = { 
-      admserv = {
+      admvps = {
         isNormalUser = true;
         description = "Stepan Zhukovsky";
         extraGroups = [ "wheel" ];
