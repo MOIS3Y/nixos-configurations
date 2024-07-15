@@ -15,7 +15,6 @@
     ../_shared/environment
     ../_shared/fonts
     ../_shared/hardware
-    ../_shared/i18n
     ../_shared/nix
     ../_shared/nixpkgs
     ../_shared/programs
@@ -91,6 +90,8 @@
   virtualisation.docker.daemon.settings = {
     data-root = "/services/docker/engine";
   };
+
+  i18n.defaultLocale = "en_US.UTF-8";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

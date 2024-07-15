@@ -14,7 +14,6 @@
     ../_shared/console
     ../_shared/environment
     ../_shared/hardware
-    ../_shared/i18n
     ../_shared/nix
     ../_shared/nixpkgs
     ../_shared/programs
@@ -89,6 +88,7 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGtpBAY/JGXUQ8tGhgxvPoffWcK9jNY/B/YmasmN6Ykv gliese.zhukovsky.me"
   ];
 
+  i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = lib.mkForce "Europe/Amsterdam";
 
   # This value determines the NixOS release from which the default
