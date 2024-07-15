@@ -62,6 +62,14 @@ in {
       default = "${assets}/share/sounds";
       description = "short path to sounds into an assets package";
     };
+    volume-beep = mkOption {
+      type = with types; oneOf [
+        str
+        path
+      ];
+      default = "${assets}/share/sounds/system/all-eyes-on-me.mp3";
+      description = "short path to sounds into an assets package";
+    };
   };
   config = {};
 }
