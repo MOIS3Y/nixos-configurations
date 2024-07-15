@@ -14,7 +14,6 @@
     ../_shared/console
     ../_shared/environment
     ../_shared/fonts
-    ../_shared/hardware
     ../_shared/nix
     ../_shared/nixpkgs
     ../_shared/programs
@@ -29,11 +28,6 @@
   host = {
     boot = {
       grubTheme = "nixos";
-    };
-    hardware = {
-      updateMicrocode = false;
-      bluetooth = false;
-      graphics = false;
     };
     virtualisation = {
       docker = {
