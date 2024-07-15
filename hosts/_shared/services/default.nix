@@ -9,8 +9,8 @@
       startWhenNeeded = true;
       allowSFTP = true;
       settings = {
-        PermitRootLogin = "no";
-        PasswordAuthentication = false;
+        PermitRootLogin = "yes";
+        PasswordAuthentication = true;
         LogLevel = "INFO";
       };
     };

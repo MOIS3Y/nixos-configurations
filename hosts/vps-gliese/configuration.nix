@@ -15,7 +15,6 @@
     ../_shared/nix
     ../_shared/nixpkgs
     ../_shared/programs
-    ../_shared/services
     ../_shared/time
     ../_shared/users
     ../_shared/virtualisation
@@ -68,10 +67,26 @@
   nix.settings.trusted-users = lib.mkForce [ "admserv" ];
   nixpkgs.overlays = lib.mkForce [];
 
-  services.openssh.banner = ''
-    █▀▀ █░░ █ █▀▀ █▀ █▀▀
-    █▄█ █▄▄ █ ██▄ ▄█ ██▄
-  '';
+  services.openssh = {
+    enable = true;
+    startWhenNeeded = true;
+    allowSFTP = true;
+    settings = {
+      PermitRootLogin = "yes";  # TODO: disable after deploy
+      PasswordAuthentication = true;  # TODO: disable after deploy
+      LogLevel = "INFO";
+    };
+    listenAddresses = [
+      {
+        addr = "0.0.0.0";
+        port = 22;  # default
+      }
+    ];
+    banner = ''
+      █▀▀ █░░ █ █▀▀ █▀ █▀▀
+      █▄█ █▄▄ █ ██▄ ▄█ ██▄
+    '';
+  };
 
   users.users.admserv.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGtpBAY/JGXUQ8tGhgxvPoffWcK9jNY/B/YmasmN6Ykv gliese.zhukovsky.me"
