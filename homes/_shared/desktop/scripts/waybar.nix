@@ -2,7 +2,10 @@
 # ▀▄▀▄▀ █▀█ ░█░ █▄█ █▀█ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, ... }: with config.desktop.utils; with config.desktop.apps; {
+{ config, pkgs, ... }:
+  with config.desktop.utils;
+  with config.desktop.apps;
+  with config.desktop.assets.sounds; {
   # Toggle scripts:
   launcher-toggle = pkgs.writeShellScript "waybar-launcher-toggle.sh" ''
     if ${pgrep} -f "${config.desktop.apps.launcher}" > /dev/null 2>&1; then
@@ -36,9 +39,11 @@
   hyprctl-swallow = pkgs.writeShellScript "waybar-hyprctl-swallow.sh" ''
     if ${hyprctl} getoption misc:enable_swallow | ${rg} -q "int: 1"; then
       ${hyprctl} keyword misc:enable_swallow false >/dev/null &&
+        ${paplay} ${toggle-beep} &
         ${notify-send} -a Hyprland -i display -t 1500 "Turned off swallowing"
     else
       ${hyprctl} keyword misc:enable_swallow true >/dev/null &&
+        ${paplay} ${toggle-beep} &
         ${notify-send} -a Hyprland -i display -t 1500 "Turned on swallowing"
     fi
   '';
@@ -112,12 +117,12 @@
   calc = "${gnome-calculator}";
   logout = "${wlogout}";
   notification-get = "${swaync-client} -swb";
-  notification-dnd = "${swaync-client} -d -sw";
+  notification-dnd = "${swaync-client} -d -sw & ${paplay} ${toggle-beep} &";
   notification-center = "${swaync-client} -t -sw";
   brightness-up = "${brightnessctl} s +1%";
   brightness-down = "${brightnessctl} s 1%-";
-  volume-mute = "${volumectl} toggle-mute";
-  mic-mute = "${volumectl} -m toggle-mute";
+  volume-mute = "${volumectl} toggle-mute & ${paplay} ${toggle-beep} &";
+  mic-mute = "${volumectl} -m toggle-mute & ${paplay} ${toggle-beep} &";
   mic-up = "${pamixer} --default-source -i 1";
   mic-down = "${pamixer} --default-source -d 1";
 }

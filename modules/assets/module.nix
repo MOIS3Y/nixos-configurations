@@ -94,6 +94,22 @@ in {
         default = "${assets}/share/sounds/system/sly.mp3";
         description = "system sound of toggle actions";
       };
+      switch-beep = mkOption {
+        type = with types; oneOf [
+          str
+          path
+        ];
+        default = "${assets}/share/sounds/system/knob.mp3";
+        description = "system sound for switch actions";
+      };
+      open-beep = mkOption {
+        type = with types; oneOf [
+          str
+          path
+        ];
+        default = "${assets}/share/sounds/system/opening.mp3";
+        description = "system sound for switch actions";
+      };
       volume-beep = mkOption {
         type = with types; oneOf [
           str
