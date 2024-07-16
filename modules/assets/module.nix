@@ -14,38 +14,43 @@ in {
       defaultText = literalExpression "pkgs.assets4nix";
       description = "package containing resources (wallpaper, icons, sounds)";
     };
-    wallpaper = mkOption {
-      type = with types; oneOf [
-        str
-        path
-      ];
-      default = "${assets}/share/images/wallpapers/hexagon/${cs}.png";
-      description = "default wallpaper";
+    # Images staff:
+    images = {
+      wallpapers = mkOption {
+        type = with types; oneOf [
+          str
+          path
+        ];
+        default = "${assets}/share/images/wallpapers";
+        description = "short path to wallpapers into an assets package";
+      };
+      backgrounds = mkOption {
+        type = with types; oneOf [
+          str
+          path
+        ];
+        default = "${assets}/share/images/backgrounds";
+        description = "short path to backgrounds into an assets package";
+      };
+      # Default:
+      wallpaper = mkOption {
+        type = with types; oneOf [
+          str
+          path
+        ];
+        default = "${assets}/share/images/wallpapers/hexagon/${cs}.png";
+        description = "default wallpaper";
+      };
+      background = mkOption {
+        type = with types; oneOf [
+          str
+          path
+        ];
+        default = "${assets}/share/images/backgrounds/hexagon/${cs}.png";
+        description = "default background image";
+      };
     };
-    background = mkOption {
-      type = with types; oneOf [
-        str
-        path
-      ];
-      default = "${assets}/share/images/backgrounds/hexagon/${cs}.png";
-      description = "default background image";
-    };
-    wallpapers = mkOption {
-      type = with types; oneOf [
-        str
-        path
-      ];
-      default = "${assets}/share/images/wallpapers";
-      description = "short path to wallpapers into an assets package";
-    };
-    backgrounds = mkOption {
-      type = with types; oneOf [
-        str
-        path
-      ];
-      default = "${assets}/share/images/backgrounds";
-      description = "short path to backgrounds into an assets package";
-    };
+    # Icons staff:
     icons = mkOption {
       type = with types; oneOf [
         str
@@ -54,30 +59,59 @@ in {
       default = "${assets}/share/icons";
       description = "short path to icons into an assets package";
     };
-    sounds = mkOption {
-      type = with types; oneOf [
-        str
-        path
-      ];
-      default = "${assets}/share/sounds";
-      description = "short path to sounds into an assets package";
-    };
-    volume-beep = mkOption {
-      type = with types; oneOf [
-        str
-        path
-      ];
-      default = "${assets}/share/sounds/system/all-eyes-on-me.mp3";
-      description = "short path to sounds into an assets package";
-    };
-    warning-notification = mkOption {
-      type = with types; oneOf [
-        str
-        path
-      ];
-      default = "${assets}/share/sounds/alarm/answer-quickly.mp3";
-      description = "short path to sounds into an assets package";
-    };
+    # Sounds stuff:
+    sounds = {
+      alarm = mkOption {
+        type = with types; oneOf [
+          str
+          path
+        ];
+        default = "${assets}/share/sounds/alarm";
+        description = "short path to alarm sounds into an assets package";
+      };
+      notifications = mkOption {
+        type = with types; oneOf [
+          str
+          path
+        ];
+        default = "${assets}/share/sounds/notifications";
+        description = "short path to notifications sounds into an assets package";
+      };
+      system = mkOption {
+        type = with types; oneOf [
+          str
+          path
+        ];
+        default = "${assets}/share/sounds/system";
+        description = "short path to alarm sounds into an assets package";
+      };
+      # Beeppers:
+      toggle-beep = mkOption {
+        type = with types; oneOf [
+          str
+          path
+        ];
+        default = "${assets}/share/sounds/system/sly.mp3";
+        description = "system sound of toggle actions";
+      };
+      volume-beep = mkOption {
+        type = with types; oneOf [
+          str
+          path
+        ];
+        default = "${assets}/share/sounds/system/all-eyes-on-me.mp3";
+        description = "system sound of volume change";
+      };
+      # Notifications:
+      warning-notification = mkOption {
+        type = with types; oneOf [
+          str
+          path
+        ];
+        default = "${assets}/share/sounds/alarm/answer-quickly.mp3";
+        description = "notification sound with critical status";
+      };
+    }; 
   };
   config = {};
 }

@@ -10,7 +10,7 @@
         {
           monitor = "";
           color = "rgb(${base00})";
-          path = "${config.desktop.assets.background}";
+          path = "${config.desktop.assets.images.background}";
           blur_size = 4;
           blur_passes = 3;
         }

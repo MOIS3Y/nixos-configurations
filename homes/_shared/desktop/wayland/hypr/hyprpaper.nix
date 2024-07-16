@@ -6,16 +6,16 @@
   services.hyprpaper = {
     enable = true;
     package = pkgs.hyprpaper;
-    settings = {
+    settings = with config.desktop.assets.images; {
       ipc = "on";
       splash = false;
       splash_offset = 2.0;
       preload = [
-        "${config.desktop.assets.wallpaper}"
+        "${wallpaper}"
         # add more here ...
       ];
       wallpaper = [
-        ",${config.desktop.assets.wallpaper}"
+        ",${wallpaper}"
         # ? above <,> mean for all monitors
       ];
     };

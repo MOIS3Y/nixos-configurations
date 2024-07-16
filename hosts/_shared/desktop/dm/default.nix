@@ -18,7 +18,7 @@
         theme = with config.colorScheme.palette; ''${
           pkgs.extra.sddm-sugar-candy.override {
             settings = {
-              Background = "${config.desktop.assets.background}";
+              Background = "${config.desktop.assets.images.background}";
               ScreenWidth = "1920";
               ScreenHeight = "1080";
               MainColor = "#${base05}";

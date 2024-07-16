@@ -23,7 +23,7 @@
     }
 
     main() {
-      ${paplay} ${config.desktop.assets.warning-notification} &
+      ${paplay} ${config.desktop.assets.sounds.warning-notification} &
       idle_msg
     }
 

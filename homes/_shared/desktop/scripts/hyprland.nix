@@ -2,7 +2,7 @@
 # █▀█ ░█░ █▀▀ █▀▄ █▄▄ █▀█ █░▀█ █▄▀ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, ... }: with config.desktop.utils; with config.desktop.assets; {
+{ config, pkgs, ... }: with config.desktop.utils; with config.desktop.assets.sounds; {
   screenshot = pkgs.writeShellScript "hyprland-screenshot.sh" ''
     ${grim} -g "$(${slurp} -w 0)" - | ${swappy} -f -
   '';
