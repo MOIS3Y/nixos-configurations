@@ -175,6 +175,18 @@
       font-size: 14px;
     }
 
+    #privacy {
+      all: initial; /* Remove GTK theme values (waybar #1351) */
+      min-width: 0; /* Fix weird spacing in materia (waybar #450) */
+      margin:7px 3px 7px 3px;
+      padding: 0px 16px 0px 16px;
+      border-radius: 15px;
+      background-color: #${base00};
+      color: #${base00};
+      font-family: JetBrainsMono, monospace;
+      font-size: 14px;
+    }
+
     #tray {
       all: initial; /* Remove GTK theme values (waybar #1351) */
       min-width: 0; /* Fix weird spacing in materia (waybar #450) */
@@ -323,6 +335,10 @@
 
     #memory {
       background-color: #${base0D};
+    }
+
+    #privacy {
+      background-color: #${base0B};
     }
 
     #pulseaudio.microphone {

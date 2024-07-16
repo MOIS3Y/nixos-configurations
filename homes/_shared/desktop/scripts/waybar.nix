@@ -2,10 +2,36 @@
 # ▀▄▀▄▀ █▀█ ░█░ █▄█ █▀█ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, ... }: with config.desktop.utils; {
+{ config, pkgs, ... }: with config.desktop.utils; with config.desktop.apps; {
+  # Toggle scripts:
   launcher-toggle = pkgs.writeShellScript "waybar-launcher-toggle.sh" ''
-    # TODO: automatic launcher detection
-    ${pgrep} wofi >/dev/null 2>&1 && ${pkill} wofi || ${wofi} --show drun
+    if ${pgrep} -f "${config.desktop.apps.launcher}" > /dev/null 2>&1; then
+      ${pkill} -f "${config.desktop.apps.launcher}"
+    else
+      ${config.desktop.apps.launcher}
+    fi
+  '';
+  btm-toggle = pkgs.writeShellScript "waybar-btm-toggle.sh" ''
+    ${pgrep} btm >/dev/null 2>&1 && ${pkill} btm || ${terminal} -e ${btm}
+  '';
+  htop-toggle = pkgs.writeShellScript "waybar-htop-toggle.sh" ''
+    ${pgrep} htop >/dev/null 2>&1 && ${pkill} htop || ${terminal} -e ${htop}
+  '';
+  gnome-calendar-toggle = pkgs.writeShellScript "waybar-gnome-calendar-toggle.sh" ''
+    ${pgrep} gnome-calendar >/dev/null 2>&1 && ${pkill} gnome-calendar || ${gnome-calendar}
+  '';
+  gnome-disks-toggle = pkgs.writeShellScript "waybar-gnome-disks-toggle.sh" ''
+    ${pgrep} gnome-disks >/dev/null 2>&1 && ${pkill} gnome-disks || ${gnome-disks}
+  '';
+  gnome-system-monitor-toggle = pkgs.writeShellScript "waybar-gnome-system-monitor-toggle.sh" ''
+    if ${pgrep} -f "${gnome-system-monitor}" > /dev/null 2>&1; then
+      ${pkill} -f "${gnome-system-monitor}"
+    else
+      ${gnome-system-monitor}
+    fi
+  '';
+  pavucontrol-toggle = pkgs.writeShellScript "waybar-pavucontrol-toggle.sh" ''
+    ${pgrep} pavucontrol >/dev/null 2>&1 && ${pkill} pavucontrol || ${pavucontrol}
   '';
   hyprctl-swallow = pkgs.writeShellScript "waybar-hyprctl-swallow.sh" ''
     if ${hyprctl} getoption misc:enable_swallow | ${rg} -q "int: 1"; then
@@ -16,6 +42,7 @@
         ${notify-send} -a Hyprland -i display -t 1500 "Turned on swallowing"
     fi
   '';
+  # External monitor managment:
   ddcutil-fast =  with config.programs; pkgs.writeShellScript "waybar-ddcutil-fast.sh" ''
     # src: https://gist.github.com/Ar7eniyan/42567870ad2ce47143ffeb41754b4484
 
@@ -79,6 +106,7 @@
   ddcutil-dark = pkgs.writeShellScript "waybar-ddcutil-dark.sh" ''
     echo 'min' > /tmp/waybar-ddc-module-rx
   '';
+  # Common:
   switch-workspaces-to-right = "${hyprctl} dispatch workspace e+1";
   switch-workspaces-to-left = "${hyprctl} dispatch workspace e-1";
   calc = "${gnome-calculator}";

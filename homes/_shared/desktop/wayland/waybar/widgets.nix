@@ -75,6 +75,8 @@
       activated = "";
       deactivated = "";
     };
+    tooltip-format-activated = "Caffeine activated";
+    tooltip-format-deactivated = "Caffeine deactivated";
   };
   "custom/notification" = {
     exec = "${notification-get}";
@@ -139,6 +141,8 @@
     interval = 10;
     unit = "GB";
     format = "󰋊 {percentage_used}%";
+    tooltip-format = "{free} out of {total} available on {path}";
+    on-click = "${gnome-disks-toggle}";
     states = {
       warning = 70;
       critical = 90;
@@ -149,6 +153,7 @@
     interval = 10;
     unit = "GB";
     format = "󰋊 nix {percentage_used}%";
+    tooltip-format = "{free} out of {total} available on {path}";
     states = {
       warning = 70;
       critical = 90;
@@ -159,6 +164,7 @@
     interval = 10;
     unit = "GB";
     format = "󰋊 home {percentage_used}%";
+    tooltip-format = "{free} out of {total} available on {path}";
     states = {
       warning = 70;
       critical = 90;
@@ -217,6 +223,7 @@
   clock = {
     format = "󱑎 {:%H:%M}";
     format-alt = "󰃰 {:%a, %d %b %H:%M}";
+    on-click-middle = "${gnome-calendar-toggle}";
     # locale = "en_GB.UTF-8";
     tooltip-format = "<tt><small>{calendar}</small></tt>";
     calendar = {
@@ -248,11 +255,18 @@
       interval = 1;
       format = "󰓅  {usage}%";
       max-length =  10;
+      on-click = "${btm-toggle}";
+      on-click-right = "${htop-toggle}";
+      on-click-middle = "${gnome-system-monitor-toggle}";
   };
   memory = {
       interval = 1;
-      format = "󰍛 {used:0.1f}Gb";
+      format = "󰍛  {percentage}%";
       max-length = 10;
+      tooltip-format = "{used:0.1f}GiB used";
+      on-click = "${btm-toggle}";
+      on-click-right = "${htop-toggle}";
+      on-click-middle = "${gnome-system-monitor-toggle}";
   };
   pulseaudio = {
     tooltip = false;
@@ -270,6 +284,7 @@
     };
     tooltip-format = "{desc}, {volume}";
     on-click = "${volume-mute}";
+    on-click-right = "${pavucontrol-toggle}";
     reverse-scrolling = true;
     reverse-mouse-scrolling = false;
   };
@@ -279,10 +294,11 @@
     format-source = "󰍬 {volume}%";
     format-source-muted = "󰍭 Mute";
     on-click = "${mic-mute}";
-    reverse-scrolling = true;
-    reverse-mouse-scrolling = false;
+    on-click-right = "${pavucontrol-toggle}";
     on-scroll-up = "${mic-up}";
     on-scroll-down = "${mic-down}";
+    reverse-scrolling = true;
+    reverse-mouse-scrolling = false;
   };
   "pulseaudio/slider" = {
     orientation = "horizontal";
@@ -299,6 +315,23 @@
     modules = [
       "pulseaudio"
       "pulseaudio/slider"
+    ];
+  };
+  privacy = {
+    icon-spacing = 10;
+    icon-size = 12;
+    transition-duration = 250;
+    modules = [
+      {
+        type = "screenshare";
+        tooltip = true;
+        tooltip-icon-size = 24;
+      }
+      {
+        type = "audio-in";
+        tooltip = true;
+        tooltip-icon-size = 24;
+      }
     ];
   };
 }

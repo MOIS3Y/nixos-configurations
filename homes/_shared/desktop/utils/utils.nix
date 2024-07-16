@@ -7,6 +7,7 @@
   awk = "${gawk}/bin/awk";
   # B
   bash = "${getExe bash}";
+  btm = "${getExe bottom}";
   brightnessctl = "${getExe brightnessctl}";
   # C
   cat = "${coreutils}/bin/cat";
@@ -20,8 +21,12 @@
   firefox = "${getExe firefox}";
   # G
   gnome-calculator = "${gnome-calculator}/bin/gnome-calculator";
+  gnome-disks = "${getExe gnome-disk-utility}";
+  gnome-system-monitor = "${getExe gnome-system-monitor}";
+  gnome-calendar = "${getExe gnome-calendar}";
   grim = "${getExe grim}";
   # H
+  htop = "${getExe htop}";
   hyprctl = "${hyprland}/bin/hyprctl";
   hyprlock = "${getExe hyprlock}";
   # I
@@ -37,6 +42,7 @@
   # P
   pamixer = "${getExe pkgs.pamixer}";
   paplay = "${pulseaudio}/bin/paplay";
+  pavucontrol = "${getExe pkgs.pavucontrol}";
   pgrep = "${procps}/bin/pgrep";
   pistol = "${getExe pistol}";
   pkill = "${procps}/bin/pkill";

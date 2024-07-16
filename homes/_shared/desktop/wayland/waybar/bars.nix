@@ -35,6 +35,7 @@
       "hyprland/language"
       "tray"
       "battery"
+      "privacy"
       "custom/power"
     ]);
   } // (builtins.removeAttrs widgets config.programs.waybar.excludeWidgets);
