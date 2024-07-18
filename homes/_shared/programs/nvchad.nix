@@ -21,6 +21,6 @@
     ];
     extraConfig = inputs.nvchad-on-steroids;
     hm-activation = true;
-    backup = true;
+    backup = false;
   };
 }
