@@ -2,9 +2,13 @@
 # █▀█ ░█░ █▀▀ █▀▄ █▄▄ █▀█ █░▀█ █▄▀ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }: lib.mkIf config.desktop.wayland.enable {
+{ config, pkgs, lib, ... }: with lib; mkIf config.desktop.wayland.enable {
   wayland.windowManager.hyprland = {
     enable = true;
+    package = pkgs.extra.hyprland;
+    plugins = [
+      pkgs.extra.hyprsplit
+    ];
     xwayland.enable = true;
     settings = {
       #! -- -- -- -- -- -- autostart -- -- -- -- -- -- #
@@ -27,23 +31,25 @@
         "XCURSOR_SIZE,26"
       ];
       #! -- -- -- --  -- -- monitors -- -- -- -- -- -- #
-      monitor = [
-        "DP-1,1920x1080@144,0x0,1"
-        ",preferred,auto,1"
-      ];
+      # the map function will generate a list of monitors 
+      # which will be taken from config.desktop.devices.monitors
+      # the function is enclosed in parentheses to indicate currying.
+      # after it works, a value for an undefined monitor with automatic
+      # parameters will be added to the fig list,
+      # which will be configured by Hyprland
+      monitor = (map (m:
+        let
+          resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
+          position = "${toString m.x}x${toString m.y}";
+        in
+          "${m.name},${if m.enabled then "${resolution},${position},1" else "disable"}"
+        )
+        (config.desktop.devices.monitors)) ++ [ ",preferred,auto,1" ];
       #! -- -- -- --  -- -- workspace -- -- -- -- -- -- #
-      workspace = [
-        "1"
-        "2"
-        "3"
-        "4"
-        "5"
-        "6"
-        "7"
-        "8"
-        "9,monitor:HDMI-A-1"
-        "10,monitor:HDMI-A-1"
-      ];
+      # Currently using the hyprsplit plugin
+      # I don't set any specific behavior for specific workspaces,
+      # they are all configured the same
+      # workspace = [ ];
       #! -- -- -- --  -- -- general -- -- -- -- -- --  #
       general = with config.colorScheme.palette; {
         border_size = 1;
@@ -67,10 +73,10 @@
         };
       };
       #! -- -- -- --  -- -- input -- -- -- -- -- -- #
-      input = {
-        kb_layout = "us,ru";
-        kb_model = "pc104";
-        kb_options = "grp:alt_shift_toggle";
+      input = with config.desktop.devices.keyboard; {
+        kb_layout = kb_layout;
+        kb_model = kb_model;
+        kb_options = kb_options;
         numlock_by_default = true;
         follow_mouse = 1;
         touchpad = {
@@ -93,12 +99,6 @@
       };
       #! -- -- -- --  -- -- rules -- -- -- -- -- --  #
       windowrulev2 = [
-        # default workspace position
-        "workspace 1, class:^(firefox)$"
-        "workspace 3, class:^(org.telegram.desktop)$"
-        "workspace 3, class:^(Mattermost)$"
-        "workspace 4, class:^(code-url-handler)$"  # VSCode
-        "workspace 6, class:^(zoom)$"
         # default floating
         "float,       class:^(nm-connection-editor)"
         "float,       class:^(.blueman-manager-wrapped)"
@@ -119,7 +119,12 @@
         # "ignorezero,      swaync-notification-window"
       ];
       #! -- -- -- -- -- keybindings -- -- -- -- -- #
-      bind = with config.desktop.scripts.hyprland; [
+      bind = with config.desktop.scripts.hyprland; let
+          # first monitor in the list is primary by default:
+          pm = builtins.elemAt config.desktop.devices.monitors 0;
+          resolution = "${toString pm.width}x${toString pm.height}@${toString pm.refreshRate}";
+          position = "${toString pm.x}x${toString pm.y}";
+        in [
           # ------------ #
           #  - GENERAL - #
           # ------------ #
@@ -148,6 +153,8 @@
           "$mod CTRL,  j, resizeactive, 0 20"
           "$mod CTRL,  k, resizeactive, 0 -20"
           "$mod CTRL,  l, resizeactive, 20 0"
+          # hyprsplit:
+          "$mod, G, split:grabroguewindows"
           # ---------- #
           #  - APPS -  #
           # ---------- # 
@@ -174,9 +181,16 @@
           ",XF86AudioLowerVolume,  exec, ${volume-down}"
           ",XF86AudioMute,         exec, ${volume-mute}"
           ",XF86AudioMicMute,      exec, ${mic-mute}"
+          # --------------- #
+          #  - SWITCHES -   #
+          # --------------- #
+          '',switch:on:Lid Switch,exec,hyprctl keyword monitor "${pm.name},disable"''
+          '',switch:off:Lid Switch,exec,hyprctl keyword monitor "${pm.name},${resolution},${position},1"''
         ]
         ++ (
-          # workspaces
+          # ----------------- #
+          #  - WORKSPACES -   #
+          # ----------------- #
           # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
           builtins.concatLists (builtins.genList (
               x: let
@@ -185,8 +199,8 @@
                 in
                   builtins.toString (x + 1 - (c * 10));
               in [
-                "$mod,        ${ws}, workspace,       ${toString (x + 1)}"
-                "$mod  SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+                "$mod,        ${ws}, split:workspace,       ${toString (x + 1)}"
+                "$mod  SHIFT, ${ws}, split:movetoworkspace, ${toString (x + 1)}"
               ]
             )
             10)
@@ -204,5 +218,13 @@
         force_zero_scaling = true;
       };
     };
+    #! -- -- -- -- -- extra config -- -- -- -- #
+    extraConfig = ''
+      plugin {
+          hyprsplit {
+              num_workspaces = 10
+          }
+      }
+    '';
   };
 }

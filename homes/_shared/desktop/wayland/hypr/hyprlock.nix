@@ -2,9 +2,10 @@
 # █▀█ ░█░ █▀▀ █▀▄ █▄▄ █▄█ █▄▄ █░█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }: lib.mkIf config.desktop.wayland.enable {
+{ inputs, config, pkgs, lib, ... }: lib.mkIf config.desktop.wayland.enable {
   programs.hyprlock = {
     enable = true;
+    package = pkgs.extra.hyprlock;
     settings = with config.colorScheme.palette; {
       general = {
         pam_module = "hyprlock";
