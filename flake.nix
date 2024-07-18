@@ -70,26 +70,14 @@
     system = "x86_64-linux";
     lib = nixpkgs.lib;
     pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
-    # Default desktop configurations:
-    desktopConf = {
-      pc = {
-        enable = true;
-        laptop.enable = false;
-      };
-      laptop = {
-        enable = true;
-        laptop.enable = true;
-      };
-      server = {
-        enable = false;
-        laptop.enable = false;
-      };
-    };
+    isDesktop = host: if builtins.hasAttr "desktop" host
+      then import host.desktop
+      else import ./modules/desktop/server.nix;
     # override nixosSystem func for create my NixOS and HM configurations:
     mkNixosSystem = host: lib.nixosSystem {
       specialArgs = {
         inherit system inputs;
-        desktop = lib.attrsets.attrByPath [ host.type ] "server" desktopConf;
+        host.desktop = isDesktop host;
       };
       modules = [
         host.configuration
@@ -97,7 +85,7 @@
           home-manager = {
             extraSpecialArgs = {
               inherit system inputs;
-              desktop = lib.attrsets.attrByPath [ host.type ] "server" desktopConf;
+              host.desktop = isDesktop host;
             };
             useGlobalPkgs = true;
             useUserPackages = true;
@@ -110,35 +98,32 @@
     nixosConfigurations = {
       desktop-laptop = mkNixosSystem {
         configuration = ./hosts/desktop-laptop/configuration.nix;
-        type = "laptop";
+        desktop = ./modules/desktop/laptop.nix;
         users = {
           stepan = ./homes/stepan/home.nix;
         };
       };
       desktop-workstation = mkNixosSystem {
       configuration = ./hosts/desktop-workstation/configuration.nix;
-        type = "pc";
+      desktop = ./modules/desktop/workstation.nix;
         users = {
           stepan = ./homes/stepan/home.nix;
         };
       };
       server-allsave = mkNixosSystem {
         configuration = ./hosts/server-allsave/configuration.nix;
-        type = "server";
         users = {
           admserv = ./homes/admserv/home.nix;
         };
       };
       vps-gliese = mkNixosSystem {
         configuration = ./hosts/vps-gliese/configuration.nix;
-        type = "server";
         users = {
           admvps = ./homes/admvps/home.nix;
         };
       };
       vps-solar = mkNixosSystem {
         configuration = ./hosts/vps-solar/configuration.nix;
-        type = "server";
         users = {
           admvps = ./homes/admvps/home.nix;
         };
