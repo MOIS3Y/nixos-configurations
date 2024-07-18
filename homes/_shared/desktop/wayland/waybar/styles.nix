@@ -84,6 +84,8 @@
       border-radius: 15px;
       border: 0px;
       transition: all 0.3s ease-in-out;
+      background-color: #${if variant == "dark" then base02 else base04};
+      color: #${if variant == "dark" then base02 else base04};
     }
 
     #workspaces button.active {
@@ -96,6 +98,10 @@
       border-radius: 15px;
     }
 
+    #workspaces button.visible {
+      background-color: #${base0E};
+      color: #${base0E};
+    }
     #workspaces button.persistent {
       background-color: #${base0D};
       color: #${base0D};
@@ -121,7 +127,7 @@
     #workspaces button:hover {
     box-shadow: inherit;
     text-shadow: inherit;
-    color: #${base0D};
+    color: #${base00};
     background-color: #${base0D};
     }
 

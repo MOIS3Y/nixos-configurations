@@ -6,11 +6,41 @@
   "hyprland/workspaces" = {
     window-rewrite = {};  # ? fix [warning] Waybar/discussions/2816
     format = "{icon}";
-    all-outputs = true;
+    format-icons = {
+      "1" = "1";
+      "2" = "2";
+      "3" = "3";
+      "4" = "4";
+      "5" = "5";
+      "6" = "6";
+      "7" = "7";
+      "8" = "8";
+      "9" = "9";
+      "10" = "0";
+      # Gasp! We’re lying here.
+      # https://github.com/shezdy/hyprsplit
+      "11" = "1";
+      "12" = "2";
+      "13" = "3";
+      "14" = "4";
+      "15" = "5";
+      "16" = "6";
+      "17" = "7";
+      "18" = "8";
+      "19" = "9";
+      "20" = "0";
+    };
+    all-outputs = false;  # ? false for hyprsplit
     active-only = false;
-    persistent-workspaces = { "*" = 8; };
+    persistent-workspaces = { "*" = 10; };
     on-scroll-up = "${switch-workspaces-to-right}";
     on-scroll-down = "${switch-workspaces-to-left}";
+  };
+  "hyprland/language" = {
+    format = " {}";
+    format-en = " us";
+    format-ru = " ru";
+    keyboard-name = config.desktop.devices.keyboard.name;
   };
   # ! doesn't work propertly on Hyprland (waiting...)
   # ? see https://github.com/hyprwm/Hyprland/discussions/1094
@@ -214,11 +244,6 @@
   };
   tray = {
     spacing = 10;
-  };
-  "hyprland/language" = {
-    format = " {}";
-    format-en = " us";
-    format-ru = " ru";
   };
   clock = {
     format = "󱑎 {:%H:%M}";
