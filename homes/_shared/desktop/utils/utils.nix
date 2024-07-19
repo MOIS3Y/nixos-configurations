@@ -27,7 +27,7 @@
   grim = "${getExe grim}";
   # H
   htop = "${getExe htop}";
-  hyprctl = "${hyprland}/bin/hyprctl";
+  hyprctl = "${extra.hyprland}/bin/hyprctl";
   hyprlock = "${getExe extra.hyprlock}";
   # I
   i3lock-run = "${pkgs.extra.i3lock-run}/bin/i3lock-run";
@@ -35,6 +35,7 @@
   kitty = "${getExe kitty}";
   # L
   lightctl = "${avizo}/bin/lightctl";
+  loginctl = "${systemd}/bin/loginctl";
   # N
   nautilus = "${getExe nautilus}";
   nil = "${getExe nil}";

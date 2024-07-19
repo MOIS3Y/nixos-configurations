@@ -47,5 +47,13 @@
   smart-hyprlock = "${pgrep} hyprlock || ${hyprlock}";
   dpms-off = "${hyprctl} dispatch dpms off";
   dpms-on = "${hyprctl} dispatch dpms on";
+  lock-session = "${loginctl} lock-session";
   suspend = "${systemctl} suspend";
+  lock-resume = pkgs.writeShellScript "hypridle-lock-resume.sh" ''
+    # This is a hack.
+    # I can't pass hyprlock as on-timeout because it resets the timer
+    # The problem is relevant with git version of Hyprland and hyprlock
+    ${hyprctl} dispatch dpms on 2>&1 > /tmp/lock-resume.log
+    ${smart-hyprlock}
+  '';
 }

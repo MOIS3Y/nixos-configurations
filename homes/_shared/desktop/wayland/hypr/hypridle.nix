@@ -9,28 +9,24 @@
     settings = {
       general = {
         lock_cmd = "${smart-hyprlock}";
-        after_sleep_cmd = "${smart-hyprlock}";
+        before_sleep_cmd = "${lock-session}";
+        after_sleep_cmd = "${dpms-on}";
       };
       listener = [
         {
-          timeout = 600;
+          timeout = 540;
           on-timeout = "${send-notify}";
           on-resume = "${kill-notify}";
         }
         {
-          timeout = 660;
-          on-timeout = "${smart-hyprlock}";
-        }
-        {
-          timeout = 720;
+          timeout = 600;
           on-timeout = "${dpms-off}";
-          on-resume = "${dpms-on}";
+          on-resume = "${lock-resume}";
         }
         {
           timeout = 900;
           on-timeout = "${suspend}";
         }
-        # add more listeners hrere ...
       ];
     };
   };
