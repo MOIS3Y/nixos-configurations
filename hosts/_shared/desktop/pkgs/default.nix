@@ -9,5 +9,6 @@
     libnotify
     pavucontrol
     xdg-utils
+    config.desktop.cursor.package  # ! required for sddm cursor theme
   ];
 }

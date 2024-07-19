@@ -2,13 +2,15 @@
 # █▀▀ █▄█ █ █░▀█ ░█░ ██▄ █▀▄ ░░ █▄▄ █▄█ █▀▄ ▄█ █▄█ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, ... }: {
-    home.pointerCursor = {
-      name = "catppuccin-mocha-blue-cursors";
-      package = pkgs.catppuccin-cursors.mochaBlue;
-      size = 24;
-      gtk.enable = true;
-      x11.enable = true;
-      x11.defaultCursor = "left_ptr";
+{ config, pkgs, lib, ... }: with lib; {
+  home.pointerCursor = with config.desktop; {
+    name = cursor.name;
+    package = cursor.package;
+    size = 24;
+    gtk.enable = true;
+    x11 = mkIf xorg.enable {
+      enable = true;
+      defaultCursor = "left_ptr";
+    };
   };
 }

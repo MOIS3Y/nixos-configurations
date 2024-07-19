@@ -13,6 +13,7 @@
         };
         extraPackages = with pkgs; [
           libsForQt5.qt5.qtgraphicaleffects
+          config.desktop.cursor.package  #? not working add it in systemPackages
         ];
         autoNumlock = true;
         theme = with config.colorScheme.palette; ''${
@@ -34,7 +35,7 @@
           }
         }'';
         settings = {
-          Theme = { CursorTheme = "catppuccin-mocha-blue-cursors"; };
+          Theme = { CursorTheme = config.desktop.cursor.name; };
         };
       };
     };

@@ -8,11 +8,13 @@
 
 { config, pkgs, lib, ... }: {
   imports = [
+    # Custom modules:
     ../../modules/assets
     ../../modules/colors
+    ../../modules/cursor
     ../../modules/desktop
     ../../modules/grub
-
+    # Shared configuration:
     ../_shared/boot
     ../_shared/console
     ../_shared/desktop
@@ -31,7 +33,7 @@
     ../_shared/users
     ../_shared/virtualisation
     ../_shared/xdg
-
+    # Host autogenerate hardware configuration:
     ./hardware-configuration.nix  # honor-vlr-w09
   ];
   # Override _shared configuration:
