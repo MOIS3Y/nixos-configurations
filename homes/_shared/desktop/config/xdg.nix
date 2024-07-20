@@ -4,8 +4,20 @@
 
 { config, pkgs, ... }: with pkgs.lib;
   let
+    # Shortcuts:
+    amberol = [ "io.bassi.Amberol.desktop" ];
     browser = [ "firefox.desktop" ];
+    chromium-browser = [ "chromium-browser.desktop" ];
+    discord = [ "discord.desktop" ];
     file-roller = [ "org.gnome.FileRoller.desktop" ];
+    inkscape = [ "org.inkscape.Inkscape.desktop" ];
+    imv = [ "imv.desktop" ];
+    vlc = [ "vlc.desktop" ];
+    mattermost = [ "Mattermost.desktop" ];
+    steam = [ "steam.desktop" ];
+    telegram = [ "telegramdesktop.desktop" ];
+    transmission-gtk = [ "transmission-gtk.desktop" ];
+    # Associations:
     associations = {
       "application/x-extension-htm" = browser;
       "application/x-extension-html" = browser;
@@ -74,28 +86,30 @@
       "text/html" = browser;
 
       "x-scheme-handler/about" = browser;
-      "x-scheme-handler/chrome" = [ "chromium-browser.desktop" ];
+      "x-scheme-handler/chrome" = chromium-browser;
       "x-scheme-handler/ftp" = browser;
       "x-scheme-handler/http" = browser;
       "x-scheme-handler/https" = browser;
       "x-scheme-handler/unknown" = browser;
-      "x-scheme-handler/discord" = [ "discord.desktop" ];
-      "x-scheme-handler/tg" = [ "telegramdesktop.desktop" ];
-      "x-scheme-handler/mattermost" = [ "Mattermost.desktop" ];
-      "x-scheme-handler/magnet" = [ "transmission-gtk.desktop" ];
-      "x-scheme-handler/steam" = [ "steam.desktop" ];
+      "x-scheme-handler/discord" = discord;
+      "x-scheme-handler/tg" = telegram;
+      "x-scheme-handler/mattermost" = mattermost;
+      "x-scheme-handler/magnet" = transmission-gtk;
+      "x-scheme-handler/steam" = steam;
 
       "compressed/*" = file-roller;
-      "audio/*" = [ "vlc.desktop" ];
-      "video/*" = [ "vlc.dekstop" ];
-      "image/png" = [ "imv.desktop" ];
-      "image/jpeg" = [ "imv.desktop" ];
-
+      "video/*" = vlc;
+      "audio/*" = amberol;
+      "audio/mpeg" = amberol;
+      "image/png" = imv;
+      "image/jpeg" = imv;
+      "image/svg+xml" = inkscape;
       "inode/directory" = [ "org.gnome.Nautilus.desktop;lf.desktop" ];
     };
 in {
   xdg = {
     enable = true;
+    # xdg-user-dirs:
     userDirs = {
       enable = true;
       createDirectories = true;
@@ -104,10 +118,42 @@ in {
         XDG_GAMES_DIR = "${config.home.homeDirectory}/Games";
       };
     };
+    # mime types:
+    mime = {
+      enable = true;
+    };
     mimeApps = {
       enable = true;
       associations.added = associations;
       defaultApplications = associations;
+    };
+    # portals:
+    portal = with pkgs; {
+      enable = true;
+      extraPortals = lib.mkForce ([
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-gnome
+      ] ++ (if config.wayland.windowManager.hyprland.enable == true
+        then [ pkgs.extra.xdg-desktop-portal-hyprland ]
+        else []
+      ));
+      configPackages = lib.mkForce ([
+        gnome.gnome-session
+      ] ++ (if config.wayland.windowManager.hyprland.enable == true
+        then [ pkgs.extra.hyprland ]
+        else []
+      ));
+      # ? below meaning ~/.config/xdg-desktop-portal/portals.conf:
+      # ? [preferred]
+      # ? default=gtk
+      # ? this overrides the default portal
+      # ? may have a negative impact on xdg-desktop-portal-hyprland
+      # ? see: https://github.com/nix-community/home-manager/blob/master/modules/misc/xdg-portal.nix
+      config = {
+        common = {
+          default = [ "gtk" ];
+        };
+      };
     };
   };
 }

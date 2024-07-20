@@ -32,7 +32,6 @@
     ../_shared/sound
     ../_shared/users
     ../_shared/virtualisation
-    ../_shared/xdg
     # Host autogenerate hardware configuration:
     ./hardware-configuration.nix  # honor-vlr-w09
   ];
