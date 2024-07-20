@@ -30,6 +30,7 @@
   environment.systemPackages = with pkgs; [
     at-spi2-atk  # required for polkit-gnome-authentication-agent-1
     adwaita-icon-theme  # required for most gnome apps
+    glib  # required for gnome-weather
     nautilus
     gnome-calculator
     gnome-calendar
