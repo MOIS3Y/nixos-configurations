@@ -28,6 +28,31 @@ in {
         they will be changed before closing the program;
         restarting will launch the program with the parameters specified here.
       '';
+      example = literalExpression ''
+        settings = {
+          General = { zoom = 1;};
+          Youtube = { favorite = true; };
+          main = { close-to-tray = true; };
+          notifications = { enabled = true; };
+          privacy = { enable-listening-history = true; };
+          private = {
+            remote-control-enabled = false;
+            show-close-to-tray-message = false;
+            show-favorite-services = true;
+          };
+          appearance = {
+            theme = "Custom";
+            toolbar-visible = true;
+            show-tray-icon = true;
+            accent = "#89b4fa";
+            background = "#1e1e2e";
+            foreground = "#cdd6f4";
+            primary-background = "#11111b";
+            primary-foreground = "#cdd6f4";
+            secondary-background = "#11111b";
+            secondary-foreground = "#cdd6f4";
+          };
+      '';
     };
   };
   config = lib.mkIf cfg.enable {

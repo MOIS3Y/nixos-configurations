@@ -9,6 +9,7 @@
     ../../modules/colors
     ../../modules/cursor
     ../../modules/desktop
+    ../../modules/programs
     # Shared configuration:
     ../_shared/desktop
     ../_shared/programs
