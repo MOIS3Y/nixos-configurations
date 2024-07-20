@@ -7,7 +7,6 @@
     gettext
     gimp
     gnumake
-    gradience
     inkscape
     poetry
     sassc
