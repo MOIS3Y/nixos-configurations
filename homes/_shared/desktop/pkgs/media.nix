@@ -4,6 +4,7 @@
 
 { config, pkgs, ... }: {
   home.packages = with pkgs; [
+    amberol
     celluloid
     delfin
     imv
