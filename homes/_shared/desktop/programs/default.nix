@@ -9,6 +9,7 @@
     ./kitty.nix
     ./lf.nix
     ./mangohud.nix
+    ./mellowplayer.nix
     ./wezterm.nix
   ];
 }
