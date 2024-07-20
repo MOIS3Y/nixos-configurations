@@ -12,8 +12,11 @@
     # add startup apps here ...
   '';
   launcher-toggle = pkgs.writeShellScript "hyprland-launcher-toggle.sh" ''
-    # TODO: automatic launcher detection
-    ${pgrep} wofi >/dev/null 2>&1 && ${pkill} wofi || ${wofi} --show drun
+    if ${pgrep} -f "${config.desktop.apps.launcher}" > /dev/null 2>&1; then
+      ${pkill} -f "${config.desktop.apps.launcher}"
+    else
+      ${config.desktop.apps.launcher}
+    fi
   '';
   brightness-up = "${lightctl} up";
   brightness-down = "${lightctl} down";
