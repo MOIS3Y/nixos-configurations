@@ -10,6 +10,7 @@
     ./gnome
     ./laptop
     ./pkgs
+    ./services
     ./wayland
     ./xorg
   ];

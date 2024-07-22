@@ -29,7 +29,6 @@
     ../_shared/security
     ../_shared/services
     ../_shared/sops
-    ../_shared/sound
     ../_shared/users
     ../_shared/virtualisation
     # Host autogenerate hardware configuration:
