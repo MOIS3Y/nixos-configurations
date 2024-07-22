@@ -8,9 +8,10 @@
 
 { config, pkgs, lib, ... }: {
   imports = [
+    # Custom modules:
     ../../modules/colors
     ../../modules/grub
-
+    # Shared configuration:
     ../_shared/console
     ../_shared/environment
     ../_shared/fonts
@@ -20,10 +21,10 @@
     ../_shared/programs
     ../_shared/users
     ../_shared/virtualisation
-
+    # Host autogenerate hardware configuration:
     ./hardware-configuration.nix
   ];
-
+  # Override _shared configuration:
   host = {
     boot = {
       grubTheme = "gigabyte";
@@ -43,6 +44,7 @@
       };
     };
     users = [ "admserv" ];
+    flake = "/home/admserv/.setup";
   };
 
   boot = {

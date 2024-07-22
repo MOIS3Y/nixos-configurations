@@ -53,11 +53,14 @@
         startWhenNeeded = true;
       };
     };
+    users = [ "stepan" ];
+    flake = "/home/stepan/.setup";
   };
 
   desktop = {
     games = {
       enable = true;
+      xpadneo = true;
       externalStorage = {
         enable = false;
       };
