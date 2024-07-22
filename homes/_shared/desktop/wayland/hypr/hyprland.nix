@@ -67,7 +67,7 @@
           enabled = true;
           size = 16;
           passes = 2; # higher then 1 expensive for GPU
-          xray = true;
+          xray = false;
           new_optimizations = true;
           ignore_opacity = true;
         };
@@ -99,6 +99,9 @@
       };
       #! -- -- -- --  -- -- rules -- -- -- -- -- --  #
       windowrulev2 = [
+        # tags
+        "tag +music, class:^(feishin|io.bassi.Amberol)"
+        "tag +music, title:^(.*Yandex Music.*)"
         # default floating
         "float,       class:^(nm-connection-editor)"
         "float,       class:^(.blueman-manager-wrapped)"
@@ -109,14 +112,17 @@
         "noblur,      class:^(zoom)"
         # size
         "size 350 700,class:^(org.gnome.Calculator)"
+        # opacity
+        "opacity 0.8 override 0.8 override 1.0 override, tag:music"
       ];
       layerrule = [
         # make some windows bg bluring
-        "blur,            logout_dialog"  #  wlogout
-        # "blur,            swaync-control-center"
-        # "blur,            swaync-notification-window"
-        # "ignorezero,      swaync-control-center"
-        # "ignorezero,      swaync-notification-window"
+        "blur,       logout_dialog"  #  wlogout
+        "xray 1,     logout_dialog"
+        # "blur,       swaync-control-center"
+        # "blur,       swaync-notification-window"
+        # "ignorezero, swaync-control-center"
+        # "ignorezero, swaync-notification-window"
       ];
       #! -- -- -- -- -- keybindings -- -- -- -- -- #
       bind = with config.desktop.scripts.hyprland; let
