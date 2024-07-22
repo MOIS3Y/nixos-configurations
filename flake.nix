@@ -96,39 +96,44 @@
     };
   in {
     nixosConfigurations = {
-      desktop-laptop = mkNixosSystem {
+      # desktops:
+      # -- -- -- -- -- -- -- --
+      laptop = mkNixosSystem {
         configuration = ./hosts/desktop-laptop/configuration.nix;
         desktop = ./modules/desktop/laptop.nix;
         users = {
           stepan = ./homes/stepan/home.nix;
         };
       };
-      desktop-workstation = mkNixosSystem {
-      configuration = ./hosts/desktop-workstation/configuration.nix;
-      desktop = ./modules/desktop/workstation.nix;
+      workstation = mkNixosSystem {
+        configuration = ./hosts/desktop-workstation/configuration.nix;
+        desktop = ./modules/desktop/workstation.nix;
         users = {
           stepan = ./homes/stepan/home.nix;
         };
       };
-      server-allsave = mkNixosSystem {
+      # servers:
+      # -- -- -- -- -- -- -- --
+      allsave = mkNixosSystem {
         configuration = ./hosts/server-allsave/configuration.nix;
         users = {
           admserv = ./homes/admserv/home.nix;
         };
       };
-      vps-gliese = mkNixosSystem {
+      # vps:
+      # -- -- -- -- -- -- -- --
+      gliese = mkNixosSystem {
         configuration = ./hosts/vps-gliese/configuration.nix;
         users = {
           admvps = ./homes/admvps/home.nix;
         };
       };
-      vps-solar = mkNixosSystem {
+      solar = mkNixosSystem {
         configuration = ./hosts/vps-solar/configuration.nix;
         users = {
           admvps = ./homes/admvps/home.nix;
         };
       };
-      # ... add more hosts here:
     };
   };
 }
