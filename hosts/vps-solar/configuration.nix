@@ -8,10 +8,11 @@
 
 { inputs, config, pkgs, ... }: {
   imports = [
+    # Custom modules:
     ../../modules/colors
-
+    # Shared configuration:
     ../_shared/console
-
+    # Host autogenerate hardware configuration:
     ./hardware-configuration.nix # virtual
   ];
 
@@ -64,7 +65,7 @@
       experimental-features = nix-command flakes
     '';
     settings = {
-      trusted-users = [ "admserv" ];
+      trusted-users = [ "admvps" ];
     };
   };
 
@@ -77,7 +78,15 @@
     })
   ];
 
-  programs.zsh.enable = true;
+  programs = {
+    nh = {
+      enable = true;
+      flake = "/home/admvps/.setup"; 
+    };
+    zsh = {
+      enable = true;
+    };
+  };
   
   services.openssh = {
     enable = true;
