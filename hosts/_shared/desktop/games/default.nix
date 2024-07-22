@@ -53,6 +53,7 @@ in {
   config = with pkgs; with lib; mkIf cfg.enable {
     programs.steam = {
       enable = true;
+      extest.enable = mkIf config.desktop.wayland.enable true;
       gamescopeSession = {
         enable = true;
       };
