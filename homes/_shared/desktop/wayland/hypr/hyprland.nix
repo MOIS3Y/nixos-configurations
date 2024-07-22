@@ -140,6 +140,7 @@
           # ------------ # 
           "$mod, w,   killactive"
           "$mod, TAB, togglefloating"
+          "$mod  SHIFT, TAB, fullscreen"
           # move focus with mod
           "$mod, h, movefocus, l"
           "$mod, j, movefocus, d"
