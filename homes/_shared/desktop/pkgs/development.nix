@@ -8,6 +8,7 @@
     gimp
     gnumake
     inkscape
+    insomnia
     poetry
     sassc
     sqlitebrowser
