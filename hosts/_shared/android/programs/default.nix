@@ -2,16 +2,8 @@
 # █▀▀ █▀▄ █▄█ █▄█ █▀▄ █▀█ █░▀░█ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, ... }: {
   imports = [
-    ./ssh
-    
-    ./git.nix
-    ./helix.nix
-    ./htop.nix
-    ./lf.nix
-    ./lsd.nix
-    ./nvchad.nix
-    ./zsh.nix
+    ./shutdown.nix
   ];
 }

@@ -10,6 +10,7 @@ in {
       type = types.enum [
         "stepan"
         "admserv"
+        "nix-on-droid"
         "empty"  # ? if user doesn't use matchBlocks
       ];
       default = "empty";

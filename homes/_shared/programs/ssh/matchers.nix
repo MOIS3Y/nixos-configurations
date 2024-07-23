@@ -4,6 +4,35 @@
 
 { config, ... }: {
   empty = {};
+  nix-on-droid = {
+    # TODO: create custom sops managment (can't install nix-sops on android)
+    # isp:
+    "services.isptech.ru" = {
+      user = "admserv";
+      identityFile = "${config.home.homeDirectory}/.ssh/ispsystem/go";
+      port = 2222;
+      hostname = "185.60.134.99";
+    };    
+    # self:
+    "allsave" = {
+      user = "admserv";
+      identityFile = "${config.home.homeDirectory}/.ssh/self/allsave";
+      port = 22;
+      hostname = "192.168.1.100";
+    };
+    "gliese" = {
+      user = "admvps";
+      identityFile = "${config.home.homeDirectory}/.ssh/self/gliese";
+      port = 22;
+      hostname = "gliese.zhukovsky.me";
+    };
+    "solar" = {
+      user = "admvps";
+      identityFile = "${config.home.homeDirectory}/.ssh/self/solar";
+      port = 2222;
+      hostname = "solar.zhukovsky.me";
+    };
+  };
   stepan = {
     # isp:
     "isp" = {
@@ -63,6 +92,12 @@
       identityFile = config.sops.secrets."private-keys/self/solar".path;
       port = 2222;
       hostname = "solar.zhukovsky.me";
+    };
+    "pixel" = {
+      user = "nix-on-droid";
+      identityFile = config.sops.secrets."private-keys/self/pixel".path;
+      port = 8022;
+      hostname = "pixel.zhukovsky.me";
     };
     # add more stepan matchers here ... 
   };
