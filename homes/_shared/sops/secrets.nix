@@ -17,6 +17,9 @@
     "private-keys/self/solar" = { 
       path = "${config.home.homeDirectory}/.ssh/self/solar"; 
     };
+    "private-keys/self/pixel" = { 
+      path = "${config.home.homeDirectory}/.ssh/self/pixel"; 
+    };
     "private-keys/ispsystem/go" = { 
       path = "${config.home.homeDirectory}/.ssh/ispsystem/go"; 
     };
@@ -38,6 +41,9 @@
     };
     "public-keys/self/solar" = { 
       path = "${config.home.homeDirectory}/.ssh/self/solar.pub"; 
+    };
+    "public-keys/self/pixel" = { 
+      path = "${config.home.homeDirectory}/.ssh/self/pixel.pub"; 
     };
     "public-keys/ispsystem/go" = { 
       path = "${config.home.homeDirectory}/.ssh/ispsystem/go.pub"; 

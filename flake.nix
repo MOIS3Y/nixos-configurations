@@ -13,6 +13,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Android:
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     # Extra:
     i3lock-color-wrapper = {
       url = "github:MOIS3Y/i3lock-color-wrapper";
@@ -66,10 +72,14 @@
     };
   };
   
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
+  outputs = { self, nixpkgs, home-manager, nix-on-droid, ... }@inputs: let
+    # Default system:
     system = "x86_64-linux";
+    # Shortcut:
     lib = nixpkgs.lib;
+    # Need for first install from flake:
     pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+    # Helpers:
     isDesktop = host: if builtins.hasAttr "desktop" host
       then import host.desktop
       else import ./modules/desktop/server.nix;
@@ -94,7 +104,29 @@
         }            
       ];
     };
+    # override nixOnDroidConfiguration func for android setup:
+    mkNixOnDroidSystem = host: nix-on-droid.lib.nixOnDroidConfiguration {
+      modules = [
+        host.configuration
+      ];
+      # for nix-on-droid:
+      extraSpecialArgs = {
+        inherit inputs;
+        home-config = {
+          config = host.home;
+          backupFileExtension = "hm-bak";
+          useGlobalPkgs = true;
+          # for hm:
+          extraSpecialArgs = { inherit inputs; };
+        };
+      };
+      pkgs = import nixpkgs {
+        system = "aarch64-linux";
+        config.allowUnfree = true;
+      };
+    };
   in {
+    # Linux:
     nixosConfigurations = {
       # desktops:
       # -- -- -- -- -- -- -- --
@@ -133,6 +165,15 @@
         users = {
           admvps = ./homes/admvps/home.nix;
         };
+      };
+    };
+    # Android:
+    nixOnDroidConfigurations = {
+      # primary
+      # -- -- -- -- -- -- -- -- --
+      pixel = mkNixOnDroidSystem {
+        configuration = ./hosts/phone-pixel/nix-on-droid.nix;
+        home = ./homes/nix-on-droid/home.nix;
       };
     };
   };
