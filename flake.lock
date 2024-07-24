@@ -609,11 +609,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1721231770,
-        "narHash": "sha256-kep88rvpOjO+PWzLvDAVCv9PUK+yWApZH8qVriDrJ/M=",
+        "lastModified": 1721833508,
+        "narHash": "sha256-octs3o8RrgMepxLpwf3hmGMRpVAxaKvbjOiRDlnhrHo=",
         "owner": "MOIS3Y",
         "repo": "nvchad4nix",
-        "rev": "e96ac73c20698709281804c28e18d6ca3c60cd8e",
+        "rev": "1cc87a23dfe3debecbe3bbbc32c625e84d15aa56",
         "type": "github"
       },
       "original": {
