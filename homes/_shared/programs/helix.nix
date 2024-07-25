@@ -4,7 +4,7 @@
 
 { config, pkgs, ... }: {
   programs.helix = {
-    enable = true;
+    enable = false;
     extraPackages = with pkgs; [
       lua-language-server
       marksman

@@ -16,7 +16,7 @@
     };
     sessionVariables = {
       PATH = "/home/${config.home.username}/.local/bin:$PATH";
-      EDITOR = "nvchad";
+      EDITOR = "nvim";
       VISUAL = "code";
     };
     shellAliases = {
