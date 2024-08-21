@@ -746,11 +746,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1721833508,
-        "narHash": "sha256-octs3o8RrgMepxLpwf3hmGMRpVAxaKvbjOiRDlnhrHo=",
+        "lastModified": 1724244905,
+        "narHash": "sha256-5JPKfkzjWsXIQx8xkaC/ynptGnJyspbAjFlXapFr8aE=",
         "owner": "MOIS3Y",
         "repo": "nvchad4nix",
-        "rev": "1cc87a23dfe3debecbe3bbbc32c625e84d15aa56",
+        "rev": "bef089e0af4d1434ae8f475fefe99c2aa348b0e4",
         "type": "github"
       },
       "original": {
