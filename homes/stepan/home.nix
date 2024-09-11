@@ -29,7 +29,7 @@
   desktop = {
     apps = with config.desktop.utils; {
       terminal = kitty;
-      spare-terminal = wezterm;
+      spare-terminal = alacritty;
       browser = firefox;
       filemanager = nautilus;
       launcher = wofi;

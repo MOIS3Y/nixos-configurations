@@ -64,7 +64,7 @@
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     };
     hyprlock = {
-      url = "github:hyprwm/hyprlock";
+      url = "github:hyprwm/hyprlock";  # ! broken with current hyprland
     };
     hyprsplit = {
       url = "github:shezdy/hyprsplit";

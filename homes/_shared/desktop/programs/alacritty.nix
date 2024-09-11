@@ -5,7 +5,7 @@
 { config, pkgs, ... }: {
   programs.alacritty = {
     package = pkgs.alacritty;
-    enable = false;
+    enable = true;
     settings = {
       env = {
         TERM = "xterm-256color";

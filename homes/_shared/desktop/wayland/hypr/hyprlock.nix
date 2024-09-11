@@ -5,7 +5,7 @@
 { inputs, config, pkgs, lib, ... }: lib.mkIf config.desktop.wayland.enable {
   programs.hyprlock = {
     enable = true;
-    package = pkgs.extra.hyprlock;
+    package = pkgs.hyprlock;
     settings = with config.colorScheme.palette; {
       general = {
         pam_module = "hyprlock";

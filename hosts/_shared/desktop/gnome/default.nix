@@ -17,7 +17,6 @@
     gnome-keyring.enable = true;
     evolution-data-server.enable = true;
     gnome-online-accounts.enable = true;
-    gnome-online-miners.enable = true;
     tracker-miners.enable = true;
   };
   # programs:
@@ -35,7 +34,6 @@
     gnome-calculator
     gnome-calendar
     gnome-online-accounts-gtk
-    gnome.gnome-weather
   ];
   # daemons:
   systemd.user.services = { 

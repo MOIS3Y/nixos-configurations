@@ -5,6 +5,7 @@
 { pkgs, lib, ... }: with pkgs; with lib; {
   # A
   awk = "${gawk}/bin/awk";
+  alacritty = "${getExe alacritty}";
   # B
   bash = "${getExe bash}";
   btm = "${getExe bottom}";
@@ -28,7 +29,7 @@
   # H
   htop = "${getExe htop}";
   hyprctl = "${extra.hyprland}/bin/hyprctl";
-  hyprlock = "${getExe extra.hyprlock}";
+  hyprlock = "${getExe hyprlock}";
   # I
   i3lock-run = "${pkgs.extra.i3lock-run}/bin/i3lock-run";
   # K
