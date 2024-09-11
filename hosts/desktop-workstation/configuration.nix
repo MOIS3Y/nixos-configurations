@@ -67,6 +67,9 @@
       externalStorage = {
         enable = true;
       };
+      extraPackages = [
+        pkgs.bottles
+      ];
     };
   };
 
