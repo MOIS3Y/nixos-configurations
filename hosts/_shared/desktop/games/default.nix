@@ -4,7 +4,6 @@
 
 { config, pkgs, lib, ... }: let
   cfg = config.desktop.games;
-  extraPackages = [];
 in {
   options.desktop.games = with lib; {
     xpadneo = mkOption {
@@ -14,6 +13,7 @@ in {
     };
     extraPackages = mkOption {
       type = types.listOf types.package;
+      default = [];
       description = ''
         List of additional packages that will be installed with steam
         The list specified here will expand the standard list.
@@ -58,7 +58,7 @@ in {
         enable = true;
       };
     };
-    environment.systemPackages = [ protonup-qt ] ++ extraPackages;
+    environment.systemPackages = [ protonup-qt ] ++ cfg.extraPackages;
     hardware.xpadneo.enable = cfg.xpadneo;
     systemd = mkIf cfg.externalStorage.enable {
       mounts = [
