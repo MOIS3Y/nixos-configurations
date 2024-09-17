@@ -28,7 +28,7 @@
   grim = "${getExe grim}";
   # H
   htop = "${getExe htop}";
-  hyprctl = "${extra.hyprland}/bin/hyprctl";
+  hyprctl = "${hyprland}/bin/hyprctl";
   hyprlock = "${getExe hyprlock}";
   # I
   i3lock-run = "${pkgs.extra.i3lock-run}/bin/i3lock-run";

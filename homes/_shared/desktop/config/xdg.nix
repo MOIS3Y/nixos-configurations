@@ -140,13 +140,13 @@ in {
         xdg-desktop-portal-gtk
         xdg-desktop-portal-gnome
       ] ++ (if config.wayland.windowManager.hyprland.enable == true
-        then [ pkgs.extra.xdg-desktop-portal-hyprland ]
+        then [ pkgs.xdg-desktop-portal-hyprland ]
         else []
       ));
       configPackages = lib.mkForce ([
         gnome-session
       ] ++ (if config.wayland.windowManager.hyprland.enable == true
-        then [ pkgs.extra.hyprland ]
+        then [ pkgs.hyprland ]
         else []
       ));
       # ? below meaning ~/.config/xdg-desktop-portal/portals.conf:

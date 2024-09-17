@@ -2,12 +2,18 @@
 # █▀█ ░█░ █▀▀ █▀▄ █▄▄ █▀█ █░▀█ █▄▀ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -
 
+# ! For stable operation I returned to the version from nixpkgs
+# ? Hyprsplit plugin can be enabled after it is added to nixpkgs-unstable
+# ? see: https://github.com/NixOS/nixpkgs/pull/342075
+
+
 { config, pkgs, lib, ... }: with lib; mkIf config.desktop.wayland.enable {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = pkgs.extra.hyprland;
+    package = pkgs.hyprland;
     plugins = [
-      pkgs.extra.hyprsplit
+      # TODO: uncomment below when Hyprsplit becomes available
+      # pkgs.hyprsplit
     ];
     xwayland.enable = true;
     settings = {
@@ -102,6 +108,12 @@
         # tags
         "tag +music, class:^(feishin|io.bassi.Amberol)"
         "tag +music, title:^(.*Yandex Music.*)"
+        # default workspace position
+        "workspace 1, class:^(firefox)$"
+        "workspace 3, class:^(org.telegram.desktop)$"
+        "workspace 3, class:^(Mattermost)$"
+        "workspace 4, class:^(code-url-handler)$"  # VSCode
+        "workspace 6, class:^(zoom)$"
         # default floating
         "float,       class:^(nm-connection-editor)"
         "float,       class:^(.blueman-manager-wrapped)"
@@ -161,7 +173,8 @@
           "$mod CTRL,  k, resizeactive, 0 -20"
           "$mod CTRL,  l, resizeactive, 20 0"
           # hyprsplit:
-          "$mod, G, split:grabroguewindows"
+          # TODO: uncomment below when Hyprsplit becomes available
+          # "$mod, G, split:grabroguewindows"
           # ---------- #
           #  - APPS -  #
           # ---------- # 
@@ -191,8 +204,9 @@
           # --------------- #
           #  - SWITCHES -   #
           # --------------- #
-          '',switch:on:Lid Switch,exec,hyprctl keyword monitor "${pm.name},disable"''
-          '',switch:off:Lid Switch,exec,hyprctl keyword monitor "${pm.name},${resolution},${position},1"''
+          # ! broken see: https://github.com/hyprwm/Hyprland/issues/7055
+          # '',switch:on:Lid Switch,exec,hyprctl keyword monitor "${pm.name},disable"''
+          # '',switch:off:Lid Switch,exec,hyprctl keyword monitor "${pm.name},${resolution},${position},1"''
         ]
         ++ (
           # ----------------- #
@@ -206,8 +220,11 @@
                 in
                   builtins.toString (x + 1 - (c * 10));
               in [
-                "$mod,        ${ws}, split:workspace,       ${toString (x + 1)}"
-                "$mod  SHIFT, ${ws}, split:movetoworkspace, ${toString (x + 1)}"
+                "$mod,        ${ws}, focusworkspaceoncurrentmonitor, ${toString (x + 1)}"
+                "$mod  SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+                # TODO: uncomment below when Hyprsplit becomes available
+                # "$mod,        ${ws}, split:workspace,       ${toString (x + 1)}"
+                # "$mod  SHIFT, ${ws}, split:movetoworkspace, ${toString (x + 1)}"
               ]
             )
             10)
@@ -227,11 +244,12 @@
     };
     #! -- -- -- -- -- extra config -- -- -- -- #
     extraConfig = ''
-      plugin {
-          hyprsplit {
-              num_workspaces = 10
-          }
-      }
+      # TODO: uncomment below when Hyprsplit becomes available
+      # plugin {
+      #     hyprsplit {
+      #         num_workspaces = 10
+      #     }
+      # }
     '';
   };
 }

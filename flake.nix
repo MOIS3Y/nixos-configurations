@@ -60,16 +60,6 @@
       url = "github:MOIS3Y/KvLibadwaita?ref=gradience";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    };
-    hyprlock = {
-      url = "github:hyprwm/hyprlock";  # ! broken with current hyprland
-    };
-    hyprsplit = {
-      url = "github:shezdy/hyprsplit";
-      inputs.hyprland.follows = "hyprland"; # ! required
-    };
   };
   
   outputs = { self, nixpkgs, home-manager, nix-on-droid, ... }@inputs: let
