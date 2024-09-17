@@ -144,7 +144,7 @@ in {
         else []
       ));
       configPackages = lib.mkForce ([
-        gnome.gnome-session
+        gnome-session
       ] ++ (if config.wayland.windowManager.hyprland.enable == true
         then [ pkgs.extra.hyprland ]
         else []
