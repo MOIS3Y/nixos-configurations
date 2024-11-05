@@ -76,25 +76,38 @@
 
   nix.settings.trusted-users = lib.mkForce [ "admserv" ];
 
-  services.openssh = {
-    enable = true;
-    startWhenNeeded = true;
-    allowSFTP = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-      LogLevel = "INFO";
+  services = { 
+    openssh = {
+      enable = true;
+      startWhenNeeded = true;
+      allowSFTP = true;
+      settings = {
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+        LogLevel = "INFO";
+      };
+      listenAddresses = [
+        {
+          addr = "0.0.0.0";
+          port = 22;  # default
+        }
+      ];
+      banner = ''
+        ▄▀█ █░░ █░░ █▀ ▄▀█ █░█ █▀▀
+        █▀█ █▄▄ █▄▄ ▄█ █▀█ ▀▄▀ ██▄
+      '';
     };
-    listenAddresses = [
-      {
-        addr = "0.0.0.0";
-        port = 22;  # default
-      }
-    ];
-    banner = ''
-      ▄▀█ █░░ █░░ █▀ ▄▀█ █░█ █▀▀
-      █▀█ █▄▄ █▄▄ ▄█ █▀█ ▀▄▀ ██▄
-    '';
+    printing = {
+      enable = true;
+      startWhenNeeded = true;
+      listenAddresses = [ "*:631" ];  # all
+      drivers = [ pkgs.pantum-driver ];
+    };
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
   };
 
   users.users.admserv.openssh.authorizedKeys.keys = [
