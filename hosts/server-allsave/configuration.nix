@@ -105,6 +105,12 @@
       listenAddresses = [ "*:631" ];  # all
       allowFrom = [ "all" ];
       drivers = [ pkgs.pantum-driver ];
+      clientConf = ''
+        ServerName print.zhukovsky.me
+      '';
+      extraConf = ''
+        ServerAlias *
+      '';
     };
     avahi = {
       enable = true;
