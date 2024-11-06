@@ -14,5 +14,9 @@
         LogLevel = "INFO";
       };
     };
+    printing = {
+      enable = true;
+      startWhenNeeded = true;
+    };
   };
 }
