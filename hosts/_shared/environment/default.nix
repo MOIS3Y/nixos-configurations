@@ -31,7 +31,6 @@
       ntfs3g
       rsync
       ripgrep
-      system-config-printer
       tree
       tty-clock
       wget
