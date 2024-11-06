@@ -100,7 +100,10 @@
     printing = {
       enable = true;
       startWhenNeeded = true;
+      webInterface = true;  # default value
+      defaultShared = true;
       listenAddresses = [ "*:631" ];  # all
+      allowFrom = [ "all" ];
       drivers = [ pkgs.pantum-driver ];
     };
     avahi = {
