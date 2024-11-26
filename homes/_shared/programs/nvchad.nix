@@ -13,6 +13,9 @@
       docker-compose-language-service
       dockerfile-language-server-nodejs
       emmet-language-server
+      vscode-langservers-extracted
+      typescript-language-server
+      vue-language-server
       nixd
       (python3.withPackages(ps: with ps; [
         python-lsp-server
