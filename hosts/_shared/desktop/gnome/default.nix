@@ -17,7 +17,7 @@
     gnome-keyring.enable = true;
     evolution-data-server.enable = true;
     gnome-online-accounts.enable = true;
-    tracker-miners.enable = true;
+    localsearch.enable = true;
   };
   # programs:
   programs = {
