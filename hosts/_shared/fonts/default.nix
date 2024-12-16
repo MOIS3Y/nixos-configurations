@@ -8,7 +8,7 @@
       inter
       liberation_ttf
       noto-fonts-emoji
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      nerd-fonts.jetbrains-mono
       roboto
       ubuntu_font_family
     ];
