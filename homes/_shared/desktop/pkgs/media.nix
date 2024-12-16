@@ -5,6 +5,7 @@
 { config, pkgs, ... }: {
   home.packages = with pkgs; [
     amberol
+    cassette
     celluloid
     delfin
     feishin
