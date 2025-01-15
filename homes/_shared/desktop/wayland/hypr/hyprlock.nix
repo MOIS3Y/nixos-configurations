@@ -7,9 +7,6 @@
     enable = true;
     package = pkgs.hyprlock;
     settings = with config.colorScheme.palette; {
-      general = {
-        pam_module = "hyprlock";
-      };
       background = [
         {
           monitor = "";
