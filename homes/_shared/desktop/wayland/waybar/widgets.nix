@@ -235,7 +235,7 @@
       drawer = {
         transition-duration = 500;
         children-class = "";
-        transition-left-to-right = true;
+        transition-left-to-right = false;
       };
     modules = [
       "backlight"
@@ -335,7 +335,7 @@
       drawer = {
         transition-duration = 500;
         children-class = "";
-        transition-left-to-right = true;
+        transition-left-to-right = false;
       };
     modules = [
       "pulseaudio"
@@ -352,11 +352,11 @@
         tooltip = true;
         tooltip-icon-size = 24;
       }
-      {
-        type = "audio-out";
-        tooltip = true;
-        tooltip-icon-size = 24;
-      }
+      # {
+      #   type = "audio-out";
+      #   tooltip = true;
+      #   tooltip-icon-size = 24;
+      # }
       {
         type = "audio-in";
         tooltip = true;
