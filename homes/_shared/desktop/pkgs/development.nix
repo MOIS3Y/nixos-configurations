@@ -12,7 +12,8 @@
     poetry
     sassc
     sqlitebrowser
-    vault 
+    # vault  #! local building
+    vault-bin  #! In Russia, loading is available only with VPN
     vscode
     # Languages:
     (lua.withPackages(ps: with ps; [ luarocks ]))
