@@ -60,7 +60,7 @@
   desktop = {
     games = {
       enable = true;
-      xpadneo = true;
+      xpadneo.enable = true;
       externalStorage = {
         enable = false;
       };

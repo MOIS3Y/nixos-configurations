@@ -4,16 +4,18 @@
 
 { config, pkgs, lib, ... }: let
   cfg = config.desktop.games;
-in {
-  options.desktop.games = with lib; {
-    xpadneo = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable gamepad support";
-    };
+  inherit (lib)
+    mkIf
+    mkOption
+    mkEnableOption
+    literalExpression
+    types;
+  in {
+  options.desktop.games = {
+    xpadneo.enable = mkEnableOption "Enable xbox gamepad support";
     extraPackages = mkOption {
       type = types.listOf types.package;
-      default = [];
+      default = [ ];
       description = ''
         List of additional packages that will be installed with steam
         The list specified here will expand the standard list.
@@ -50,7 +52,7 @@ in {
       };
     };
   };
-  config = with pkgs; with lib; mkIf cfg.enable {
+  config = mkIf cfg.enable {
     programs.steam = {
       enable = true;
       extest.enable = mkIf config.desktop.wayland.enable true;
@@ -58,8 +60,8 @@ in {
         enable = true;
       };
     };
-    environment.systemPackages = [ protonup-qt ] ++ cfg.extraPackages;
-    hardware.xpadneo.enable = cfg.xpadneo;
+    environment.systemPackages = [ pkgs.protonup-qt ] ++ cfg.extraPackages;
+    hardware.xpadneo.enable = cfg.xpadneo.enable;
     systemd = mkIf cfg.externalStorage.enable {
       mounts = [
         {
