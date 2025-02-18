@@ -4,8 +4,15 @@
 
 { config, pkgs, lib, ... }: let
   cfg = config.host.hardware;
+  inherit (lib)
+    mkOption
+    mkEnableOption
+    mkIf
+    types
+    optionals
+    literalMD;
 in {
-  options.host.hardware = with lib; {
+  options.host.hardware = {
     motherboard = mkOption {
       type = types.nullOr (types.enum [ "amd" "intel" ]);
       default = if config.hardware.cpu.intel.updateMicrocode then "intel"
@@ -38,7 +45,7 @@ in {
     openRGB = mkEnableOption "Enable openRGB";
     ddcci = mkEnableOption "Enable ddcci support for control external monitors";
   };
-  config = with pkgs; with lib; {
+  config = {
     services.hardware.openrgb = mkIf cfg.openRGB {
       enable = true;
       package = pkgs.openrgb-with-all-plugins;
@@ -62,7 +69,7 @@ in {
       options amdgpu ppfeaturemask=0xFFF7FFFF
     '';
     systemd = mkIf cfg.gpu {
-      packages = [ lact ];
+      packages = [ pkgs.lact ];
       services = {
         # ? daemon required for managment gpu settings
         # ? see: https://github.com/NixOS/nixpkgs/issues/317544
@@ -73,9 +80,9 @@ in {
       };
     };
     environment.systemPackages = mkIf cfg.gpu [
-      amdgpu_top
-      lact
-      nvtopPackages.amd
+      pkgs.amdgpu_top
+      pkgs.lact
+      pkgs.nvtopPackages.amd
     ];
     # DDCCI: 
     boot.extraModulePackages = mkIf cfg.ddcci [ config.boot.kernelPackages.ddcci-driver ]; 
@@ -84,7 +91,7 @@ in {
       ++ optionals (cfg.motherboard == "amd") [ "i2c-piix4" ]
       ++ optionals (cfg.motherboard == "intel") [ "i2c-i801" ]
     );
-    services.udev.packages = mkIf cfg.ddcci [ ddcutil ]; #! MSI Monitor, Model:G2712
+    services.udev.packages = mkIf cfg.ddcci [ pkgs.ddcutil ]; #! MSI Monitor, Model:G2712
     # SSD:
     services.fstrim.enable = true; 
   };
