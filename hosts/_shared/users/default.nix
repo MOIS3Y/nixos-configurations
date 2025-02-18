@@ -4,10 +4,15 @@
 
 { config, pkgs, lib, ... }: let
   cfg = config.host;
+  inherit (lib)
+    mkOption
+    attrsets
+    types
+    literalExpression;
 in {
-  options.host = with lib; {
+  options.host = {
     users = mkOption {
-      type = with types; listOf (enum [ "stepan" "admserv" ]);
+      type = types.listOf (types.enum [ "stepan" "admserv" ]);
       default = [ "stepan" ];
       description = "List of preconfigured users";
       example = literalExpression ''
@@ -15,7 +20,7 @@ in {
       '';
     };
   };
-  config = with lib; {
+  config = {
     users = {
       users = attrsets.getAttrs config.host.users (
         import ./users.nix { inherit config pkgs;}
