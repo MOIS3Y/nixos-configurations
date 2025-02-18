@@ -91,15 +91,10 @@
       name = "gtk.css";
       text = "${extraCss}";
     };
-    # themeName = with config.colorScheme; "${
-    #   if variant == "dark" then "Tela-circle-blue-dark"
-    #   else
-    #     "Tela-circle-blue"
-    # }";
     themeName = with config.colorScheme; "${
-      if variant == "dark" then "Papirus-Dark"
+      if variant == "dark" then "Tela-circle-blue-dark"
       else
-        "Papirus-Light"
+        "Tela-circle-blue"
     }";
   in {
   gtk = {
@@ -111,11 +106,9 @@
     };
     iconTheme = {
       name = "${themeName}";
-      package = pkgs.papirus-icon-theme;
-      #! broken since 02.24 ERROR: noBrokenSymlinks
-      # package = pkgs.tela-circle-icon-theme.override {
-      #   allColorVariants = true;
-      # };
+      package = pkgs.tela-circle-icon-theme.override {
+        allColorVariants = true;
+      };
     };
     font = {
       name = "Ubuntu";
