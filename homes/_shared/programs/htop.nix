@@ -4,8 +4,11 @@
 
 { config, pkgs, lib, ... }: let
   cfg = config.programs.htop;
+  inherit (lib)
+    mkOption
+    types;
 in {
-  options.programs.htop = with lib; {
+  options.programs.htop = {
     os = mkOption {
       type = types.enum [
         "linux"

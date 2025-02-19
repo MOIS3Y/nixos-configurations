@@ -4,8 +4,12 @@
 
 { config, pkgs, lib, ... }: let
   cfg = config.programs.ssh;
+  inherit (lib)
+    mkOption
+    types
+    attrsets;
 in {
-  options.programs.ssh = with lib; {
+  options.programs.ssh = {
     userMatchBlocks = mkOption {
       type = types.enum [
         "stepan"
@@ -17,7 +21,7 @@ in {
       description = "Pre-configured user-specific matchBlocks";
     };
   };
-  config = with lib; {
+  config = {
     programs.ssh = {
       enable = true;
       extraOptionOverrides = {
