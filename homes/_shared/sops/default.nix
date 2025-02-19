@@ -2,7 +2,12 @@
 # ▄█ █▄█ █▀▀ ▄█ ▄
 # -- -- -- -- -- 
 
-{ inputs, config, pkgs, lib, ... }: with lib; {
+{ inputs, config, pkgs, lib, ... }: let
+  inherit (lib)
+    mkOption
+    types
+    attrsets;
+in {
   imports = [
     inputs.sops-nix.homeManagerModules.sops
   ];
