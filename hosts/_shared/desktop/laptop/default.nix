@@ -2,8 +2,8 @@
 # █▄▄ █▀█ █▀▀ ░█░ █▄█ █▀▀ ▄
 # -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }: with lib; {
-  services = mkIf config.desktop.laptop.enable {
+{ config, pkgs, lib, ... }: {
+  services = lib.mkIf config.desktop.laptop.enable {
     logind = {
       lidSwitch = "suspend";
       lidSwitchExternalPower = "suspend";

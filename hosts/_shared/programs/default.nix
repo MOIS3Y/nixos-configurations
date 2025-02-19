@@ -4,9 +4,12 @@
 
 { config, pkgs, lib, ... }: let
   cfg = config.host;
+  inherit (lib)
+    mkOption
+    types;
 in {
-  options.host.flake = lib.mkOption {
-    type = lib.types.nullOr lib.types.path;
+  options.host.flake = mkOption {
+    type = types.nullOr types.path;
     default = null;
     description = ''
       The path that will be used for the `FLAKE` environment variable.

@@ -4,8 +4,16 @@
 
 { config, pkgs, lib, ... }: let
   cfg = config.host.virtualisation;
+  inherit (lib)
+    mkOption
+    mkForce
+    mkIf
+    mkEnableOption
+    attrsets
+    types
+    literalExpression;
 in {
-  options.host.virtualisation = with lib; {
+  options.host.virtualisation = {
     libvirtd = {
       enable = mkEnableOption "Enable KVM";
       startWhenNeeded = mkEnableOption ''
@@ -25,7 +33,7 @@ in {
         docker.wantedBy = lib.mkForce [];
       '';
       oci-containers = mkOption {
-        type = with types; listOf (enum [ "portainer-agent" ]);
+        type = types.listOf (types.enum [ "portainer-agent" ]);
         default = [];
         description = "List of preconfigured oci-containers";
         example = literalExpression ''
@@ -34,7 +42,7 @@ in {
       };
     };
   };
-  config = with lib; {
+  config = {
     virtualisation.libvirtd = {
       enable = mkIf cfg.libvirtd.enable true;
     };

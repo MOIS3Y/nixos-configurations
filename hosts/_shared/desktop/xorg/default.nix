@@ -4,6 +4,14 @@
 
 { config, pkgs, lib, ... }: let
   cfg = config.desktop.xorg;
+  inherit (lib)
+    mkOption
+    mkEnableOption
+    mkIf
+    literalExpression
+    types
+    getExe
+    attrsets;
   windowManagers = {
     awesome = {
       enable = true;
@@ -21,10 +29,10 @@
     # add more WM here ...
   };
 in {
-  options.desktop.xorg = with lib; {
+  options.desktop.xorg = {
     touchpad = mkEnableOption "Enable touchpad support services";
     windowManager = mkOption {
-      type = with types; listOf (enum [ "awesome" "qtile" ]);
+      type = types.listOf (types.enum [ "awesome" "qtile" ]);
       default = [ "awesome" ];
       description = "List of preconfigured window managers";
       example = literalExpression ''
@@ -40,7 +48,7 @@ in {
       ];
     };
   };
-  config = with pkgs; with lib; mkIf cfg.enable {
+  config = mkIf cfg.enable {
     services.xserver = {
       enable = true;
       windowManager = attrsets.getAttrs cfg.windowManager windowManagers;
@@ -73,11 +81,11 @@ in {
         partOf = [ "graphical-session.target" ];
         serviceConfig = {
           Type = "simple";
-          ExecStart = "${getExe touchegg}";
+          ExecStart = "${getExe pkgs.touchegg}";
         };
       };
     };
     # ? needed for awesomeWM sound scripts (pactl)
-    environment.systemPackages = [ pulseaudio ]; 
+    environment.systemPackages = [ pkgs.pulseaudio ]; 
   };
 }
