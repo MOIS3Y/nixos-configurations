@@ -13,7 +13,6 @@
     ../../modules/colors
     ../../modules/cursor
     ../../modules/desktop
-    ../../modules/grub
     # Shared configuration:
     ../_shared/boot
     ../_shared/console

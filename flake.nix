@@ -36,6 +36,9 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    distro-grub-themes = {
+      url = "github:AdisonCavani/distro-grub-themes";
+    };
     aladdin4nix = {
       url = "github:MOIS3Y/aladdin4nix";
       inputs.nixpkgs.follows = "nixpkgs";

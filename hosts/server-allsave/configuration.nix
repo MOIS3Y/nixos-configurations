@@ -10,7 +10,6 @@
   imports = [
     # Custom modules:
     ../../modules/colors
-    ../../modules/grub
     # Shared configuration:
     ../_shared/console
     ../_shared/environment
