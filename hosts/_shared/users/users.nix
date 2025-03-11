@@ -6,7 +6,14 @@
   stepan = {
     isNormalUser = true;
     description = "Stepan Zhukovsky";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "input" "i2c" ];
+    extraGroups = [ 
+      "networkmanager"
+      "wireshark"
+      "wheel"
+      "libvirtd"
+      "input"
+      "i2c"
+    ];
     shell = pkgs.zsh;
     packages = with pkgs; [] ++ ( if config.host.virtualisation.libvirtd.enable
       then [ virt-manager ]
