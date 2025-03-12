@@ -14,30 +14,14 @@
     ../_shared/console
     ../_shared/environment
     ../_shared/fonts
-    ../_shared/hardware
     ../_shared/nix
     ../_shared/nixpkgs
-    ../_shared/programs
     ../_shared/sops
     ../_shared/users
     # Host autogenerate hardware configuration:
     ./hardware-configuration.nix
   ];
   # Override _shared configuration:
-  host = {
-    boot = {
-      grubTheme = "gigabyte";
-    };
-    hardware = {
-      cpu = "amd";
-      updateMicrocode = true;
-      bluetooth = false;
-      graphics = false;
-    };
-    users = [ "admserv" ];
-    flake = "/home/admserv/.setup";
-  };
-
   boot = {
     loader.grub = {
       device = "/dev/disk/by-id/ata-HP_SSD_S650_120GB_HASA12100101184";
@@ -54,6 +38,9 @@
         MAILFROM allsave@zhukovsky.me
       '';
     };
+    extraModprobeConfig = ''
+      options kvm_amd nested=1
+    '';
   };
 
   networking = {
@@ -117,6 +104,16 @@
   };
 
   programs = {
+    nh = {
+      enable = true;
+      flake = "/home/admserv/.setup";
+    };
+    ssh = {
+      startAgent = true;
+    };
+    zsh = {
+      enable = true;
+    };
     msmtp = {
       enable = true;
       accounts = {
@@ -160,6 +157,10 @@
       };
       # add more secrets here ...
     };
+  };
+
+  hardware = {
+    cpu.amd.updateMicrocode = true;
   };
 
   time.timeZone = "Asia/Chita";
