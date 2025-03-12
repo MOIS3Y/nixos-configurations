@@ -18,8 +18,8 @@
     ../_shared/nix
     ../_shared/nixpkgs
     ../_shared/programs
+    ../_shared/sops
     ../_shared/users
-    ../_shared/virtualisation
     # Host autogenerate hardware configuration:
     ./hardware-configuration.nix
   ];
@@ -33,14 +33,6 @@
       updateMicrocode = true;
       bluetooth = false;
       graphics = false;
-    };
-    virtualisation = {
-      docker = {
-        enable = true;
-      };
-      libvirtd = {
-        enable = false;  # TODO: enable after configure storage
-      };
     };
     users = [ "admserv" ];
     flake = "/home/admserv/.setup";
@@ -58,15 +50,21 @@
         ARRAY /dev/md1 level=raid1 num-devices=2 metadata=1.2 name=allsave:1 UUID=1408f414:46bd022f:a3be13b0:c1560046
         ARRAY /dev/md2 level=raid1 num-devices=2 metadata=1.2 name=allsave:2 UUID=4db185fa:54cf0828:89ed0f44:1b63382a
         ARRAY /dev/md3 level=raid1 num-devices=2 metadata=1.2 name=allsave:3 UUID=14c9d6da:2e618286:df380868:d8d07f27
+        MAILADDR stepan@zhukovsky.me
+        MAILFROM allsave@zhukovsky.me
       '';
     };
   };
 
   networking = {
     hostName = "allsave";
-    networkmanager = {
-      enable = true;
-      appendNameservers = [ "8.8.8.8" ];
+    useDHCP = false; # DHCP is enabled in the configuration of each interface
+    bridges = {
+      vmbr0.interfaces = [ "enp5s0" ];
+    };
+    interfaces = {
+      vmbr0.useDHCP = true;
+      enp7s0.useDHCP = true;
     };
     firewall = { 
       enable = false;
@@ -118,17 +116,51 @@
     };
   };
 
+  programs = {
+    msmtp = {
+      enable = true;
+      accounts = {
+        default = {
+          auth = true;
+          tls = true;
+          tls_starttls = false;
+          from = "allsave@zhukovsky.me";
+          host = "mail.zhukovsky.me";
+          user = "allsave@zhukovsky.me";
+          passwordeval = "cat ${config.sops.secrets."passwords/msmtp".path}";
+        };
+      };
+    };
+  };
+
   users.users.admserv.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIN8ntFxD/6St6f8I9U+W+uqw9tQZQk6nxSBkaYpB5QN home server"
   ];
 
-  # Legacy host configuration engine path:
-  # TODO: move it default path /var/lib/docker
-  virtualisation.docker.daemon.settings = {
-    data-root = "/services/docker/engine";
+  virtualisation = {
+    docker = {
+      enable = true;
+      daemon.settings = {
+        data-root = "/services/docker/engine";
+      };
+    };
+    libvirtd = {
+      enable = true;
+    };
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
+
+  sops = {
+    defaultHostSopsFile = ../../secrets/hosts/server-allsave/secrets.yaml;
+    secrets = {
+      "passwords/msmtp" = {
+        owner = config.users.users.admserv.name;
+        inherit (config.users.users.admserv) group;
+      };
+      # add more secrets here ...
+    };
+  };
 
   time.timeZone = "Asia/Chita";
 
