@@ -26,6 +26,12 @@
 #     ├── desktop-laptop
 #     │   └── secrets.yaml
 #     ├── desktop-workstation
+#     │   └── secrets.yaml
+#     ├── server-allsave
+#     │   └── secrets.yaml
+#     ├── vps-gliese
+#     │   └── secrets.yaml
+#     └── vps-solar
 #         └── secrets.yaml
 # -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -36,6 +42,8 @@ keys:
   # desktop:
   - &workstation age1chg5v8qvt38w46ezt3f2h6x2e7wr8w2pchhukkdpmg0v3lqgsd5qrt5mus
   - &laptop age19jkshqf6qmk7kcjr5ux9agvfckcdt2gtntqn5njqlycmu73p2v2qhyqf8m
+  # server:
+  - &allsave age1rrsynr4y9d0n57q4ahjrukr5azspj954l4lndxx8e75njr0queksrctnv8
   # user:
   - &stepan age1j20yg5zx3rjjt868phm72qaw2vetd23egux5v62plr06lwwfhg5s6tyjkn
 creation_rules:
@@ -50,6 +58,11 @@ creation_rules:
     - age:
       - *primary
       - *workstation
+  - path_regex: secrets/hosts/server-allsave/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *primary
+      - *allsave
   # users:
   - path_regex: secrets/homes/stepan/[^/]+\.(yaml|json|env|ini)$
     key_groups:
