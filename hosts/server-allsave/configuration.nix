@@ -40,6 +40,12 @@
     extraModprobeConfig = ''
       options kvm_amd nested=1
     '';
+    kernel.sysctl = {
+      "net.bridge.bridge-nf-call-ip6tables" = 0;
+      "net.bridge.bridge-nf-call-iptables" = 0;
+      "net.bridge.bridge-nf-call-arptables" = 0;
+    };
+    kernelModules = [ "br_netfilter" ];
   };
 
   networking = {
@@ -135,6 +141,7 @@
       description = "Stepan Zhukovsky";
       extraGroups = [
         "wheel"
+        "libvirtd"
       ];
       shell = pkgs.zsh;
       packages = with pkgs; [];
