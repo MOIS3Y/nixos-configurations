@@ -27,7 +27,7 @@
       fsType = "ext4";
     };
 
-  fileSystems."/services/docker/engine" =
+  fileSystems."/var/lib/docker" =
     { device = "/dev/disk/by-label/docker";
       fsType = "ext4";
     };
