@@ -37,18 +37,8 @@
       fsType = "ext4";
     };
 
-  fileSystems."/storage/data" =
-    { device = "/dev/disk/by-label/data";
-      fsType = "ext4";
-    };
-
-  fileSystems."/storage/cloud" =
-    { device = "/dev/disk/by-label/cloud";
-      fsType = "ext4";
-    };
-
-  fileSystems."/storage/share" =
-    { device = "/dev/disk/by-label/share";
+  fileSystems."/storage" =
+    { device = "/dev/disk/by-label/storage";
       fsType = "ext4";
     };
 
