@@ -29,6 +29,7 @@
       nitch
       nmap
       ntfs3g
+      parted
       rsync
       ripgrep
       tree
