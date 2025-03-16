@@ -22,8 +22,15 @@
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-label/boot";
+  fileSystems."/boot/efi" =
+    {
+      device = "/dev/disk/by-label/EFI";
+      fsType = "vfat";
+    };
+
+  fileSystems."/home" =
+    {
+      device = "/dev/disk/by-label/home";
       fsType = "ext4";
     };
 

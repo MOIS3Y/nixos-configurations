@@ -22,14 +22,21 @@
   ];
   # Override _shared configuration:
   boot = {
-    loader.grub = {
-      device = "/dev/disk/by-id/ata-HP_SSD_S650_120GB_HASA12100101184";
-      configurationLimit = 7;
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+      grub = {
+        devices = [ "nodev" ];
+        efiSupport = true;
+        configurationLimit = 7;
+        gfxmodeEfi = "1920x1080";
+      };
     };
     swraid = {
       enable = true;
       mdadmConf = ''
-        ARRAY /dev/md0 level=raid1 num-devices=2 metadata=0.90 UUID=8bb2622a:203030e8:ac926b66:e55a92b1
         ARRAY /dev/md1 level=raid1 num-devices=2 metadata=1.2 name=allsave:1 UUID=1408f414:46bd022f:a3be13b0:c1560046
         ARRAY /dev/md2 level=raid1 num-devices=2 metadata=1.2 name=allsave:2 UUID=4db185fa:54cf0828:89ed0f44:1b63382a
         MAILADDR stepan@zhukovsky.me
