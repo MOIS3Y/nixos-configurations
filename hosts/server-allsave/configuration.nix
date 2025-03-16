@@ -71,7 +71,10 @@
 
   nix.settings.trusted-users = lib.mkForce [ "admserv" ];
 
-  services = { 
+  services = {
+    fstrim = {
+      enable = true;
+    };
     openssh = {
       enable = true;
       startWhenNeeded = true;
