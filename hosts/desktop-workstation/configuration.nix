@@ -39,11 +39,13 @@
       grubTheme = "msi";
     };
     hardware = {
+      motherboard = "intel";
       cpu = "intel";
       gpu = true;
       updateMicrocode = true;
       ddcci = true;
       openRGB = false;
+      coolercontrol = true;
     };
     virtualisation = {
       docker = {

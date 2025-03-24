@@ -43,13 +43,14 @@ in {
     };
     gpu = mkEnableOption "Enable GPU services";
     openRGB = mkEnableOption "Enable openRGB";
+    coolercontrol = mkEnableOption "Enable coolercontrol";
     ddcci = mkEnableOption "Enable ddcci support for control external monitors";
   };
   config = {
     services.hardware.openrgb = mkIf cfg.openRGB {
       enable = true;
       package = pkgs.openrgb-with-all-plugins;
-      motherboard = "intel";
+      motherboard = cfg.motherboard;
     };
     hardware.bluetooth = mkIf cfg.bluetooth {
       enable = true;
@@ -89,9 +90,13 @@ in {
     boot.kernelModules = mkIf cfg.ddcci (
       [ "i2c-dev" "ddcci_backlight" ]
       ++ optionals (cfg.motherboard == "amd") [ "i2c-piix4" ]
-      ++ optionals (cfg.motherboard == "intel") [ "i2c-i801" ]
+      ++ optionals (cfg.motherboard == "intel") [ "i2c-i801" "coretemp" "nct6775" ]
     );
     services.udev.packages = mkIf cfg.ddcci [ pkgs.ddcutil ]; #! MSI Monitor, Model:G2712
+    # Fans:
+    programs.coolercontrol = mkIf cfg.coolercontrol {
+      enable = true;
+    };
     # SSD:
     services.fstrim.enable = true; 
   };
