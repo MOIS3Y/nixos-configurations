@@ -67,13 +67,5 @@ in {
         ]
       ));
     };
-    # ? workaround: htop overwrites htoprc on the fly, this interferes with activation
-    # ? at the moment there is no solution to the problem of backup files on the way
-    # ? see: https://github.com/nix-community/home-manager/issues/4199
-    home.activation.removeHtoprc = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-      if [ -f "${config.xdg.configHome}/htop/htoprc" ]; then
-        rm ${config.xdg.configHome}/htop/htoprc
-      fi
-    '';
   };
 }
