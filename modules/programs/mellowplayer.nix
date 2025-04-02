@@ -5,8 +5,13 @@
 { config, pkgs, lib, ... }: let
   cfg = config.programs.mellowplayer;
   iniFormat = pkgs.formats.ini {};
-in {
-  options.programs.mellowplayer = with lib; {
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    literalExpression
+    types;
+  in {
+  options.programs.mellowplayer = {
     enable = mkEnableOption "enable MellowPlayer";
     package = mkOption {
       type = types.package;
@@ -58,7 +63,9 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [ cfg.package ];
     xdg.configFile = {
-      "MellowPlayer/MellowPlayer3.conf".source = iniFormat.generate "mellowplayer-config" cfg.settings;
+      "MellowPlayer/MellowPlayer3.conf".source = (
+        iniFormat.generate "mellowplayer-config" cfg.settings
+      );
     };
   };
 }
