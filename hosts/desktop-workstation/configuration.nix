@@ -9,7 +9,6 @@
 { config, pkgs, lib, ... }: {
   imports = [
     # Custom modules:
-    ../../modules/assets
     ../../modules/colors
     ../../modules/desktop
     # Shared configuration:

@@ -1,13 +1,17 @@
-# █▀▄▀█ █▀█ █▀▄ █░█ █░░ █▀▀ ▀
-# █░▀░█ █▄█ █▄▀ █▄█ █▄▄ ██▄ ▄
-# -- -- -- --- -- -- -- -- --
+# ▄▀█ █▀ █▀ █▀▀ ▀█▀ █▀ ▀
+# █▀█ ▄█ ▄█ ██▄ ░█░ ▄█ ▄
+# -- -- -- -- -- -- -- -
 
 { inputs, config, pkgs, lib, ... }: let
   cfg = config.desktop.assets;
   assets = inputs.assets4nix.packages."${pkgs.system}".assets4nix;
   cs = config.colorScheme.name;
-in {
-  options.desktop.assets = with lib; {
+  inherit (lib)
+    mkOption
+    literalExpression
+    types;
+  in {
+  options.desktop.assets = {
     package = mkOption {
       type = types.package;
       default = assets;

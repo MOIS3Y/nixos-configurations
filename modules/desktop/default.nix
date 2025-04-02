@@ -21,6 +21,7 @@
   in {
   imports = [
     ./cursor
+    ./assets
   ];
   options.desktop = {
     enable = mkEnableOption "Enable desktop setup";

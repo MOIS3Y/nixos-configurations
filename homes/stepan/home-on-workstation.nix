@@ -5,7 +5,6 @@
 { config, ... }: {
   imports = [
     # Custom modules:
-    ../../modules/assets
     ../../modules/colors
     ../../modules/desktop
     # Shared configuration:
