@@ -73,14 +73,10 @@
     # Need for first install from flake:
     pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
     # Helpers:
-    isDesktop = host: if builtins.hasAttr "desktop" host
-      then import host.desktop
-      else import ./modules/desktop/server.nix;
     # override nixosSystem func for create my NixOS and HM configurations:
     mkNixosSystem = host: lib.nixosSystem {
       specialArgs = {
         inherit system inputs;
-        host.desktop = isDesktop host;
       };
       modules = [
         host.configuration
@@ -88,7 +84,6 @@
           home-manager = {
             extraSpecialArgs = {
               inherit system inputs;
-              host.desktop = isDesktop host;
             };
             useGlobalPkgs = true;
             useUserPackages = true;
@@ -125,16 +120,14 @@
       # -- -- -- -- -- -- -- --
       laptop = mkNixosSystem {
         configuration = ./hosts/desktop-laptop/configuration.nix;
-        desktop = ./modules/desktop/laptop.nix;
         users = {
-          stepan = ./homes/stepan/home.nix;
+          stepan = ./homes/stepan/home-on-laptop.nix;
         };
       };
       workstation = mkNixosSystem {
         configuration = ./hosts/desktop-workstation/configuration.nix;
-        desktop = ./modules/desktop/workstation.nix;
         users = {
-          stepan = ./homes/stepan/home.nix;
+          stepan = ./homes/stepan/home-on-workstation.nix;
         };
       };
       # servers:

@@ -57,6 +57,7 @@
   };
 
   desktop = {
+    preset = "laptop";
     games = {
       enable = true;
       xpadneo.enable = true;

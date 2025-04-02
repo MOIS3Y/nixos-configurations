@@ -2,16 +2,15 @@
 # █▀█ █▄█ █░▀░█ ██▄ ░░ █░▀░█ █▀█ █░▀█ █▀█ █▄█ ██▄ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, ... }: {
+# Common home configuration 
+# This might be expanded using attrs specific to the host
+
+{ config, ... }: {
   imports = [
     # Custom modules:
-    ../../modules/assets
     ../../modules/colors
-    ../../modules/cursor
-    ../../modules/desktop
     ../../modules/programs
     # Shared configuration:
-    ../_shared/desktop
     ../_shared/programs
     ../_shared/sops
   ];
@@ -24,18 +23,6 @@
   sops = {
     defaultUserSopsFile = ../../secrets/homes/stepan/secrets.yaml;
     sharedSecrets = "stepan";  # ? override default secrets option
-  };
-
-  desktop = {
-    apps = with config.desktop.utils; {
-      terminal = kitty;
-      spare-terminal = alacritty;
-      browser = firefox;
-      filemanager = nautilus;
-      launcher = wofi;
-      lockscreen = hyprlock;
-      visual-text-editor = vscode;
-    };
   };
 
   programs.ssh.userMatchBlocks = "stepan";

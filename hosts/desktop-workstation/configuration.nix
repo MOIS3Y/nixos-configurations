@@ -62,6 +62,7 @@
   };
 
   desktop = {
+    preset = "workstation";
     games = {
       enable = true;
       xpadneo.enable = true;
