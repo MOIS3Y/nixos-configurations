@@ -13,6 +13,9 @@
 # so I use this theme as a fallback for all other color schemes.
 
 { config, pkgs, lib, ... }: let
+  inherit (lib)
+    mkOption
+    types;
   guessCursorTheme = colorSchemeName: {
     name = if colorSchemeName == "catppuccin_mocha"
       then "catppuccin-mocha-blue-cursors"
@@ -34,7 +37,7 @@
       else pkgs.volantes-cursors;
   };
 in {
-  options.desktop.cursor = with lib; {
+  options.desktop.cursor = {
     name = mkOption {
       type = types.str;
       default = (guessCursorTheme config.colorSchemeName).name;

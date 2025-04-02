@@ -11,7 +11,6 @@
     # Custom modules:
     ../../modules/assets
     ../../modules/colors
-    ../../modules/cursor
     ../../modules/desktop
     # Shared configuration:
     ../_shared/boot

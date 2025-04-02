@@ -19,6 +19,9 @@
     literalExpression
     types;
   in {
+  imports = [
+    ./cursor
+  ];
   options.desktop = {
     enable = mkEnableOption "Enable desktop setup";
     preset = mkOption {
