@@ -2,7 +2,24 @@
 # ▄█ █▄▄ █▀▄ █ █▀▀ ░█░ ▄█ ▄
 # -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }: with pkgs; with lib; {
+{ config, lib, ... }: let 
+  inherit (lib)
+    mkOption
+    types;
+  in {
+  imports = [
+    # common:
+    ./lf.nix
+    # wayland:
+    ./hypridle.nix
+    ./hyprland.nix
+    ./waybar.nix
+    ./wlogout.nix
+    # xorg:
+    ./dunst.nix
+    ./xidlehook.nix
+    ./xss-lock.nix
+  ];
   options.desktop.scripts = mkOption {
     type = with types;
       let
@@ -15,7 +32,6 @@
           description = "Attrs with preconfigured scripts";
         };
       in valueType;
-    default = callPackage ./scripts.nix { inherit config; };
     description = "Preconfigured scripts";
   };
   config = {};
