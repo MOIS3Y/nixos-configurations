@@ -3,7 +3,10 @@
 # -- -- -- -- -
 
 { config, pkgs, lib, ... }: let
-  extraCss = with config.colorScheme.palette; ''
+  inherit (config.colorScheme)
+    palette
+    variant;
+  extraCss = with palette; ''
     @define-color accent_color #${base0E};
     @define-color accent_bg_color#${base0D};
     @define-color accent_fg_color #${base00};
@@ -90,11 +93,11 @@
     name = "gtk.css";
     text = "${extraCss}";
   };
-  themeName = with config.colorScheme; "${
+  themeName = ''${
     if variant == "dark" then "Tela-circle-blue-dark"
     else
       "Tela-circle-blue"
-  }";
+  }'';
 in {
   gtk = {
     enable = true;    
