@@ -23,6 +23,7 @@
     ./apps
     ./assets
     ./cursor
+    ./scripts
     ./utils
   ];
   options.desktop = {

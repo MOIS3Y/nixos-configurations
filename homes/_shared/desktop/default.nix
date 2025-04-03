@@ -7,7 +7,6 @@
     ./config
     ./pkgs
     ./programs
-    ./scripts
     ./services
     ./wayland
     ./xorg
