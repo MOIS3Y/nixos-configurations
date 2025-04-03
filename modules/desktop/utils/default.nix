@@ -2,7 +2,11 @@
 # █▄█ ░█░ █ █▄▄ ▄█ ▄
 # -- -- -- -- -- --
 
-{ config, pkgs, lib, ... }: with pkgs; with lib; {
+{ config, pkgs, lib, ... }: let
+  inherit (lib)
+    mkOption
+    types;
+  in {
   options.desktop.utils = mkOption {
     type = with types;
       let
@@ -15,7 +19,7 @@
           description = "Attrs with preconfigured utils";
         };
       in valueType;
-    default = callPackage ./utils.nix {};
+    default = pkgs.callPackage ./utils.nix {};
     description = "Preconfigured utils";
   };
   config = {};

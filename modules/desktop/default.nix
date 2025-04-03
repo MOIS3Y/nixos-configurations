@@ -20,8 +20,10 @@
     types;
   in {
   imports = [
-    ./cursor
+    ./apps
     ./assets
+    ./cursor
+    ./utils
   ];
   options.desktop = {
     enable = mkEnableOption "Enable desktop setup";

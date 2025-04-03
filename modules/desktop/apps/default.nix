@@ -2,14 +2,17 @@
 # █▀█ █▀▀ █▀▀ ▄█ ▄
 # -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }: with config.desktop; {
-  options.desktop.apps = with lib; {
+{ config, pkgs, lib, ... }: let
+  inherit (lib)
+    mkOption
+    types;
+  in {
+  options.desktop.apps = {
     terminal = mkOption {
       type = with types; oneOf [
         str
         path
       ];
-      default = utils.kitty;
       description = "default terminal";
     };
     spare-terminal = mkOption {
@@ -17,7 +20,6 @@
         str
         path
       ];
-      default = utils.wezterm;
       description = "spare terminal";
     };
     browser = mkOption {
@@ -25,7 +27,6 @@
         str
         path
       ];
-      default = utils.firefox;
       description = "default browser";
     };
     filemanager = mkOption {
@@ -33,7 +34,6 @@
         str
         path
       ];
-      default = utils.nautilus;
       description = "default filemanager";
     };
     launcher = mkOption {
@@ -41,7 +41,6 @@
         str
         path
       ];
-      default = utils.wofi;
       description = "default launcher";
     };
     lockscreen = mkOption {
@@ -49,7 +48,6 @@
         str
         path
       ];
-      default = utils.hyprlock;
       description = "default lockscreen";
     };
     visual-text-editor = mkOption {
@@ -57,7 +55,6 @@
         str
         path
       ];
-      default = utils.vscode;
       description = "default visual text editor";
     };
   };
