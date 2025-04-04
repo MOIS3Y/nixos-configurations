@@ -2,7 +2,7 @@
 # █▀█ ░█░ █▀▀ █▀▄ █▄▄ █▀█ █░▀█ █▄▀ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, ... }: let
   cfg = config.desktop.wayland;
   inherit (config.colorScheme)
     palette;

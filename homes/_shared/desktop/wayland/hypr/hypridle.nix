@@ -2,9 +2,20 @@
 # █▀█ ░█░ █▀▀ █▀▄ █ █▄▀ █▄▄ ██▄ ▄
 # -- -- -- -- -- -- -- -- - -- --
 
-{ config, pkgs, lib, ... }: lib.mkIf config.desktop.wayland.enable {
-  services.hypridle = with config.desktop.scripts.hypridle; {
-    enable = true;
+{ config, pkgs, ... }: let
+  cfg = config.desktop.wayland;
+  inherit (config.desktop.scripts.hypridle)
+    dpms-off
+    dpms-on
+    lock-session
+    lock-resume
+    kill-notify
+    send-notify
+    smart-hyprlock
+    suspend;
+  in {
+  services.hypridle = {
+    enable = cfg.enable;
     package = pkgs.hypridle;
     settings = {
       general = {

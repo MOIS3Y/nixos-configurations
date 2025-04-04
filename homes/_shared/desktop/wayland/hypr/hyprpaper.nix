@@ -2,11 +2,15 @@
 # █▀█ ░█░ █▀▀ █▀▄ █▀▀ █▀█ █▀▀ ██▄ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ...}: lib.mkIf config.desktop.wayland.enable {
+{ config, pkgs, ...}: let
+  cfg = config.desktop.wayland;
+  inherit (config.desktop.assets.images)
+    wallpaper;
+  in {
   services.hyprpaper = {
-    enable = true;
+    enable = cfg.enable;
     package = pkgs.hyprpaper;
-    settings = with config.desktop.assets.images; {
+    settings = {
       ipc = "on";
       splash = false;
       splash_offset = 2.0;
