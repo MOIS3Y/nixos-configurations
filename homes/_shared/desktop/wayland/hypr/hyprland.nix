@@ -2,18 +2,12 @@
 # █▀█ ░█░ █▀▀ █▀▄ █▄▄ █▀█ █░▀█ █▄▀ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -
 
-# ! For stable operation I returned to the version from nixpkgs
-# ? Hyprsplit plugin can be enabled after it is added to nixpkgs-unstable
-# ? see: https://github.com/NixOS/nixpkgs/pull/342075
-
-
-{ config, pkgs, lib, ... }: with lib; mkIf config.desktop.wayland.enable {
+{ config, pkgs, lib, ... }: lib.mkIf config.desktop.wayland.enable {
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
     plugins = [
-      # TODO: uncomment below when Hyprsplit becomes available
-      # pkgs.hyprsplit
+      pkgs.hyprlandPlugins.hyprsplit
     ];
     xwayland.enable = true;
     settings = {
@@ -173,8 +167,7 @@
           "$mod CTRL,  k, resizeactive, 0 -20"
           "$mod CTRL,  l, resizeactive, 20 0"
           # hyprsplit:
-          # TODO: uncomment below when Hyprsplit becomes available
-          # "$mod, G, split:grabroguewindows"
+          "$mod, G, split:grabroguewindows"
           # ---------- #
           #  - APPS -  #
           # ---------- # 
@@ -220,11 +213,12 @@
                 in
                   builtins.toString (x + 1 - (c * 10));
               in [
-                "$mod,        ${ws}, focusworkspaceoncurrentmonitor, ${toString (x + 1)}"
-                "$mod  SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-                # TODO: uncomment below when Hyprsplit becomes available
-                # "$mod,        ${ws}, split:workspace,       ${toString (x + 1)}"
-                # "$mod  SHIFT, ${ws}, split:movetoworkspace, ${toString (x + 1)}"
+                # Default:
+                # "$mod,        ${ws}, focusworkspaceoncurrentmonitor, ${toString (x + 1)}"
+                # "$mod  SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+                # Hyprsplit:
+                "$mod,        ${ws}, split:workspace,       ${toString (x + 1)}"
+                "$mod  SHIFT, ${ws}, split:movetoworkspace, ${toString (x + 1)}"
               ]
             )
             10)
@@ -244,12 +238,11 @@
     };
     #! -- -- -- -- -- extra config -- -- -- -- #
     extraConfig = ''
-      # TODO: uncomment below when Hyprsplit becomes available
-      # plugin {
-      #     hyprsplit {
-      #         num_workspaces = 10
-      #     }
-      # }
+      plugin {
+          hyprsplit {
+              num_workspaces = 10
+          }
+      }
     '';
   };
 }
