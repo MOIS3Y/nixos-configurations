@@ -11,7 +11,7 @@
     icons;
   in {
   services.avizo = {
-    enable = true;
+    enable = cfg.enable;
     # ? workaround avizo ignore image-base-dir
     # ? see: https://github.com/heyjuvi/avizo/issues/60
     package = pkgs.avizo.overrideAttrs (final: prev: {
