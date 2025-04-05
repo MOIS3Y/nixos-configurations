@@ -15,5 +15,6 @@
 { config, pkgs, lib, ... }: {
   imports = [
     ./mellowplayer.nix
+    ./swappy.nix
   ];
 }
