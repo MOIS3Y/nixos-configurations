@@ -2,15 +2,17 @@
 # ▀▄▀▄▀ █▀█ ░█░ █▄█ █▀█ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }:
-  let
-    bars = import ./bars.nix { inherit config; inherit pkgs; inherit lib; };
-    styles = import ./styles.nix { inherit config; inherit pkgs; };
+{ config, lib, ... }: let
+    bars = import ./bars.nix { inherit config lib; };
+    styles = import ./styles.nix { inherit config;};
+    inherit (lib)
+      mkOption
+      types;
   in {
   options.programs.waybar = {
-    excludeWidgets = lib.mkOption {
+    excludeWidgets = mkOption {
       default = [];
-      type = with lib.types; listOf (enum [
+      type = with types; listOf (enum [
         "battery"
         "group/group-backlight"
         "custom/ddcutil"
@@ -18,38 +20,38 @@
       description = "Exclude widgets from current bar";
     };
     ddcutil = {
-      busNumber = lib.mkOption {
+      busNumber = mkOption {
         default = 6;  # ? my monitor on /sys/bus/i2c/devices/i2c-6 card1-DP-1
-        type = lib.types.number;
+        type = types.number;
         description = ''
           The bus number is the DP or HDMI port of the video card 
           to which the monitor is connected
         '';
       };
-      multiplier = lib.mkOption {
+      multiplier = mkOption {
         default = 5;
-        type = lib.types.enum [ 1 2 3 4 5 6 7 ];
+        type = types.enum [ 1 2 3 4 5 6 7 ];
         description = ''
           Required for speed of operation and reduction of imput lag
         '';
       };
-      step = lib.mkOption {
+      step = mkOption {
         default = 5;
-        type = lib.types.number;
+        type = types.number;
         description = ''
           Steps to increase or decrease brightness
         '';
       };
-      bright = lib.mkOption {
+      bright = mkOption {
         default = 50;
-        type = lib.types.number;
+        type = types.number;
         description = ''
           Quickly set screen brightness to a specified value
         '';
       };
-      dark = lib.mkOption {
+      dark = mkOption {
         default = 25;
-        type = lib.types.number;
+        type = types.number;
         description = ''
           Quickly set screen brightness to a specified value
         '';

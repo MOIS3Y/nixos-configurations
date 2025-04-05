@@ -2,9 +2,8 @@
 # █▄█ █▀█ █▀▄ ▄█ ▄
 # -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }:
-  let
-    widgets = import ./widgets.nix { inherit config; inherit pkgs; inherit lib;};
+{ config, lib, ... }: let
+  widgets = import ./widgets.nix { inherit config;};
   in {
   primary = {
     layer = "top";
@@ -39,4 +38,5 @@
       "custom/power"
     ]);
   } // (builtins.removeAttrs widgets config.programs.waybar.excludeWidgets);
+  # add more bars here ...
 }

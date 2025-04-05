@@ -2,13 +2,14 @@
 # ▀▄▀▄▀ █▀█ ░█░ █▄█ █▀█ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: let
+  cfg = config.desktop.wayland;
+  in {
   imports = [
     ./waybar.nix
   ];
-
-  programs.waybar = lib.mkIf config.desktop.wayland.enable {
-    enable = true;
+  programs.waybar = {
+    enable = cfg.enable;
     systemd.enable = true;
     excludeWidgets = if config.desktop.laptop.enable
       then [ "custom/ddcutil" ]

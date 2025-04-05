@@ -2,7 +2,14 @@
 # ▀▄▀▄▀ █ █▄▀ █▄█ ██▄ ░█░ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }: with config.desktop.scripts.waybar; {
+{ config, ... }: let
+  inherit (config.colorScheme)
+    palette
+    variant;
+  inherit (config.desktop)
+    apps
+    scripts;
+  in {
   "hyprland/workspaces" = {
     window-rewrite = {};  # ? fix [warning] Waybar/discussions/2816
     format = "{icon}";
@@ -33,8 +40,8 @@
     all-outputs = false;  # ? false for hyprsplit
     active-only = false;
     persistent-workspaces = { "*" = 10; };
-    on-scroll-up = "${switch-workspaces-to-right}";
-    on-scroll-down = "${switch-workspaces-to-left}";
+    on-scroll-up = "${scripts.waybar.switch-workspaces-to-right}";
+    on-scroll-down = "${scripts.waybar.switch-workspaces-to-left}";
   };
   "hyprland/language" = {
     format = " {}";
@@ -67,36 +74,36 @@
   "custom/logo" = {
     tooltip = false;
     format = " ";
-    on-click = "${launcher-toggle}";
+    on-click = "${scripts.waybar.launcher-toggle}";
   };
   "custom/filemanager" = {
     tooltip = false;
-    on-click = "${config.desktop.apps.filemanager}";
+    on-click = "${apps.filemanager}";
     format = "󱂵  Files";
   };
   "custom/browser" = {
     tooltip = false;
-    on-click = "${config.desktop.apps.browser}";
+    on-click = "${apps.browser}";
     format = "󰈹  Browser";
   };
   "custom/calc" = {
     tooltip = false;
-    on-click = "${calc}";
+    on-click = "${scripts.waybar.calc}";
     format = "󰃬  Calc";
   };
   "custom/terminal" = {
     tooltip = false;
-    on-click = "${config.desktop.apps.terminal}";
+    on-click = "${apps.terminal}";
     format = "  Terminal";
   };
   "custom/swallow" = {
     tooltip = false;
-    on-click = "${hyprctl-swallow}";
+    on-click = "${scripts.waybar.hyprctl-swallow}";
     format = "󰊰 ";
   };
   "custom/power" = {
     tooltip = false;
-    on-click = "${logout}";
+    on-click = "${scripts.waybar.logout}";
     format = "";
   };
   idle_inhibitor = {
@@ -109,7 +116,7 @@
     tooltip-format-deactivated = "Caffeine deactivated";
   };
   "custom/notification" = {
-    exec = "${notification-get}";
+    exec = "${scripts.waybar.notification-get}";
     return-type = "json";
     format = "{icon}";
     format-icons = {
@@ -122,8 +129,8 @@
       dnd-inhibited-notification = "󰂛";
       dnd-inhibited-none = "󰪑";
     };
-    on-click = "${notification-center}";
-    on-click-right = "${notification-dnd}";
+    on-click = "${scripts.waybar.notification-center}";
+    on-click-right = "${scripts.waybar.notification-dnd}";
     tooltip = true;
     escape = true;
   };
@@ -131,11 +138,11 @@
     format = "{icon} {percentage}%";
     format-icons = ["󰋙" "󰫃" "󰫄" "󰫅" "󰫆" "󰫇" "󰫈"];
     tooltip = false;
-    exec = "${ddcutil-fast}";
-    on-scroll-up = "${ddcutil-up}";
-    on-scroll-down = "${ddcutil-down}";
-    on-click = "${ddcutil-bright}";
-    on-click-right = "${ddcutil-dark}";
+    exec = "${scripts.waybar.ddcutil-fast}";
+    on-scroll-up = "${scripts.waybar.ddcutil-up}";
+    on-scroll-down = "${scripts.waybar.ddcutil-down}";
+    on-click = "${scripts.waybar.ddcutil-bright}";
+    on-click-right = "${scripts.waybar.ddcutil-dark}";
     return-type = "json";
   };
   "group/group-apps" = {
@@ -172,7 +179,7 @@
     unit = "GB";
     format = "󰋊 {percentage_used}%";
     tooltip-format = "{free} out of {total} available on {path}";
-    on-click = "${gnome-disks-toggle}";
+    on-click = "${scripts.waybar.gnome-disks-toggle}";
     states = {
       warning = 70;
       critical = 90;
@@ -222,8 +229,8 @@
     format-icons = ["󰋙" "󰫃" "󰫄" "󰫅" "󰫆" "󰫇" "󰫈"];
     reverse-scrolling = true;
     reverse-mouse-scrolling = false;
-    on-scroll-up = "${brightness-up}";
-    on-scroll-down = "${brightness-down}";
+    on-scroll-up = "${scripts.waybar.brightness-up}";
+    on-scroll-down = "${scripts.waybar.brightness-down}";
   };
   "backlight/slider" = {
     orientation = "horizontal";
@@ -248,7 +255,7 @@
   clock = {
     format = "󱑎 {:%H:%M}";
     format-alt = "󰃰 {:%a, %d %b %H:%M}";
-    on-click-middle = "${gnome-calendar-toggle}";
+    on-click-middle = "${scripts.waybar.gnome-calendar-toggle}";
     # locale = "en_GB.UTF-8";
     tooltip-format = "<tt><small>{calendar}</small></tt>";
     calendar = {
@@ -259,15 +266,14 @@
       on-click-right = "mode";
       format = let
         # ? bold looks ugly on light mode
-        variant = "${config.colorScheme.variant}";
         bold-or-thin = "${if variant == "dark" then "<b>{}</b>" else "{}"}";
         bold-or-thin-underline = "${if variant == "dark" then "<b><u>{}</u></b>" else "<u>{}</u>"}";
       in {
-        months   = "<span color='#${config.colorScheme.palette.base0D}'>${bold-or-thin}</span>";
-        days     = "<span color='#${config.colorScheme.palette.base05}'>${bold-or-thin}</span>";
-        weeks    = "<span color='#${config.colorScheme.palette.base07}'>${bold-or-thin}</span>";
-        weekdays = "<span color='#${config.colorScheme.palette.base0E}'>${bold-or-thin}</span>";
-        today    = "<span color='#${config.colorScheme.palette.base08}'>${bold-or-thin-underline}</span>";
+        months   = "<span color='#${palette.base0D}'>${bold-or-thin}</span>";
+        days     = "<span color='#${palette.base05}'>${bold-or-thin}</span>";
+        weeks    = "<span color='#${palette.base07}'>${bold-or-thin}</span>";
+        weekdays = "<span color='#${palette.base0E}'>${bold-or-thin}</span>";
+        today    = "<span color='#${palette.base08}'>${bold-or-thin-underline}</span>";
       };
     };
     actions = {
@@ -280,18 +286,18 @@
       interval = 1;
       format = "󰓅  {usage}%";
       max-length =  10;
-      on-click = "${btm-toggle}";
-      on-click-right = "${htop-toggle}";
-      on-click-middle = "${gnome-system-monitor-toggle}";
+      on-click = "${scripts.waybar.btm-toggle}";
+      on-click-right = "${scripts.waybar.htop-toggle}";
+      on-click-middle = "${scripts.waybar.gnome-system-monitor-toggle}";
   };
   memory = {
       interval = 1;
       format = "󰍛  {percentage}%";
       max-length = 10;
       tooltip-format = "{used:0.1f}GiB used";
-      on-click = "${btm-toggle}";
-      on-click-right = "${htop-toggle}";
-      on-click-middle = "${gnome-system-monitor-toggle}";
+      on-click = "${scripts.waybar.btm-toggle}";
+      on-click-right = "${scripts.waybar.htop-toggle}";
+      on-click-middle = "${scripts.waybar.gnome-system-monitor-toggle}";
   };
   pulseaudio = {
     tooltip = false;
@@ -308,8 +314,8 @@
       default = ["󰕿" "󰖀" "󰕾"];
     };
     tooltip-format = "{desc}, {volume}";
-    on-click = "${volume-mute}";
-    on-click-right = "${pavucontrol-toggle}";
+    on-click = "${scripts.waybar.volume-mute}";
+    on-click-right = "${scripts.waybar.pavucontrol-toggle}";
     reverse-scrolling = true;
     reverse-mouse-scrolling = false;
   };
@@ -318,10 +324,10 @@
     format = "{format_source}";
     format-source = "󰍬 {volume}%";
     format-source-muted = "󰍭 Mute";
-    on-click = "${mic-mute}";
-    on-click-right = "${pavucontrol-toggle}";
-    on-scroll-up = "${mic-up}";
-    on-scroll-down = "${mic-down}";
+    on-click = "${scripts.waybar.mic-mute}";
+    on-click-right = "${scripts.waybar.pavucontrol-toggle}";
+    on-scroll-up = "${scripts.waybar.mic-up}";
+    on-scroll-down = "${scripts.waybar.mic-down}";
     reverse-scrolling = true;
     reverse-mouse-scrolling = false;
   };
