@@ -2,7 +2,10 @@
 # █▄▀ █ ▄█ █▀▀ █▄▄ █▀█ ░█░   █░▀░█ █▀█ █░▀█ █▀█ █▄█ ██▄ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: let
+  inherit (config.colorScheme)
+    palette;
+  in {
   services = {
     displayManager = {
       enable = true;
@@ -11,21 +14,21 @@
         wayland = {
           enable = true;
         };
-        extraPackages = with pkgs; [
-          libsForQt5.qt5.qtgraphicaleffects
+        extraPackages = [
+          pkgs.libsForQt5.qt5.qtgraphicaleffects
           config.desktop.cursor.package  #? not working add it in systemPackages
         ];
         autoNumlock = true;
-        theme = with config.colorScheme.palette; ''${
+        theme = ''${
           pkgs.extra.sddm-sugar-candy.override {
             settings = {
               Background = "${config.desktop.assets.images.background}";
               ScreenWidth = "1920";
               ScreenHeight = "1080";
-              MainColor = "#${base05}";
-              AccentColor = "#${base0D}";
-              BackgroundColor = "#${base01}";
-              OverrideLoginButtonTextColor = "#${base01}";
+              MainColor = "#${palette.base05}";
+              AccentColor = "#${palette.base0D}";
+              BackgroundColor = "#${palette.base01}";
+              OverrideLoginButtonTextColor = "#${palette.base01}";
               Font = "Ubuntu";
               DateFormat = "dddd, d MMMM yyyy";
               HeaderText = "NixOS";
