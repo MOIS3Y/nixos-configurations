@@ -2,13 +2,13 @@
 # █▀▀ █▄█ █ █░▀█ ░█░ ██▄ █▀▄ ░░ █▄▄ █▄█ █▀▄ ▄█ █▄█ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }: with lib; {
-  home.pointerCursor = with config.desktop; {
-    name = cursor.name;
-    package = cursor.package;
+{ config, lib, ... }: {
+  home.pointerCursor = {
+    name = config.desktop.cursor.name;
+    package = config.desktop.cursor.package;
     size = 24;
     gtk.enable = true;
-    x11 = mkIf xorg.enable {
+    x11 = lib.mkIf config.desktop.xorg.enable {
       enable = true;
       defaultCursor = "left_ptr";
     };

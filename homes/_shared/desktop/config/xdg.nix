@@ -2,7 +2,7 @@
 # █░█ █▄▀ █▄█ ▄
 # -- -- -- -- -
 
-{ config, pkgs, ... }: with pkgs.lib; let
+{ config, pkgs, lib, ... }: let
   # Shortcuts:
   # -- -- -- -
   amberol = [ "io.bassi.Amberol.desktop" ];
@@ -134,17 +134,17 @@ in {
       defaultApplications = associations;
     };
     # portals:
-    portal = with pkgs; {
+    portal = {
       enable = true;
       extraPortals = lib.mkForce ([
-        xdg-desktop-portal-gtk
-        xdg-desktop-portal-gnome
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-gnome
       ] ++ (if config.wayland.windowManager.hyprland.enable == true
         then [ pkgs.xdg-desktop-portal-hyprland ]
         else []
       ));
       configPackages = lib.mkForce ([
-        gnome-session
+        pkgs.gnome-session
       ] ++ (if config.wayland.windowManager.hyprland.enable == true
         then [ pkgs.hyprland ]
         else []
