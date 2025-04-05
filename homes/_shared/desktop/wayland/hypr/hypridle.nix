@@ -4,39 +4,32 @@
 
 { config, pkgs, ... }: let
   cfg = config.desktop.wayland;
-  inherit (config.desktop.scripts.hypridle)
-    dpms-off
-    dpms-on
-    lock-session
-    lock-resume
-    kill-notify
-    send-notify
-    smart-hyprlock
-    suspend;
+  inherit (config.desktop)
+    scripts;
   in {
   services.hypridle = {
     enable = cfg.enable;
     package = pkgs.hypridle;
     settings = {
       general = {
-        lock_cmd = "${smart-hyprlock}";
-        before_sleep_cmd = "${lock-session}";
-        after_sleep_cmd = "${dpms-on}";
+        lock_cmd = "${scripts.hypridle.smart-hyprlock}";
+        before_sleep_cmd = "${scripts.hypridle.lock-session}";
+        after_sleep_cmd = "${scripts.hypridle.dpms-on}";
       };
       listener = [
         {
           timeout = 540;
-          on-timeout = "${send-notify}";
-          on-resume = "${kill-notify}";
+          on-timeout = "${scripts.hypridle.send-notify}";
+          on-resume = "${scripts.hypridle.kill-notify}";
         }
         {
           timeout = 600;
-          on-timeout = "${dpms-off}";
-          on-resume = "${lock-resume}";
+          on-timeout = "${scripts.hypridle.dpms-off}";
+          on-resume = "${scripts.hypridle.lock-resume}";
         }
         {
           timeout = 900;
-          on-timeout = "${suspend}";
+          on-timeout = "${scripts.hypridle.suspend}";
         }
       ];
     };
