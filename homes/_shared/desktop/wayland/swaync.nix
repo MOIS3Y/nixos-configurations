@@ -2,9 +2,14 @@
 # ▄█ ▀▄▀▄▀ █▀█ ░█░ █░▀█ █▄▄ ▄
 # -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }: lib.mkIf config.desktop.wayland.enable {
+{ config, pkgs, lib, ... }: let
+  cfg = config.desktop.wayland;
+  inherit (config.colorScheme)
+    palette
+    variant;
+  in {
   services.swaync = {
-    enable = true;
+    enable = cfg.enable;
     settings = {
       # General settings
       cssPriority = "user";
@@ -72,30 +77,29 @@
     };
 
     # Custom style
-    style = with config.colorScheme.palette; let
-      variant = "${config.colorScheme.variant}";
+    style = let
       dark01 = "rgba(12, 12, 12, 0.1)";
       light01 = "rgba(255, 255, 255, 0.1)";
       dark04 = "rgba(12, 12, 12, 0.4)";
       light04 = "rgba(255, 255, 255, 0.4)";
     in ''
-      @define-color background #${base00};
+      @define-color background #${palette.base00};
       @define-color background-alt ${if variant == "dark" then dark01 else light01};
       @define-color background-focus ${if variant == "dark" then dark04 else light04};
 
-      @define-color border #${base02};
+      @define-color border #${palette.base02};
       
-      @define-color base00 #${base00};
-      @define-color base01 #${base01};
-      @define-color base02 #${base02};
-      @define-color base03 #${base03};
-      @define-color base04 #${base04};
-      @define-color base05 #${base05};
-      @define-color base08 #${base08};
-      @define-color base09 #${base09};
-      @define-color base0A #${base0A};
-      @define-color base0B #${base0B};
-      @define-color base0D #${base0D};
+      @define-color base00 #${palette.base00};
+      @define-color base01 #${palette.base01};
+      @define-color base02 #${palette.base02};
+      @define-color base03 #${palette.base03};
+      @define-color base04 #${palette.base04};
+      @define-color base05 #${palette.base05};
+      @define-color base08 #${palette.base08};
+      @define-color base09 #${palette.base09};
+      @define-color base0A #${palette.base0A};
+      @define-color base0B #${palette.base0B};
+      @define-color base0D #${palette.base0D};
 
       * {
         all: unset;

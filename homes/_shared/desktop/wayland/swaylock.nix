@@ -15,9 +15,13 @@
 # ```
 # -- -- -- -- -- - -- -- -- -- -- --
 
-{ config, pkgs, lib, ... }: lib.mkIf config.desktop.wayland.enable {
-  programs.swaylock = with config.colorScheme.palette; {
-    enable = true;
+{ config, pkgs, ... }: let 
+  cfg = config.desktop.wayland;
+  inherit (config.colorScheme)
+    palette;
+  in {
+  programs.swaylock = {
+    enable = cfg.enable;
     package = pkgs.swaylock-effects;
     settings = {
       screenshots = true;
@@ -42,33 +46,33 @@
 
       # color = "00000000";
 
-      bs-hl-color = "#${base08}";
-      key-hl-color = "#${base0E}";
+      bs-hl-color = "#${palette.base08}";
+      key-hl-color = "#${palette.base0E}";
       
-      caps-lock-bs-hl-color = "#${base09}";
-      caps-lock-key-hl-color = "#${base09}";
+      caps-lock-bs-hl-color = "#${palette.base09}";
+      caps-lock-key-hl-color = "#${palette.base09}";
 
-      inside-color = "#${base01}";
-      inside-clear-color = "#${base01}";
-      inside-ver-color = "#${base01}";
-      inside-wrong-color = "#${base01}";
+      inside-color = "#${palette.base01}";
+      inside-clear-color = "#${palette.base01}";
+      inside-ver-color = "#${palette.base01}";
+      inside-wrong-color = "#${palette.base01}";
 
-      line-color = "#${base00}";
-      line-ver-color = "#${base00}";
-      line-clear-color = "#${base00}";
-      line-wrong-color = "#${base00}";
+      line-color = "#${palette.base00}";
+      line-ver-color = "#${palette.base00}";
+      line-clear-color = "#${palette.base00}";
+      line-wrong-color = "#${palette.base00}";
 
-      ring-color = "#${base02}";
-      ring-clear-color = "#${base08}";
-      ring-ver-color = "#${base08}";
-      ring-wrong-color = "#${base08}";
+      ring-color = "#${palette.base02}";
+      ring-clear-color = "#${palette.base08}";
+      ring-ver-color = "#${palette.base08}";
+      ring-wrong-color = "#${palette.base08}";
 
       separator-color = "00000000";
 
-      text-color = "#${base05}";
-      text-clear-color = "#${base05}";
-      text-ver-color = "#${base05}";
-      text-wrong-color = "#${base08}";
+      text-color = "#${palette.base05}";
+      text-clear-color = "#${palette.base05}";
+      text-ver-color = "#${palette.base05}";
+      text-wrong-color = "#${palette.base08}";
     };
   };
 }
