@@ -9,10 +9,6 @@
 # For example, the desktop.games option has additional options in _shared.
 
 { config, pkgs, lib, ... }: let
-  cfg = config.desktop;
-  preset = lib.attrsets.attrByPath [ cfg.preset ] "workstation" (
-    import ./presets.nix
-  );
   inherit (lib)
     mkEnableOption
     mkOption
@@ -27,42 +23,29 @@
     ./utils
   ];
   options.desktop = {
-    enable = mkEnableOption "Enable desktop setup";
-    preset = mkOption {
-      type = types.enum [
-        "workstation"
-        "laptop"
-        # add more enum value here ...
-      ];
-      # default = 
-      description = "Preconfigured desktop setup";
-    };
+    enable = mkEnableOption "Whether to enable desktop setup.";
     laptop = {
       enable = mkOption {
         type = types.bool;
-        default = preset.laptop.enable;
-        description = "Enable laptop setup";
+        description = "Whether to enable laptop setup.";
       }; 
     };
     wayland = {
       enable = mkOption {
         type = types.bool;
-        default = preset.wayland.enable;
-        description = "Enable wayland setup";
+        description = "Whether to enable wayland setup.";
       }; 
     };
     xorg = {
       enable = mkOption {
         type = types.bool;
-        default = preset.xorg.enable;
-        description = "Enable X11 setup";
+        description = "Whether to enable X11 setup.";
       }; 
     };
     games = {
       enable = mkOption {
         type = types.bool;
-        default = preset.games.enable;
-        description = "Enable games setup";
+        description = "Whether to enable games setup.";
       };
     }; 
     devices = {
@@ -99,7 +82,6 @@
             };
           };
         });
-        default = preset.devices.monitors;
         description = ''
           Properties of the monitor in the format that Hyprland uses.
           The monitor name can also be used in the configuration of services
@@ -117,7 +99,6 @@
               description = "Attrs with keyboard params";
             };
           in valueType;
-        default = preset.devices.keyboard;
         description = ''
           Current keyboard properties.
         '';

@@ -10,7 +10,7 @@
   imports = [
     # Custom modules:
     ../../modules/colors
-    ../../modules/desktop
+    ../../modules/desktop/laptop.nix
     # Shared configuration:
     ../_shared/boot
     ../_shared/console
@@ -55,7 +55,6 @@
   };
 
   desktop = {
-    preset = "laptop";
     games = {
       enable = true;
       xpadneo.enable = true;

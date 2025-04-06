@@ -10,7 +10,7 @@
   imports = [
     # Custom modules:
     ../../modules/colors
-    ../../modules/desktop
+    ../../modules/desktop/workstation.nix
     # Shared configuration:
     ../_shared/boot
     ../_shared/console
@@ -60,7 +60,6 @@
   };
 
   desktop = {
-    preset = "workstation";
     games = {
       enable = true;
       xpadneo.enable = true;
