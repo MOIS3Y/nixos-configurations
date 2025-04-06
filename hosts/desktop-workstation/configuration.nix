@@ -59,19 +59,6 @@
     flake = "/home/stepan/.setup";
   };
 
-  desktop = {
-    games = {
-      enable = true;
-      xpadneo.enable = true;
-      externalStorage = {
-        enable = true;
-      };
-      extraPackages = [
-        pkgs.bottles
-      ];
-    };
-  };
-
   sops = {
     defaultHostSopsFile = ../../secrets/hosts/desktop-workstation/secrets.yaml;
     secrets = {};

@@ -6,7 +6,6 @@
 # These values ​​are available across both NixOS and HM configurations.
 # Options can be overridden or expanded later in the configuration 
 # itself individually for each host.
-# For example, the desktop.games option has additional options in _shared.
 
 { config, pkgs, lib, ... }: let
   inherit (lib)
@@ -19,6 +18,7 @@
     ./apps
     ./assets
     ./cursor
+    ./games
     ./scripts
     ./utils
   ];
@@ -42,12 +42,6 @@
         description = "Whether to enable X11 setup.";
       }; 
     };
-    games = {
-      enable = mkOption {
-        type = types.bool;
-        description = "Whether to enable games setup.";
-      };
-    }; 
     devices = {
       monitors = mkOption {
         type = types.listOf (types.submodule {

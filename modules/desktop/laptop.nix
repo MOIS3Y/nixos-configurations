@@ -5,7 +5,6 @@
 # This module contains configuration for desktop-laptop
 # These values ​​are available across both NixOS and HM configurations.
 # The module can be considered as a upper level module.
-# If you need to override the values, you should do it here
 # If necessary override values, this is the best place to do this.
 # Although the values ​​can be changed in the configuration of each host or hm.
 
@@ -23,7 +22,7 @@
     wayland.enable = true;
     games = {
       enable = true;
-      # TODO: add attrs here after split games module
+      xpadneo.enable = true;
     };
     devices = {
       monitors = [
