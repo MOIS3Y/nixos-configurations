@@ -12,10 +12,6 @@
     shadowOffsets = [(-40) (-20)];
     shadowOpacity = 0.55;
     shadowExclude = [
-      "_GTK_FRAME_EXTENTS@:c"
-      "_PICOM_SHADOW@:32c = 0"
-      "_NET_WM_WINDOW_TYPE:a = '_NET_WM_WINDOW_TYPE_NOTIFICATION'"
-      "_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
       "class_g = 'Conky'"
       "class_g = 'slop'"
       "window_type = 'combo'"
@@ -43,7 +39,6 @@
       "window_type = 'toolbar'"
       "window_type = 'unknown'"
       "window_type = 'utility'"
-      "_PICOM_FADE@:32c = 0"
     ];
 
     activeOpacity = 1.0;
@@ -97,10 +92,7 @@
 
       corner-radius = 12;
       rounded-corners-exclude = [
-        "_PICOM_SHADOW@:32c = 0"
         "window_type = 'dock'"
-        "_NET_WM_STATE@:32a *= '_NET_WM_STATE_MAXIMIZED_VERT'"
-        "_NET_WM_STATE@:32a *= '_NET_WM_STATE_MAXIMIZED_HORZ'"
       ];
 
       blur-method = "dual_kawase";
@@ -111,7 +103,6 @@
       blur-background-frame = true;
       blur-background-fixed = true;
       blur-background-exclude = [
-        "_GTK_FRAME_EXTENTS@:c"
         "window_type = 'combo'"
         "window_type = 'desktop'"
         "window_type = 'dnd'"
