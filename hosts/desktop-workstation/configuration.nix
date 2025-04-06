@@ -63,7 +63,7 @@
     secrets = {};
   };
 
-  networking.hostName = lib.mkForce "workstation";
+  networking.hostName = "workstation";
 
   time.timeZone = "Asia/Chita";
 

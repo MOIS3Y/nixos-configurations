@@ -4,7 +4,7 @@
 
 {config, pkgs, lib, ...}: {
   networking = {
-    hostName = "replace-hostname";
+    hostName = lib.mkDefault "dummy-hostname";
     networkmanager = {
       enable = true;
       enableStrongSwan = true;
