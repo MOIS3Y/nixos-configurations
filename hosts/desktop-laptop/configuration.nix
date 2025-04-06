@@ -9,7 +9,6 @@
 { config, pkgs, lib, ... }: {
   imports = [
     # Custom modules:
-    ../../modules/colors
     ../../modules/desktop/laptop.nix
     # Shared configuration:
     ../_shared/boot

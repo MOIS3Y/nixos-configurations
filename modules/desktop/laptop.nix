@@ -13,8 +13,10 @@
     utils;
   in {
   imports = [
+    ../colors  # ? or import it in in nixos and home-manager configurations
     ./.
   ];
+  colorSchemeName = lib.mkForce "catppuccin_mocha";
   desktop = {
     enable = true;
     laptop.enable = true;
@@ -52,6 +54,8 @@
         kb_options = "grp:alt_shift_toggle";
       };
     };
+    cursor = {}; # ? Default arrts from module 
+    assets = {}; # ? Default arrts from module 
     apps = with utils; {
       terminal = kitty;
       spare-terminal = alacritty;
