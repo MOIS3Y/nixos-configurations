@@ -14,7 +14,6 @@
     sqlitebrowser
     # vault  #! local building
     vault-bin  #! In Russia, loading is available only with VPN
-    vscode
     # Languages:
     (lua.withPackages(ps: with ps; [ luarocks ]))
     (python3.withPackages(ps: with ps; [ pip ]))
