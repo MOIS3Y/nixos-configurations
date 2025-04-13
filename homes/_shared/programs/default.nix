@@ -5,7 +5,8 @@
 { config, pkgs, lib, ... }: {
   imports = [
     ./ssh
-    
+
+    ./direnv.nix
     ./git.nix
     ./helix.nix
     ./htop.nix
