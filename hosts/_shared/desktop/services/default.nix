@@ -2,8 +2,9 @@
 # ▄█ ██▄ █▀▄ ▀▄▀ █ █▄▄ ██▄ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, ... }: {
+{ ... }: {
   imports = [
+    ./blueman.nix
     ./pipewire.nix
   ];
 }

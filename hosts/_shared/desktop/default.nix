@@ -2,10 +2,9 @@
 # █▄▀ ██▄ ▄█ █░█ ░█░ █▄█ █▀▀ ▄
 # -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, ... }: {
+{ ... }: {
   imports = [
     ./dm
-    ./fixes
     ./games
     ./gnome
     ./laptop

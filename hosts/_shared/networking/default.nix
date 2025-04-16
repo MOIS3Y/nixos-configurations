@@ -2,7 +2,7 @@
 # █░▀█ ██▄ ░█░ ▀▄▀▄▀ █▄█ █▀▄ █░█ █ █░▀█ █▄█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
-{config, pkgs, lib, ...}: {
+{ pkgs, lib, ... }: {
   networking = {
     hostName = lib.mkDefault "dummy-hostname";
     networkmanager = {
@@ -15,8 +15,8 @@
       ];
       appendNameservers = [ "8.8.8.8" ];
     };
-    firewall = { 
-      enable = false;
-    };
   };
+  # ! fix l2tp vpn:
+  # ? see: https://github.com/NixOS/nixpkgs/issues/375352
+  environment.etc."strongswan.conf".text = "";
 }
