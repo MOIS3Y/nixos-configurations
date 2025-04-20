@@ -7,7 +7,6 @@
     ./dm
     ./games
     ./gnome
-    ./laptop
     ./pkgs
     ./programs
     ./services
