@@ -32,6 +32,9 @@
       };
       extraPackages = [
         pkgs.bottles
+        (pkgs.retroarch.withCores (cores: with cores; [
+          nestopia
+        ]))
       ];
     };
     devices = {
