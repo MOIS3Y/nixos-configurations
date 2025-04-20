@@ -4,7 +4,6 @@
 
 { ... }: {
   imports = [
-    ./dm
     ./games
     ./gnome
     ./pkgs
