@@ -6,7 +6,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   imports = [
     # Custom modules:
     ../../modules/colors
@@ -40,6 +40,40 @@
       unzip
       wget
     ];
+    etc = {
+      # ? Mailu fail2ban filters and actions
+      # TODO: move it in row conf files
+      "fail2ban/filter.d/bad-auth-bots.conf".text = ''
+        [Definition]
+        failregex = ^\s?\S+ mailu\-front\[\d+\]: \S+ \S+ \[info\] \d+#\d+: \*\d+ client login failed: \"AUTH not supported\" while in http auth state, client: <HOST>, server:
+        ignoreregex =
+        journalmatch = CONTAINER_TAG=mailu-front
+      '';
+      "fail2ban/filter.d/bad-auth.conf".text = ''
+        [Definition]
+        failregex = : Authentication attempt from <HOST> has been rate-limited\.$
+        ignoreregex =
+        journalmatch = CONTAINER_TAG=mailu-admin
+      '';
+      "fail2ban/action.d/docker-action-net.conf".text = ''
+        [Definition]
+        actionstart = ipset --create f2b-bad-auth-bots nethash
+            iptables -I DOCKER-USER -m set --match-set f2b-bad-auth-bots src -p tcp -m tcp --dport 25 -j DROP
+        actionstop = iptables -D DOCKER-USER -m set --match-set f2b-bad-auth-bots src -p tcp -m tcp --dport 25 -j DROP
+            ipset --destroy f2b-bad-auth-bots
+        actionban = ipset add -exist f2b-bad-auth-bots <ip>/24
+        actionunban = ipset del -exist f2b-bad-auth-bots <ip>/24
+      '';
+      "fail2ban/action.d/docker-action.conf".text = ''
+        [Definition]
+        actionstart = ipset --create f2b-bad-auth iphash
+            iptables -I DOCKER-USER -m set --match-set f2b-bad-auth src -j DROP
+        actionstop = iptables -D DOCKER-USER -m set --match-set f2b-bad-auth src -j DROP
+            ipset --destroy f2b-bad-auth
+        actionban = ipset add -exist f2b-bad-auth <ip>
+        actionunban = ipset del -exist f2b-bad-auth <ip>
+      '';
+    };
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -54,8 +88,8 @@
     };
     defaultGateway = "89.110.68.1";
     nameservers = [ "8.8.8.8" "1.1.1.1" ];
-    firewall = { 
-      enable = false;
+    firewall = {
+      enable = true;
     };
   };
 
@@ -81,43 +115,74 @@
   programs = {
     nh = {
       enable = true;
-      flake = "/home/admvps/.setup"; 
+      flake = "/home/admvps/.setup";
     };
     zsh = {
       enable = true;
     };
   };
-  
-  services.openssh = {
-    enable = true;
-    startWhenNeeded = true;
-    allowSFTP = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-      LogLevel = "INFO";
+
+  services = {
+    fail2ban = {
+      enable = true;
+      extraPackages = [
+        pkgs.ipset
+      ];
+      jails = {
+        bad-auth-bots = {
+          settings = {
+            enabled = true;
+            backend = "systemd";
+            filter = "bad-auth-bots";
+            bantime = 604800;
+            findtime = 600;
+            maxretry = 5;
+            action = "docker-action-net";
+          };
+        };
+        bad-auth = {
+          settings = {
+            enabled = true;
+            backend = "systemd";
+            filter = "bad-auth";
+            bantime = 604800;
+            findtime = 900;
+            maxretry = 15;
+            action = "docker-action";
+          };
+        };
+      };
     };
-    listenAddresses = [
-      {
-        addr = "0.0.0.0";
-        port = 2222;
-      }
-    ];
-    banner = ''
-      █▀ █▀█ █░░ ▄▀█ █▀█
-      ▄█ █▄█ █▄▄ █▀█ █▀▄
-    '';
+    openssh = {
+      enable = true;
+      startWhenNeeded = true;
+      allowSFTP = true;
+      settings = {
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+      };
+      listenAddresses = [
+        {
+          addr = "0.0.0.0";
+          port = 2222;
+        }
+      ];
+      banner = ''
+        █▀ █▀█ █░░ ▄▀█ █▀█
+        ▄█ █▄█ █▄▄ █▀█ █▀▄
+      '';
+      };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
-    users = { 
+    users = {
       admvps = {
         isNormalUser = true;
         description = "Stepan Zhukovsky";
         extraGroups = [ "wheel" ];
         shell = pkgs.zsh;
-        packages = with pkgs; [];
+        packages = [];
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM2uRkkbZ7Z9Zc0WHIZCBRBU8EylvBHoR7lB6sldtJp8 stepan@zhukovsky.me"
         ];
