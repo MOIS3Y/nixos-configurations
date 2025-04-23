@@ -41,38 +41,19 @@
       wget
     ];
     etc = {
-      # ? Mailu fail2ban filters and actions
-      # TODO: move it in row conf files
-      "fail2ban/filter.d/bad-auth-bots.conf".text = ''
-        [Definition]
-        failregex = ^\s?\S+ mailu\-front\[\d+\]: \S+ \S+ \[info\] \d+#\d+: \*\d+ client login failed: \"AUTH not supported\" while in http auth state, client: <HOST>, server:
-        ignoreregex =
-        journalmatch = CONTAINER_TAG=mailu-front
-      '';
-      "fail2ban/filter.d/bad-auth.conf".text = ''
-        [Definition]
-        failregex = : Authentication attempt from <HOST> has been rate-limited\.$
-        ignoreregex =
-        journalmatch = CONTAINER_TAG=mailu-admin
-      '';
-      "fail2ban/action.d/docker-action-net.conf".text = ''
-        [Definition]
-        actionstart = ipset --create f2b-bad-auth-bots nethash
-            iptables -I DOCKER-USER -m set --match-set f2b-bad-auth-bots src -p tcp -m tcp --dport 25 -j DROP
-        actionstop = iptables -D DOCKER-USER -m set --match-set f2b-bad-auth-bots src -p tcp -m tcp --dport 25 -j DROP
-            ipset --destroy f2b-bad-auth-bots
-        actionban = ipset add -exist f2b-bad-auth-bots <ip>/24
-        actionunban = ipset del -exist f2b-bad-auth-bots <ip>/24
-      '';
-      "fail2ban/action.d/docker-action.conf".text = ''
-        [Definition]
-        actionstart = ipset --create f2b-bad-auth iphash
-            iptables -I DOCKER-USER -m set --match-set f2b-bad-auth src -j DROP
-        actionstop = iptables -D DOCKER-USER -m set --match-set f2b-bad-auth src -j DROP
-            ipset --destroy f2b-bad-auth
-        actionban = ipset add -exist f2b-bad-auth <ip>
-        actionunban = ipset del -exist f2b-bad-auth <ip>
-      '';
+      # ? Mailu fail2ban filters and actions:
+      "fail2ban/filter.d/mailu-bad-auth-bots.conf".text = (
+        builtins.readFile ../../row/fail2ban/filter.d/mailu-bad-auth-bots.conf
+      );
+      "fail2ban/filter.d/mailu-bad-auth.conf".text = (
+        builtins.readFile ../../row/fail2ban/filter.d/mailu-bad-auth.conf
+      );
+      "fail2ban/action.d/mailu-docker-action-net.conf".text = (
+        builtins.readFile ../../row/fail2ban/action.d/mailu-docker-action-net.conf
+      );
+      "fail2ban/action.d/mailu-docker-action.conf".text = (
+        builtins.readFile ../../row/fail2ban/action.d/mailu-docker-action.conf
+      );
     };
   };
 
@@ -129,26 +110,26 @@
         pkgs.ipset
       ];
       jails = {
-        bad-auth-bots = {
+        mailu-bad-auth-bots = {
           settings = {
             enabled = true;
             backend = "systemd";
-            filter = "bad-auth-bots";
+            filter = "mailu-bad-auth-bots";
             bantime = 604800;
             findtime = 600;
             maxretry = 5;
-            action = "docker-action-net";
+            action = "mailu-docker-action-net";
           };
         };
-        bad-auth = {
+        mailu-bad-auth = {
           settings = {
             enabled = true;
             backend = "systemd";
-            filter = "bad-auth";
+            filter = "mailu-bad-auth";
             bantime = 604800;
             findtime = 900;
             maxretry = 15;
-            action = "docker-action";
+            action = "mailu-docker-action";
           };
         };
         sshd = {
