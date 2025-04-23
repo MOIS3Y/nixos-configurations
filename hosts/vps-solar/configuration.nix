@@ -151,6 +151,12 @@
             action = "docker-action";
           };
         };
+        sshd = {
+          settings = {
+            enable = true;
+            port = "22,2222";
+          };
+        };
       };
     };
     openssh = {
