@@ -155,18 +155,13 @@
     };
     openssh = {
       enable = true;
-      startWhenNeeded = true;
       allowSFTP = true;
+      ports = [ 2222 ];
       settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = false;
+        LogLevel = "VERBOSE";
       };
-      listenAddresses = [
-        {
-          addr = "0.0.0.0";
-          port = 2222;
-        }
-      ];
       banner = ''
         █▀ █▀█ █░░ ▄▀█ █▀█
         ▄█ █▄█ █▄▄ █▀█ █▀▄
