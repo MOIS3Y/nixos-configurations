@@ -65,101 +65,142 @@
     };
   };
   
-  outputs = { self, nixpkgs, home-manager, nix-on-droid, ... }@inputs: let
-    # Default system:
+  outputs = { nixpkgs, home-manager, nix-on-droid, ... }@inputs: let
     system = "x86_64-linux";
-    # Shortcut:
     lib = nixpkgs.lib;
-    # Need for first install from flake:
-    pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
-    # Helpers:
-    # override nixosSystem func for create my NixOS and HM configurations:
-    mkNixosSystem = host: lib.nixosSystem {
-      specialArgs = {
-        inherit system inputs;
-      };
-      modules = [
-        host.configuration
-        home-manager.nixosModules.home-manager {
-          home-manager = {
-            extraSpecialArgs = {
-              inherit system inputs;
-            };
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users = host.users;
-          };
-        }            
-      ];
-    };
-    # override nixOnDroidConfiguration func for android setup:
-    mkNixOnDroidSystem = host: nix-on-droid.lib.nixOnDroidConfiguration {
-      modules = [
-        host.configuration
-      ];
-      # for nix-on-droid:
-      extraSpecialArgs = {
-        inherit inputs;
-        home-config = {
-          config = host.home;
-          backupFileExtension = "hm-bak";
-          useGlobalPkgs = true;
-          # for hm:
-          extraSpecialArgs = { inherit inputs; };
-        };
-      };
-      pkgs = import nixpkgs {
-        system = "aarch64-linux";
-        config.allowUnfree = true;
-      };
-    };
   in {
-    # Linux:
+    # ! -- -- -- -- -- Linux -- -- -- -- -- ! #
     nixosConfigurations = {
       # desktops:
       # -- -- -- -- -- -- -- --
-      laptop = mkNixosSystem {
-        configuration = ./hosts/desktop-laptop/configuration.nix;
-        users = {
-          stepan = ./homes/stepan/home-on-laptop.nix;
+      laptop = lib.nixosSystem {
+        specialArgs = {
+          inherit system inputs;
         };
+        modules = [
+          ./hosts/desktop-laptop/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              extraSpecialArgs = {
+                inherit system inputs;
+              };
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users = {
+                stepan = ./homes/stepan/home-on-laptop.nix;
+              };
+            };
+          }
+        ];
       };
-      workstation = mkNixosSystem {
-        configuration = ./hosts/desktop-workstation/configuration.nix;
-        users = {
-          stepan = ./homes/stepan/home-on-workstation.nix;
+      workstation = lib.nixosSystem {
+        specialArgs = {
+          inherit system inputs;
         };
+        modules = [
+          ./hosts/desktop-workstation/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              extraSpecialArgs = {
+                inherit system inputs;
+              };
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users = {
+                stepan = ./homes/stepan/home-on-workstation.nix;
+              };
+            };
+          }
+        ];
       };
       # servers:
       # -- -- -- -- -- -- -- --
-      allsave = mkNixosSystem {
-        configuration = ./hosts/server-allsave/configuration.nix;
-        users = {
-          admserv = ./homes/admserv/home.nix;
+      allsave = lib.nixosSystem {
+        specialArgs = {
+          inherit system inputs;
         };
+        modules = [
+          ./hosts/server-allsave/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              extraSpecialArgs = {
+                inherit system inputs;
+              };
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users = {
+                admserv = ./homes/admserv/home.nix;
+              };
+            };
+          }
+        ];
       };
       # vps:
       # -- -- -- -- -- -- -- --
-      gliese = mkNixosSystem {
-        configuration = ./hosts/vps-gliese/configuration.nix;
-        users = {
-          admvps = ./homes/admvps/home.nix;
+      gliese = lib.nixosSystem {
+        specialArgs = {
+          inherit system inputs;
         };
+        modules = [
+          ./hosts/vps-gliese/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              extraSpecialArgs = {
+                inherit system inputs;
+              };
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users = {
+                admvps = ./homes/admvps/home.nix;
+              };
+            };
+          }
+        ];
       };
-      solar = mkNixosSystem {
-        configuration = ./hosts/vps-solar/configuration.nix;
-        users = {
-          admvps = ./homes/admvps/home.nix;
+      solar = lib.nixosSystem {
+        specialArgs = {
+          inherit system inputs;
         };
+        modules = [
+          ./hosts/vps-solar/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              extraSpecialArgs = {
+                inherit system inputs;
+              };
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users = {
+                admvps = ./homes/admvps/home.nix;
+              };
+            };
+          }
+        ];
       };
     };
-    # Android:
+    # ! -- -- -- -- -- Android -- -- -- -- -- ! #
     nixOnDroidConfigurations = {
       # primary
-      # -- -- -- -- -- -- -- -- --
-      pixel = mkNixOnDroidSystem {
-        configuration = ./hosts/phone-pixel/nix-on-droid.nix;
-        home = ./homes/nix-on-droid/home.nix;
+      # -- -- -- --
+      pixel = nix-on-droid.lib.nixOnDroidConfiguration {
+        modules = [
+          ./hosts/phone-pixel/nix-on-droid.nix
+        ];
+        # for nix-on-droid:
+        extraSpecialArgs = {
+          inherit inputs;
+          home-config = {
+            config = ./homes/nix-on-droid/home.nix;
+            backupFileExtension = "hm-bak";
+            useGlobalPkgs = true;
+            # for hm:
+            extraSpecialArgs = { inherit inputs; };
+          };
+        };
+        pkgs = import nixpkgs {
+          system = "aarch64-linux";
+          config.allowUnfree = true;
+        };
       };
     };
   };
