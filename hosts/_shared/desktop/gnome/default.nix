@@ -2,11 +2,10 @@
 # █▄█ █░▀█ █▄█ █░▀░█ ██▄ ▄
 # -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }: {
+{ pkgs, ... }: {
   # dependencies:
   services.gvfs.enable = true;
-  services.dleyna-server.enable = true;
-  services.dleyna-renderer.enable = true;
+  services.dleyna.enable = true;
   services.geoclue2.enable = true;
   services.geoclue2.enableDemoAgent = false; # GNOME has its own geoclue agent
 

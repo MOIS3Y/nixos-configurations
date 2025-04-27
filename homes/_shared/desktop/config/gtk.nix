@@ -93,12 +93,7 @@
     name = "gtk.css";
     text = "${extraCss}";
   };
-  themeName = ''${
-    if variant == "dark" then "Tela-circle-blue-dark"
-    else
-      "Tela-circle-blue"
-  }'';
-in {
+  in {
   gtk = {
     enable = true;    
     theme = {
@@ -106,10 +101,10 @@ in {
       package = pkgs.adw-gtk3;
     };
     iconTheme = {
-      name = "${themeName}";
-      package = pkgs.tela-circle-icon-theme.override {
-        allColorVariants = true;
-      };
+      name = ''${
+        if variant == "dark" then "Tela-circle-dark" else "Tela-circle-light"
+      }'';
+      package = pkgs.tela-circle-icon-theme;
     };
     font = {
       name = "Ubuntu";
