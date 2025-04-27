@@ -7,7 +7,7 @@
 # nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
 # nix-channel --update
 
-{ config, lib, pkgs, home-config, ... }: {
+{ home-config, ... }: {
   imports = [
     # Custom modules:
     ../../modules/colors

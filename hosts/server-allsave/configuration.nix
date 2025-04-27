@@ -153,7 +153,7 @@
         "libvirtd"
       ];
       shell = pkgs.zsh;
-      packages = with pkgs; [];
+      packages = [];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIN8ntFxD/6St6f8I9U+W+uqw9tQZQk6nxSBkaYpB5QN home server"
       ];

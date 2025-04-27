@@ -6,7 +6,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   imports = [
     # Custom modules:
     ../../modules/colors
@@ -112,7 +112,7 @@
         description = "Stepan Zhukovsky";
         extraGroups = [ "wheel" ];
         shell = pkgs.zsh;
-        packages = with pkgs; [];
+        packages = [];
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGtpBAY/JGXUQ8tGhgxvPoffWcK9jNY/B/YmasmN6Ykv gliese.zhukovsky.me"
         ];
