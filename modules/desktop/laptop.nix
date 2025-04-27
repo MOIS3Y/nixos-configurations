@@ -8,7 +8,7 @@
 # If necessary override values, this is the best place to do this.
 # Although the values ​​can be changed in the configuration of each host or hm.
 
-{ config, pkgs, lib, ... }: let 
+{ config, lib, ... }: let 
   inherit (config.desktop)
     utils;
   in {

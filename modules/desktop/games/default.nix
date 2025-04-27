@@ -7,9 +7,8 @@
 # for a specific host and user
 # Depending on the values, the configuration is used in _shared/desktop/games
 
-{ config, pkgs, lib, ... }: let
+{ lib, ... }: let
   inherit (lib)
-    mkIf
     mkOption
     mkEnableOption
     literalExpression

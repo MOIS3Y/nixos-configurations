@@ -7,7 +7,7 @@
 # Options can be overridden or expanded later in the configuration 
 # itself individually for each host.
 
-{ config, pkgs, lib, ... }: let
+{ lib, ... }: let
   inherit (lib)
     mkEnableOption
     mkOption

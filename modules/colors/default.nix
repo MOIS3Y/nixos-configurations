@@ -6,7 +6,7 @@
 # After the import of the module, you can override the value of colorSchemeName
 # from the current available list
 
-{ inputs, config, pkgs, lib, ... }: {
+{ inputs, config, lib, ... }: {
   imports = [
     inputs.nix-colors.homeManagerModules.default  # ? add base16 color schemes
   ];

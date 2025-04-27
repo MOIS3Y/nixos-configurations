@@ -34,8 +34,8 @@
   desktop.scripts.waybar = {
     # Toggle scripts:
     launcher-toggle = pkgs.writeShellScript "waybar-launcher-toggle.sh" ''
-      if ${pgrep} -f "${config.desktop.apps.launcher}" > /dev/null 2>&1; then
-        ${pkill} -f "${config.desktop.apps.launcher}"
+      if ${pgrep} -f "${launcher}" > /dev/null 2>&1; then
+        ${pkill} -f "${launcher}"
       else
         ${config.desktop.apps.launcher}
       fi

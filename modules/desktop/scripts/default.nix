@@ -2,7 +2,7 @@
 # ▄█ █▄▄ █▀▄ █ █▀▀ ░█░ ▄█ ▄
 # -- -- -- -- -- -- -- -- -
 
-{ config, lib, ... }: let 
+{ lib, ... }: let 
   inherit (lib)
     mkOption
     types;

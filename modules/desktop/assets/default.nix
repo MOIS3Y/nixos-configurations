@@ -3,7 +3,6 @@
 # -- -- -- -- -- -- -- -
 
 { inputs, config, pkgs, lib, ... }: let
-  cfg = config.desktop.assets;
   assets = inputs.assets4nix.packages."${pkgs.system}".assets4nix;
   cs = config.colorScheme.name;
   inherit (lib)

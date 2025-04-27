@@ -12,7 +12,7 @@
 # the standard repository wherever possible.
 # The module is just a temporary solution.
 
-{ config, pkgs, lib, ... }: {
+{ ... }: {
   imports = [
     ./mellowplayer.nix
     ./swappy.nix
