@@ -2,7 +2,7 @@
 # █░█ █▀▄ ██▄ ▄█ █▄█ █▄█ █▀▄ █▄▄ ██▄ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }: lib.mkIf config.desktop.xorg.enable {
+{ config, lib, ... }: lib.mkIf config.desktop.xorg.enable {
   xresources.extraConfig = with config.colorScheme.palette; ''
     Xft.dpi: 96
     Xft.antialias: true

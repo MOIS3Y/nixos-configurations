@@ -2,7 +2,7 @@
 # █▄ ▄█ █▀█ ▄
 # -- -- -- --
 
-{ config, pkgs, ... }: {
+{ config, ... }: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;

@@ -2,7 +2,7 @@
 # █░▀█ ▀▄▀ █▄▄ █▀█ █▀█ █▄▀ ▄
 # -- -- -- -- -- -- -- -- --
 
-{ inputs, config, pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   imports = [
     inputs.nvchad4nix.homeManagerModule
   ];

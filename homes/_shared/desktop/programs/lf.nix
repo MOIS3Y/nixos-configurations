@@ -2,7 +2,7 @@
 # █▄▄ █▀░   ██▄ █░█ ░█░ ██▄ █░▀█ █▄▀ ██▄ █▄▀ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, lib, ... }: {
+{ config, lib, ... }: {
   programs.lf = {
     enable = lib.mkForce true;
     settings = lib.mkForce {

@@ -2,7 +2,7 @@
 # █▄▄ █▄█ █░▀█ █▀░ █ █▄█ ▄
 # -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }: {
+{  ... }: {
   imports = [
     ./dconf.nix
     ./gtk.nix

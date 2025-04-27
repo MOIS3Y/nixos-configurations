@@ -12,7 +12,7 @@
 # https://github.com/nix-community/home-manager/blob/master/modules/services/blueman-applet.nix
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-{config, pkgs, ...}: {
+{ ... }: {
   services.blueman-applet.enable = true;
   services.network-manager-applet.enable = true;
 

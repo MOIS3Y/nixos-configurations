@@ -2,7 +2,7 @@
 # ▄█ █▄█ █▄▄ █ ██▄ ░█░ ░█░ ▄
 # -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     linphone
     mattermost-desktop

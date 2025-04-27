@@ -10,10 +10,10 @@
 
 { config, pkgs, ... }: let
   googleCalendarFetchId = pkgs.writeShellScript "khal-gcfid.sh" ''
-    ${cat} ${config.sops.secrets."google-calendar/fetch-id".path}
+    cat ${config.sops.secrets."google-calendar/fetch-id".path}
   '';
   googleCalendarFetchSecret = pkgs.writeShellScript "khal-gcfs.sh" ''
-    ${cat} ${config.sops.secrets."google-calendar/fetch-secret".path}
+    cat ${config.sops.secrets."google-calendar/fetch-secret".path}
   '';
 in {
   accounts.calendar = {

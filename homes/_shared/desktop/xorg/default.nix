@@ -2,7 +2,7 @@
 # █░█ █▄█ █▀▄ █▄█ ▄
 # -- -- -- -- -- --
 
-{ config, pkgs, lib, ... }: {
+{ config, lib, ... }: {
   imports = [
     ./cbatticon.nix
     ./dunst.nix

@@ -2,7 +2,7 @@
 # █▀█ ██▄ █▄▄ █ █░█ ▄
 # -- -- -- -- -- -- -
 
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   programs.helix = {
     enable = false;
     extraPackages = with pkgs; [

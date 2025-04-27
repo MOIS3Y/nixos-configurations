@@ -2,7 +2,7 @@
 # █▄▄ █▄█ █▀█ ░█░ ░█░ █ █▄▄ █▄█ █░▀█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, lib, ... }: lib.mkIf config.desktop.xorg.enable {
+{ config, lib, ... }: lib.mkIf config.desktop.xorg.enable {
   services.cbatticon = {
     enable = true;
     lowLevelPercent = 20;

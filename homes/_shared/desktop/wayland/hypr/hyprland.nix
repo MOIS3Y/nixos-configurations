@@ -142,9 +142,11 @@
       #! -- -- -- -- -- keybindings -- -- -- -- -- #
       bind = let
         # first monitor in the list is primary by default:
-        pm = builtins.elemAt devices.monitors 0;
-        resolution = "${toString pm.width}x${toString pm.height}@${toString pm.refreshRate}";
-        position = "${toString pm.x}x${toString pm.y}";
+       # ! broken see: https://github.com/hyprwm/Hyprland/issues/7055
+        # pm = builtins.elemAt devices.monitors 0;
+
+        # resolution = "${toString pm.width}x${toString pm.height}@${toString pm.refreshRate}";
+        # position = "${toString pm.x}x${toString pm.y}";
       in [
         # ------------ #
         #  - GENERAL - #

@@ -5,7 +5,7 @@
 # ! Minimal general configuration.
 # ! Extensions (previewer, dragon) are configured in desktop/programs/lf.nix
 
-{ config, pkgs, ... }: let
+{ ... }: let
   # pull icons file
   lfIcons = builtins.fetchurl rec {
     name = "lf-icons-${sha256}.txt";

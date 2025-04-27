@@ -2,7 +2,7 @@
 # ▀▄▀▄▀ █▀█ ░█░ █▄█ █▀█ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }: let
+{ config, lib, ... }: let
   cfg = config.desktop.wayland;
   bars = import ./bars.nix { inherit config lib; };
   styles = import ./styles.nix { inherit config;};

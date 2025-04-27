@@ -2,7 +2,7 @@
 # █▀█ █▄█ █░▀░█ ██▄ ░░ █░▀░█ █▀█ █░▀█ █▀█ █▄█ ██▄ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, lib, ... }: {
+{ pkgs, lib, ... }: {
   imports = [
     # Custom modules
     ../../modules/colors

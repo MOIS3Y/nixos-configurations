@@ -5,7 +5,7 @@
 # Common home configuration 
 # This might be expanded using attrs specific to the host
 
-{ config, ... }: {
+{ ... }: {
   imports = [
     # Custom modules:
     ../../modules/colors

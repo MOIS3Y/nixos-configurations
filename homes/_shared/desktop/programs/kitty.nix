@@ -2,7 +2,7 @@
 # █░█ █ ░█░ ░█░ ░█░ ▄
 # -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }: {
+{ config, ... }: {
   programs.kitty = {
     enable = true;
     shellIntegration.enableZshIntegration = false;  # fix underline cursor

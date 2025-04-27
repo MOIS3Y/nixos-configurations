@@ -2,7 +2,7 @@
 # █░▀█ ██▄ ░█░ ▀▄▀▄▀ █▄█ █▀▄ █░█ ▄
 # -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     wireguard-tools
     google-chrome
