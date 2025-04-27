@@ -2,7 +2,7 @@
 # ██▄ █░▀█ ▀▄▀ █ █▀▄ █▄█ █░▀█ █░▀░█ ██▄ █░▀█ ░█░ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   environment = {
     variables = {
       "PYTHONDONTWRITEBYTECODE" = "1";

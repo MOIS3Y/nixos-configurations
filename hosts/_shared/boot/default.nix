@@ -2,13 +2,12 @@
 # █▄█ █▄█ █▄█ ░█░ ▄
 # -- -- -- -- -- --
 
-{ inputs, config, pkgs, lib, system, ... }: let
+{ inputs, config, pkgs, lib, ... }: let
   cfg = config.host.boot;
-  theme = inputs.distro-grub-themes.packages.${system}."${cfg.grubTheme}-grub-theme";
+  theme = inputs.distro-grub-themes.packages.${pkgs.system}."${cfg.grubTheme}-grub-theme";
   inherit (lib)
     mkOption
-    types
-    attrsets;
+    types;
 in {
   options.host.boot = {
     grubTheme = mkOption {

@@ -2,7 +2,7 @@
 # ▄█ █▄█ █▀▀ ▄█ ▄
 # -- -- -- -- -- 
 
-{ inputs, config, pkgs, lib, ... }: {
+{ inputs, config, lib, ... }: {
   imports = [
     inputs.sops-nix.nixosModules.sops
   ];

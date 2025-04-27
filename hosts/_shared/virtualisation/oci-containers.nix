@@ -2,7 +2,7 @@
 # █▄█ █▄▄ █ ░░ █▄▄ █▄█ █░▀█ ░█░ █▀█ █ █░▀█ ██▄ █▀▄ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, ... }: {
+{ ... }: {
   portainer-agent = {
     image = "portainer/agent:2.20.1-alpine";
     hostname = "portainer-agent";

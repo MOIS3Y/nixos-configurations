@@ -3,7 +3,6 @@
 # -- -- -- -- -- -- -
 
 { config, pkgs, lib, ... }: let
-  cfg = config.host;
   inherit (lib)
     mkOption
     attrsets

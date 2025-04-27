@@ -25,7 +25,7 @@
     description = "Stepan Zhukovsky";
     extraGroups = [ "wheel" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [];
+    packages = [];
   };
   # add more users here ...
 }

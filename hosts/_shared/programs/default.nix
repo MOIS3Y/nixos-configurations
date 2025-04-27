@@ -2,7 +2,7 @@
 # █▀▀ █▀▄ █▄█ █▄█ █▀▄ █▀█ █░▀░█ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }: let
+{ config, lib, ... }: let
   cfg = config.host;
   inherit (lib)
     mkOption
