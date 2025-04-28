@@ -101,9 +101,6 @@
         '';
       };
     };
-    brightness-controller = {
-      enable = mkEnableOption "Wether to enable hardware brightness controller";
-    };
     battery = {
       enable = mkEnableOption "Wether to enable battery power management";
     };
