@@ -1,6 +1,6 @@
-# █▀█ █▄▀ █▀▀ █▀ ▀
-# █▀▀ █░█ █▄█ ▄█ ▄
-# -- -- -- -- -- -
+# ▀▄▀ ▄█ ▄█ ▀
+# █░█ ░█ ░█ ▄
+# -- -- -- --
 
 { config, pkgs, lib, ... }: lib.mkIf config.desktop.xorg.enable {
   home.packages = with pkgs; [

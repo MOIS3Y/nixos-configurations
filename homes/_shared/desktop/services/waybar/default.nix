@@ -27,7 +27,7 @@
         then true
         else false;
       systemd.enable = true;
-      excludeWidgets = if config.desktop.devices.brightness-controller.enable
+      excludeWidgets = if !config.desktop.devices.ddcci.enable
         then [ "custom/ddcutil" ]
         else [ "battery" "group/group-backlight" ];
       settings = {
