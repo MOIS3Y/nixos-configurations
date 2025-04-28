@@ -6,10 +6,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ ... }: {
+{ config, pkgs, lib, ... }: {
+
   imports = [
     # Custom modules:
-    ../../modules/desktop/workstation.nix
+    ../../modules/colors
+    ../../modules/desktop
     # Shared configuration:
     ../_shared/boot
     ../_shared/console
@@ -30,7 +32,9 @@
     # Host autogenerate hardware configuration:
     ./hardware-configuration.nix  # msi-z390-a-pro
   ];
+
   # Override _shared configuration:
+  colorSchemeName = lib.mkForce "catppuccin_mocha";
   host = {
     boot = {
       grubTheme = "msi";
@@ -66,6 +70,78 @@
   networking.hostName = "workstation";
 
   time.timeZone = "Asia/Chita";
+
+  # Set desktop configuration:
+  desktop = {
+    enable = true;
+    xorg = {
+      enable = false;
+      windowManagers = [ "awesome" ];
+    };
+    wayland = {
+      enable = true;
+      compositors = [ "hyprland" ];
+    };
+    games = {
+      enable = true;
+      xpadneo.enable = true;
+      externalStorage = {
+        enable = true;
+        storagePath = "/dev/disk/by-label/games";
+        mountPath = "/home/stepan/Games";
+      };
+      extraPackages = [
+        pkgs.bottles
+        (pkgs.retroarch.withCores (cores: with cores; [
+          nestopia
+        ]))
+      ];
+    };
+    devices = {
+      monitors = [
+        {
+          name = "DP-1";  # primary
+          width = 1920;
+          height = 1080;
+          refreshRate = 144;
+          x = 0;
+          y =0;
+          enabled = true;
+        }
+        {
+          name = "HDMI-A-1";  # secondary
+          width = 1920;
+          height = 1080;
+          refreshRate = 60;
+          x = 1920;  # connected to the right of DP-1
+          y =0;
+          enabled = true;      
+        }
+      ];
+      keyboard = {
+        enable = true;
+        settings = {
+          name = "logitech-k370s/k375s";
+          kb_layout = "us,ru";
+          kb_model = "pc104";
+          kb_options = "grp:alt_shift_toggle";
+        };
+      };
+      bluetooth.enable = true;
+      ddcci.enable = true;
+    };
+    cursor = {}; # ? Default arrts from module 
+    assets = {}; # ? Default arrts from module 
+    apps = with config.desktop.utils; {
+      terminal = kitty;
+      spare-terminal = alacritty;
+      browser = firefox;
+      filemanager = nautilus;
+      launcher = wofi;
+      lockscreen = hyprlock;
+      visual-text-editor = vscode;
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

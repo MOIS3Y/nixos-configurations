@@ -9,7 +9,5 @@
     ./pkgs
     ./programs
     ./services
-    ./wayland
-    ./xorg
   ];
 }

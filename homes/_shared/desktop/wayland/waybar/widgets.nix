@@ -47,7 +47,7 @@
     format = " {}";
     format-en = " us";
     format-ru = " ru";
-    keyboard-name = config.desktop.devices.keyboard.name;
+    keyboard-name = config.desktop.devices.keyboard.settings.name;
   };
   # ! doesn't work propertly on Hyprland (waiting...)
   # ? see https://github.com/hyprwm/Hyprland/discussions/1094

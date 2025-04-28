@@ -87,7 +87,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               users = {
-                stepan = ./homes/stepan/home-on-laptop.nix;
+                stepan = ./homes/stepan/home.nix;
               };
             };
           }
@@ -107,7 +107,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               users = {
-                stepan = ./homes/stepan/home-on-workstation.nix;
+                stepan = ./homes/stepan/home.nix;
               };
             };
           }

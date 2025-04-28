@@ -2,15 +2,14 @@
 # █▀█ █▄█ █░▀░█ ██▄ ░░ █░▀░█ █▀█ █░▀█ █▀█ █▄█ ██▄ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-# Common home configuration 
-# This might be expanded using attrs specific to the host
-
-{ ... }: {
+{ osConfig, ... }: {
   imports = [
     # Custom modules:
     ../../modules/colors
+    ../../modules/desktop
     ../../modules/programs
     # Shared configuration:
+    ../_shared/desktop
     ../_shared/programs
     ../_shared/sops
   ];
@@ -19,6 +18,10 @@
     username = "stepan";
     homeDirectory = "/home/stepan";
   };
+
+  # ? inherit host configuration
+  colorSchemeName = osConfig.colorSchemeName;
+  desktop = osConfig.desktop;
 
   sops = {
     defaultUserSopsFile = ../../secrets/homes/stepan/secrets.yaml;

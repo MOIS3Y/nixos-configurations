@@ -83,9 +83,9 @@
       };
       #! -- -- -- --  -- -- input -- -- -- -- -- -- #
       input = {
-        kb_layout = devices.keyboard.kb_layout;
-        kb_model = devices.keyboard.kb_model;
-        kb_options = devices.keyboard.kb_options;
+        kb_layout = devices.keyboard.settings.kb_layout;
+        kb_model = devices.keyboard.settings.kb_model;
+        kb_options = devices.keyboard.settings.kb_options;
         numlock_by_default = true;
         follow_mouse = 1;
         touchpad = {
@@ -142,7 +142,7 @@
       #! -- -- -- -- -- keybindings -- -- -- -- -- #
       bind = let
         # first monitor in the list is primary by default:
-       # ! broken see: https://github.com/hyprwm/Hyprland/issues/7055
+        # ! broken see: https://github.com/hyprwm/Hyprland/issues/7055
         # pm = builtins.elemAt devices.monitors 0;
 
         # resolution = "${toString pm.width}x${toString pm.height}@${toString pm.refreshRate}";

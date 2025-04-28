@@ -18,91 +18,38 @@
     ./apps
     ./assets
     ./cursor
+    ./devices
     ./games
     ./scripts
     ./utils
   ];
   options.desktop = {
     enable = mkEnableOption "Whether to enable desktop setup.";
-    laptop = {
-      enable = mkOption {
-        type = types.bool;
-        description = "Whether to enable laptop setup.";
-      }; 
-    };
     wayland = {
-      enable = mkOption {
-        type = types.bool;
-        description = "Whether to enable wayland setup.";
-      }; 
-    };
-    xorg = {
-      enable = mkOption {
-        type = types.bool;
-        description = "Whether to enable X11 setup.";
-      }; 
-    };
-    devices = {
-      monitors = mkOption {
-        type = types.listOf (types.submodule {
-          options = {
-            name = mkOption {
-              type = types.str;
-              example = "DP-1";
-            };
-            width = mkOption {
-              type = types.int;
-              example = 1920;
-            };
-            height = mkOption {
-              type = types.int;
-              example = 1080;
-            };
-            refreshRate = mkOption {
-              type = types.int;
-              default = 60;
-            };
-            x = mkOption {
-              type = types.int;
-              default = 0;
-            };
-            y = mkOption {
-              type = types.int;
-              default = 0;
-            };
-            enabled = mkOption {
-              type = types.bool;
-              default = true;
-            };
-          };
-        });
-        description = ''
-          Properties of the monitor in the format that Hyprland uses.
-          The monitor name can also be used in the configuration of services
-          such as Hyprlock and Waybar.
+      enable = mkEnableOption "Whether to enable wayland setup.";
+      compositors = mkOption {
+        type = types.listOf (types.enum [
+          "hyprland"
+          "wayfire" 
+        ]);
+        default = [ "hyprland" ];
+        description = "List of preconfigured wayland compositors";
+        example = literalExpression ''
+          compositors = [ "hyprland" "wayfire" ];
         '';
       };
-      keyboard = mkOption {
-        type = with types;
-          let
-            valueType = nullOr (oneOf [
-              str
-              attrs
-              (attrsOf valueType)
-            ]) // {
-              description = "Attrs with keyboard params";
-            };
-          in valueType;
-        description = ''
-          Current keyboard properties.
-        '';
+    };
+    xorg = {
+      enable = mkEnableOption "Whether to enable X11 setup.";
+      windowManagers = mkOption {
+        type = types.listOf (types.enum [
+          "awesome"
+          "qtile"
+        ]);
+        default = [ "awesome" ];
+        description = "List of preconfigured x11 window managers";
         example = literalExpression ''
-          {
-            name = "keyboard name (can get with hyprctl devices)";
-            kb_layout = "us,ru";
-            kb_model = "pc104";
-            kb_options = "grp:alt_shift_toggle";
-          };
+          windowManagers = [ "awesome" "qtile" ];
         '';
       };
     };

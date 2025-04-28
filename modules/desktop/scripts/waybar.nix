@@ -28,8 +28,10 @@
     terminal;
   inherit (config.desktop.assets.sounds)
     toggle-beep;
-  inherit (config.programs)
-    waybar;
+  inherit (config.desktop)
+    devices;
+  # inherit (config.programs)
+  #   waybar;
   in {
   desktop.scripts.waybar = {
     # Toggle scripts:
@@ -37,7 +39,7 @@
       if ${pgrep} -f "${launcher}" > /dev/null 2>&1; then
         ${pkill} -f "${launcher}"
       else
-        ${config.desktop.apps.launcher}
+        ${launcher}
       fi
     '';
     btm-toggle = pkgs.writeShellScript "waybar-btm-toggle.sh" ''
@@ -78,15 +80,15 @@
       # src: https://gist.github.com/Ar7eniyan/42567870ad2ce47143ffeb41754b4484
 
       receive_pipe="/tmp/waybar-ddc-module-rx"
-      step=${builtins.toString waybar.ddcutil.step}
+      step=${builtins.toString devices.ddcci.step}
 
       ddcutil_fast() {
         # ! adjust the bus number and the multiplier for your display
         # ! multiplier should be chosen so that it both works reliably and fast enough
         ${ddcutil} \
         --noverify \
-        --bus ${builtins.toString waybar.ddcutil.busNumber} \
-        --sleep-multiplier .0${builtins.toString waybar.ddcutil.multiplier} "$@" 2>/dev/null
+        --bus ${builtins.toString devices.ddcci.busNumber} \
+        --sleep-multiplier .0${builtins.toString devices.ddcci.multiplier} "$@" 2>/dev/null
       }
 
       ddcutil_slow() {
@@ -116,10 +118,10 @@
                   ddcutil_fast setvcp 10 $command $step
                   ;;
               max)
-                  ddcutil_fast setvcp 10 ${builtins.toString waybar.ddcutil.bright} 
+                  ddcutil_fast setvcp 10 ${builtins.toString devices.ddcci.bright} 
                   ;;
               min)
-                  ddcutil_fast setvcp 10 ${builtins.toString waybar.ddcutil.dark}
+                  ddcutil_fast setvcp 10 ${builtins.toString devices.ddcci.dark}
                   ;;
           esac
           print_brightness ddcutil_fast
