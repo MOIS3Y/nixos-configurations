@@ -43,61 +43,24 @@
     @define-color sidebar_bg_color #${base01};
     @define-color sidebar_fg_color #${base05};
     @define-color sidebar_backdrop_color #${base01};
-    @define-color blue_1 #99c1f1;
-    @define-color blue_2 #62a0ea;
-    @define-color blue_3 #3584e4;
-    @define-color blue_4 #1c71d8;
-    @define-color blue_5 #1a5fb4;
-    @define-color green_1 #8ff0a4;
-    @define-color green_2 #57e389;
-    @define-color green_3 #33d17a;
-    @define-color green_4 #2ec27e;
-    @define-color green_5 #26a269;
-    @define-color yellow_1 #f9f06b;
-    @define-color yellow_2 #f8e45c;
-    @define-color yellow_3 #f6d32d;
-    @define-color yellow_4 #f5c211;
-    @define-color yellow_5 #e5a50a;
-    @define-color orange_1 #ffbe6f;
-    @define-color orange_2 #ffa348;
-    @define-color orange_3 #ff7800;
-    @define-color orange_4 #e66100;
-    @define-color orange_5 #c64600;
-    @define-color red_1 #f66151;
-    @define-color red_2 #ed333b;
-    @define-color red_3 #e01b24;
-    @define-color red_4 #c01c28;
-    @define-color red_5 #a51d2d;
-    @define-color purple_1 #dc8add;
-    @define-color purple_2 #c061cb;
-    @define-color purple_3 #9141ac;
-    @define-color purple_4 #813d9c;
-    @define-color purple_5 #613583;
-    @define-color brown_1 #cdab8f;
-    @define-color brown_2 #b5835a;
-    @define-color brown_3 #986a44;
-    @define-color brown_4 #865e3c;
-    @define-color brown_5 #63452c;
-    @define-color light_1 #ffffff;
-    @define-color light_2 #f6f5f4;
-    @define-color light_3 #deddda;
-    @define-color light_4 #c0bfbc;
-    @define-color light_5 #9a9996;
-    @define-color dark_1 #77767b;
-    @define-color dark_2 #5e5c64;
-    @define-color dark_3 #3d3846;
-    @define-color dark_4 #241f31;
-    @define-color dark_5 #000000;
   '';
   gtk4css = pkgs.writeTextFile {
     name = "gtk.css";
     text = "${extraCss}";
   };
+  commonGtkExtraConfig = {
+    gtk-decoration-layout = "menu:";
+    # add more common gtk3/4 settings here ...
+  } // ( 
+    if variant == "dark"
+      then { gtk-application-prefer-dark-theme = true; }
+      else {}
+  );
   in {
   gtk = {
     enable = true;    
     theme = {
-      name = "adw-gtk3";
+      name = ''${ if variant == "dark" then "adw-gtk3-dark" else "adw-gtk3" }'';
       package = pkgs.adw-gtk3;
     };
     iconTheme = {
@@ -112,15 +75,11 @@
       size = 11;
     };
     gtk3 = {
-      extraConfig = {
-        gtk-decoration-layout = "menu:";
-      };
+      extraConfig = commonGtkExtraConfig;
       inherit extraCss; 
     };
     gtk4 = {
-      extraConfig = {
-        gtk-decoration-layout = "menu:";
-      };
+      extraConfig = commonGtkExtraConfig;
       inherit extraCss; 
     };
   };
