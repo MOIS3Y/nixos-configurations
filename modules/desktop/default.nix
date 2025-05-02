@@ -25,6 +25,17 @@
   ];
   options.desktop = {
     enable = mkEnableOption "Whether to enable desktop setup.";
+    displayManager = {
+      enable = mkEnableOption ''
+        Whether to enable systemd’s display-manager service.
+      '';
+      sddm.enable = mkEnableOption ''
+        Whether to enable sddm as the display manager.
+      '';
+      greetd.enable = mkEnableOption ''
+        Whether to enable greetd, a minimal and flexible login manager daemon.
+      '';
+    };
     wayland = {
       enable = mkEnableOption "Whether to enable wayland setup.";
       compositors = mkOption {

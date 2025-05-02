@@ -6,6 +6,7 @@
   imports = [
     ./display-manager.nix
     ./blueman.nix
+    ./greetd.nix
     ./libinput.nix
     ./logind.nix
     ./pipewire.nix

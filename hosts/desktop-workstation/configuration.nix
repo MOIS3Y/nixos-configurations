@@ -74,6 +74,10 @@
   # Set desktop configuration:
   desktop = {
     enable = true;
+    displayManager = {
+      enable = true;
+      greetd.enable = true;
+    };
     xorg = {
       enable = false;
       windowManagers = [ "awesome" ];

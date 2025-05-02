@@ -3,26 +3,27 @@
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 { config, pkgs, ... }: let
+  cfg = config.desktop;
   inherit (config.colorScheme)
     palette;
   in {
   services = {
     displayManager = {
-      enable = true;
+      enable = cfg.displayManager.enable;
       sddm = { 
-        enable = true;
+        enable = cfg.displayManager.sddm.enable;
         wayland = {
           enable = true;
         };
         extraPackages = [
           pkgs.libsForQt5.qt5.qtgraphicaleffects
-          config.desktop.cursor.package  #? not working add it in systemPackages
+          cfg.cursor.package  #? not working add it in systemPackages
         ];
         autoNumlock = true;
         theme = ''${
           pkgs.extra.sddm-sugar-candy.override {
             settings = {
-              Background = "${config.desktop.assets.images.background}";
+              Background = "${cfg.assets.images.background}";
               ScreenWidth = "1920";
               ScreenHeight = "1080";
               MainColor = "#${palette.base05}";
@@ -38,7 +39,7 @@
           }
         }'';
         settings = {
-          Theme = { CursorTheme = config.desktop.cursor.name; };
+          Theme = { CursorTheme = cfg.cursor.name; };
         };
       };
     };

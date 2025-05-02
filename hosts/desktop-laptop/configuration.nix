@@ -68,6 +68,10 @@
   # Set desktop configuration:
   desktop = {
     enable = true;
+    displayManager = {
+      enable = true;
+      sddm.enable = true;
+    };
     xorg = {
       enable = false;
       windowManagers = [ "awesome" ];
