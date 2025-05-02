@@ -7,7 +7,7 @@
     enable = true;
   };
   # TODO: move it to systemd module then check if desktop.devices.touchpad.enable = true;
-  systemd.user.services = lib.mkIf config.devices.touchpad.enable {
+  systemd.user.services = lib.mkIf config.desktop.devices.touchpad.enable {
     touchegg-client = {
       description = "Touchégg. The client.";
       wantedBy = pkgs.lib.mkForce [];
