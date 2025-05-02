@@ -361,11 +361,7 @@
     }
 
     #tray {
-      /*  
-        # ? workaround tray icons always light
-        # ? see: https://github.com/Alexays/Waybar/issues/2639
-      */
-      background-color: #${if variant == "dark" then palette.base01 else palette.base05};
+      background-color: #${palette.base01};
       color: #${palette.base05};
     }
 
