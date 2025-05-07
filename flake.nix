@@ -55,6 +55,11 @@
       url = "github:MOIS3Y/nvchad4nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix4nvchad = {
+      url = "github:nix-community/nix4nvchad";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nvchad-starter.follows = "nvchad-on-steroids";
+    };
     nvchad-on-steroids = {
       url = "github:MOIS3Y/nvchad-on-steroids";
       flake = false;
