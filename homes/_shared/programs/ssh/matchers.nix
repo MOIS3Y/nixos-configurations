@@ -11,7 +11,7 @@
       user = "admserv";
       identityFile = "${config.home.homeDirectory}/.ssh/ispsystem/go";
       port = 2222;
-      hostname = "185.60.134.99";
+      hostname = "172.31.52.25";
     };    
     # self:
     "allsave" = {
@@ -52,12 +52,12 @@
       user = "admserv";
       identityFile = config.sops.secrets."private-keys/ispsystem/go".path;
       port = 2222;
-      hostname = "185.60.134.99";
+      hostname = "172.31.52.25";
     };
     "git.isptech.ru" = {
       identityFile = config.sops.secrets."private-keys/ispsystem/gitea".path;
       identitiesOnly = true;
-      port = 22;
+      port = 1488;
       hostname = "git.isptech.ru";
     };
     # misc:
