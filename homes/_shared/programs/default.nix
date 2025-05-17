@@ -13,6 +13,7 @@
     ./lf.nix
     ./lsd.nix
     ./nvchad.nix
+    ./ruff.nix
     ./zsh.nix
   ];
 }

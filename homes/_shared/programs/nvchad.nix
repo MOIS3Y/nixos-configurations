@@ -9,20 +9,28 @@
   programs.nvchad = {
     enable = true;
     extraPackages = with pkgs; [
+      # LSP servers
       nodePackages.bash-language-server
       blueprint-compiler
       docker-compose-language-service
       dockerfile-language-server-nodejs
       emmet-language-server
       vscode-langservers-extracted
+      rust-analyzer
       typescript-language-server
       vue-language-server
       vala-language-server
       nixd
       (python3.withPackages(ps: with ps; [
         python-lsp-server
+        python-lsp-ruff
         flake8
       ]))
+      # formatters
+      nodePackages.prettier
+      nixfmt-rfc-style
+      rustfmt
+      shfmt
     ];
     hm-activation = true;
     backup = false;
