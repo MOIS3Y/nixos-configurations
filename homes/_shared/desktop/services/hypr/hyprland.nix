@@ -2,7 +2,7 @@
 # █▀█ ░█░ █▀▀ █▀▄ █▄▄ █▀█ █░▀█ █▄▀ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, ... }: let
+{ config, pkgs, osConfig, ... }: let
   cfg = config.desktop.wayland;
   inherit (config.colorScheme)
     palette;
@@ -18,6 +18,7 @@
       pkgs.hyprlandPlugins.hyprsplit
       pkgs.hyprlandPlugins.hyprexpo
     ];
+    systemd.enable = if osConfig.programs.hyprland.withUWSM then false else true;
     xwayland.enable = true;
     settings = {
       #! -- -- -- -- -- -- autostart -- -- -- -- -- -- #
@@ -38,6 +39,8 @@
         "WLR_NO_HARDWARE_CURSORS,1"  # ? If your cursor becomes invisible
         "NIXOS_OZONE_WL,1"           # ? Hint electron apps to use wayland
         "XCURSOR_SIZE,26"
+        "QT_STYLE_OVERRIDE,kvantum"
+        "QT_QPA_PLATFORMTHEME,qt5ct"
       ];
       #! -- -- -- --  -- -- monitors -- -- -- -- -- -- #
       # the map function will generate a list of monitors 

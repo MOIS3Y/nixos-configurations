@@ -7,6 +7,9 @@
     enable = builtins.elem "hyprland" config.desktop.wayland.compositors;
     package = pkgs.hyprland;
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
+    # ? waiting fix uwsm with sddm
+    # ? see: https://github.com/Vladimir-csp/uwsm/issues/92
+    withUWSM  = false;
   };
   # TODO: move it to security module then check if desktop.wayland.enable = true;
   security.pam.services = {
