@@ -42,6 +42,13 @@
       port = 22;
       hostname = "ssh.ispsystem.net";
     };
+    "isp-de" = {
+      user = "s.zhukovskii";
+      identityFile = config.sops.secrets."private-keys/ispsystem/go".path;
+      certificateFile = "${config.home.homeDirectory}/.ssh/ispsystem/go-cert.pub";
+      port = 22;
+      hostname = "ssh-de.ispsystem.net";
+    };
     "gitlab-dev.ispsystem.net" = {
       identityFile = config.sops.secrets."private-keys/ispsystem/go".path;
       identitiesOnly = true;
