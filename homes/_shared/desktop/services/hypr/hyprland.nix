@@ -180,6 +180,12 @@
         "$mod CTRL,  j, resizeactive, 0 20"
         "$mod CTRL,  k, resizeactive, 0 -20"
         "$mod CTRL,  l, resizeactive, 20 0"
+        # scratchpad
+        "$mod, S, togglespecialworkspace, magic"
+        "$mod, S, movetoworkspace, +0"
+        "$mod, S, togglespecialworkspace, magic"
+        "$mod, S, movetoworkspace, special:magic"
+        "$mod, S, togglespecialworkspace, magic"
         # hyprsplit:
         "$mod, G, split:grabroguewindows"
         # ---------- #
