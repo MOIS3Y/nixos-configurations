@@ -17,7 +17,7 @@
       background = [
         {
           monitor = "";
-          color = "rgb(${palette.base00})";
+          color = "rgba(${palette.base00}ff)";
           path = "${images.background}";
           blur_size = 4;
           blur_passes = 3;
@@ -44,8 +44,6 @@
           fail_color = "rgba(${palette.base08}ff)";
           fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
           capslock_color = "rgb(${palette.base0A})";
-          numlock_color = "-1";
-          bothlock_color = "-1";
           invert_numlock = false;
           swap_font_color = false;
           position = "0, -20";
@@ -58,7 +56,7 @@
           #time
           monitor = "";
           text = ''cmd[update:1000] echo "$TIME"'';
-          color = "rgb(${palette.base05})";
+          color = "rgba(${palette.base05}ff)";
           font_size = 72;
           font_family = "Ubuntu";
           position = "-100, 50";
@@ -71,7 +69,7 @@
           #username
           monitor = "";
           text = "$DESC";
-          color = "rgb(${palette.base05})";
+          color = "rgba(${palette.base05}ff)";
           font_size = 22;
           font_family = "Ubuntu";
           position = "-100, 180";
@@ -84,7 +82,7 @@
           #language
           monitor = "";
           text = "$LAYOUT";
-          color = "rgb(${palette.base05})";
+          color = "rgba(${palette.base05}ff)";
           font_size = 13;
           font_family = "Ubuntu";
           position = "-100, 220";
@@ -101,7 +99,7 @@
           size = 270; # lesser side if not 1:1 ratio
           rounding = "-1";
           border_size = 3;
-          border_color = "rgb(${palette.base02})";
+          border_color = "rgba(${palette.base02}ff)";
           rotate = 0;
           reload_time = "-1";
           position = "0, 200";
