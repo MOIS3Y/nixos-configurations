@@ -2,7 +2,10 @@
 # ░█░ ██▄ █▀▄ █░▀░█ █ █░▀█ █▀█ █▄▄ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: let
+  jetbrains = pkgs.nerd-fonts.jetbrains-mono;
+  fontPath = "share/fonts/truetype/NerdFonts/JetBrainsMonoNerdFontMono-Regular.ttf";
+  in {
   terminal = {
     colors = with config.colorScheme.palette; {
       background = "#${base00}";
@@ -27,11 +30,6 @@
       color14 = "#${base0C}";
       color15 = "#${base06}";
     };
-    font = let
-      jetbrains = pkgs.nerdfonts.override {
-        fonts = [ "JetBrainsMono" ];
-      };
-      fontPath = "share/fonts/truetype/NerdFonts/JetBrainsMonoNerdFontMono-Regular.ttf";
-    in "${jetbrains}/${fontPath}";
+    font = "${jetbrains}/${fontPath}";
   };
 }
