@@ -5,6 +5,8 @@
 { ... }: {
   imports = [
     ./alacritty.nix
+    ./hyprland.nix
+    ./hyprlock.nix
     ./kitty.nix
     ./lf.nix
     ./mangohud.nix
