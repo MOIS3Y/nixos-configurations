@@ -51,11 +51,7 @@
   commonGtkExtraConfig = {
     gtk-decoration-layout = "menu:";
     # add more common gtk3/4 settings here ...
-  } // ( 
-    if variant == "dark"
-      then { gtk-application-prefer-dark-theme = true; }
-      else {}
-  );
+  };
   in {
   gtk = {
     enable = true;    
@@ -64,9 +60,7 @@
       package = pkgs.adw-gtk3;
     };
     iconTheme = {
-      name = ''${
-        if variant == "dark" then "Tela-circle-dark" else "Tela-circle-light"
-      }'';
+      name = ''${if variant == "dark" then "Tela-circle-dark" else "Tela-circle-light"}'';
       package = pkgs.tela-circle-icon-theme;
     };
     font = {
@@ -75,7 +69,10 @@
       size = 11;
     };
     gtk3 = {
-      extraConfig = commonGtkExtraConfig;
+      extraConfig = commonGtkExtraConfig // ( if variant == "dark"
+        then { gtk-application-prefer-dark-theme = true; }
+        else {}
+      );
       inherit extraCss; 
     };
     gtk4 = {
