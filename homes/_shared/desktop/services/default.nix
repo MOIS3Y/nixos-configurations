@@ -16,6 +16,5 @@
     ./xss-lock.nix
 
     ./hypr
-    ./waybar
   ];
 }

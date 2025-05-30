@@ -13,6 +13,7 @@
     ./swaylock.nix
     ./vscode.nix
     ./wezterm.nix
+    ./waybar.nix
     ./wlogout.nix
     ./wofi.nix
   ];
