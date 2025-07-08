@@ -23,7 +23,6 @@
     ../_shared/nix
     ../_shared/nixpkgs
     ../_shared/programs
-    ../_shared/resolved
     ../_shared/security
     ../_shared/services
     ../_shared/sops
