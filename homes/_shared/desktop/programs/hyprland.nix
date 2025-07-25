@@ -15,7 +15,18 @@
     enable = cfg.enable;
     package = pkgs.hyprland;
     plugins = [
-      pkgs.hyprlandPlugins.hyprsplit
+      # ? hotfix not matching versions of Hypland and Hyprsplit
+      # ? see: https://github.com/NixOS/nixpkgs/issues/427149
+      (pkgs.hyprlandPlugins.hyprsplit.overrideAttrs {
+        version = "0.50.1";
+        src = pkgs.fetchFromGitHub {
+          owner = "shezdy";
+          repo = "hyprsplit";
+          rev = "b64b24a410154eac6c3ca794b77ae56c672fc6e0";
+          hash = "sha256-D0zfdUJXBRnNMmv/5qW+X4FJJ3/+t7yQmwJFkBuEgck=";
+        };
+      }) 
+      # pkgs.hyprlandPlugins.hyprsplit
       pkgs.hyprlandPlugins.hyprexpo
     ];
     systemd.enable = if osConfig.programs.hyprland.withUWSM then false else true;

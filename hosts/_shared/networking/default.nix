@@ -7,11 +7,11 @@
     hostName = lib.mkDefault "dummy-hostname";
     networkmanager = {
       enable = true;
-      enableStrongSwan = true;
       plugins = with pkgs; [
         networkmanager-l2tp
         networkmanager-openvpn
         networkmanager-openconnect
+        networkmanager-strongswan
       ];
       appendNameservers = [ "8.8.8.8" ];
     };

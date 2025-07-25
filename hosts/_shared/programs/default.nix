@@ -5,6 +5,7 @@
 { config, lib, ... }: let
   cfg = config.host;
   inherit (lib)
+    mkIf
     mkOption
     types;
 in {
@@ -12,8 +13,8 @@ in {
     type = types.nullOr types.path;
     default = null;
     description = ''
-      The path that will be used for the `FLAKE` environment variable.
-      `FLAKE` is used by nh as the default flake for performing actions,
+      The path that will be used for the `NH_FLAKE` environment variable.
+      `NH_FLAKE` is used by nh as the default flake for performing actions,
       like `nh os switch`.
     '';
   };
@@ -24,7 +25,7 @@ in {
         flake = cfg.flake;
       };
       ssh = {
-        startAgent = true;
+        startAgent = mkIf (!config.services.gnome.gnome-keyring.enable) true;
       };
       zsh = {
         enable = true;
