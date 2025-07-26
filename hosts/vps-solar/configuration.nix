@@ -179,7 +179,7 @@
       backend = "docker";
       containers =  {
         portainer-agent = {
-          image = "portainer/agent:2.20.1-alpine";
+          image = "portainer/agent:2.32.0-alpine";
           hostname = "portainer-agent";
           autoStart = true;
           ports = [
