@@ -52,6 +52,7 @@
         "XCURSOR_SIZE,26"
         "QT_STYLE_OVERRIDE,kvantum"
         "QT_QPA_PLATFORMTHEME,qt5ct"
+        "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/gcr/ssh" # ? fix gcr-ssh-agent
       ];
       #! -- -- -- --  -- -- monitors -- -- -- -- -- -- #
       # the map function will generate a list of monitors 
