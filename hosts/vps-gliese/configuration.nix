@@ -50,7 +50,7 @@
     defaultGateway = "89.110.70.1";
     nameservers = [ "8.8.8.8" "1.1.1.1" ];
     firewall = { 
-      enable = false;
+      enable = true;
     };
   };
 
@@ -83,25 +83,35 @@
     };
   };
 
-  services.openssh = {
-    enable = true;
-    startWhenNeeded = true;
-    allowSFTP = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-      LogLevel = "INFO";
+  services = {
+    fail2ban = {
+      enable = true;
+      extraPackages = [
+        pkgs.ipset
+      ];
+      jails = {
+        sshd = {
+          settings = {
+            enable = true;
+            port = "22";
+          };
+        };
+      };
     };
-    listenAddresses = [
-      {
-        addr = "0.0.0.0";
-        port = 22;  # default
-      }
-    ];
-    banner = ''
-      █▀▀ █░░ █ █▀▀ █▀ █▀▀
-      █▄█ █▄▄ █ ██▄ ▄█ ██▄
-    '';
+    openssh = {
+      enable = true;
+      allowSFTP = true;
+      ports = [ 22 ];
+      settings = {
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+        LogLevel = "VERBOSE";
+      };
+      banner = ''
+        █▀▀ █░░ █ █▀▀ █▀ █▀▀
+        █▄█ █▄▄ █ ██▄ ▄█ ██▄
+      '';
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
