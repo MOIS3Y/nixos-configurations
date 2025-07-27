@@ -51,6 +51,16 @@
     nameservers = [ "8.8.8.8" "1.1.1.1" ];
     firewall = { 
       enable = true;
+      allowedTCPPorts = [
+        80
+        443
+        24364
+        26042
+      ];
+      allowedUDPPorts = [
+        24364
+        26042
+      ];
     };
   };
 
