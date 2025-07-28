@@ -7,12 +7,11 @@
 # nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
 # nix-channel --update
 
-{ home-config, ... }: {
+{ pkgs, lib, home-config, ... }: {
   imports = [
     # Custom modules:
     ../../modules/colors
-    # Shared configuration:
-    ../_shared/android
+    ../../modules/android
   ];
 
   android-integration = {
@@ -25,6 +24,18 @@
   };
 
   home-manager = home-config;
+
+  environment = {
+    motd = null;
+    etcBackupExtension = ".bak";
+    packages = [];
+  };
+
+  nix = {
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
 
   services = {
     sshd = {
@@ -46,6 +57,8 @@
       ];
     };
   };
+
+  user.shell = "${lib.getExe pkgs.zsh}";
 
   time.timeZone = "Asia/Chita";
 

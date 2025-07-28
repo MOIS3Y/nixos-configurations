@@ -7,7 +7,16 @@
     # Custom modules
     ../../modules/colors
     # Shared configuration
-    ../_shared/programs
+    ../_shared/programs/ssh
+    ../_shared/programs/direnv.nix
+    ../_shared/programs/git.nix
+    ../_shared/programs/helix.nix
+    ../_shared/programs/htop.nix
+    ../_shared/programs/lf.nix
+    ../_shared/programs/lsd.nix
+    ../_shared/programs/nvchad.nix
+    ../_shared/programs/ruff.nix
+    ../_shared/programs/zsh.nix
   ];
 
   home.packages = with pkgs; [
@@ -39,6 +48,7 @@
     zip
   ];
 
+  # Override _shared configuration:
   programs.htop.os = "android";
   programs.ssh.userMatchBlocks = "nix-on-droid";
   programs.zsh.shellAliases = lib.mkForce { shutdown = "exec shutdown"; };
