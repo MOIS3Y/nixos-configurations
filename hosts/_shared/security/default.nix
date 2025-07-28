@@ -3,7 +3,8 @@
 # -- -- -- -- -- -- -- -- -- -- 
 
 { ... }: {
-  security.polkit = {
-    enable = true;
-  };
+  imports = [
+    ./pam.nix
+    ./polkit.nix
+  ];
 }

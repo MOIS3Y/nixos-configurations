@@ -2,7 +2,7 @@
 # ██▄ █░▀█ ▀▄▀ █ █▀▄ █▄█ █░▀█ █░▀░█ ██▄ █░▀█ ░█░ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
-{ pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   environment = {
     variables = {
       "PYTHONDONTWRITEBYTECODE" = "1";
@@ -15,6 +15,7 @@
       "/libexec"
     ];
     systemPackages = with pkgs; [
+      # common:
       bottom
       cmatrix
       curl
@@ -36,6 +37,14 @@
       tty-clock
       wget
       unzip
+    ] ++ lib.optionals (config.desktop or null != null) [
+      # desktop:
+      appimage-run
+      firefox
+      libnotify
+      pavucontrol
+      xdg-utils
+      config.desktop.cursor.package  # ! required for sddm cursor theme
     ];
   };
 }

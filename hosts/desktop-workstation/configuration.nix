@@ -15,9 +15,10 @@
     # Shared configuration:
     ../_shared/boot
     ../_shared/console
-    ../_shared/desktop
     ../_shared/environment
     ../_shared/fonts
+    ../_shared/games
+    ../_shared/gnome
     ../_shared/hardware
     ../_shared/i18n
     ../_shared/networking

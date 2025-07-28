@@ -3,20 +3,18 @@
 # -- -- -- -- -- -- -- -- -- --
 
 { ... }: {
-  services = {
-    openssh = {
-      enable = true;
-      startWhenNeeded = true;
-      allowSFTP = true;
-      settings = {
-        PermitRootLogin = "yes";
-        PasswordAuthentication = true;
-        LogLevel = "INFO";
-      };
-    };
-    printing = {
-      enable = true;
-      startWhenNeeded = true;
-    };
-  };
+  imports = [
+    ./blueman.nix
+    ./display-manager.nix
+    ./greetd.nix
+    ./libinput.nix
+    ./logind.nix
+    ./openssh.nix
+    ./pipewire.nix
+    ./printing.nix
+    ./tlp.nix
+    ./touchegg.nix
+    ./upower.nix
+    ./xserver.nix
+  ];
 }
