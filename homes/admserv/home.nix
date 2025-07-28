@@ -2,16 +2,44 @@
 # █▀█ █▄█ █░▀░█ ██▄ ░░ █░▀░█ █▀█ █░▀█ █▀█ █▄█ ██▄ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-{ ... }: {
+{ pkgs, lib, ... }: {
   imports = [
+    # Custom modules:
     ../../modules/colors
-    ../_shared/programs
+    # Shared configuration:
+    ../_shared/programs/ssh
+    ../_shared/programs/git.nix
+    ../_shared/programs/helix.nix
+    ../_shared/programs/htop.nix
+    ../_shared/programs/lf.nix
+    ../_shared/programs/lsd.nix
+    ../_shared/programs/nvchad.nix
+    ../_shared/programs/ruff.nix
+    ../_shared/programs/zsh.nix
   ];
-  # Override _shared configuration:
+
   home = {
     username = "admserv";
     homeDirectory = "/home/admserv";
   };
+
+  # Override _shared configuration:
+  programs.nvchad.extraPackages = with pkgs; lib.mkForce [
+    # LSP servers
+    nodePackages.bash-language-server
+    docker-compose-language-service
+    dockerfile-language-server-nodejs
+    vscode-langservers-extracted
+    nixd
+    (python3.withPackages(ps: with ps; [
+      python-lsp-server
+      python-lsp-ruff
+      flake8
+    ]))
+    # formatters
+    nixfmt-rfc-style
+    shfmt
+  ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

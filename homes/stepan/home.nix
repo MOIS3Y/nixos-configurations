@@ -9,8 +9,10 @@
     ../../modules/desktop
     ../../modules/programs
     # Shared configuration:
-    ../_shared/desktop
+    ../_shared/config
+    ../_shared/pkgs
     ../_shared/programs
+    ../_shared/services
     ../_shared/sops
   ];
 
@@ -23,6 +25,7 @@
   colorSchemeName = osConfig.colorSchemeName;
   desktop = osConfig.desktop;
 
+  # Override _shared configuration:
   sops = {
     defaultUserSopsFile = ../../secrets/homes/stepan/secrets.yaml;
     sharedSecrets = "stepan";  # ? override default secrets option

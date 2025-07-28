@@ -4,8 +4,8 @@
 
 { ... }: {
   imports = [
+    # common:
     ./ssh
-
     ./direnv.nix
     ./git.nix
     ./helix.nix
@@ -15,5 +15,20 @@
     ./nvchad.nix
     ./ruff.nix
     ./zsh.nix
+
+    # desktop:
+    ./alacritty.nix
+    ./hyprland.nix
+    ./hyprlock.nix
+    ./kitty.nix
+    ./mangohud.nix
+    ./mellowplayer.nix
+    ./rofi.nix
+    ./swaylock.nix
+    ./vscode.nix
+    ./wezterm.nix
+    ./waybar.nix
+    ./wlogout.nix
+    ./wofi.nix
   ];
 }

@@ -2,10 +2,7 @@
 # █▄▄ █▀░ ▄
 # -- -- -- 
 
-# ! Minimal general configuration.
-# ! Extensions (previewer, dragon) are configured in desktop/programs/lf.nix
-
-{ ... }: let
+{ config, lib, ... }: let
   # pull icons file
   lfIcons = builtins.fetchurl rec {
     name = "lf-icons-${sha256}.txt";
@@ -29,13 +26,24 @@ in {
           mkdir $DIR
         }}
       '';
+    } // lib.optionalAttrs (config.desktop.scripts.lf or null != null) {
+      dragon-out = config.desktop.scripts.lf.dragon-out;
     };
     keybindings = {
       mk = "mkdir";
       xD = "delete";
       "<enter>" = "open";
-      # ... add more keybindings here:
+      # ... add more common keybindings here:
+    } // lib.optionalAttrs (config.desktop or null != null) {
+      xx = "dragon-out";
+      # ... add more desktop keybindings here:
     };
+  } // lib.optionalAttrs (config.desktop.scripts.lf or null != null) {
+    extraConfig = with config.desktop.scripts.lf; ''
+      set cleaner ${cleaner}
+      set previewer ${previewer}
+      setlocal ${config.xdg.userDirs.pictures}/isp sortby 'time'
+    '';
   };
   xdg.configFile."lf/icons".source = lfIcons;  # enable icons
 }
