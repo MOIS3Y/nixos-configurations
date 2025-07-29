@@ -12,6 +12,7 @@
     # Custom modules:
     ../../modules/colors
     ../../modules/desktop
+    ../../modules/host
     # Shared configuration:
     ../_shared/boot
     ../_shared/console

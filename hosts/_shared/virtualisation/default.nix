@@ -5,60 +5,25 @@
 { config, pkgs, lib, ... }: let
   cfg = config.host.virtualisation;
   inherit (lib)
-    mkOption
     mkForce
     mkIf
-    mkEnableOption
-    attrsets
-    types
-    literalExpression;
+    attrsets;
 in {
-  options.host.virtualisation = {
-    libvirtd = {
-      enable = mkEnableOption "Enable KVM";
-      startWhenNeeded = mkEnableOption ''
-        Systemd will only start the daemon
-        if the user runs KVM related utilities
-        Under the hood this removes wantedBy.
-        libvirtd.wantedBy = lib.mkForce [];
-        libvirt-guests.wantedBy = lib.mkForce [];
-      '';
-    };
-    docker = {
-      enable = mkEnableOption "Enable Docker";
-      startWhenNeeded = mkEnableOption ''
-        Systemd will only start the daemon
-        if the user runs Docker related utilities
-        Under the hood this removes wantedBy.
-        docker.wantedBy = lib.mkForce [];
-      '';
-      oci-containers = mkOption {
-        type = types.listOf (types.enum [ "portainer-agent" ]);
-        default = [];
-        description = "List of preconfigured oci-containers";
-        example = literalExpression ''
-          host.virtualisation.oci-containers = [ "portainer-agent" ];
-        '';
-      };
-    };
+  virtualisation.libvirtd = {
+    enable = mkIf cfg.libvirtd.enable true;
   };
-  config = {
-    virtualisation.libvirtd = {
-      enable = mkIf cfg.libvirtd.enable true;
-    };
-    virtualisation.docker = {
-      enable = mkIf cfg.docker.enable true;
-    };
-    systemd.services = {
-      libvirtd.wantedBy = mkIf cfg.libvirtd.startWhenNeeded (mkForce []);
-      libvirt-guests.wantedBy = mkIf cfg.libvirtd.startWhenNeeded (mkForce []);
-      docker.wantedBy = mkIf cfg.docker.startWhenNeeded (mkForce []);
-    };
-    virtualisation.oci-containers = {
-      backend = "docker";
-      containers = attrsets.getAttrs cfg.docker.oci-containers (
-        import ./oci-containers.nix { inherit config pkgs;}
-      );
-    };
+  virtualisation.docker = {
+    enable = mkIf cfg.docker.enable true;
+  };
+  systemd.services = {
+    libvirtd.wantedBy = mkIf cfg.libvirtd.startWhenNeeded (mkForce []);
+    libvirt-guests.wantedBy = mkIf cfg.libvirtd.startWhenNeeded (mkForce []);
+    docker.wantedBy = mkIf cfg.docker.startWhenNeeded (mkForce []);
+  };
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers = attrsets.getAttrs cfg.docker.oci-containers (
+      import ./oci-containers.nix { inherit config pkgs;}
+    );
   };
 }
