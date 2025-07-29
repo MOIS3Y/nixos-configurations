@@ -2,7 +2,7 @@
 # █▄█ ▄█ ██▄ █▀▄ ▄█ ▄
 # -- -- -- -- -- -- -
 
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   stepan = {
     isNormalUser = true;
     description = "Stepan Zhukovsky";
@@ -15,10 +15,12 @@
       "i2c"
     ];
     shell = pkgs.zsh;
-    packages = with pkgs; [] ++ ( if config.host.virtualisation.libvirtd.enable
-      then [ virt-manager ]
-      else []
-    );
+    packages = [
+      # add default user pkgs here or in HM configuration ... 
+    ] ++ lib.optionals (config.host.virtualisation.libvirtd.enable) [
+      pkgs.virt-manager
+    ] ++ lib.optionals (config.desktop.games.enable or null != null)
+      config.desktop.games.extraPackages;
   };
   admserv = {
     isNormalUser = true;

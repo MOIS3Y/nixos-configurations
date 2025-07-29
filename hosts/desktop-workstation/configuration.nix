@@ -18,7 +18,6 @@
     ../_shared/console
     ../_shared/environment
     ../_shared/fonts
-    ../_shared/games
     ../_shared/gnome
     ../_shared/hardware
     ../_shared/i18n
@@ -29,6 +28,7 @@
     ../_shared/security
     ../_shared/services
     ../_shared/sops
+    ../_shared/systemd
     ../_shared/users
     ../_shared/virtualisation
     # Host autogenerate hardware configuration:
@@ -98,6 +98,7 @@
         mountPath = "/home/stepan/Games";
       };
       extraPackages = [
+        pkgs.protonup-qt
         pkgs.bottles
         (pkgs.retroarch.withCores (cores: with cores; [
           nestopia

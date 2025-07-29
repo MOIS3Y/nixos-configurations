@@ -21,6 +21,7 @@ in {
     enable = true;
     enable32Bit = true;
   };
+  hardware.xpadneo.enable = config.desktop.games.xpadneo.enable;
   # CPU:
   hardware.cpu = mkIf cfg.updateMicrocode {
     intel.updateMicrocode = if cfg.cpu == "intel" then true else false;
