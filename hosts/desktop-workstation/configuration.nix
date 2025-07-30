@@ -42,13 +42,13 @@
       grubTheme = "msi";
     };
     hardware = {
-      motherboard = "intel";
-      cpu = "intel";
-      gpu = true;
-      updateMicrocode = true;
-      ddcci = true;
-      openRGB = false;
-      coolercontrol = true;
+      motherboard.cpu = "intel";
+      gpu.enable = true;
+      graphics.enable = true;
+      bluetooth.enable = true;
+      ddcci.enable = true;
+      openRGB.enable = false;
+      coolercontrol.enable = true;
     };
     virtualisation = {
       docker = {

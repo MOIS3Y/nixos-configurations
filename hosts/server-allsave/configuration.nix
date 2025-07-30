@@ -12,7 +12,6 @@
     ../../modules/colors
     # Shared configuration:
     ../_shared/console
-    ../_shared/environment
     ../_shared/fonts
     ../_shared/nix
     ../_shared/nixpkgs
@@ -70,6 +69,33 @@
   };
 
   nix.settings.trusted-users = lib.mkForce [ "admserv" ];
+
+  environment = {
+    shells = [
+      pkgs.bash
+      pkgs.zsh
+    ];
+    systemPackages = with pkgs; [
+      bottom
+      curl
+      dnsutils
+      docker-compose
+      git
+      htop
+      jq
+      lm_sensors
+      ncdu
+      neofetch
+      nitch
+      ntfs3g
+      parted
+      rsync
+      ripgrep
+      tree
+      wget
+      unzip
+    ];
+  };
 
   services = {
     fstrim = {
@@ -180,10 +206,6 @@
       };
       # add more secrets here ...
     };
-  };
-
-  hardware = {
-    cpu.amd.updateMicrocode = true;
   };
 
   time.timeZone = "Asia/Chita";

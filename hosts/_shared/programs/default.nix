@@ -4,6 +4,7 @@
 
 { ... }: {
   imports = [
+    ./coolercontrol.nix
     ./hyprland.nix
     ./nh.nix
     ./ssh.nix

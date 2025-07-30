@@ -37,14 +37,21 @@
       tty-clock
       wget
       unzip
-    ] ++ lib.optionals (config.desktop or null != null) [
+    ] ++ lib.optionals config.desktop.enable [
       # desktop:
       appimage-run
+      config.desktop.cursor.package  # ! required for sddm cursor theme
       firefox
       libnotify
       pavucontrol
       xdg-utils
-      config.desktop.cursor.package  # ! required for sddm cursor theme
-    ];
+    ] ++ lib.optionals config.host.hardware.gpu.enable [
+      amdgpu_top
+      lact
+      nvtopPackages.amd
+    ] ++ lib.optionals config.host.virtualisation.libvirtd.enable [
+      virt-manager
+    ] ++ lib.optionals config.desktop.games.enable 
+    config.desktop.games.extraPackages;
   };
 }

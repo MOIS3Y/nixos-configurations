@@ -9,11 +9,11 @@
     literalExpression;
 in {
   options.host.users = mkOption {
-      type = types.listOf (types.enum [ "stepan" "admserv" ]);
+      type = types.listOf (types.enum [ "stepan" ]);
       default = [ "stepan" ];
       description = "List of preconfigured users";
       example = literalExpression ''
-        host.users = [ "stepan" "admserv" ];
+        host.users = [ "stepan" ];
       '';
     };
   config = {};

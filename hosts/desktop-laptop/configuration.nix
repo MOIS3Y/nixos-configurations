@@ -41,8 +41,9 @@
       grubTheme = "huawei";
     };
     hardware = {
-      cpu = "intel";
-      updateMicrocode = true;
+      motherboard.cpu = "intel";
+      graphics.enable = true;
+      bluetooth.enable = true;
     };
     virtualisation = {
       docker = {

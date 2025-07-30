@@ -2,8 +2,8 @@
 # ▄█ ▄█ █▀█ ▄
 #  -- -- -- -
 
-{ config, lib, ... }: {
+{ config, ... }: {
   programs.ssh = {
-    startAgent = lib.mkIf (!config.services.gnome.gnome-keyring.enable) true;
+    startAgent = !config.services.gnome.gnome-keyring.enable;
   };
 }

@@ -2,7 +2,7 @@
 # █▄█ █▄▄ █▄█ ██▄ █░▀░█ █▀█ █░▀█ ▄
 # -- -- -- -- -- -- -- -- -- -- --
 
-{ config, lib, ... }: lib.mkIf config.desktop.devices.bluetooth.enable {
+{ config, ... }: {
   # ! required for blueman-applet HM-systemd-service (hide error msg)
-  services.blueman.enable = true;
+  services.blueman.enable = config.desktop.devices.bluetooth.enable;
 }
