@@ -8,6 +8,6 @@
     xorg;
 in {
   services.touchegg = {
-    enable = (xorg.enable or false) && (devices.touchpad.enable or false);
+    enable = xorg.enable && devices.touchpad.enable;
   };
 }

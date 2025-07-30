@@ -13,7 +13,7 @@
 in {
   systemd.user.services = {
     # add base systemd services here ...
-  } // optionalAttrs ((devices.touchpad.enable or false) && (xorg.enable or false)) {
+  } // optionalAttrs (devices.touchpad.enable && xorg.enable) {
     touchegg-client = {
       description = "Touchégg. The client.";
       wantedBy = mkForce [];
