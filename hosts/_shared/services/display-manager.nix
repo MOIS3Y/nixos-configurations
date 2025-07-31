@@ -13,7 +13,7 @@
       sddm = { 
         enable = cfg.displayManager.sddm.enable;
         wayland = {
-          enable = true;
+          enable = cfg.wayland.enable;
         };
         extraPackages = [
           pkgs.libsForQt5.qt5.qtgraphicaleffects
