@@ -23,7 +23,6 @@
       description = ''
         List of additional packages that will be installed with steam
         The list specified here will expand the standard list.
-        protonup-qt is added by default.
       '';
       example = literalExpression ''
         with pkgs; [
@@ -33,6 +32,7 @@
             ];
           })
           bottles
+          protonup-qt
         ];
       '';
     };
