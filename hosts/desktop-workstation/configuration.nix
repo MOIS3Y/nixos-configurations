@@ -18,7 +18,6 @@
     ../_shared/console
     ../_shared/environment
     ../_shared/fonts
-    ../_shared/gnome
     ../_shared/hardware
     ../_shared/i18n
     ../_shared/networking

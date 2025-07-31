@@ -6,8 +6,12 @@
   imports = [
     ./blueman.nix
     ./display-manager.nix
+    ./dleyna.nix
     ./fstrim.nix
+    ./geoclue2.nix
+    ./gnome.nix
     ./greetd.nix
+    ./gvfs.nix
     ./lact.nix
     ./libinput.nix
     ./logind.nix

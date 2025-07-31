@@ -37,9 +37,16 @@ in {
   # optional:
   ++ lib.optionals config.desktop.enable [
     appimage-run
-    cursor.package  # ! required for sddm cursor theme
+    cursor.package      # ! required for sddm cursor theme
+    at-spi2-atk         # !required for polkit-gnome-authentication-agent-1
+    adwaita-icon-theme  #! required for most gnome apps
+    evince
     firefox
+    gnome-calculator
+    gnome-calendar
+    gnome-online-accounts-gtk
     libnotify
+    nautilus
     pavucontrol
     xdg-utils
   ]
