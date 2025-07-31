@@ -43,7 +43,7 @@
           "hyprland"
           "wayfire" 
         ]);
-        default = [ "hyprland" ];
+        default = [ ];
         description = "List of preconfigured wayland compositors";
         example = literalExpression ''
           compositors = [ "hyprland" "wayfire" ];
@@ -57,7 +57,7 @@
           "awesome"
           "qtile"
         ]);
-        default = [ "awesome" ];
+        default = [ ];
         description = "List of preconfigured x11 window managers";
         example = literalExpression ''
           windowManagers = [ "awesome" "qtile" ];
