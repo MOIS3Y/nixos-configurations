@@ -24,7 +24,7 @@
   services.xserver = {
     enable = cfg.xorg.enable;
     windowManager = lib.optionalAttrs cfg.xorg.enable (
-      lib.attrsets.getAttrs cfg.windowManagers windowManagers
+      lib.attrsets.getAttrs cfg.xorg.windowManagers windowManagers
     );
     xkb = {
       variant = "";
