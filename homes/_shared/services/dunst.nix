@@ -109,7 +109,7 @@ in {
     };
   };
   #?Add to $PATH, it might call late to show current volume
-  home.packages = lib.optional config.services.dunst.enable [
+  home.packages = lib.optionals config.services.dunst.enable [
     scripts.dunst-volume
     scripts.dunst-microphone
     scripts.dunst-brightness 

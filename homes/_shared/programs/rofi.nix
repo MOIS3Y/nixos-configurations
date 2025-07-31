@@ -112,7 +112,7 @@
       sidebar-mode = true;
     };
   };
-  home.packages = lib.optional config.programs.rofi.enable [
+  home.packages = lib.optionals config.programs.rofi.enable [
     pkgs.rofi-bluetooth
     pkgs.rofi-power-menu
     pkgs.rofi-systemd
