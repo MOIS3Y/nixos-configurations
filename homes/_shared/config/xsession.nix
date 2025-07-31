@@ -2,6 +2,6 @@
 # █░█ ▄█ ██▄ ▄█ ▄█ █ █▄█ █░▀█ ▄
 # -- -- -- -- -- -- -- -- -- --
 
-{ config, lib, ... }: {
-  xsession.enable = lib.mkIf config.desktop.xorg.enable true;
+{ config, ... }: {
+  xsession.enable = config.desktop.xorg.enable;
 }
