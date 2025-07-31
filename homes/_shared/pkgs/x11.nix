@@ -2,13 +2,13 @@
 # █░█ ░█ ░█ ▄
 # -- -- -- --
 
-{ config, pkgs, lib, ... }: lib.mkIf config.desktop.xorg.enable {
-  home.packages = with pkgs; [
-    arandr
-    flameshot
-    xkb-switch
+{ config, pkgs, lib, ... }: {
+  home.packages = lib.optionals config.desktop.xorg.enable [
+    pkgs.arandr
+    pkgs.flameshot
+    pkgs.xkb-switch
     # Extra-pkgs:
-    extra.i3lock-run
-    extra.xidlehook-caffeine
+    pkgs.extra.i3lock-run
+    pkgs.extra.xidlehook-caffeine
   ];
 }
