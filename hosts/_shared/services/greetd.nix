@@ -42,18 +42,4 @@
       };
     };
   };
-  # ? yoinked from:
-  # https://github.com/sjcobb2022/nixos-config/blob/main/hosts/common/optional/greetd.nix
-  # https://codeberg.org/kye/nixos/src/branch/master/home/greetd/default.nix
-  systemd.services.greetd.serviceConfig = {
-    Type = "idle";
-    StandardInput = "tty";
-    StandardOutput = "tty";
-    # Without this errors will spam on screen
-    StandardError = "journal";
-    # Without these boot logs will spam on screen
-    TTYReset = true;
-    TTYVHangup = true;
-    TTYVTDisallocate = true;
-  };
 }
