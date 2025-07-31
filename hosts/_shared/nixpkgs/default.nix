@@ -11,7 +11,7 @@
       (final: prev:{
         extra = {
           # Xorg utils:
-          i3lock-run = inputs.i3lock-color-wrapper.packages.${pkgs.stdenv.hostPlatform.system}.i3lock-color-wrapper;
+          i3lock-run = inputs.i3lock-color-wrapper.packages.${pkgs.stdenv.hostPlatform.system}.i3lock-run;
           xidlehook-caffeine = inputs.xidlehook-caffeine.packages.${pkgs.stdenv.hostPlatform.system}.xidlehook-caffeine;
           # Common utils;
           aladdin4nix = inputs.aladdin4nix.packages.${pkgs.stdenv.hostPlatform.system}.aladdin4nix;
