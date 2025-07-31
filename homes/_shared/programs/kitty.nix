@@ -2,9 +2,9 @@
 # █░█ █ ░█░ ░█░ ░█░ ▄
 # -- -- -- -- -- -- -
 
-{ config, ... }: {
+{ config, lib, ... }: {
   programs.kitty = {
-    enable = true;
+    enable = lib.mkDefault config.desktop.enable;
     shellIntegration.enableZshIntegration = false;  # fix underline cursor
     settings = with config.colorScheme.palette; {
       # Font:

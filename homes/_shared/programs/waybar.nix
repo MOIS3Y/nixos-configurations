@@ -2,7 +2,7 @@
 # ▀▄▀▄▀ █▀█ ░█░ █▄█ █▀█ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- 
 
-{ config, lib, ... }: let
+{ config, lib, osConfig, ... }: let
   #! -- -- -- vars -- -- -- !#
   inherit (config.colorScheme)
     variant
@@ -397,8 +397,8 @@
   };
   in {
   programs.waybar = {
-    enable = true;
-    systemd.enable = true;
+    enable = lib.mkDefault config.wayland.windowManager.hyprland.enable;
+    systemd.enable = !osConfig.programs.hyprland.withUWSM;
     settings = {
       # ? right now waybar has configuration only for hyprland
       topBar = hyprBar // (builtins.removeAttrs widgets excludeWidgets);

@@ -2,13 +2,12 @@
 # ▀▄▀▄▀ █▄█ █▀░ █ ▄
 # -- -- -- -- - -- 
 
-{ config, ...}: let
-  cfg = config.desktop.wayland;
+{ config, lib, ...}: let
   inherit (config.colorScheme)
     palette;
   in {
   programs.wofi = {
-    enable = cfg.enable;
+    enable = lib.mkDefault config.desktop.wayland.enable;
     settings = {
       show = "drun";
       width = 750;

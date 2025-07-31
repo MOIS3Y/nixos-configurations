@@ -2,9 +2,15 @@
 # █▄▀ █▄█ █░▀█ ▄█ ░█░ ▄
 # -- -- -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }: lib.mkIf config.desktop.xorg.enable {
+{ config, pkgs, lib, osConfig, ... }: let
+  inherit (config.desktop)
+    scripts;
+in {
   services.dunst = {
-    enable = true;
+    enable = lib.mkDefault (
+      osConfig.services.xserver.windowManager.qtile.enable &&
+      !osConfig.services.desktopManager.gnome.enable
+    );
     iconTheme = {
       name = config.gtk.iconTheme.name;
       package = config.gtk.iconTheme.package;
@@ -103,9 +109,9 @@
     };
   };
   #?Add to $PATH, it might call late to show current volume
-  home.packages = with config.desktop.scripts.dunst; [
-    dunst-volume
-    dunst-microphone
-    dunst-brightness 
+  home.packages = lib.optional config.services.dunst.enable [
+    scripts.dunst-volume
+    scripts.dunst-microphone
+    scripts.dunst-brightness 
   ];
 }

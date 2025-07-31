@@ -3,7 +3,6 @@
 # -- -- -- -- -- -- -- -- -- -- -- -
 
 { config, pkgs, osConfig, ... }: let
-  cfg = config.desktop.wayland;
   inherit (config.colorScheme)
     palette;
   inherit (config.desktop)
@@ -12,8 +11,9 @@
     scripts;
   in {
   wayland.windowManager.hyprland = {
-    enable = cfg.enable;
+    enable = osConfig.programs.hyprland.enable;
     package = pkgs.hyprland;
+    systemd.enable = !osConfig.programs.hyprland.withUWSM;
     plugins = [
       # ? hotfix not matching versions of Hypland and Hyprsplit
       # ? see: https://github.com/NixOS/nixpkgs/issues/427149
@@ -29,7 +29,7 @@
       # pkgs.hyprlandPlugins.hyprsplit
       pkgs.hyprlandPlugins.hyprexpo
     ];
-    systemd.enable = if osConfig.programs.hyprland.withUWSM then false else true;
+    
     xwayland.enable = true;
     settings = {
       #! -- -- -- -- -- -- autostart -- -- -- -- -- -- #

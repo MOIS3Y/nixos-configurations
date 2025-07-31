@@ -15,13 +15,12 @@
 # ```
 # -- -- -- -- -- - -- -- -- -- -- --
 
-{ config, pkgs, ... }: let 
-  cfg = config.desktop.wayland;
+{ config, pkgs, lib, ... }: let 
   inherit (config.colorScheme)
     palette;
   in {
   programs.swaylock = {
-    enable = cfg.enable;
+    enable = lib.mkDefault config.desktop.wayland.enable;
     package = pkgs.swaylock-effects;
     settings = {
       screenshots = true;

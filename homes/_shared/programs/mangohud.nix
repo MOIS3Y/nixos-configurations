@@ -2,8 +2,8 @@
 # █░▀░█ █▀█ █░▀█ █▄█ █▄█ █▀█ █▄█ █▄▀ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- 
 
-{ config, lib, ... }: lib.mkIf config.desktop.games.enable {
+{ config, lib, ... }: {
   programs.mangohud = {
-    enable = true;
+    enable = lib.mkDefault config.desktop.games.enable;
   };
 }

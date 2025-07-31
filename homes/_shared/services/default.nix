@@ -15,6 +15,5 @@
     ./swappy.nix
     ./swaync.nix
     ./xidlehook.nix
-    ./xss-lock.nix
   ];
 }

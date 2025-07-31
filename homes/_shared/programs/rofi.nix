@@ -2,9 +2,9 @@
 # █▀▄ █▄█ █▀░ █ ▄
 # -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }: lib.mkIf config.desktop.xorg.enable {
+{ config, pkgs, lib, ... }: {
   programs.rofi = {
-    enable = true;
+    enable = lib.mkDefault config.desktop.xorg.enable;
     plugins = with pkgs; [
       rofi-calc
       rofi-emoji
@@ -112,10 +112,10 @@
       sidebar-mode = true;
     };
   };
-  home.packages = with pkgs; [
-    rofi-bluetooth
-    rofi-power-menu
-    rofi-systemd
-    rofi-vpn
+  home.packages = lib.optional config.programs.rofi.enable [
+    pkgs.rofi-bluetooth
+    pkgs.rofi-power-menu
+    pkgs.rofi-systemd
+    pkgs.rofi-vpn
   ];
 }

@@ -2,13 +2,13 @@
 # █░▀█ ▀▄▀ █▄▄ █▀█ █▀█ █▄▀ ▄
 # -- -- -- -- -- -- -- -- --
 
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, lib, ... }: {
   imports = [
     inputs.nix4nvchad.homeManagerModule
   ];
   programs.nvchad = {
-    enable = true;
-    extraPackages = with pkgs; [
+    enable = lib.mkDefault true;
+    extraPackages = with pkgs; lib.mkDefault [
       # LSP servers
       nodePackages.bash-language-server
       blueprint-compiler

@@ -2,9 +2,9 @@
 # █▄▀ █ █▀▄ ██▄ █░▀█ ▀▄▀ ▄
 # -- -- -- -- -- -- -- -- 
 
-{ ... }: {
+{ lib, ... }: {
   programs.direnv = {
-    enable = true;
+    enable = lib.mkDefault true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };

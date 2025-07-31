@@ -2,34 +2,35 @@
 # █░█ █ █▄▀ █▄▄ ██▄ █▀█ █▄█ █▄█ █░█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, lib, ... }: lib.mkIf config.desktop.xorg.enable {
-  services.xidlehook = with config.desktop.scripts.xidlehook; {
-    enable = true;
+{ config, lib, osConfig, ... }: let 
+  inherit (config.desktop)
+    scripts;
+in {
+  services.xidlehook = {
+    enable = lib.mkDefault (
+      (osConfig.services.xserver.windowManager.qtile.enable ||
+      osConfig.services.xserver.windowManager.awesome.enable) &&
+      !osConfig.services.desktopManager.gnome.enable
+    );
     detect-sleep = true;
     not-when-audio = true;
     not-when-fullscreen = true;
     environment = {
-      PRIMARY_DISPLAY = "$(${primary-display})";
+      PRIMARY_DISPLAY = "$(${scripts.primary-display})";
     };
     timers = [
       {
         delay = 600;
-        command = "${notify}";
+        command = "${scripts.notify}";
       }
       {
         delay = 10;
-        command = "${lock}";
+        command = "${scripts.lock}";
       }
       {
         delay = 60;
-        command = "${suspend}";
+        command = "${scripts.suspend}";
       }
     ];
   };
-  # override systemd unit:
-  systemd.user.services.xidlehook.Service.Restart = lib.mkForce "always";
-  systemd.user.services.xidlehook.Service.RestartSec = lib.mkForce 90;
-  systemd.user.services.xidlehook.Service.ExecCondition = lib.mkForce [
-    "${lib.getExe pkgs.bash} -c '! [ -v WAYLAND_DISPLAY ] || exit -1'"
-  ];
 }

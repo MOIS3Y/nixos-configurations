@@ -5,11 +5,10 @@
 # From custom modules/programs/swappy.nix
 # add import ../modules/programs into home.nix before use it.
 
-{ config, pkgs, ... }: let
-  cfg = config.desktop.wayland;
+{ config, pkgs, lib, ... }: let
   in {
   programs.swappy = {
-    enable = cfg.enable;
+    enable = lib.mkDefault config.desktop.wayland.enable;
     package = pkgs.swappy;
     extraPackages = [
       pkgs.grim

@@ -2,8 +2,7 @@
 # ▀▄▀▄▀ █▄▄ █▄█ █▄█ █▄█ █▄█ ░█░ ▄
 # -- -- -- -- -- -- -- -- -- -- -
 
-{ config, ... }: let
-  cfg = config.desktop.wayland;
+{ config, lib, ... }: let
   inherit (config.colorScheme)
     name
     palette
@@ -12,7 +11,7 @@
     scripts;
   in {
   programs.wlogout = {
-    enable = cfg.enable;
+    enable = lib.mkDefault config.desktop.wayland.enable;
     layout = [
       {
         label = "lock";

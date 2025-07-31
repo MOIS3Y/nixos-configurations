@@ -5,9 +5,9 @@
 # From custom modules/programs/mellowplayer.nix
 # add import ../modules/programs into home.nix before use it.
 
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   programs.mellowplayer = {
-    enable = true;
+    enable = lib.mkDefault config.desktop.enable;
     package = pkgs.mellowplayer;
     settings = {
       General = { zoom = 1;};

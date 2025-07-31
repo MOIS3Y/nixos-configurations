@@ -2,9 +2,9 @@
 # █▄█ █ ░█░ ▄
 # -- -- -- --
 
-{ ... }: {
+{ lib, ... }: {
   programs.git = {
-    enable = true;
+    enable = lib.mkDefault true;
     userName = "MOIS3Y";
     userEmail = "stepan@zhukovsky.me";
     extraConfig = {

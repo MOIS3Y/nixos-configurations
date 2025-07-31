@@ -2,9 +2,13 @@
 # █▀▀ █ █▄▄ █▄█ █░▀░█ ▄
 # -- -- -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }: lib.mkIf config.desktop.xorg.enable {
+{ config, pkgs, lib, osConfig, ... }: {
   services.picom = {
-    enable = true;
+    enable = lib.mkDefault (
+      (osConfig.services.xserver.windowManager.qtile.enable ||
+      osConfig.services.xserver.windowManager.awesome.enable) &&
+      !osConfig.services.desktopManager.gnome.enable
+    );
     backend = "glx";
     vSync = true;
 
@@ -130,15 +134,9 @@
       log-level = "warn";
     };
   };
-  # override systemd unit:
-  systemd.user.services.picom.Service.Restart = lib.mkForce "always";
-  systemd.user.services.picom.Service.RestartSec = lib.mkForce 90;
-  systemd.user.services.picom.Service.ExecCondition = lib.mkForce [
-    "${lib.getExe pkgs.bash} -c '! [ -v WAYLAND_DISPLAY ] || exit -1'"
-  ];
   # override systemd-xdg-autostart-generator:
   # ? it's a hack, we don't need to autostart app-picom, we start it by .service
-  xdg.configFile = {
+  xdg.configFile = lib.mkIf config.services.picom.enable {
   "autostart/picom.desktop".text = (
     builtins.readFile "${pkgs.picom}/etc/xdg/autostart/picom.desktop"
     ) + ''

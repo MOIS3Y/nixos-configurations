@@ -2,9 +2,9 @@
 # █▄ ▄█ █▀█ ▄
 # -- -- -- --
 
-{ config, ... }: {
+{ config, lib, ... }: {
   programs.zsh = {
-    enable = true;
+    enable = lib.mkDefault true;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
@@ -25,7 +25,7 @@
     };
     oh-my-zsh = {
       enable = true;
-      plugins = ["git"];
+      plugins = [ "git" ];
       extraConfig = ''
         if [[ "$TERM" = "linux" ]]; then
           ZSH_THEME="jonathan"

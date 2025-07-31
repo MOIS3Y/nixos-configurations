@@ -2,10 +2,10 @@
   # █▀█ █▄▄ █▀█ █▄▄ █▀▄ █ ░█░ ░█░ ░█░ ▄
   # -- -- -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   programs.alacritty = {
     package = pkgs.alacritty;
-    enable = true;
+    enable = lib.mkDefault config.desktop.enable;
     settings = {
       env = {
         TERM = "xterm-256color";

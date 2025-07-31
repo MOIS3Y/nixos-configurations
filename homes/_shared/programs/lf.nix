@@ -11,7 +11,7 @@
   };
 in {
   programs.lf = {
-    enable = true;
+    enable = lib.mkDefault true;
     settings = {
       drawbox = true;
       icons = true;

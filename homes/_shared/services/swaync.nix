@@ -2,14 +2,13 @@
 # ▄█ ▀▄▀▄▀ █▀█ ░█░ █░▀█ █▄▄ ▄
 # -- -- -- -- -- -- -- -- -- 
 
-{ config, ... }: let
-  cfg = config.desktop.wayland;
+{ config, lib, ... }: let
   inherit (config.colorScheme)
     palette
     variant;
   in {
   services.swaync = {
-    enable = cfg.enable;
+    enable = lib.mkDefault config.wayland.windowManager.hyprland.enable;
     settings = {
       # General settings
       cssPriority = "user";

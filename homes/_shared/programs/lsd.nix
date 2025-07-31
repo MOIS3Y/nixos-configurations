@@ -2,8 +2,8 @@
 # █▄▄ ▄█ █▄▀ ▄
 # -- -- -- -- 
 
-{ ... }: {
+{ lib, ... }: {
   programs.lsd = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
 }

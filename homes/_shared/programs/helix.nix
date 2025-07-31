@@ -2,9 +2,9 @@
 # █▀█ ██▄ █▄▄ █ █░█ ▄
 # -- -- -- -- -- -- -
 
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   programs.helix = {
-    enable = false;
+    enable = lib.mkDefault false;
     extraPackages = with pkgs; [
       lua-language-server
       marksman

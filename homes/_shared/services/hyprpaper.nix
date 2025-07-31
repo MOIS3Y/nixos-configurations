@@ -2,13 +2,12 @@
 # █▀█ ░█░ █▀▀ █▀▄ █▀▀ █▀█ █▀▀ ██▄ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, ...}: let
-  cfg = config.desktop.wayland;
+{ config, pkgs, lib, ...}: let
   inherit (config.desktop.assets.images)
     wallpaper;
   in {
   services.hyprpaper = {
-    enable = cfg.enable;
+    enable = lib.mkDefault config.wayland.windowManager.hyprland.enable;
     package = pkgs.hyprpaper;
     settings = {
       ipc = "on";

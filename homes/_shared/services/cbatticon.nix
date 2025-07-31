@@ -2,9 +2,12 @@
 # █▄▄ █▄█ █▀█ ░█░ ░█░ █ █▄▄ █▄█ █░▀█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, lib, ... }: lib.mkIf config.desktop.xorg.enable {
+{ lib, osConfig, ... }: {
   services.cbatticon = {
-    enable = true;
+    enable = lib.mkDefault (
+      osConfig.services.xserver.windowManager.awesome.enable &&
+      !osConfig.services.desktopManager.gnome.enable
+    );
     lowLevelPercent = 20;
     criticalLevelPercent = 5;
   };

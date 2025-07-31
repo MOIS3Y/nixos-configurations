@@ -10,6 +10,10 @@
 # ? Declared by:
 # https://github.com/nix-community/home-manager/blob/master/modules/services/blueman-applet.nix
 
-{ config, lib, ... }: lib.mkIf config.desktop.devices.bluetooth.enable {
-  services.blueman-applet.enable = true;
+{ config, osConfig, ... }: {
+  services.blueman-applet.enable = (
+    config.desktop.enable &&
+    config.desktop.devices.bluetooth.enable &&
+    !osConfig.services.desktopManager.gnome.enable
+  );
 }
