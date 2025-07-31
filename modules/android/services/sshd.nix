@@ -4,9 +4,17 @@
 
 { config, pkgs, lib, ... }: let
   cfg = config.services.sshd;
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    mkIf
+    literalExpression
+    types;
+
   # utility functions
   concatLines = list: builtins.concatStringsSep "\n" list;
   prefixLines = mapper: list: concatLines (map mapper list);
+
   # could be put in the config
   configPath = "ssh/sshd_config";
   keysFolder = "/etc/ssh";
@@ -32,6 +40,7 @@
   appendAuthorizedKeys = authorizedKeys: ''
     $DRY_RUN_CMD echo ${concatLines authorizedKeys} >${authorizedKeysFolder}/${config.user.userName}
   '';
+
   # bin tools:
   sshd-init = pkgs.writeScriptBin "sshd-init" ''
     #!${pkgs.runtimeShell}
@@ -55,7 +64,7 @@
     fi
   '';
 in {
-  options.services.sshd = with lib; {
+  options.services.sshd = {
     enable = mkEnableOption ''
       Whether to enable the OpenSSH secure shell daemon, which
       allows secure remote logins.
@@ -86,7 +95,7 @@ in {
       '';
     };
   };
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     environment.etc = {
       "${configPath}".text = ''
         ${prefixLines (port: "Port ${toString port}") cfg.ports}

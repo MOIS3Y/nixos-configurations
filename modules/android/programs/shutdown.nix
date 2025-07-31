@@ -11,6 +11,12 @@
 
 { config, pkgs, lib, ... }: let
   cfg = config.programs.shutdown;
+  inherit (lib)
+  mkEnableOption
+  mkOption
+  mkIf
+  types;
+
   concatServices = list: builtins.concatStringsSep " " list;
   shutdown = pkgs.writeScriptBin "shutdown" ''
     #!${pkgs.runtimeShell}
@@ -28,7 +34,7 @@
     exit
   '';
 in {
-  options.programs.shutdown = with lib; {
+  options.programs.shutdown = {
     enable = mkEnableOption "Whether to enable the shutdown program";
     services = mkOption {
       type = types.listOf types.str;
@@ -38,7 +44,7 @@ in {
       '';
     };
   };
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     environment.packages = [
       shutdown
     ];
