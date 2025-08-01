@@ -32,6 +32,9 @@
       sddm.enable = mkEnableOption ''
         Whether to enable sddm as the display manager.
       '';
+      gdm.enable = mkEnableOption ''
+        Whether to enable GDM, the GNOME display manager.
+      '';
       greetd.enable = mkEnableOption ''
         Whether to enable greetd, a minimal and flexible login manager daemon.
       '';
