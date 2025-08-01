@@ -5,6 +5,7 @@
 { ... }: {
   imports = [
     ./blueman.nix
+    ./desktop-manager.nix
     ./display-manager.nix
     ./dleyna.nix
     ./fstrim.nix

@@ -4,28 +4,30 @@
 
 { config, pkgs, lib, ... }: let
   cfg = config.desktop;
-  windowManagers = {
-    awesome = {
-      enable = true;
-      luaModules = [
-        pkgs.lua52Packages.lgi
-      ];
-    };
-    qtile = { 
-      enable = true;
-      extraPackages = python3Packages: with python3Packages; [
-        psutil
-        requests
-      ];
-    };
-    # add more X11 window managers here ...
-  };
   in {
   services.xserver = {
     enable = cfg.xorg.enable;
-    windowManager = lib.optionalAttrs cfg.xorg.enable (
-      lib.attrsets.getAttrs cfg.xorg.windowManagers windowManagers
-    );
+    windowManager = {
+      awesome = {
+        enable = (
+          lib.lists.elem "awesome" cfg.xorg.windowManagers &&
+          !config.services.desktopManager.gnome.enable
+        );
+        luaModules = [
+          pkgs.lua52Packages.lgi
+        ];
+      };
+      qtile = { 
+        enable = (
+          lib.lists.elem "qtile" cfg.xorg.windowManagers &&
+          !config.services.desktopManager.gnome.enable
+        );
+        extraPackages = python3Packages: [
+          python3Packages.psutil
+          python3Packages.requests
+        ];
+      };
+    };
     xkb = {
       variant = "";
       options = "grp:alt_shift_toggle";

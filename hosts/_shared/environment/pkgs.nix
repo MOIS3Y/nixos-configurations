@@ -50,6 +50,9 @@ in {
     pavucontrol
     xdg-utils
   ]
+  ++ lib.optionals config.services.desktopManager.gnome.enable [
+    dconf-editor
+  ]
   ++ lib.optionals (config.desktop.enable && games.enable) games.extraPackages
   ++ lib.optionals (config.desktop.enable && hardware.gpu.enable) [
     amdgpu_top

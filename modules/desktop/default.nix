@@ -25,6 +25,11 @@
   ];
   options.desktop = {
     enable = mkEnableOption "Whether to enable desktop setup.";
+    desktopManager = {
+      gnome.enable = mkEnableOption ''
+        Whether to enable GNOME desktop manager
+      '';
+    };
     displayManager = {
       enable = mkEnableOption ''
         Whether to enable systemd’s display-manager service.
