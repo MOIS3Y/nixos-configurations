@@ -16,20 +16,20 @@ in {
     not-when-audio = true;
     not-when-fullscreen = true;
     environment = {
-      PRIMARY_DISPLAY = "$(${scripts.primary-display})";
+      PRIMARY_DISPLAY = "$(${scripts.xidlehook.primary-display})";
     };
     timers = [
       {
         delay = 600;
-        command = "${scripts.notify}";
+        command = "${scripts.xidlehook.notify}";
       }
       {
         delay = 10;
-        command = "${scripts.lock}";
+        command = "${scripts.xidlehook.lock}";
       }
       {
         delay = 60;
-        command = "${scripts.suspend}";
+        command = "${scripts.xidlehook.suspend}";
       }
     ];
   };
