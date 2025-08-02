@@ -44,10 +44,6 @@
     @define-color sidebar_fg_color #${base05};
     @define-color sidebar_backdrop_color #${base01};
   '';
-  gtk4css = pkgs.writeTextFile {
-    name = "gtk.css";
-    text = "${extraCss}";
-  };
   commonGtkExtraConfig = {
     gtk-decoration-layout = "menu:";
     # add more common gtk3/4 settings here ...
@@ -69,26 +65,14 @@
       size = 11;
     };
     gtk3 = {
-      extraConfig = commonGtkExtraConfig // ( if variant == "dark"
-        then { gtk-application-prefer-dark-theme = true; }
-        else {}
-      );
-      inherit extraCss; 
+      extraConfig = commonGtkExtraConfig // lib.optionalAttrs (variant == "dark") {
+        gtk-application-prefer-dark-theme = true;
+      };
+      inherit extraCss;
     };
     gtk4 = {
       extraConfig = commonGtkExtraConfig;
-      inherit extraCss; 
+      inherit extraCss;
     };
   };
-  # ? workaround write custom gtk-4.0 css
-  # ? see: https://github.com/nix-community/home-manager/issues/5133
-  home.activation.removeGTK4Css = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-    if [ -f "${config.xdg.configHome}/gtk-4.0/gtk.css" ]; then
-      rm ${config.xdg.configHome}/gtk-4.0/gtk.css
-    fi
-  '';
-  home.activation.linkGTK4Css = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    rm ${config.xdg.configHome}/gtk-4.0/gtk.css
-    ln -s ${gtk4css} ${config.xdg.configHome}/gtk-4.0/gtk.css
-  '';
 }
