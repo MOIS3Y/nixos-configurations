@@ -53,7 +53,6 @@ assertions = [
 ];
   services.greetd = {
     enable = lib.mkDefault config.desktop.displayManager.greetd.enable;
-    vt = 7;
     settings = {
       default_session = {
         user = "greeter";
