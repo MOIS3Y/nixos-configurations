@@ -7,7 +7,9 @@
 in {
   assertions = [
     {
-      assertion = lib.lists.elem "hyprland" cfg.wayland.compositors -> cfg.wayland.enable;
+      assertion = (
+        lib.lists.elem "hyprland" cfg.wayland.compositors -> cfg.wayland.enable
+      );
       message = ''
         [Configuration Error] Wayland must be enabled when using Hyprland!
 
@@ -33,6 +35,7 @@ in {
   ];
   programs.hyprland = {
     enable = (
+      cfg.wayland.enable &&
       lib.lists.elem "hyprland" cfg.wayland.compositors &&
       !config.services.desktopManager.gnome.enable
     );

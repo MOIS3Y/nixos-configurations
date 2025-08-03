@@ -10,6 +10,7 @@
     windowManager = {
       awesome = {
         enable = (
+          cfg.xorg.enable &&
           lib.lists.elem "awesome" cfg.xorg.windowManagers &&
           !config.services.desktopManager.gnome.enable
         );
@@ -19,6 +20,7 @@
       };
       qtile = { 
         enable = (
+          cfg.xorg.enable &&
           lib.lists.elem "qtile" cfg.xorg.windowManagers &&
           !config.services.desktopManager.gnome.enable
         );
