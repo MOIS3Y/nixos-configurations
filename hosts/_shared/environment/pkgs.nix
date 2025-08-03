@@ -52,6 +52,11 @@ in {
   ]
   ++ lib.optionals config.services.desktopManager.gnome.enable [
     dconf-editor
+    gnomeExtensions.auto-move-windows
+    gnomeExtensions.appindicator
+    gnomeExtensions.caffeine
+    gnomeExtensions.system-monitor
+    gnomeExtensions.useless-gaps
   ]
   ++ lib.optionals (config.desktop.enable && games.enable) games.extraPackages
   ++ lib.optionals (config.desktop.enable && hardware.gpu.enable) [
