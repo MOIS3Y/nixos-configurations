@@ -9,6 +9,7 @@
   services.hypridle = {
     enable = lib.mkDefault config.wayland.windowManager.hyprland.enable;
     package = pkgs.hypridle;
+    systemdTarget = "hyprland-session.target";
     settings = {
       general = {
         lock_cmd = "${scripts.hypridle.smart-hyprlock}";
