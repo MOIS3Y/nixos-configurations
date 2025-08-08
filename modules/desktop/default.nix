@@ -49,7 +49,8 @@
       compositors = mkOption {
         type = types.listOf (types.enum [
           "hyprland"
-          "wayfire" 
+          "wayfire"
+          "niri"
         ]);
         default = [ ];
         description = "List of preconfigured wayland compositors";

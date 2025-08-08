@@ -398,7 +398,10 @@
   in {
   programs.waybar = {
     enable = lib.mkDefault config.wayland.windowManager.hyprland.enable;
-    systemd.enable = !osConfig.programs.hyprland.withUWSM;
+    systemd = {
+      enable = !osConfig.programs.uwsm.enable;
+      target = "hyprland-session.target";
+    };
     settings = {
       # ? right now waybar has configuration only for hyprland
       topBar = hyprBar // (builtins.removeAttrs widgets excludeWidgets);

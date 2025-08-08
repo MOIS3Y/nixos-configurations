@@ -139,16 +139,16 @@ in {
       extraPortals = lib.mkForce ([
         pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-gnome
-      ] ++ (if config.wayland.windowManager.hyprland.enable == true
-        then [ pkgs.xdg-desktop-portal-hyprland ]
-        else []
-      ));
+      ] ++ lib.optionals config.wayland.windowManager.hyprland.enable [
+        pkgs.xdg-desktop-portal-hyprland
+      ] ++ lib.optionals config.wayland.windowManager.wayfire.enable [
+        pkgs.xdg-desktop-portal-wlr
+      ]);
       configPackages = lib.mkForce ([
         pkgs.gnome-session
-      ] ++ (if config.wayland.windowManager.hyprland.enable == true
-        then [ pkgs.hyprland ]
-        else []
-      ));
+      ] ++ lib.optionals config.wayland.windowManager.hyprland.enable [
+        pkgs.hyprland 
+      ]);
       # ? below meaning ~/.config/xdg-desktop-portal/portals.conf:
       # ? [preferred]
       # ? default=gtk

@@ -28,6 +28,7 @@
     ./vscode.nix
     ./wezterm.nix
     ./waybar.nix
+    ./wayfire.nix
     ./wlogout.nix
     ./wofi.nix
   ];
