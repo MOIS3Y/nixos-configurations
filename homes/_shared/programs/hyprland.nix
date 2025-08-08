@@ -18,7 +18,6 @@
       pkgs.hyprlandPlugins.hyprsplit
       pkgs.hyprlandPlugins.hyprexpo
     ];
-    
     xwayland.enable = true;
     settings = {
       #! -- -- -- -- -- -- autostart -- -- -- -- -- -- #
@@ -65,7 +64,7 @@
       # workspace = [ ];
       #! -- -- -- --  -- -- general -- -- -- -- -- --  #
       general = {
-        border_size = 1;
+        border_size = 2;
         no_border_on_floating = false;
         gaps_in = 4;
         gaps_out = 8;
@@ -75,7 +74,7 @@
       };
       #! -- -- -- --  -- -- decoration -- -- -- -- --  #
       decoration = {
-        rounding = 6;
+        rounding = 8;
         blur = {
           enabled = true;
           size = 16;
@@ -111,10 +110,11 @@
         
       };
       #! -- -- -- --  -- -- rules -- -- -- -- -- --  #
-      windowrulev2 = [
+      windowrule = [
         # tags
         "tag +music, class:^(feishin|io.bassi.Amberol)"
         "tag +music, title:^(.*Yandex Music.*)"
+        "tag +term, class:^(kitty|Alacritty|org.wezfurlong.wezterm)"
         # default workspace position
         "workspace 1, class:^(firefox)$"
         "workspace 3, class:^(org.telegram.desktop)$"
@@ -133,15 +133,20 @@
         "size 350 700,class:^(org.gnome.Calculator)"
         # opacity
         "opacity 0.8 override 0.8 override 1.0 override, tag:music"
+        "opacity 0.8 override 0.8, tag:term"
       ];
       layerrule = [
-        # make some windows bg bluring
-        "blur,       logout_dialog"  #  wlogout
-        "xray 1,     logout_dialog"
-        # "blur,       swaync-control-center"
-        # "blur,       swaync-notification-window"
-        # "ignorezero, swaync-control-center"
-        # "ignorezero, swaync-notification-window"
+        # animations
+        "animation slide top,  logout_dialog"
+        "animation slide top,  swaync-notification-window"
+        "animation slide left, swaync-control-center"
+        "animation slide down, wofi"
+        # blur
+        "blur,   logout_dialog"
+        "xray 1, logout_dialog"
+        # dim 
+        "dimaround, swaync-control-center"
+        "dimaround, wofi"
       ];
       #! -- -- -- -- -- keybindings -- -- -- -- -- #
       bind = let
@@ -253,7 +258,7 @@
         # --------------- #
         #  - HARDWARE -   #
         # --------------- #
-        # sound and brightness managment
+        # sound and brightness management
         ",XF86MonBrightnessUp,   exec, ${scripts.hyprland.brightness-up}"
         ",XF86MonBrightnessDown, exec, ${scripts.hyprland.brightness-down}"
         ",XF86AudioRaiseVolume,  exec, ${scripts.hyprland.volume-up}"
