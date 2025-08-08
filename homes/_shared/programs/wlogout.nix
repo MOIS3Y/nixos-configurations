@@ -52,8 +52,8 @@
     ];
     style = let
       wlogoutIconsDir = "${config.desktop.assets.icons}/wlogout/${name}";
-      dark01 = "rgba(12, 12, 12, 0.1)";
-      light01 = "rgba(255, 255, 255, 0.1)";
+      dark01 = "rgba(12, 12, 12, 0.7)";
+      light01 = "rgba(255, 255, 255, 0.7)";
       dark02 = "rgba(12, 12, 12, 0.2)";
       light02 = "rgba(255, 255, 255, 0.2)";
       dark04 = "rgba(12, 12, 12, 0.4)";
