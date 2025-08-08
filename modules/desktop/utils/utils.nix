@@ -37,6 +37,8 @@
   # L
   lightctl = "${pkgs.avizo}/bin/lightctl";
   loginctl = "${pkgs.systemd}/bin/loginctl";
+  # M
+  mkfifo = "${pkgs.coreutils}/bin/mkfifo";
   # N
   nautilus = "${lib.getExe pkgs.nautilus}";
   nil = "${lib.getExe pkgs.nil}";
@@ -51,6 +53,7 @@
   pylsp = "${lib.getExe pkgs.python311Packages.python-lsp-server}";
   # R
   rg = "${lib.getExe pkgs.ripgrep}";
+  rm = "${pkgs.coreutils}/bin/rm";
   # S
   seq = "${pkgs.coreutils}/bin/seq";
   sleep = "${pkgs.coreutils}/bin/sleep";

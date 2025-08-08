@@ -13,6 +13,7 @@
     gnome-system-monitor
     htop
     hyprctl
+    mkfifo
     notify-send
     pamixer
     paplay
@@ -20,6 +21,7 @@
     pgrep
     pkill
     rg
+    rm
     swaync-client
     volumectl
     wlogout;
@@ -105,8 +107,8 @@
           echo '{ "percentage":' "$brightness" '}'
       }
 
-      rm -rf $receive_pipe
-      mkfifo $receive_pipe
+      ${rm} -rf $receive_pipe
+      ${mkfifo} $receive_pipe
 
       # in case waybar restarted the script after restarting/replugging a monitor
       print_brightness ddcutil_slow
