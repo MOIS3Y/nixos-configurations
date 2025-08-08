@@ -23,7 +23,8 @@
       window = {
         padding.x = 25;
         padding.y = 25;
-        opacity = 0.8;
+        opacity = 1.0;
+        decorations = "Full";
         title = "Alacritty";
         dynamic_title = true;
       };

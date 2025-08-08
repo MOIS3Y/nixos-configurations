@@ -48,11 +48,11 @@
       window_padding_width = 15;      
       inactive_text_alpha = "1.0";
       confirm_os_window_close = 0;
-      hide_window_decorations = "titlebar-only";
+      hide_window_decorations = "no";
       placement_strategy = "center";
       resize_in_steps = "yes";
       # The basic colors
-      background_opacity = "0.8";
+      background_opacity = "1.0";
       foreground = "#${base05}";
       background = "#${base00}";
       selection_foreground = "#${base00}";
