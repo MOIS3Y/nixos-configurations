@@ -12,6 +12,8 @@
   brightnessctl = "${lib.getExe pkgs.brightnessctl}";
   # C
   cat = "${pkgs.coreutils}/bin/cat";
+  cut = "${pkgs.coreutils}/bin/cut";
+  curl = "${lib.getExe pkgs.curl}";
   # D
   ddcutil = "${lib.getExe pkgs.ddcutil}";
   dunstify = "${pkgs.dunst}/bin/dunstify";
@@ -32,6 +34,8 @@
   hyprlock = "${lib.getExe pkgs.hyprlock}";
   # I
   i3lock-run = "${pkgs.extra.i3lock-run}/bin/i3lock-run";
+  # J
+  jq = "${lib.getExe pkgs.jq}";
   # K
   kitty = "${lib.getExe pkgs.kitty}";
   # L
@@ -52,6 +56,7 @@
   pkill = "${pkgs.procps}/bin/pkill";
   pylsp = "${lib.getExe pkgs.python311Packages.python-lsp-server}";
   # R
+  rfkill = "${pkgs.util-linux}/bin/rfkill";
   rg = "${lib.getExe pkgs.ripgrep}";
   rm = "${pkgs.coreutils}/bin/rm";
   # S
@@ -77,4 +82,6 @@
   xrandr = "${lib.getExe pkgs.xorg.xrandr}";
   xss-lock = "${lib.getExe pkgs.xss-lock}";
   xset = "${lib.getExe pkgs.xorg.xset}";
+  # Z
+  zenity = "${lib.getExe pkgs.zenity}";
 }

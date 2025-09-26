@@ -33,6 +33,11 @@ in {
     tty-clock
     wget
     unzip
+    # TODO: delete it after finishing renovation
+    pamixer
+    ddcutil
+    hyprsunset
+    zenity
   ]
   # optional:
   ++ lib.optionals config.desktop.enable [
@@ -49,6 +54,10 @@ in {
     nautilus
     pavucontrol
     xdg-utils
+  ]
+  ++ lib.optionals config.desktop.wayland.enable [
+    # ? see: https://github.com/NixOS/nixpkgs/issues/280041
+    swayosd  # ! required for SwayOSD LibInput Backend
   ]
   ++ lib.optionals config.services.desktopManager.gnome.enable [
     dconf-editor

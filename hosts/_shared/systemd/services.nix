@@ -2,12 +2,14 @@
 # ▄█ ██▄ █▀▄ ▀▄▀ █ █▄▄ ██▄ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- --
 
-{ config, lib, ... }: let 
+{ config, pkgs, lib, ... }: let 
   cfg = config.host.virtualisation;
   inherit (lib)
     mkForce
     mkIf
     optionalAttrs;
+  inherit (config.services)
+    desktopManager;
 in {
     systemd.services = {
       # ? disable autostart virtualisation services if startWhenNeeded is true
@@ -30,6 +32,21 @@ in {
       TTYReset = true;
       TTYVHangup = true;
       TTYVTDisallocate = true;
+    };
+  } // optionalAttrs (config.desktop.wayland.enable && !desktopManager.gnome.enable) {
+    # ? see: https://github.com/NixOS/nixpkgs/issues/280041
+    swayosd-libinput-backend = {
+      description = "SwayOSD LibInput backend for listening to certain keys like CapsLock, ScrollLock, VolumeUp, etc.";
+      documentation = [ "https://github.com/ErikReider/SwayOSD" ];
+      wantedBy = [ "graphical.target" ];
+      partOf = [ "graphical.target" ];
+      after = [ "graphical.target" ];
+      serviceConfig = {
+        Type = "dbus";
+        BusName = "org.erikreider.swayosd";
+        ExecStart = "${pkgs.swayosd}/bin/swayosd-libinput-backend";
+        Restart = "on-failure";
+      };
     };
   };
 }

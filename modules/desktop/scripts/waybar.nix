@@ -14,7 +14,6 @@
     htop
     hyprctl
     mkfifo
-    notify-send
     pamixer
     paplay
     pavucontrol
@@ -66,16 +65,207 @@
     pavucontrol-toggle = pkgs.writeShellScript "waybar-pavucontrol-toggle.sh" ''
       ${pgrep} pavucontrol >/dev/null 2>&1 && ${pkill} pavucontrol || ${pavucontrol}
     '';
+    # hyprland specific:
     hyprctl-swallow = pkgs.writeShellScript "waybar-hyprctl-swallow.sh" ''
-      if ${hyprctl} getoption misc:enable_swallow | ${rg} -q "int: 1"; then
-        ${hyprctl} keyword misc:enable_swallow false >/dev/null &&
-          ${paplay} ${toggle-beep} &
-          ${notify-send} -a Hyprland -i display -t 1500 "Turned off swallowing"
-      else
-        ${hyprctl} keyword misc:enable_swallow true >/dev/null &&
-          ${paplay} ${toggle-beep} &
-          ${notify-send} -a Hyprland -i display -t 1500 "Turned on swallowing"
-      fi
+      receive_pipe="/tmp/waybar-swallow-rx"
+
+      setup_pipe() {
+        ${rm} -rf "$receive_pipe"
+        ${mkfifo} "$receive_pipe"
+      }
+
+      check_swallow_status() {
+        if ${hyprctl} getoption misc:enable_swallow | ${rg} -q "int: 1"; then
+          echo "enabled"
+        else
+          echo "disabled"
+        fi
+      }
+
+      get_waybar_output() {
+        local status
+        status=$(check_swallow_status)
+        
+        case "$status" in
+          enabled)
+              echo '{"text": "󰊰", "tooltip": "Window swallow enabled", "class": "visible"}'
+              ;;
+          disabled)
+              echo '{"text": "", "tooltip": "Window swallow disabled", "class": "hidden"}'
+              ;;
+          *)
+              echo '{"text": "", "tooltip": "Unknown status", "class": "hidden"}'
+              ;;
+        esac
+      }
+
+      toggle_swallow() {
+        local current_status
+        current_status=$(check_swallow_status)
+        
+        case "$current_status" in
+          enabled)
+              ${hyprctl} keyword misc:enable_swallow false >/dev/null 2>&1
+              ;;
+          disabled)
+              ${hyprctl} keyword misc:enable_swallow true >/dev/null 2>&1
+              ;;
+        esac
+      }
+
+      process_command() {
+        local command="$1"
+        
+        case "$command" in
+          toggle)
+              toggle_swallow
+              ;;
+          status)
+              # Just return status without changes
+              ;;
+          *)
+              echo "Unknown command: $command" >&2
+              return 1
+              ;;
+        esac
+      }
+
+      main_loop() {
+        while true; do
+          local command
+          read -r command < "$receive_pipe"
+          
+          if process_command "$command"; then
+              get_waybar_output
+          fi
+        done
+      }
+
+      cleanup() {
+          {rm} -f "$receive_pipe"
+          exit 0
+      }
+
+      main() {
+        trap cleanup EXIT INT TERM
+        setup_pipe
+        get_waybar_output
+        main_loop
+      }
+
+      # Run it:
+      main "$@"
+    '';
+    hyprctl-swallow-toggle = pkgs.writeShellScript "waybar-hyprctl-swallow-toggle.sh" ''
+      echo "toggle" > /tmp/waybar-swallow-rx
+    '';
+    hyprctl-swallow-status = pkgs.writeShellScript "waybar-hyprctl-swallow-status.sh" ''
+      echo "status" > /tmp/waybar-swallow-rx
+    '';
+    hyprctl-hyprsunset = pkgs.writeShellScript "waybar-hyprctl-hyprsunset.sh" ''
+      receive_pipe="/tmp/waybar-hyprsunset-rx"
+      #? see: https://github.com/hyprwm/hyprsunset/issues/51
+      #? see: https://github.com/hyprwm/hyprsunset/issues/26
+      NIGHT_TEMP="5000"
+      DAY_TEMP="6650"  #? eq identity value (issues above)
+
+      setup_pipe() {
+        ${rm} -rf "$receive_pipe"
+        ${mkfifo} "$receive_pipe"
+      }
+
+      get_current_temp() {
+        ${hyprctl} hyprsunset temperature 2>/dev/null
+      }
+
+      check_temperature_status() {
+        local current_temp
+        current_temp=$(get_current_temp)
+        
+        if [ "$current_temp" = "$DAY_TEMP" ]; then
+          echo "day"
+        else
+          echo "night"
+        fi
+      }
+
+      get_waybar_output() {
+        local status
+        status=$(check_temperature_status)
+        
+        case "$status" in
+          day)
+              echo '{"text": "", "tooltip": "Day mode", "class": "hidden"}'
+              ;;
+          night)
+              echo '{"text": "󱩌", "tooltip": "Night mode active", "class": "visible"}'
+              ;;
+          *)
+              echo '{"text": "", "tooltip": "Unknown status", "class": "hidden"}'
+              ;;
+        esac
+      }
+
+      toggle_temperature() {
+        local current_temp
+        current_temp=$(get_current_temp)
+        
+        if [ "$current_temp" = "$NIGHT_TEMP" ]; then
+          ${hyprctl} hyprsunset temperature "$DAY_TEMP" >/dev/null 2>&1
+        else
+          ${hyprctl} hyprsunset temperature "$NIGHT_TEMP" >/dev/null 2>&1
+        fi
+      }
+
+      process_command() {
+        local command="$1"
+        
+        case "$command" in
+          toggle)
+              toggle_temperature
+              ;;
+          status)
+              # Just return status without changes
+              ;;
+          *)
+              echo "Unknown command: $command" >&2
+              return 1
+              ;;
+        esac
+      }
+
+      main_loop() {
+        while true; do
+          local command
+          read -r command < "$receive_pipe"
+          
+          if process_command "$command"; then
+            get_waybar_output
+          fi
+        done
+      }
+
+      cleanup() {
+        rm -f "$receive_pipe"
+        exit 0
+      }
+
+      main() {
+        trap cleanup EXIT INT TERM
+        
+        setup_pipe
+        get_waybar_output
+        main_loop
+      }
+
+      # Run it:
+      main "$@"
+    '';
+    hyprctl-hyprsunset-toggle = pkgs.writeShellScript "waybar-hyprctl-hyprsunset-toggle.sh" ''
+      echo "toggle" > /tmp/waybar-hyprsunset-rx
+    '';
+    hyprctl-hyprsunset-status = pkgs.writeShellScript "waybar-hyprctl-hyprsunset-status.sh" ''
+      echo "status" > /tmp/waybar-hyprsunset-rx
     '';
     # External monitor managment:
     ddcutil-fast = pkgs.writeShellScript "waybar-ddcutil-fast.sh" ''
@@ -125,6 +315,14 @@
               min)
                   ddcutil_fast setvcp 10 ${builtins.toString devices.ddcci.dark}
                   ;;
+              *)
+                  # Check if the command is a number from 0 to 100 (for swaync slider)
+                  if [[ $command =~ ^[0-9]+$ ]] && [ $command -ge 0 ] && [ $command -le 100 ]; then
+                      ddcutil_fast setvcp 10 $command
+                  else
+                      echo "Unknown command: $command" >&2
+                  fi
+                  ;;
           esac
           print_brightness ddcutil_fast
       done
@@ -144,11 +342,12 @@
     # Common:
     switch-workspaces-to-right = "${hyprctl} dispatch workspace e+1";
     switch-workspaces-to-left = "${hyprctl} dispatch workspace e-1";
+    switch-keyboard-layout = "${hyprctl} switchxkblayout ${devices.keyboard.settings.name} next";
     calc = "${gnome-calculator}";
     logout = "${wlogout}";
     notification-get = "${swaync-client} -swb";
-    notification-dnd = "${swaync-client} -d -sw & ${paplay} ${toggle-beep} &";
-    notification-center = "${swaync-client} -t -sw";
+    notification-dnd = "${swaync-client} -d & ${paplay} ${toggle-beep} &";
+    notification-center = "${swaync-client} -t";
     brightness-up = "${brightnessctl} s +1%";
     brightness-down = "${brightnessctl} s 1%-";
     volume-mute = "${volumectl} toggle-mute & ${paplay} ${toggle-beep} &";

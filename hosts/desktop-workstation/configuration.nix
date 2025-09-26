@@ -65,7 +65,16 @@
 
   sops = {
     defaultHostSopsFile = ../../secrets/hosts/desktop-workstation/secrets.yaml;
-    secrets = {};
+    secrets = {
+      "coolercontrol/username" = {
+        owner = config.users.users.stepan.name;
+        inherit (config.users.users.stepan) group;
+      };
+      "coolercontrol/password" = {
+        owner = config.users.users.stepan.name;
+        inherit (config.users.users.stepan) group;
+      };
+    };
   };
 
   networking.hostName = "workstation";

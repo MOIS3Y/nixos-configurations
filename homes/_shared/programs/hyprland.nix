@@ -129,8 +129,17 @@
         # disable blur
         "noblur,      class:^(vlc)"
         "noblur,      class:^(zoom)"
+        # rounding
+        "rounding 16, class:^(zenity)"
+        # dim 
+        "dimaround,   class:^(zenity)"
+        "dimaround,   class:^(nm-connection-editor)"
+        "dimaround,   class:^(.blueman-manager-wrapped)"
+        # pin
+        "pin,         class:^(zenity)"
+        "pin,         class:^(org.gnome.Calculator)"
         # size
-        "size 350 700,class:^(org.gnome.Calculator)"
+        "size 380 700,class:^(org.gnome.Calculator)"
         # opacity
         "opacity 0.8 override 0.8 override 1.0 override, tag:music"
         "opacity 0.8 override 0.8, tag:term"
@@ -139,7 +148,7 @@
         # animations
         "animation slide top,  logout_dialog"
         "animation slide top,  swaync-notification-window"
-        "animation slide left, swaync-control-center"
+        "animation slide right, swaync-control-center"
         "animation slide down, wofi"
         # blur
         "blur,   logout_dialog"

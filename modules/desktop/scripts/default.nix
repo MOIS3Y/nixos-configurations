@@ -13,6 +13,7 @@
     # wayland:
     ./hypridle.nix
     ./hyprland.nix
+    ./swaync.nix
     ./waybar.nix
     ./wlogout.nix
     # xorg:
