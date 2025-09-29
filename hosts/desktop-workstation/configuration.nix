@@ -111,6 +111,7 @@
         (pkgs.retroarch.withCores (cores: with cores; [
           nestopia
         ]))
+        pkgs.dualsensectl
       ];
     };
     devices = {
