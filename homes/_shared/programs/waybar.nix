@@ -44,7 +44,7 @@
           "tray"
           "group/monitoring"
           "group/control-center"
-        ] ++ (lib.optionals devices.battery.enable [ "battery" ]) ++ [
+        ] ++ [
           "privacy"
         ] ++ lib.optionals (!config.services.swaync.enable) [ "custom/power" ];
         #! -- -- -- -- widgets (config) -- -- -- -- #!
