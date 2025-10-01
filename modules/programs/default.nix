@@ -15,6 +15,5 @@
 { ... }: {
   imports = [
     ./mellowplayer.nix
-    ./swappy.nix
   ];
 }

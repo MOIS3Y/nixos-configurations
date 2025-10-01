@@ -4,8 +4,6 @@
 
 { config, pkgs, ... }: let
   cfg = config.desktop;
-  inherit (config.colorScheme)
-    palette;
   in {
   assertions = [
     {
@@ -103,30 +101,15 @@
           enable = cfg.wayland.enable;
         };
         extraPackages = [
-          pkgs.libsForQt5.qt5.qtgraphicaleffects
-          cfg.cursor.package  #? not working add it in systemPackages
+          pkgs.kdePackages.qtsvg
+          pkgs.kdePackages.qtmultimedia
+          pkgs.kdePackages.qtvirtualkeyboard
         ];
         autoNumlock = true;
-        theme = ''${
-          pkgs.extra.sddm-sugar-candy.override {
-            settings = {
-              Background = "${cfg.assets.images.background}";
-              ScreenWidth = "1920";
-              ScreenHeight = "1080";
-              MainColor = "#${palette.base05}";
-              AccentColor = "#${palette.base0D}";
-              BackgroundColor = "#${palette.base01}";
-              OverrideLoginButtonTextColor = "#${palette.base01}";
-              Font = "Ubuntu";
-              DateFormat = "dddd, d MMMM yyyy";
-              HeaderText = "NixOS";
-              FormPosition="center";
-              FullBlur=true;
-            };
-          }
-        }'';
+        theme = "sddm-astronaut-theme";
         settings = {
           Theme = { CursorTheme = cfg.cursor.name; };
+          General = { InputMethod = "qtvirtualkeyboard"; };
         };
       };
     };

@@ -27,6 +27,7 @@ in {
       extraOptionOverrides = {
         AddKeysToAgent = "yes";
       };
+      enableDefaultConfig = false;  #? default values will be removed in the future
       matchBlocks = attrsets.attrByPath [ cfg.userMatchBlocks ] "empty" (
         import ./matchers.nix { inherit config; }
       ); # empty is a default value {} to return if the path does not exist in attrset;

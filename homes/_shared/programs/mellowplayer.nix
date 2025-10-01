@@ -7,7 +7,10 @@
 
 { config, pkgs, lib, ... }: {
   programs.mellowplayer = {
-    enable = lib.mkDefault config.desktop.enable;
+    #! broken qtwebengine-5.15.19 CVE-2025-6558
+    #? see: https://github.com/NixOS/nixpkgs/issues/438881
+    # enable = lib.mkDefault config.desktop.enable;
+    enable = lib.mkDefault false;
     package = pkgs.mellowplayer;
     settings = {
       General = { zoom = 1;};

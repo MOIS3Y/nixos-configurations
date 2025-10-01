@@ -47,14 +47,6 @@
       url = "github:MOIS3Y/assets4nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    sddmSugarCandy4Nix = {
-      url = "github:MOIS3Y/sddmSugarCandy4Nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nvchad4nix = {
-      url = "github:MOIS3Y/nvchad4nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";

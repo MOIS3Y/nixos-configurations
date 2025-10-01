@@ -2,19 +2,9 @@
 # ▄█ ▀▄▀▄▀ █▀█ █▀▀ █▀▀ ░█░ ▄
 # -- -- -- -- -- -- -- -- --
 
-# From custom modules/programs/swappy.nix
-# add import ../modules/programs into home.nix before use it.
-
-{ config, pkgs, lib, ... }: let
-  in {
+{ config, lib, ... }: {
   programs.swappy = {
     enable = lib.mkDefault config.desktop.wayland.enable;
-    package = pkgs.swappy;
-    extraPackages = [
-      pkgs.grim
-      pkgs.slurp
-      pkgs.wl-clipboard
-    ];
     settings = {
       Default = {
         save_dir = "${config.home.homeDirectory}/Pictures/Screenshots";

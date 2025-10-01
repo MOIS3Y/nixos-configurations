@@ -13,7 +13,7 @@
       nodePackages.bash-language-server
       blueprint-compiler
       docker-compose-language-service
-      dockerfile-language-server-nodejs
+      dockerfile-language-server
       emmet-language-server
       vscode-langservers-extracted
       rust-analyzer

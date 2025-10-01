@@ -25,6 +25,7 @@
     ./mangohud.nix
     ./mellowplayer.nix
     ./rofi.nix
+    ./swappy.nix
     ./swaylock.nix
     ./vscode.nix
     ./wezterm.nix

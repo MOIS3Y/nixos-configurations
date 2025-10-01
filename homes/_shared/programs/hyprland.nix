@@ -15,7 +15,17 @@
     package = pkgs.hyprland;
     systemd.enable = !osConfig.programs.hyprland.withUWSM;
     plugins = [
-      pkgs.hyprlandPlugins.hyprsplit
+      #? fix the same problem, again...
+      #? see: https://github.com/NixOS/nixpkgs/issues/427149
+      (pkgs.hyprlandPlugins.hyprsplit.overrideAttrs {
+        version = "0.51.1";
+        src = pkgs.fetchFromGitHub {
+          owner = "SeraphimRP";
+          repo = "hyprsplit";
+          rev = "aa9519b94f598a2497d9ef09615a54963d65df75";
+          hash = "sha256-7cnfq7fXgJHkmHyvRwx8UsUdUwUEN4A1vUGgsSb4SmI=";
+        };
+      })
       pkgs.hyprlandPlugins.hyprexpo
     ];
     xwayland.enable = true;
@@ -98,10 +108,11 @@
         };
       };
       #! -- -- -- --  -- -- gestures -- -- -- -- -- -- #
-      gestures = {
-        workspace_swipe = true;
-        workspace_swipe_fingers = 3;
-      };
+      #? new gestures system since 0.51.0
+      #? see: https://wiki.hypr.land/0.51.0/Configuring/Gestures/
+      gesture = [
+        "3, horizontal, workspace"
+      ];
       #! -- -- -- --  -- -- misc -- -- -- -- -- -- - #
       misc = {
         disable_hyprland_logo = true;

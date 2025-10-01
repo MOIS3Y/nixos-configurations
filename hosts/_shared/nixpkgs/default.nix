@@ -16,8 +16,7 @@
           # Common utils;
           aladdin4nix = inputs.aladdin4nix.packages.${pkgs.stdenv.hostPlatform.system}.aladdin4nix;
           assets4nix = inputs.assets4nix.packages.${pkgs.stdenv.hostPlatform.system}.assets4nix;
-          sddm-sugar-candy = inputs.sddmSugarCandy4Nix.packages.${pkgs.stdenv.hostPlatform.system}.sddm-sugar-candy;
-          nvchad = inputs.nvchad4nix.packages.${pkgs.stdenv.hostPlatform.system}.nvchad;
+          nvchad = inputs.nix4nvchad.packages.${pkgs.stdenv.hostPlatform.system}.nvchad;
         };
       })
     ];

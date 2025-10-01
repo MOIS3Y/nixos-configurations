@@ -5,53 +5,53 @@
 { config, ... }: {
   stepan = {
     # ssh-keys:
-    "private-keys/self/allsave" = { 
+    "ssh/private-keys/self/allsave" = { 
       path = "${config.home.homeDirectory}/.ssh/self/allsave"; 
     };
-    "private-keys/self/gitea" = { 
+    "ssh/private-keys/self/gitea" = { 
       path = "${config.home.homeDirectory}/.ssh/self/gitea"; 
     };
-    "private-keys/self/gliese" = { 
+    "ssh/private-keys/self/gliese" = { 
       path = "${config.home.homeDirectory}/.ssh/self/gliese"; 
     };
-    "private-keys/self/solar" = { 
+    "ssh/private-keys/self/solar" = { 
       path = "${config.home.homeDirectory}/.ssh/self/solar"; 
     };
-    "private-keys/self/pixel" = { 
+    "ssh/private-keys/self/pixel" = { 
       path = "${config.home.homeDirectory}/.ssh/self/pixel"; 
     };
-    "private-keys/ispsystem/go" = { 
+    "ssh/private-keys/ispsystem/go" = { 
       path = "${config.home.homeDirectory}/.ssh/ispsystem/go"; 
     };
-    "private-keys/ispsystem/gitea" = { 
+    "ssh/private-keys/ispsystem/gitea" = { 
       path = "${config.home.homeDirectory}/.ssh/ispsystem/gitea"; 
     };
-    "private-keys/misc/github" = { 
+    "ssh/private-keys/misc/github" = { 
       path = "${config.home.homeDirectory}/.ssh/ispsystem/github"; 
     };
 
-    "public-keys/self/allsave" = { 
+    "ssh/public-keys/self/allsave" = { 
       path = "${config.home.homeDirectory}/.ssh/self/allsave.pub"; 
     };
-    "public-keys/self/gitea" = { 
+    "ssh/public-keys/self/gitea" = { 
       path = "${config.home.homeDirectory}/.ssh/self/gitea.pub"; 
     };
-    "public-keys/self/gliese" = { 
+    "ssh/public-keys/self/gliese" = { 
       path = "${config.home.homeDirectory}/.ssh/self/gliese.pub"; 
     };
-    "public-keys/self/solar" = { 
+    "ssh/public-keys/self/solar" = { 
       path = "${config.home.homeDirectory}/.ssh/self/solar.pub"; 
     };
-    "public-keys/self/pixel" = { 
+    "ssh/public-keys/self/pixel" = { 
       path = "${config.home.homeDirectory}/.ssh/self/pixel.pub"; 
     };
-    "public-keys/ispsystem/go" = { 
+    "ssh/public-keys/ispsystem/go" = { 
       path = "${config.home.homeDirectory}/.ssh/ispsystem/go.pub"; 
     };
-    "public-keys/ispsystem/gitea" = { 
+    "ssh/public-keys/ispsystem/gitea" = { 
       path = "${config.home.homeDirectory}/.ssh/ispsystem/gitea.pub"; 
     };
-    "public-keys/misc/github" = { 
+    "ssh/public-keys/misc/github" = { 
       path = "${config.home.homeDirectory}/.ssh/misc/github.pub"; 
     };
     # google calendar fetchers:

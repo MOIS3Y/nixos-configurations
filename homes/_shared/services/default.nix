@@ -14,7 +14,6 @@
     ./hyprsunset.nix
     ./nm-applet.nix
     ./picom.nix
-    ./swappy.nix
     ./swaync.nix
     ./swayosd.nix
     ./xidlehook.nix
