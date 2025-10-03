@@ -20,10 +20,10 @@
       (pkgs.hyprlandPlugins.hyprsplit.overrideAttrs {
         version = "0.51.1";
         src = pkgs.fetchFromGitHub {
-          owner = "SeraphimRP";
-          repo = "hyprsplit";
-          rev = "aa9519b94f598a2497d9ef09615a54963d65df75";
-          hash = "sha256-7cnfq7fXgJHkmHyvRwx8UsUdUwUEN4A1vUGgsSb4SmI=";
+        owner = "shezdy";
+        repo = "hyprsplit";
+        tag = "v0.51.1";
+        hash = "sha256-7cnfq7fXgJHkmHyvRwx8UsUdUwUEN4A1vUGgsSb4SmI=";
         };
       })
       pkgs.hyprlandPlugins.hyprexpo
