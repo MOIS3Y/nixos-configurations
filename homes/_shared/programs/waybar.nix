@@ -183,8 +183,8 @@
           format-muted = "󰖁";
           format-icons = {
             headphone = "";
-            hands-free = "";
-            headset = "";
+            hands-free = "󰋎";
+            headset = "󰋎";
             phone = "";
             portable = "";
             car = "";
