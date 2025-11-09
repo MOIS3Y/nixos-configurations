@@ -15,17 +15,7 @@
     package = pkgs.hyprland;
     systemd.enable = !osConfig.programs.hyprland.withUWSM;
     plugins = [
-      #? fix the same problem, again...
-      #? see: https://github.com/NixOS/nixpkgs/issues/427149
-      (pkgs.hyprlandPlugins.hyprsplit.overrideAttrs {
-        version = "0.51.1";
-        src = pkgs.fetchFromGitHub {
-        owner = "shezdy";
-        repo = "hyprsplit";
-        tag = "v0.51.1";
-        hash = "sha256-7cnfq7fXgJHkmHyvRwx8UsUdUwUEN4A1vUGgsSb4SmI=";
-        };
-      })
+      pkgs.hyprlandPlugins.hyprsplit
       pkgs.hyprlandPlugins.hyprexpo
     ];
     xwayland.enable = true;

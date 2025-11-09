@@ -61,7 +61,7 @@
     };
     font = {
       name = "Ubuntu";
-      package = pkgs.ubuntu_font_family;
+      package = pkgs.ubuntu-classic;
       size = 11;
     };
     gtk3 = {

@@ -88,7 +88,7 @@
   nixpkgs.overlays = [
     (final: prev:{
       extra = {
-        nvchad = inputs.nvchad4nix.packages."${pkgs.system}".nvchad;
+        nvchad = inputs.nvchad4nix.packages."${pkgs.stdenv.hostPlatform.system}".nvchad;
       };
     })
   ];

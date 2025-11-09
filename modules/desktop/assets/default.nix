@@ -3,7 +3,8 @@
 # -- -- -- -- -- -- -- -
 
 { inputs, config, pkgs, lib, ... }: let
-  assets = inputs.assets4nix.packages."${pkgs.system}".assets4nix;
+  system = pkgs.stdenv.hostPlatform.system;
+  assets = inputs.assets4nix.packages."${system}".assets4nix;
   cs = config.colorScheme.name;
   inherit (lib)
     mkOption

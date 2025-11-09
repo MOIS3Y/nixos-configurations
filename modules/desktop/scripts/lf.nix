@@ -4,6 +4,7 @@
 
 { config, pkgs, ... }: let
   inherit (config.desktop.utils)
+    dragon-drop
     file
     kitty
     pistol
@@ -38,6 +39,6 @@
         --transfer-mode file < /dev/null > /dev/tty
     '';
     # commands:
-    dragon-out = ''%${xdragon} -a -x "$fx"'';
+    dragon-out = ''%${dragon-drop} -a -x "$fx"'';
   };
 }

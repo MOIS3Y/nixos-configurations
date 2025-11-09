@@ -7,10 +7,10 @@
     packages = with pkgs; [
       inter
       liberation_ttf
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       nerd-fonts.jetbrains-mono
       roboto
-      ubuntu_font_family
+      ubuntu-classic
     ];
     fontconfig = {
       enable = true;

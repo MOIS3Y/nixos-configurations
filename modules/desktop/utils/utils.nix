@@ -16,6 +16,7 @@
   curl = "${lib.getExe pkgs.curl}";
   # D
   ddcutil = "${lib.getExe pkgs.ddcutil}";
+  dragon-drop = "${lib.getExe pkgs.dragon-drop}";
   dunstify = "${pkgs.dunst}/bin/dunstify";
   # E
   emmet-ls = "${lib.getExe pkgs.emmet-ls}";
@@ -78,7 +79,6 @@
   wezterm = "${lib.getExe pkgs.wezterm}";
   wofi = "${lib.getExe pkgs.wofi}";
   # X
-  xdragon = "${lib.getExe pkgs.xdragon}";
   xrandr = "${lib.getExe pkgs.xorg.xrandr}";
   xss-lock = "${lib.getExe pkgs.xss-lock}";
   xset = "${lib.getExe pkgs.xorg.xset}";

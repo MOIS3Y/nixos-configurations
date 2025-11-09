@@ -5,7 +5,7 @@
 { config, pkgs, ... }: {
   console = {
     earlySetup = true;
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-k16n.psf.gz";  # RU
+    font = "ter-k16n";  # RU
     packages = [ pkgs.terminus_font ];
     keyMap = "us";
     colors = with config.colorScheme.palette; [

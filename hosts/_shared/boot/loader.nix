@@ -3,8 +3,9 @@
 # -- -- -- -- -- -- -- -- -
 
 { inputs, config, pkgs, ... }: let
+  system = pkgs.stdenv.hostPlatform.system;
   cfg = config.host.boot;
-  theme = inputs.distro-grub-themes.packages.${pkgs.system}."${cfg.grubTheme}-grub-theme";
+  theme = inputs.distro-grub-themes.packages.${system}."${cfg.grubTheme}-grub-theme";
 in {
   boot.loader = {
     efi = {
