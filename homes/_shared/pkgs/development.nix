@@ -12,6 +12,7 @@
     poetry
     sassc
     sqlitebrowser
+    uv
     # vault  #! local building
     vault-bin  #! In Russia, loading is available only with VPN
     # Languages:
