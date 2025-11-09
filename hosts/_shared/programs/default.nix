@@ -11,6 +11,7 @@
     ./hyprland.nix
     ./nh.nix
     ./niri.nix
+    ./nix-ld.nix
     ./ssh.nix
     ./steam.nix
     ./wayfire.nix
