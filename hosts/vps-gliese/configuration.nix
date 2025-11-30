@@ -49,7 +49,7 @@
     };
     defaultGateway = "89.110.70.1";
     nameservers = [ "8.8.8.8" "1.1.1.1" ];
-    firewall = { 
+    firewall = {
       enable = true;
       allowedTCPPorts = [
         53
@@ -84,7 +84,7 @@
   nixpkgs.overlays = [
     (final: prev:{
       extra = {
-        nvchad = inputs.nvchad4nix.packages."${pkgs.stdenv.hostPlatform.system}".nvchad;
+        nvchad = inputs.nix4nvchad.packages."${pkgs.stdenv.hostPlatform.system}".nvchad;
       };
     })
   ];
@@ -92,7 +92,7 @@
   programs = {
     nh = {
       enable = true;
-      flake = "/home/admvps/.setup"; 
+      flake = "/home/admvps/.setup";
     };
     zsh = {
       enable = true;
@@ -132,7 +132,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
-    users = { 
+    users = {
       admvps = {
         isNormalUser = true;
         description = "Stepan Zhukovsky";
