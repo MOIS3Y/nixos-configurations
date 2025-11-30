@@ -9,6 +9,7 @@
       liberation_ttf
       noto-fonts-color-emoji
       nerd-fonts.jetbrains-mono
+      nerd-fonts.zed-mono
       roboto
       ubuntu-classic
     ];

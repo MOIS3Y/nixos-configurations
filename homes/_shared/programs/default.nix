@@ -33,5 +33,6 @@
     ./wayfire.nix
     ./wlogout.nix
     ./wofi.nix
+    ./zed.nix
   ];
 }

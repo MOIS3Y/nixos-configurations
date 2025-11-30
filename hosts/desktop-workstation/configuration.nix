@@ -74,6 +74,10 @@
         owner = config.users.users.stepan.name;
         inherit (config.users.users.stepan) group;
       };
+      "xray/workstation" = {
+        path = "/etc/xray/config.json";
+        mode = "0644";
+      };
     };
   };
 

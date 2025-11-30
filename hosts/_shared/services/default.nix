@@ -24,6 +24,7 @@
     ./touchegg.nix
     ./udev.nix
     ./upower.nix
+    ./xray.nix
     ./xserver.nix
   ];
 }

@@ -60,7 +60,12 @@
 
   sops = {
     defaultHostSopsFile = ../../secrets/hosts/desktop-laptop/secrets.yaml;
-    secrets = {};
+    secrets = {
+      "xray/laptop" = {
+        path = "/etc/xray/config.json";
+        mode = "0644";
+      };
+    };
   };
 
   networking.hostName = "laptop";
@@ -111,7 +116,7 @@
           refreshRate = 60;
           x = 1920;  # connected to the right of eDP-1
           y =0;
-          enabled = true;      
+          enabled = true;
         }
       ];
       keyboard = {
@@ -130,8 +135,8 @@
       lid.enable = true;
       bluetooth.enable = true;
     };
-    cursor = {}; # ? Default arrts from module 
-    assets = {}; # ? Default arrts from module 
+    cursor = {}; # ? Default arrts from module
+    assets = {}; # ? Default arrts from module
     apps = with config.desktop.utils; {
       terminal = kitty;
       spare-terminal = alacritty;
