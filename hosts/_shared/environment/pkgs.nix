@@ -6,7 +6,7 @@
   inherit (config.colorScheme)
     palette;
   inherit (config.desktop)
-    assets  
+    assets
     cursor
     games;
   inherit (config.host)
@@ -43,6 +43,7 @@ in {
     at-spi2-atk         # !required for polkit-gnome-authentication-agent-1
     adwaita-icon-theme  #! required for most gnome apps
     evince
+    file-roller
     firefox
     gnome-calculator
     gnome-calendar
@@ -68,7 +69,7 @@ in {
   ++ lib.optionals (config.desktop.enable && hardware.gpu.enable) [
     amdgpu_top
     lact
-    nvtopPackages.amd    
+    nvtopPackages.amd
   ]
   ++ lib.optionals (config.desktop.enable && virtualisation.libvirtd.enable) [
     virt-manager
