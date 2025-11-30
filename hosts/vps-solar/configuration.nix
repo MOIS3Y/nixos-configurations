@@ -31,6 +31,7 @@
       nitch
       git
       htop
+      ipset
       jq
       extra.nvchad
       ncdu
@@ -53,6 +54,22 @@
       );
       "fail2ban/action.d/mailu-docker-action.conf".text = (
         builtins.readFile ../../row/fail2ban/action.d/mailu-docker-action.conf
+      );
+      # ? Gitea fail2ban fielters and acttions:
+      "fail2ban/filter.d/gitea-bad-auth.conf".text = (
+        builtins.readFile ../../row/fail2ban/filter.d/gitea-bad-auth.conf
+      );
+      "fail2ban/filter.d/gitea-bots.conf".text = (
+        builtins.readFile ../../row/fail2ban/filter.d/gitea-bots.conf
+      );
+      "fail2ban/filter.d/gitea-ssh.conf".text = (
+        builtins.readFile ../../row/fail2ban/filter.d/gitea-ssh.conf
+      );
+      "fail2ban/action.d/gitea-docker-action.conf".text = (
+        builtins.readFile ../../row/fail2ban/action.d/gitea-docker-action.conf
+      );
+      "fail2ban/action.d/gitea-docker-action-net.conf".text = (
+        builtins.readFile ../../row/fail2ban/action.d/gitea-docker-action-net.conf
       );
     };
   };
@@ -115,6 +132,7 @@
             enabled = true;
             backend = "systemd";
             filter = "mailu-bad-auth-bots";
+            journalmatch = "SYSLOG_IDENTIFIER=mailu-front";
             bantime = 604800;
             findtime = 600;
             maxretry = 5;
@@ -126,10 +144,47 @@
             enabled = true;
             backend = "systemd";
             filter = "mailu-bad-auth";
+            journalmatch = "SYSLOG_IDENTIFIER=mailu-admin";
             bantime = 604800;
             findtime = 900;
-            maxretry = 15;
+            maxretry = 5;
             action = "mailu-docker-action";
+          };
+        };
+        gitea-bad-auth = {
+          settings = {
+            enabled = true;
+            backend = "systemd";
+            filter = "gitea-bad-auth";
+            journalmatch = "SYSLOG_IDENTIFIER=gitea";
+            bantime = 3600;
+            findtime = 600;
+            maxretry = 5;
+            action = "gitea-docker-action";
+          };
+        };
+        gitea-bots = {
+          settings = {
+            enabled = true;
+            backend = "systemd";
+            filter = "gitea-bots";
+            journalmatch = "SYSLOG_IDENTIFIER=gitea";
+            bantime = 86400;
+            findtime = 3600;
+            maxretry = 5;
+            action = "gitea-docker-action-net";
+          };
+        };
+        gitea-ssh = {
+          settings = {
+            enabled = true;
+            backend = "systemd";
+            filter = "gitea-ssh";
+            journalmatch = "SYSLOG_IDENTIFIER=gitea";
+            bantime = 7200;
+            findtime = 3600;
+            maxretry = 10;
+            action = "gitea-docker-action";
           };
         };
         sshd = {
@@ -179,7 +234,7 @@
       backend = "docker";
       containers =  {
         portainer-agent = {
-          image = "portainer/agent:2.32.0-alpine";
+          image = "portainer/agent:2.33.5-alpine";
           hostname = "portainer-agent";
           autoStart = true;
           ports = [

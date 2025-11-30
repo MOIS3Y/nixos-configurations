@@ -52,12 +52,18 @@
     firewall = { 
       enable = true;
       allowedTCPPorts = [
+        53
         80
         443
+        1500
         24364
         26042
       ];
       allowedUDPPorts = [
+        53
+        500
+        1500
+        4500
         24364
         26042
       ];
@@ -147,7 +153,7 @@
       backend = "docker";
       containers =  {
         portainer-agent = {
-          image = "portainer/agent:2.32.0-alpine";
+          image = "portainer/agent:2.33.5-alpine";
           hostname = "portainer-agent";
           autoStart = true;
           ports = [
