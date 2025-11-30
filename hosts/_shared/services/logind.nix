@@ -3,13 +3,13 @@
 # -- -- -- -- -- -- -- -- 
 
 { config, lib, ... }: {
-  services.logind = {
+  services.logind.settings.Login = {
     # add common logind attrs here ...
   }
   # optional:
   // lib.optionalAttrs config.desktop.devices.lid.enable {
-    lidSwitch = "suspend";
-    lidSwitchExternalPower = "suspend";
-    lidSwitchDocked = "ignore";
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "suspend";
+    HandleLidSwitchDocked = "ignore";
   };
 }
