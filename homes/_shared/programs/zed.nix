@@ -133,7 +133,7 @@
       snippet_sort_order = "bottom";
 
       # Gutter
-      relative_line_numbers = false;
+      relative_line_numbers = "disabled";
 
       # Minimap
       minimap = {
