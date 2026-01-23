@@ -28,7 +28,7 @@
     # LSP servers
     nodePackages.bash-language-server
     docker-compose-language-service
-    dockerfile-language-server-nodejs
+    dockerfile-language-server
     vscode-langservers-extracted
     nixd
     (python3.withPackages(ps: with ps; [
