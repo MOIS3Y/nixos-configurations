@@ -1,0 +1,30 @@
+name: "CI"
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - '**.png'
+      - '**.jpg'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v1
+
+      - name: Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v2
+
+      - name: Check Flake Evaluation
+        run: nix flake check --no-build
