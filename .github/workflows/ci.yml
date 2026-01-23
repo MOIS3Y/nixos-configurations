@@ -24,7 +24,7 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@v1
 
       - name: Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@v2
+        uses: DeterminateSystems/magic-nix-cache-action@v13
 
       - name: Check Flake Evaluation
         run: nix flake check --no-build
