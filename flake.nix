@@ -5,7 +5,7 @@
 
 {
   description = "NixOS configurations for my devices";
-  
+
   inputs = {
     # Default:
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -61,144 +61,188 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  
-  outputs = { nixpkgs, home-manager, nix-on-droid, ... }@inputs: let
-    system = "x86_64-linux";
-    lib = nixpkgs.lib;
-  in {
-    # ! -- -- -- -- -- Linux -- -- -- -- -- ! #
-    nixosConfigurations = {
-      # desktops:
-      # -- -- -- -- -- -- -- --
-      laptop = lib.nixosSystem {
-        specialArgs = {
-          inherit system inputs;
+
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nix-on-droid,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      lib = nixpkgs.lib;
+    in
+    {
+      # ! -- -- -- -- -- Linux -- -- -- -- -- ! #
+      nixosConfigurations = {
+        # desktops:
+        # -- -- -- -- -- -- -- --
+        laptop = lib.nixosSystem {
+          specialArgs = {
+            inherit system inputs;
+          };
+          modules = [
+            ./hosts/desktop-laptop/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit system inputs;
+                };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = {
+                  stepan = ./homes/stepan/home.nix;
+                };
+              };
+            }
+          ];
         };
-        modules = [
-          ./hosts/desktop-laptop/configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              extraSpecialArgs = {
-                inherit system inputs;
+        workstation = lib.nixosSystem {
+          specialArgs = {
+            inherit system inputs;
+          };
+          modules = [
+            ./hosts/desktop-workstation/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit system inputs;
+                };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = {
+                  stepan = ./homes/stepan/home.nix;
+                };
               };
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users = {
-                stepan = ./homes/stepan/home.nix;
-              };
-            };
-          }
-        ];
-      };
-      workstation = lib.nixosSystem {
-        specialArgs = {
-          inherit system inputs;
+            }
+          ];
         };
-        modules = [
-          ./hosts/desktop-workstation/configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              extraSpecialArgs = {
-                inherit system inputs;
+        # servers:
+        # -- -- -- -- -- -- -- --
+        allsave = lib.nixosSystem {
+          specialArgs = {
+            inherit system inputs;
+          };
+          modules = [
+            ./hosts/server-allsave/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit system inputs;
+                };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = {
+                  admserv = ./homes/admserv/home.nix;
+                };
               };
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users = {
-                stepan = ./homes/stepan/home.nix;
-              };
-            };
-          }
-        ];
-      };
-      # servers:
-      # -- -- -- -- -- -- -- --
-      allsave = lib.nixosSystem {
-        specialArgs = {
-          inherit system inputs;
+            }
+          ];
         };
-        modules = [
-          ./hosts/server-allsave/configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              extraSpecialArgs = {
-                inherit system inputs;
+        # vps:
+        # -- -- -- -- -- -- -- --
+        gliese = lib.nixosSystem {
+          specialArgs = {
+            inherit system inputs;
+          };
+          modules = [
+            ./hosts/vps-gliese/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit system inputs;
+                };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = {
+                  admvps = ./homes/admvps/home.nix;
+                };
               };
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users = {
-                admserv = ./homes/admserv/home.nix;
-              };
-            };
-          }
-        ];
-      };
-      # vps:
-      # -- -- -- -- -- -- -- --
-      gliese = lib.nixosSystem {
-        specialArgs = {
-          inherit system inputs;
+            }
+          ];
         };
-        modules = [
-          ./hosts/vps-gliese/configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              extraSpecialArgs = {
-                inherit system inputs;
+        solar = lib.nixosSystem {
+          specialArgs = {
+            inherit system inputs;
+          };
+          modules = [
+            ./hosts/vps-solar/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit system inputs;
+                };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = {
+                  admvps = ./homes/admvps/home.nix;
+                };
               };
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users = {
-                admvps = ./homes/admvps/home.nix;
-              };
-            };
-          }
-        ];
-      };
-      solar = lib.nixosSystem {
-        specialArgs = {
-          inherit system inputs;
+            }
+          ];
         };
-        modules = [
-          ./hosts/vps-solar/configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              extraSpecialArgs = {
-                inherit system inputs;
-              };
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users = {
-                admvps = ./homes/admvps/home.nix;
-              };
-            };
-          }
-        ];
       };
-    };
-    # ! -- -- -- -- -- Android -- -- -- -- -- ! #
-    nixOnDroidConfigurations = {
-      # primary
-      # -- -- -- --
-      pixel = nix-on-droid.lib.nixOnDroidConfiguration {
-        modules = [
-          ./hosts/phone-pixel/nix-on-droid.nix
-        ];
-        # for nix-on-droid:
-        extraSpecialArgs = {
-          inherit inputs;
-          home-config = {
-            config = ./homes/nix-on-droid/home.nix;
-            backupFileExtension = "hm-bak";
-            useGlobalPkgs = true;
-            # for hm:
-            extraSpecialArgs = { inherit inputs; };
+      # ! -- -- -- -- -- Android -- -- -- -- -- ! #
+      nixOnDroidConfigurations = {
+        # primary
+        # -- -- -- --
+        pixel = nix-on-droid.lib.nixOnDroidConfiguration {
+          modules = [
+            ./hosts/phone-pixel/nix-on-droid.nix
+          ];
+          # for nix-on-droid:
+          extraSpecialArgs = {
+            inherit inputs;
+            home-config = {
+              config = ./homes/nix-on-droid/home.nix;
+              backupFileExtension = "hm-bak";
+              useGlobalPkgs = true;
+              # for hm:
+              extraSpecialArgs = { inherit inputs; };
+            };
+          };
+          pkgs = import nixpkgs {
+            system = "aarch64-linux";
+            config.allowUnfree = true;
           };
         };
-        pkgs = import nixpkgs {
-          system = "aarch64-linux";
-          config.allowUnfree = true;
-        };
       };
+      # ! -- -- -- -- -- Checks -- -- -- -- -- !
+      checks.${system} =
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          mkEval =
+            name: drv:
+            pkgs.runCommand "check-${name}" {
+              _trigger = builtins.typeOf drv;
+            } "touch $out";
+
+          # List of NixOS hosts to check
+          hosts = [
+            "laptop"
+            "workstation"
+            "allsave"
+            "gliese"
+            "solar"
+          ];
+        in
+        (builtins.listToAttrs (
+          map (name: {
+            inherit name;
+            value =
+              mkEval name
+                self.nixosConfigurations.${name}.config.system.build.toplevel;
+          }) hosts
+        ))
+        // {
+          pixel = mkEval "pixel" self.nixOnDroidConfigurations.pixel.activationPackage;
+        };
     };
-  };
 }
