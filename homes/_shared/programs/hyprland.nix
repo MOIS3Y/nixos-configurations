@@ -65,7 +65,6 @@
       #! -- -- -- --  -- -- general -- -- -- -- -- --  #
       general = {
         border_size = 2;
-        no_border_on_floating = false;
         gaps_in = 4;
         gaps_out = 8;
         "col.inactive_border" = "rgba(${palette.base00}ff)";
@@ -98,8 +97,6 @@
         };
       };
       #! -- -- -- --  -- -- gestures -- -- -- -- -- -- #
-      #? new gestures system since 0.51.0
-      #? see: https://wiki.hypr.land/0.51.0/Configuring/Gestures/
       gesture = [
         "3, horizontal, workspace"
       ];
@@ -113,50 +110,99 @@
       #! -- -- -- --  -- -- rules -- -- -- -- -- --  #
       windowrule = [
         # tags
-        "tag +music, class:^(feishin|io.bassi.Amberol)"
-        "tag +music, title:^(.*Yandex Music.*)"
-        "tag +term, class:^(kitty|Alacritty|org.wezfurlong.wezterm)"
+        "tag +music, match:class ^(feishin|io.bassi.Amberol)"
+        "tag +music, match:title ^(.*Yandex Music.*)"
+        "tag +term, match:class ^(kitty|Alacritty|org.wezfurlong.wezterm)"
+        
         # default workspace position
-        "workspace 1, class:^(firefox)$"
-        "workspace 3, class:^(org.telegram.desktop)$"
-        "workspace 3, class:^(Mattermost)$"
-        "workspace 4, class:^(code-url-handler)$"  # VSCode
-        "workspace 6, class:^(zoom)$"
+        "workspace 1, match:class ^(firefox)$"
+        "workspace 3, match:class ^(org.telegram.desktop)$"
+        "workspace 3, match:class ^(Mattermost)$"
+        "workspace 4, match:class ^(code-url-handler)$"  # VSCode
+        
         # default floating
-        "float,       class:^(nm-connection-editor)"
-        "float,       class:^(.blueman-manager-wrapped)"
-        "float,       class:^(zoom)"
-        "float,       class:^(org.gnome.Calculator)"
-        # disable blur
-        "noblur,      class:^(vlc)"
-        "noblur,      class:^(zoom)"
-        # rounding
-        "rounding 16, class:^(zenity)"
-        # dim 
-        "dimaround,   class:^(zenity)"
-        "dimaround,   class:^(nm-connection-editor)"
-        "dimaround,   class:^(.blueman-manager-wrapped)"
-        # pin
-        "pin,         class:^(zenity)"
-        "pin,         class:^(org.gnome.Calculator)"
-        # size
-        "size 380 700,class:^(org.gnome.Calculator)"
+        {
+          name = "zoom_rules";
+          "match:class" = "^(zoom)$";
+          workspace = 6;
+          float = true;
+          no_blur = "on";
+        }
+        {
+          name = "float_nm";
+          "match:class" = "^(nm-connection-editor)";
+          float = true;
+        }
+        {
+          name = "float_blueman";
+          "match:class" = "^(.blueman-manager-wrapped)";
+          float = true;
+        }
+        {
+          name = "float_calc";
+          "match:class" = "^(org.gnome.Calculator)";
+          float = true;
+        }
+        # force disable blur
+        {
+          name = "noblur_vlc";
+          "match:class" = "^(vlc)";
+          no_blur = "on";
+        }
+        # dim around rules
+        {
+          name = "zenity_rules";
+          "match:class" = "^(zenity)$";
+          dim_around = "on";
+          rounding = 16;
+          pin = "on";
+        }
+        {
+          name = "nm_connection_rules";
+          "match:class" = "^(nm-connection-editor)$";
+          dim_around = "on";
+        }
+        {
+          name = "blueman_rules";
+          "match:class" = "^(.blueman-manager-wrapped)$";
+          dim_around = "on";
+        }
+        {
+          name = "calculator_rules";
+          "match:class" = "^(org.gnome.Calculator)$";
+          size = "380 700";
+          pin = "on";
+        }
+        
         # opacity
-        "opacity 0.8 override 0.8 override 1.0 override, tag:music"
-        "opacity 0.8 override 0.8, tag:term"
+        "opacity 0.8 override 0.8 override 1.0 override, match:tag music"
+        "opacity 0.8 override 0.8, match:tag term"
       ];
       layerrule = [
-        # animations
-        "animation slide top,  logout_dialog"
-        "animation slide top,  swaync-notification-window"
-        "animation slide right, swaync-control-center"
-        "animation slide down, wofi"
-        # blur
-        "blur,   logout_dialog"
-        "xray 1, logout_dialog"
-        # dim 
-        "dimaround, swaync-control-center"
-        "dimaround, wofi"
+        {
+          name = "logout_dialog_rule";
+          animation = "slide top";
+          blur = "on";
+          xray = 1;
+          "match:namespace" = "logout_dialog";
+        }
+        {
+          name = "swaync_notification_rule";
+          animation = "slide top";
+          "match:namespace" = "swaync-notification-window";
+        }
+        {
+          name = "swaync_control_rule";
+          animation = "slide right";
+          dim_around = "on";
+          "match:namespace" = "swaync-control-center";
+        }
+        {
+          name = "wofi_rule";
+          animation = "slide down";
+          dim_around = "on";
+          "match:namespace" = "wofi";
+        }
       ];
       #! -- -- -- -- -- keybindings -- -- -- -- -- #
       bind = let
@@ -286,7 +332,7 @@
       plugin {
         # ? https://github.com/shezdy/hyprsplit/blob/main/README.md
         hyprsplit {
-            num_workspaces = 10
+          num_workspaces = 10
         }
         # ? https://github.com/hyprwm/hyprland-plugins/tree/main/hyprexpo#readme
         hyprexpo {
