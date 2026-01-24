@@ -28,7 +28,7 @@
       ]))
       # formatters
       nodePackages.prettier
-      nixfmt-rfc-style
+      nixfmt
       rustfmt
       shfmt
     ];

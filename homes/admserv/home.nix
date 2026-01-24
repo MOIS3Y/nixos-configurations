@@ -37,7 +37,7 @@
       flake8
     ]))
     # formatters
-    nixfmt-rfc-style
+    nixfmt
     shfmt
   ];
 

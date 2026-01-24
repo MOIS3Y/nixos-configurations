@@ -42,7 +42,7 @@
       nginx-language-server
       nil
       nixd
-      nixfmt-rfc-style
+      nixfmt
       (python3.withPackages (
         ps: with ps; [
           python-lsp-server
