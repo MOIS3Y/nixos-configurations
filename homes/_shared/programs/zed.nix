@@ -18,6 +18,8 @@
       "dockerfile"
       "docker-compose"
       "emmet"
+      "git-firefly"
+      "jinja2"
       "lua"
       "meson"
       "nginx"
@@ -94,7 +96,7 @@
       # Buffer Font
       buffer_font_family = "JetBrainsMono Nerd Font Mono";
       buffer_font_fallbacks = [ ".ZedMono" ];
-      buffer_font_size = 15;
+      buffer_font_size = 14.5;
       buffer_line_height = "standard";
 
       # UI Font
@@ -174,6 +176,7 @@
 
       # Miscellaneous
       extend_comment_on_newline = true;
+      colorize_brackets = true;
 
 
       # -- -- -- Languages & tools -- -- -- #
@@ -270,7 +273,7 @@
 
 
       # -- -- -- AI -- -- -- #
-      disable_ai = true;
+      disable_ai = false;  # You were supposed to fight evil, not join it. :)
     };
     # TODO: Add keymaps
     # userKeymaps = {};
