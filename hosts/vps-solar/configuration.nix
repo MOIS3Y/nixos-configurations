@@ -6,7 +6,23 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, pkgs, ... }: {
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  inherit (builtins) readFile;
+  raw = ../../raw/fail2ban;
+  f2b = type: name: {
+    name = "fail2ban/${type}.d/${name}.conf";
+    value = {
+      text = readFile "${raw}/${type}.d/${name}.conf";
+    };
+  };
+in
+{
   imports = [
     # Custom modules:
     ../../modules/colors
@@ -22,7 +38,10 @@
   };
 
   environment = {
-    shells = [ pkgs.bash pkgs.zsh ];
+    shells = [
+      pkgs.bash
+      pkgs.zsh
+    ];
     systemPackages = with pkgs; [
       bottom
       curl
@@ -41,51 +60,38 @@
       unzip
       wget
     ];
-    etc = {
+    etc = lib.listToAttrs [
       # ? Mailu fail2ban filters and actions:
-      "fail2ban/filter.d/mailu-bad-auth-bots.conf".text = (
-        builtins.readFile ../../row/fail2ban/filter.d/mailu-bad-auth-bots.conf
-      );
-      "fail2ban/filter.d/mailu-bad-auth.conf".text = (
-        builtins.readFile ../../row/fail2ban/filter.d/mailu-bad-auth.conf
-      );
-      "fail2ban/action.d/mailu-docker-action-net.conf".text = (
-        builtins.readFile ../../row/fail2ban/action.d/mailu-docker-action-net.conf
-      );
-      "fail2ban/action.d/mailu-docker-action.conf".text = (
-        builtins.readFile ../../row/fail2ban/action.d/mailu-docker-action.conf
-      );
-      # ? Gitea fail2ban fielters and acttions:
-      "fail2ban/filter.d/gitea-bad-auth.conf".text = (
-        builtins.readFile ../../row/fail2ban/filter.d/gitea-bad-auth.conf
-      );
-      "fail2ban/filter.d/gitea-bots.conf".text = (
-        builtins.readFile ../../row/fail2ban/filter.d/gitea-bots.conf
-      );
-      "fail2ban/filter.d/gitea-ssh.conf".text = (
-        builtins.readFile ../../row/fail2ban/filter.d/gitea-ssh.conf
-      );
-      "fail2ban/action.d/gitea-docker-action.conf".text = (
-        builtins.readFile ../../row/fail2ban/action.d/gitea-docker-action.conf
-      );
-      "fail2ban/action.d/gitea-docker-action-net.conf".text = (
-        builtins.readFile ../../row/fail2ban/action.d/gitea-docker-action-net.conf
-      );
-    };
-  };
+      (f2b "filter" "mailu-bad-auth-bots")
+      (f2b "filter" "mailu-bad-auth")
+      (f2b "action" "mailu-docker-action-net")
+      (f2b "action" "mailu-docker-action")
 
+      # ? Gitea fail2ban fielters and acttions:
+      (f2b "filter" "gitea-bad-auth")
+      (f2b "filter" "gitea-bots")
+      (f2b "filter" "gitea-ssh")
+      (f2b "action" "gitea-docker-action")
+      (f2b "action" "gitea-docker-action-net")
+    ];
+  };
   i18n.defaultLocale = "en_US.UTF-8";
 
   networking = {
     hostName = "solar";
     interfaces = {
-      ens3.ipv4.addresses = [{
-        address = "89.110.68.134";
-        prefixLength = 24;
-      }];
+      ens3.ipv4.addresses = [
+        {
+          address = "89.110.68.134";
+          prefixLength = 24;
+        }
+      ];
     };
     defaultGateway = "89.110.68.1";
-    nameservers = [ "8.8.8.8" "1.1.1.1" ];
+    nameservers = [
+      "8.8.8.8"
+      "1.1.1.1"
+    ];
     firewall = {
       enable = true;
     };
@@ -103,7 +109,7 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
-    (final: prev:{
+    (final: prev: {
       extra = {
         nvchad = inputs.nix4nvchad.packages."${pkgs.stdenv.hostPlatform.system}".nvchad;
       };
@@ -208,7 +214,7 @@
         █▀ █▀█ █░░ ▄▀█ █▀█
         ▄█ █▄█ █▄▄ █▀█ █▀▄
       '';
-      };
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -219,7 +225,7 @@
         description = "Stepan Zhukovsky";
         extraGroups = [ "wheel" ];
         shell = pkgs.zsh;
-        packages = [];
+        packages = [ ];
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM2uRkkbZ7Z9Zc0WHIZCBRBU8EylvBHoR7lB6sldtJp8 stepan@zhukovsky.me"
         ];
@@ -232,7 +238,7 @@
     docker.enable = true;
     oci-containers = {
       backend = "docker";
-      containers =  {
+      containers = {
         portainer-agent = {
           image = "portainer/agent:2.33.5-alpine";
           hostname = "portainer-agent";
