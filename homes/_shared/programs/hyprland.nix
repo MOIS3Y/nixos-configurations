@@ -43,7 +43,7 @@
         "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/gcr/ssh" # ? fix gcr-ssh-agent
       ];
       #! -- -- -- --  -- -- monitors -- -- -- -- -- -- #
-      # the map function will generate a list of monitors 
+      # the map function will generate a list of monitors
       # which will be taken from config.desktop.devices.monitors
       # the function is enclosed in parentheses to indicate currying.
       # after it works, a value for an undefined monitor with automatic
@@ -105,7 +105,7 @@
         disable_hyprland_logo = true;
         swallow_regex = "^(Alacritty|kitty|org.wezfurlong.wezterm)$";
         vrr = 1;
-        
+
       };
       #! -- -- -- --  -- -- rules -- -- -- -- -- --  #
       windowrule = [
@@ -113,13 +113,13 @@
         "tag +music, match:class ^(feishin|io.bassi.Amberol)"
         "tag +music, match:title ^(.*Yandex Music.*)"
         "tag +term, match:class ^(kitty|Alacritty|org.wezfurlong.wezterm)"
-        
+
         # default workspace position
         "workspace 1, match:class ^(firefox)$"
         "workspace 3, match:class ^(org.telegram.desktop)$"
         "workspace 3, match:class ^(Mattermost)$"
         "workspace 4, match:class ^(code-url-handler)$"  # VSCode
-        
+
         # default floating
         {
           name = "zoom_rules";
@@ -173,7 +173,6 @@
           size = "380 700";
           pin = "on";
         }
-        
         # opacity
         "opacity 0.8 override 0.8 override 1.0 override, match:tag music"
         "opacity 0.8 override 0.8, match:tag term"
@@ -219,7 +218,7 @@
         "CTRL ALT, L, exec, $lockscreen"
         # ------------ #
         #  - WINDOWS - #
-        # ------------ # 
+        # ------------ #
         "$mod, w,   killactive"
         "$mod, TAB, togglefloating"
         "$mod  SHIFT, TAB, fullscreen"
@@ -243,16 +242,21 @@
         "$mod CTRL,  k, resizeactive, 0 -20"
         "$mod CTRL,  l, resizeactive, 20 0"
         # scratchpad
+        "$mod SHIFT, S, movetoworkspacesilent, special:magic"
         "$mod, S, togglespecialworkspace, magic"
-        "$mod, S, movetoworkspace, +0"
-        "$mod, S, togglespecialworkspace, magic"
-        "$mod, S, movetoworkspace, special:magic"
-        "$mod, S, togglespecialworkspace, magic"
+        # ? i think it's broken (not working since v0.53.1)
+        # https://wiki.hypr.land/Configuring/Uncommon-tips--tricks/
+        # "$mod, S, togglespecialworkspace, magic"
+        # "$mod, S, movetoworkspace, +0"
+        # "$mod, S, togglespecialworkspace, magic"
+        # "$mod, S, movetoworkspace, special:magic"
+        # "$mod, S, togglespecialworkspace, magic"
+
         # hyprsplit:
         "$mod, G, split:grabroguewindows"
         # ---------- #
         #  - APPS -  #
-        # ---------- # 
+        # ---------- #
         "$mod, RETURN, exec, $terminal"
         "$mod, t,      exec, $spare-terminal"
         "$mod, m,      exec, $launcher"
@@ -262,7 +266,7 @@
         ",     Print,  exec, $screenshot"
         # --------------- #
         #  - WORKSPACES - #
-        # --------------- # 
+        # --------------- #
         # scroll through existing workspaces with $mod + scroll
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up,   workspace, e-1"
@@ -305,7 +309,7 @@
       bindm = [
         # ------------ #
         #  - WINDOWS - #
-        # ------------ # 
+        # ------------ #
         # move and resize window
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
