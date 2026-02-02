@@ -1,0 +1,20 @@
+description = "Generate a Conventional Commit message draft"
+
+prompt = """
+Analyze the staged changes and generate a professional commit message.
+
+### Rules:
+1. Format: <type>(<scope>): <description>
+2. Types: feat, fix, chore, refactor, style, docs, test, ci.
+3. Language: Strictly English.
+4. Content: Be concise. Focus on 'why' and 'what', not 'how'.
+5. Output: Return ONLY the raw message text. No markdown, no quotes.
+
+### Context:
+Files changed:
+!{git diff --name-only --staged}
+
+Diff:
+```diff
+!{git diff --staged}
+"""

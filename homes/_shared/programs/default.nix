@@ -7,6 +7,7 @@
     # common:
     ./ssh
     ./direnv.nix
+    ./gemini-cli.nix
     ./git.nix
     ./gpg.nix
     ./helix.nix

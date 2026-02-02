@@ -1,0 +1,9 @@
+description = "Summarize local commits for a squash"
+prompt = """
+Review the messages of the commits I'm about to squash:
+!{git log @{u}..HEAD --pretty=format:"%s"}
+
+Based on these messages, write a single,
+high-quality Conventional Commit message that covers all changes.
+Keep it concise and professional.
+"""

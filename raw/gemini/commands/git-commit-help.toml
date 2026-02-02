@@ -1,0 +1,9 @@
+description = "Help choosing the right commit type and scope"
+prompt = """
+Staged changes:
+!{git diff --staged --name-only}
+
+Based on the files changed and the diff, suggest the most appropriate
+Conventional Commit type (feat, fix, chore, etc.) and a relevant scope.
+Explain why you chose that type.
+"""

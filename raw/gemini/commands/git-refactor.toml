@@ -1,0 +1,11 @@
+description = "Suggest refactoring for staged changes"
+prompt = """
+Analyze these staged changes:
+!{git diff --staged}
+
+Suggest how to make this code more idiomatic, clean, and maintainable.
+Focus on:
+1. Reducing complexity.
+2. Improving naming.
+3. Adhering to SOLID principles where applicable.
+"""

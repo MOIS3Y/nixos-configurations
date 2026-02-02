@@ -1,0 +1,11 @@
+description = "Review staged changes for bugs and style issues"
+prompt = """
+Review the following staged changes:
+!{git diff --staged}
+
+Please:
+1. Identify any potential bugs or logic errors.
+2. Spot temporary code (TODOs, debug logs, commented out blocks).
+3. Suggest improvements for readability.
+Keep it concise and technical.
+"""

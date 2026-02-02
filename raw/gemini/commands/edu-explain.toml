@@ -1,0 +1,24 @@
+description = "Universal code mentor: explain files, blocks, or logic"
+prompt = """
+You are a technical mentor.
+Your task is to explain the provided input clearly and concisely.
+
+### Target:
+{{args}}
+
+### Instructions:
+1. **The "Big Picture"**: If this is a file, what is its purpose in the project?
+If it's code, what problem does it solve?
+2. **Breakdown**: Explain the logic step-by-step.
+Don't just paraphrase the code; explain *what* is happening.
+3. **The "Why"**: If there's a specific pattern or tool used
+(like a regex, a pipe, or a specific config key), explain why it's used there.
+4. **Suggestions**: Briefly mention if there's a more modern
+or safer way to do the same thing.
+
+### Context Retrieval:
+- If '{{args}}' looks like a file path, analyze its content.
+- If '{{args}}' is a snippet of code, focus on the logic.
+- If no specific code is provided, look at the recent changes for context:
+!{git diff --staged}
+"""

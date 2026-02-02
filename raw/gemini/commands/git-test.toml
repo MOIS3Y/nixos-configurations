@@ -1,0 +1,9 @@
+description = "Generate test cases for current changes"
+prompt = """
+Based on these changes:
+!{git diff --staged}
+
+Identify edge cases and logical paths that require testing.
+Provide a list of test scenarios (and code snippets if possible)
+to ensure full coverage of the new logic.
+"""
