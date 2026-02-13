@@ -120,8 +120,8 @@ in {
       enable = true;
       createDirectories = true;
       extraConfig = {
-        XDG_DEVELOPMENT_DIR = "${config.xdg.userDirs.documents}/Dev";
-        XDG_GAMES_DIR = "${config.home.homeDirectory}/Games";
+        DEVELOPMENT_DIR = "${config.xdg.userDirs.documents}/Projects";
+        GAMES_DIR = "${config.home.homeDirectory}/Games";
       };
     };
     # mime types:
@@ -147,7 +147,7 @@ in {
       configPackages = lib.mkForce ([
         pkgs.gnome-session
       ] ++ lib.optionals config.wayland.windowManager.hyprland.enable [
-        pkgs.hyprland 
+        pkgs.hyprland
       ]);
       # ? below meaning ~/.config/xdg-desktop-portal/portals.conf:
       # ? [preferred]
