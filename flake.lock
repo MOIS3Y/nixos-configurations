@@ -134,6 +134,24 @@
     },
     "flake-utils_4": {
       "inputs": {
+        "systems": "systems_4"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_5": {
+      "inputs": {
         "systems": [
           "xidlehook-caffeine",
           "systems"
@@ -160,11 +178,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773608492,
-        "narHash": "sha256-QZteyExJYSQzgxqdsesDPbQgjctGG7iKV/6ooyQPITk=",
+        "lastModified": 1774210133,
+        "narHash": "sha256-yeiWCY9aAUUJ3ebMVjs0UZXRnT5x90MCtpbpOWiXrvM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9a40ec3b78fc688d0908485887d355caa5666d18",
+        "rev": "c6fe2944ad9f2444b2d767c4a5edee7c166e8a95",
         "type": "github"
       },
       "original": {
@@ -197,16 +215,17 @@
     },
     "kvlibadwaita": {
       "inputs": {
+        "flake-utils": "flake-utils_3",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1720277189,
-        "narHash": "sha256-GhYf//TrA+yWAIws/KTlx1V+ocb6QtxwH5uvnOFSqCY=",
+        "lastModified": 1774102027,
+        "narHash": "sha256-FmL+EMvHThIjA6qPzYLTLrv90XCaFt+G/3Ry2MOl8F8=",
         "owner": "MOIS3Y",
         "repo": "KvLibadwaita",
-        "rev": "856ed01f26348d0f8a054b05c34c40f43a7bfbd4",
+        "rev": "4de670e6aa719dec5950d4c801e85fa3b31d9aff",
         "type": "github"
       },
       "original": {
@@ -288,7 +307,7 @@
     },
     "nix4nvchad": {
       "inputs": {
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -297,11 +316,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773496870,
-        "narHash": "sha256-zriI/dGF8h+6wP/GatPvYwydE/6UQCjjvTgIMYYRpUo=",
+        "lastModified": 1773922628,
+        "narHash": "sha256-bsnFTM5bJgVvMU5aDhoLoY/tH8g3yqi0if42hGwFw4w=",
         "owner": "nix-community",
         "repo": "nix4nvchad",
-        "rev": "c83e47ad73fd1bcb28478a7789d7c3dde83e51b7",
+        "rev": "7fb203152aae22d6d012fef019142e5f5cb25d58",
         "type": "github"
       },
       "original": {
@@ -375,11 +394,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1773389992,
-        "narHash": "sha256-wvfdLLWJ2I9oEpDd9PfMA8osfIZicoQ5MT1jIwNs9Tk=",
+        "lastModified": 1773821835,
+        "narHash": "sha256-TJ3lSQtW0E2JrznGVm8hOQGVpXjJyXY2guAxku2O9A4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c06b4ae3d6599a672a6210b7021d699c351eebda",
+        "rev": "b40629efe5d6ec48dd1efba650c797ddbd39ace0",
         "type": "github"
       },
       "original": {
@@ -499,11 +518,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773550941,
-        "narHash": "sha256-wa/++bL2QeMUreNFBZEWluQfOYB0MnQIeGNMuaX9sfs=",
+        "lastModified": 1774154798,
+        "narHash": "sha256-zsTuloDSdKf+PrI1MsWx5z/cyGEJ8P3eERtAfdP8Bmg=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "c469b6885f0dcd5c7c56bd935a0f08dbcd9e79e1",
+        "rev": "3e0d543e6ba6c0c48117a81614e90c6d8c425170",
         "type": "github"
       },
       "original": {
@@ -559,6 +578,21 @@
     },
     "systems_4": {
       "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_5": {
+      "locked": {
         "lastModified": 1689347949,
         "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
         "owner": "nix-systems",
@@ -574,11 +608,11 @@
     },
     "xidlehook-caffeine": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
+        "flake-utils": "flake-utils_5",
         "nixpkgs": [
           "nixpkgs"
         ],
-        "systems": "systems_4"
+        "systems": "systems_5"
       },
       "locked": {
         "lastModified": 1753977078,
