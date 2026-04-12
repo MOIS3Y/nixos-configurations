@@ -63,7 +63,7 @@
       vmbr0.useDHCP = true;
       enp7s0.useDHCP = true;
     };
-    firewall = { 
+    firewall = {
       enable = false;
     };
   };
@@ -85,7 +85,7 @@
       jq
       lm_sensors
       ncdu
-      neofetch
+      fastfetch
       nitch
       ntfs3g
       parted

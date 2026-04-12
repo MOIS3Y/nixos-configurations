@@ -37,7 +37,7 @@
     nettools
     ncurses
     nix-direnv
-    neofetch
+    fastfetch
     procps
     ripgrep
     tree

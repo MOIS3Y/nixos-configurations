@@ -25,7 +25,7 @@ in {
     jq
     lm_sensors
     ncdu
-    neofetch
+    fastfetch
     nitch
     nmap
     ntfs3g
@@ -52,6 +52,7 @@ in {
     nautilus
     pavucontrol
     xdg-utils
+    xwayland-satellite
   ]
   ++ lib.optionals config.desktop.wayland.enable [
     # ? see: https://github.com/NixOS/nixpkgs/issues/280041
