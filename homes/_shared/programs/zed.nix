@@ -26,7 +26,9 @@
       "nix"
       "python-requirements"
       "python-snippets"
+      "qml"
       "scss"
+      "slint"
       "toml"
       "tombi"
       "vala"
@@ -36,6 +38,7 @@
       basedpyright
       bash-language-server
       blueprint-compiler
+      clippy
       caddy
       docker-compose-language-service
       dockerfile-language-server
@@ -52,6 +55,8 @@
         ]
       ))
       mesonlsp
+      qt6.qtdeclarative
+      rust-analyzer
       rustfmt
       shellcheck
       shfmt
@@ -184,6 +189,16 @@
       # LSP
       enable_language_server = true;
 
+      lsp = {
+        qml = {
+          binary = {
+            arguments = [
+              "-E"
+            ];
+          };
+        };
+      };
+
       # Languages
       languages = {
         HTML = {
@@ -274,6 +289,14 @@
 
       # -- -- -- AI -- -- -- #
       disable_ai = false;  # You were supposed to fight evil, not join it. :)
+      agent_servers = {
+        "Qwen Code" = {
+          type = "custom";
+          command = "qwen";
+          args = [ "--acp" ];
+          env = {};
+        };
+      };
     };
     # TODO: Add keymaps
     # userKeymaps = {};
