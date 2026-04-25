@@ -23,6 +23,6 @@
     clippy
     rust-analyzer
     # AI tools:
-    qwen-code
+    opencode
   ];
 }

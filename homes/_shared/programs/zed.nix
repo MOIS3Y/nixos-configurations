@@ -24,6 +24,7 @@
       "meson"
       "nginx"
       "nix"
+      "opencode"
       "python-requirements"
       "python-snippets"
       "qml"
@@ -190,7 +191,7 @@
       enable_language_server = true;
 
       lsp = {
-        qml = {
+        qmljs = {
           binary = {
             arguments = [
               "-E"
@@ -220,6 +221,10 @@
               arguments = [ "--quiet" "--" ];
             };
           };
+        };
+        Rust = {
+          format_on_save = "on";
+          formatter = "language_server";
         };
       };
 
@@ -290,13 +295,23 @@
       # -- -- -- AI -- -- -- #
       disable_ai = false;  # You were supposed to fight evil, not join it. :)
       agent_servers = {
-        "Qwen Code" = {
-          type = "custom";
-          command = "qwen";
-          args = [ "--acp" ];
-          env = {};
+        opencode = {
+          type = "registry";
         };
       };
+      context_servers = {
+        mcp-server-context7 = {
+          enabled = true;
+          remote = false;
+          settings = {
+            # ENV: context7_api_key: Set the Context7 API key.
+          };
+        };
+      };
+
+
+      # -- -- -- Network -- -- -- #
+      proxy = "socks5h://127.0.0.1:10808";
     };
     # TODO: Add keymaps
     # userKeymaps = {};

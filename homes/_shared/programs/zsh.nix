@@ -17,11 +17,12 @@
     sessionVariables = {
       PATH = "/home/${config.home.username}/.local/bin:$PATH";
       EDITOR = "nvim";
-      VISUAL = "code";
+      VISUAL = "zeditor";
     };
     shellAliases = {
       docker = "sudo docker";
       docker-compose = "sudo docker-compose";
+      gemini = "all_proxy=socks5h://localhost:10808 gemini";
     };
     oh-my-zsh = {
       enable = true;
