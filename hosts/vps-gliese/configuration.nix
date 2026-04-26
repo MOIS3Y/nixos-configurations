@@ -123,10 +123,7 @@
         PasswordAuthentication = false;
         LogLevel = "VERBOSE";
       };
-      banner = ''
-        █▀▀ █░░ █ █▀▀ █▀ █▀▀
-        █▄█ █▄▄ █ ██▄ ▄█ ██▄
-      '';
+
     };
   };
 
