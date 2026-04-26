@@ -4,18 +4,20 @@
 
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    # Tools:
     gettext
     gimp
     gnumake
     inkscape
     insomnia
-    poetry
     sassc
     sqlitebrowser
-    uv
     # Languages:
+    nodejs_25
     (lua.withPackages(ps: with ps; [ luarocks ]))
     (python3.withPackages(ps: with ps; [ pip ]))
+    poetry
+    uv
     # Rust env (for quick use without nix develop or shell)
     cargo
     rustc

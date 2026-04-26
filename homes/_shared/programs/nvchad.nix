@@ -10,7 +10,7 @@
     enable = lib.mkDefault true;
     extraPackages = with pkgs; lib.mkDefault [
       # LSP servers
-      nodePackages.bash-language-server
+      bash-language-server
       blueprint-compiler
       docker-compose-language-service
       dockerfile-language-server
@@ -27,7 +27,7 @@
         flake8
       ]))
       # formatters
-      nodePackages.prettier
+      prettier
       nixfmt
       rustfmt
       shfmt

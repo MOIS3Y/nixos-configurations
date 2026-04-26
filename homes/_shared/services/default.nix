@@ -5,7 +5,6 @@
 { ... }: {
   imports = [
     ./avizo.nix
-    ./blueman-applet.nix
     ./cbatticon.nix
     ./dunst.nix
     ./gpg-agent.nix

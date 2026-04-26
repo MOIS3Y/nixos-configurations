@@ -16,7 +16,8 @@
     systemd.enable = !osConfig.programs.hyprland.withUWSM;
     plugins = [
       pkgs.hyprlandPlugins.hyprsplit
-      pkgs.hyprlandPlugins.hyprexpo
+      # broken see: https://github.com/NixOS/nixpkgs/issues/503629
+      # pkgs.hyprlandPlugins.hyprexpo
     ];
     xwayland.enable = true;
     settings = {
@@ -287,7 +288,7 @@
               ws = let
                 c = (x + 1) / 10;
               in
-                builtins.toString (x + 1 - (c * 10));
+                toString (x + 1 - (c * 10));
             in [
               # Default:
               # "$mod,        ${ws}, focusworkspaceoncurrentmonitor, ${toString (x + 1)}"
@@ -304,7 +305,8 @@
         #  - WORKSPACES -   #
         # ----------------- #
         # Hyprexpo:
-        "$mod, SUPER_L, hyprexpo:expo, toggle"
+        # ! broken: see: https://github.com/NixOS/nixpkgs/issues/503629
+        # "$mod, SUPER_L, hyprexpo:expo, toggle"
       ];
       bindm = [
         # ------------ #
@@ -339,16 +341,16 @@
           num_workspaces = 10
         }
         # ? https://github.com/hyprwm/hyprland-plugins/tree/main/hyprexpo#readme
-        hyprexpo {
-          columns = 3
-          gap_size = 10
-          bg_col = rgb(${palette.base01})
-          workspace_method = center current
-          enable_gesture = true
-          gesture_fingers = 3
-          gesture_distance = 300
-          gesture_positive = true
-        }
+        # hyprexpo {
+        #   columns = 3
+        #   gap_size = 10
+        #   bg_col = rgb(${palette.base01})
+        #   workspace_method = center current
+        #   enable_gesture = true
+        #   gesture_fingers = 3
+        #   gesture_distance = 300
+        #   gesture_positive = true
+        # }
       }
     '';
   };

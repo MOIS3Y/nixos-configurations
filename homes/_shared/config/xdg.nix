@@ -119,6 +119,7 @@ in {
     userDirs = {
       enable = true;
       createDirectories = true;
+      setSessionVariables = true;
       extraConfig = {
         DEVELOPMENT_DIR = "${config.xdg.userDirs.documents}/Projects";
         GAMES_DIR = "${config.home.homeDirectory}/Games";

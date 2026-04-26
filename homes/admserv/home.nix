@@ -26,7 +26,7 @@
   # Override _shared configuration:
   programs.nvchad.extraPackages = with pkgs; lib.mkForce [
     # LSP servers
-    nodePackages.bash-language-server
+    bash-language-server
     docker-compose-language-service
     dockerfile-language-server
     vscode-langservers-extracted

@@ -1,6 +1,6 @@
 # █░█░█ ▄▀█ █▄█ █▄▄ ▄▀█ █▀█ ▀
 # ▀▄▀▄▀ █▀█ ░█░ █▄█ █▀█ █▀▄ ▄
-# -- -- -- -- -- -- -- -- -- 
+# -- -- -- -- -- -- -- -- --
 
 { config, lib, osConfig, ... }: let
   #! -- -- -- vars -- -- -- !#
@@ -20,7 +20,9 @@
     enable = lib.mkDefault config.wayland.windowManager.hyprland.enable;
     systemd = {
       enable = !osConfig.programs.uwsm.enable;
-      target = "hyprland-session.target";
+      targets = [
+        "hyprland-session.target"
+      ];
     };
     settings = {
       topBar = {
@@ -377,7 +379,7 @@
       }
 
       /* -----------------------------------------------------
-      * Workspaces 
+      * Workspaces
       * ----------------------------------------------------- */
 
       #workspaces {
@@ -460,7 +462,7 @@
         padding: 0px 9px 0px 9px;
         border-radius: 15px;
         background-color: #${palette.base01};
-        color: #${palette.base05};    
+        color: #${palette.base05};
       }
 
       #taskbar button.active {
@@ -469,7 +471,7 @@
       }
 
     /* -----------------------------------------------------
-    * Widgets 
+    * Widgets
     * ----------------------------------------------------- */
       #cpu,
       #memory,
@@ -509,8 +511,8 @@
 
       #language {
         margin-right: 2px;
-        padding-top: 1px; 
-        padding-bottom: 4px; 
+        padding-top: 1px;
+        padding-bottom: 4px;
       }
 
       #clock {
@@ -596,7 +598,7 @@
         padding-right: 6px;
         margin: 7px 3px;
         color: #${palette.base00};
-        
+
         background: linear-gradient(
           90deg,
           #${palette.base0E},
@@ -620,7 +622,7 @@
         padding-right: 6px;
         margin: 7px 3px;
         color: #${palette.base00};
-        
+
         background: linear-gradient(
           90deg,
           #${palette.base0B},

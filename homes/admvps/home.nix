@@ -21,7 +21,7 @@
   };
 
   programs.nvchad.extraPackages = with pkgs; lib.mkForce [
-    nodePackages.bash-language-server
+    bash-language-server
     docker-compose-language-service
     nixd
   ];

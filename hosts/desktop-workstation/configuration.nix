@@ -111,7 +111,24 @@
       };
       extraPackages = [
         pkgs.protonup-qt
-        pkgs.bottles
+        # Skipping tests while upstream sorts it out, revert once
+        # Hydra consistently builds openldap green.
+        # see: https://github.com/NixOS/nixpkgs/issues/513245
+        (pkgs.bottles.override {
+            # Intercept the buildFHSEnv function passed to the bottles wrapper
+            buildFHSEnv = args: pkgs.buildFHSEnv (args // {
+              multiPkgs = envPkgs:
+                let
+                  # Get the original list of packages
+                  originalPkgs = args.multiPkgs envPkgs;
+
+                  # Create our custom openldap without tests
+                  customLdap = envPkgs.openldap.overrideAttrs (_: { doCheck = false; });
+                in
+                # Remove the broken openldap from the original list and add the custom one
+                builtins.filter (p: (p.pname or "") != "openldap") originalPkgs ++ [ customLdap ];
+            });
+          })
         (pkgs.retroarch.withCores (cores: with cores; [
           nestopia
         ]))
@@ -136,7 +153,7 @@
           refreshRate = 60;
           x = 1920;  # connected to the right of DP-1
           y =0;
-          enabled = true;      
+          enabled = true;
         }
       ];
       keyboard = {
@@ -151,8 +168,8 @@
       bluetooth.enable = true;
       ddcci.enable = true;
     };
-    cursor = {}; # ? Default arrts from module 
-    assets = {}; # ? Default arrts from module 
+    cursor = {}; # ? Default arrts from module
+    assets = {}; # ? Default arrts from module
     apps = with config.desktop.utils; {
       terminal = kitty;
       spare-terminal = alacritty;

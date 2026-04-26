@@ -311,7 +311,7 @@
 
 
       # -- -- -- Network -- -- -- #
-      proxy = "socks5h://127.0.0.1:10808";
+      proxy = "http://127.0.0.1:10809";
     };
     # TODO: Add keymaps
     # userKeymaps = {};

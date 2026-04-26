@@ -50,7 +50,7 @@
   };
   in {
   gtk = {
-    enable = true;    
+    enable = true;
     theme = {
       name = ''${ if variant == "dark" then "adw-gtk3-dark" else "adw-gtk3" }'';
       package = pkgs.adw-gtk3;
@@ -71,6 +71,8 @@
       inherit extraCss;
     };
     gtk4 = {
+      theme = config.gtk.theme;
+      iconTheme = config.gtk.iconTheme;
       extraConfig = commonGtkExtraConfig;
       inherit extraCss;
     };
