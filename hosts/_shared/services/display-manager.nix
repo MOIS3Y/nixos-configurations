@@ -37,7 +37,7 @@
     }
     {
       assertion = (
-        config.services.displayManager.enable -> 
+        config.services.displayManager.enable ->
         (cfg.xorg.enable || cfg.wayland.enable)
       );
       message = ''
@@ -95,18 +95,21 @@
       gdm = {
         enable = cfg.displayManager.gdm.enable;
       };
-      sddm = { 
+      sddm = {
         enable = cfg.displayManager.sddm.enable;
         wayland = {
           enable = cfg.wayland.enable;
         };
         extraPackages = [
           pkgs.kdePackages.qtsvg
+          pkgs.kdePackages.qtdeclarative
+          pkgs.kdePackages.qt5compat # Included for wider QML component compatibility
           pkgs.kdePackages.qtmultimedia
           pkgs.kdePackages.qtvirtualkeyboard
         ];
         autoNumlock = true;
-        theme = "sddm-astronaut-theme";
+        # theme = "sddm-astronaut-theme";
+        theme = "pixie";
         settings = {
           Theme = { CursorTheme = cfg.cursor.name; };
           General = { InputMethod = "qtvirtualkeyboard"; };

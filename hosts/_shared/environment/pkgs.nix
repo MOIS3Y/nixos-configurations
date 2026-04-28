@@ -2,7 +2,7 @@
 # ▄█ ░█░ ▄█ ░█░ ██▄ █░▀░█   █▀▀ █▀█ █▄▄ █░█ █▀█ █▄█ ██▄ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
-{ config, pkgs, lib, ... }: let
+{ inputs, config, pkgs, lib, ... }: let
   inherit (config.colorScheme)
     palette;
   inherit (config.desktop)
@@ -74,6 +74,19 @@ in {
   ]
   ++ lib.optionals (config.desktop.enable && virtualisation.libvirtd.enable) [
     virt-manager
+  ]
+  ++ lib.optionals (config.services.displayManager.sddm.enable) [
+    cursor.package
+    (inputs.pixie-sddm.packages.${stdenv.hostPlatform.system}.pixie-sddm.override {
+      background = "${assets.images.background}";
+      avatar = "${assets.images.background}";
+      primaryColor = "#${palette.base0E}";
+      accentColor = "#${palette.base0D}";
+      backgroundColor = "#${palette.base01}";
+      textColor = "#${palette.base05}";
+      fontFamily = "Ubuntu";
+      fontSize = 13;
+    })
   ]
   ++ lib.optionals (config.services.displayManager.sddm.enable) [
     cursor.package
