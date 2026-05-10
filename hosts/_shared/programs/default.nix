@@ -6,6 +6,7 @@
   imports = [
     ./coolercontrol.nix
     ./dconf.nix
+    ./gamescope.nix
     ./geary.nix
     ./hyprland.nix
     ./nh.nix
