@@ -1,6 +1,6 @@
 # ▄▀█ █░█ █ ▀█ █▀█ ▀
 # █▀█ ▀▄▀ █ █▄ █▄█ ▄
-# -- -- -- -- -- -- 
+# -- -- -- -- -- --
 
 { config, pkgs, lib, ... }: let
   inherit (config.colorScheme)
@@ -10,7 +10,7 @@
     icons;
   in {
   services.avizo = {
-    enable = lib.mkDefault config.desktop.wayland.enable;
+    enable = lib.mkDefault config.desktop.enable;
     # ? workaround avizo ignore image-base-dir
     # ? see: https://github.com/heyjuvi/avizo/issues/60
     package = pkgs.avizo.overrideAttrs (final: prev: {

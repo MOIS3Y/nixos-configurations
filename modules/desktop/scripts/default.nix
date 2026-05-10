@@ -2,24 +2,18 @@
 # ▄█ █▄▄ █▀▄ █ █▀▀ ░█░ ▄█ ▄
 # -- -- -- -- -- -- -- -- -
 
-{ lib, ... }: let 
+{ lib, ... }: let
   inherit (lib)
     mkOption
     types;
   in {
   imports = [
-    # common:
     ./lf.nix
-    # wayland:
     ./hypridle.nix
     ./hyprland.nix
     ./swaync.nix
     ./waybar.nix
     ./wlogout.nix
-    # xorg:
-    ./dunst.nix
-    ./xidlehook.nix
-    ./xss-lock.nix
   ];
   options.desktop.scripts = mkOption {
     type = with types;

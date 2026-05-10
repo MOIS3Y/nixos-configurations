@@ -12,7 +12,7 @@ assertions = [
 
       Solution:
       1. Enable the display manager globally:
-        Z`services.displayManager.enable = true;`
+        `services.displayManager.enable = true;`
       
       2. Or enable it via the desktop module:
         `desktop.displayManager.enable = true;`

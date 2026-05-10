@@ -51,12 +51,10 @@ in {
     libnotify
     nautilus
     pavucontrol
-    xdg-utils
-    xwayland-satellite
-  ]
-  ++ lib.optionals config.desktop.wayland.enable [
     # ? see: https://github.com/NixOS/nixpkgs/issues/280041
     swayosd  # ! required for SwayOSD LibInput Backend
+    xdg-utils
+    xwayland-satellite
   ]
   ++ lib.optionals config.services.desktopManager.gnome.enable [
     dconf-editor

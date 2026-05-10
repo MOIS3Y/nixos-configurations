@@ -36,31 +36,6 @@
       '';
     }
     {
-      assertion = (
-        config.services.displayManager.enable ->
-        (cfg.xorg.enable || cfg.wayland.enable)
-      );
-      message = ''
-        [Configuration Error] Neither Xorg nor Wayland is enabled!
-
-        Required Action:
-        You must enable at least one graphical protocol:
-
-        1. For Wayland support (recommended for modern setups):
-          `desktop.wayland.enable = true;`
-
-        2. For Xorg support (legacy/compatibility):
-          `desktop.xorg.enable = true;`
-
-        3. Or enable both for hybrid systems:
-          `desktop.wayland.enable = true;`
-          `desktop.xorg.enable = true;`
-
-        Note: Most desktop environments require at least one protocol enabled.
-              Wayland is preferred for better security and performance.
-      '';
-    }
-    {
       assertion = !(cfg.displayManager.gdm.enable && cfg.displayManager.sddm.enable);
       message = ''
         [Configuration Conflict] Multiple display managers detected!
@@ -98,7 +73,7 @@
       sddm = {
         enable = cfg.displayManager.sddm.enable;
         wayland = {
-          enable = cfg.wayland.enable;
+          enable = true;
         };
         extraPackages = [
           pkgs.kdePackages.qtsvg

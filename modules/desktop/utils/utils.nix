@@ -1,6 +1,6 @@
 # █░█ ▀█▀ █ █░░ █▀ ▀
 # █▄█ ░█░ █ █▄▄ ▄█ ▄
-# -- -- -- -- -- -- 
+# -- -- -- -- -- --
 
 { pkgs, lib, ... }: {
   # A
@@ -33,8 +33,6 @@
   htop = "${lib.getExe pkgs.htop}";
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   hyprlock = "${lib.getExe pkgs.hyprlock}";
-  # I
-  i3lock-run = "${pkgs.extra.i3lock-run}/bin/i3lock-run";
   # J
   jq = "${lib.getExe pkgs.jq}";
   # K
@@ -70,7 +68,6 @@
   swaync-client = "${pkgs.swaynotificationcenter}/bin/swaync-client";
   systemctl = "${pkgs.systemd}/bin/systemctl";
   # V
-  vault = "${lib.getExe pkgs.vault}";
   volumectl = "${pkgs.avizo}/bin/volumectl";
   vscode = "${lib.getExe pkgs.vscode}";
   # W
@@ -78,10 +75,6 @@
   wayland-logout = "${lib.getExe pkgs.wayland-logout}";
   wezterm = "${lib.getExe pkgs.wezterm}";
   wofi = "${lib.getExe pkgs.wofi}";
-  # X
-  xrandr = "${lib.getExe pkgs.xorg.xrandr}";
-  xss-lock = "${lib.getExe pkgs.xss-lock}";
-  xset = "${lib.getExe pkgs.xorg.xset}";
   # Z
   zenity = "${lib.getExe pkgs.zenity}";
 }

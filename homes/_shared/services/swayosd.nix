@@ -7,7 +7,7 @@
     palette;
 in {
   services.swayosd = {
-    enable = lib.mkDefault config.desktop.wayland.enable;
+    enable = lib.mkDefault config.desktop.enable;
     topMargin = 0.9;
     stylePath = pkgs.writeText "swayosd-style.css" ''
       window#osd {
@@ -49,13 +49,13 @@ in {
         border-radius: inherit;
         border: none;
         background: linear-gradient(
-          to left, 
-          #${palette.base08}, 
-          #${palette.base09}, 
-          #${palette.base0A}, 
-          #${palette.base0B}, 
-          #${palette.base0C}, 
-          #${palette.base0D}, 
+          to left,
+          #${palette.base08},
+          #${palette.base09},
+          #${palette.base0A},
+          #${palette.base0B},
+          #${palette.base0C},
+          #${palette.base0D},
           #${palette.base0E}
         );
       }

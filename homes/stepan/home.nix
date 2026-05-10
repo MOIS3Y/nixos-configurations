@@ -7,7 +7,6 @@
     # Custom modules:
     ../../modules/colors
     ../../modules/desktop
-    ../../modules/programs
     # Shared configuration:
     ../_shared/config
     ../_shared/pkgs

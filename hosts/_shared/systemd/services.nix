@@ -33,7 +33,7 @@ in {
       TTYVHangup = true;
       TTYVTDisallocate = true;
     };
-  } // optionalAttrs (config.desktop.wayland.enable && !desktopManager.gnome.enable) {
+  } // optionalAttrs (config.desktop.compositors != [] && !desktopManager.gnome.enable) {
     # ? see: https://github.com/NixOS/nixpkgs/issues/280041
     swayosd-libinput-backend = {
       description = "SwayOSD LibInput backend for listening to certain keys like CapsLock, ScrollLock, VolumeUp, etc.";

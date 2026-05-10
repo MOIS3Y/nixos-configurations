@@ -11,7 +11,7 @@
     scripts;
   in {
   programs.wlogout = {
-    enable = lib.mkDefault config.desktop.wayland.enable;
+    enable = lib.mkDefault config.desktop.enable;
     layout = [
       {
         label = "lock";
@@ -61,7 +61,7 @@
 
       window-bg-color = "${if variant == "dark" then dark01 else light01}";
       btn-bg-color = "${if variant == "dark" then dark02 else light02}";
-      btn-focus-color = "${if variant == "dark" then dark04 else light04}"; 
+      btn-focus-color = "${if variant == "dark" then dark04 else light04}";
     in ''
       * {
           font-family: Ubuntu, Roboto, Inter, Helvetica, Arial, sans-serif;
@@ -90,10 +90,10 @@
         background-color: ${btn-focus-color};
         border: 3px solid #${palette.base0D};
       }
-      /* 
-      ----------------------------------------------------- 
+      /*
+      -----------------------------------------------------
       Buttons
-      ----------------------------------------------------- 
+      -----------------------------------------------------
       */
       #lock {
         margin: 10px;

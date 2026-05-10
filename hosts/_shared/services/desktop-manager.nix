@@ -7,63 +7,20 @@
 in {
   assertions = [
     {
-      assertion = config.desktop.desktopManager.gnome.enable ->  
-        (config.desktop.xorg.enable && config.desktop.wayland.enable);
+      assertion = config.desktop.desktopManager.gnome.enable -> (cfg.compositors == []);
       message = ''
-        [Conflict Detected] GNOME requires both Xorg and Wayland support!
+        [Conflict Detected] GNOME and standalone compositors are mutually exclusive!
 
         Current state:
-        • Xorg: ${lib.boolToString config.desktop.xorg.enable}
-        • Wayland: ${lib.boolToString config.desktop.wayland.enable}
+        • GNOME: enabled
+        • Compositors: [ ${lib.concatStringsSep ", " cfg.compositors} ]
 
         Resolution:
-        • To use GNOME, enable both protocols:
-          `desktop.xorg.enable = true;`
-          `desktop.wayland.enable = true;`
-
-        • To keep current protocol configuration, disable GNOME:
+        • To use GNOME, remove all entries from `desktop.compositors`.
+        • To use standalone compositors, disable GNOME:
           `desktop.desktopManager.gnome.enable = false;`
       '';
     }
-  ];
-  warnings = [
-    (lib.optionalString (
-      config.desktop.desktopManager.gnome.enable &&
-      cfg.wayland.compositors != []
-    ) ''
-      WARNING: Detected Wayland compositors while using GNOME:
-
-      [${lib.concatStringsSep ", " cfg.wayland.compositors}]
-      
-      These will be automatically disabled because:
-      - GNOME provides its own Wayland compositor
-      - Running multiple compositors causes conflicts in:
-        * Session management
-        * Services conflicts
-        * Display control
-      
-      To use these compositors instead of GNOME:
-      1. Disable GNOME: `desktop.desktopManager.gnome.enable = false`
-      2. Keep the compositors list
-    '')
-    (lib.optionalString (
-      config.desktop.desktopManager.gnome.enable &&
-      cfg.xorg.windowManagers != []
-    ) ''
-      WARNING: Detected Xorg window managers while using GNOME:
-
-      [${lib.concatStringsSep ", " cfg.xorg.windowManagers}]
-      
-      These will be automatically disabled because:
-      - GNOME manages its own windows
-      - Running additional WMs causes:
-        * Window decoration conflicts
-        * Services conflicts
-      
-      To use these window managers instead of GNOME:
-      1. Disable GNOME: `desktop.desktopManager.gnome.enable = false`
-      2. Keep the window managers list
-    '')
   ];
 
   services.desktopManager.gnome = {

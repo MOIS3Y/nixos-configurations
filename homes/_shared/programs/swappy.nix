@@ -4,7 +4,7 @@
 
 { config, lib, ... }: {
   programs.swappy = {
-    enable = lib.mkDefault config.desktop.wayland.enable;
+    enable = lib.mkDefault config.desktop.enable;
     settings = {
       Default = {
         save_dir = "${config.home.homeDirectory}/Pictures/Screenshots";
