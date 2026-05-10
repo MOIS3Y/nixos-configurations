@@ -2,7 +2,7 @@
 # █▄▀ █ ▄█ █▀▀ █▄▄ █▀█ ░█░   █░▀░█ █▀█ █░▀█ █▀█ █▄█ ██▄ █▀▄ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-{ config, pkgs, ... }: let
+{ config, ... }: let
   cfg = config.desktop;
   in {
   assertions = [
@@ -35,60 +35,12 @@
         • Broken system tray functionality
       '';
     }
-    {
-      assertion = !(cfg.displayManager.gdm.enable && cfg.displayManager.sddm.enable);
-      message = ''
-        [Configuration Conflict] Multiple display managers detected!
-
-        Problem:
-        - Both GDM and SDDM are currently enabled
-        - Only one display manager can be active at a time
-
-        Required Action:
-        1. To use GDM, disable SDDM by adding to your configuration:
-          `services.displayManager.sddm.enable = false;`
-          or via desktop module:
-          `desktop.displayManager.sddm.enable = false;`
-
-        2. To use SDDM, disable GDM by adding to your configuration:
-          `services.displayManager.gdm.enable = false;`
-          or via desktop module:
-          `desktop.displayManager.gdm.enable = false;`
-
-        Technical Details:
-        - Display managers handle graphical user sessions
-        - Running multiple managers causes:
-          * Session conflicts
-          * Resource competition
-          * Unpredictable login behavior
-      '';
-    }
 ];
   services = {
     displayManager = {
       enable = cfg.displayManager.enable;
       gdm = {
         enable = cfg.displayManager.gdm.enable;
-      };
-      sddm = {
-        enable = cfg.displayManager.sddm.enable;
-        wayland = {
-          enable = true;
-        };
-        extraPackages = [
-          pkgs.kdePackages.qtsvg
-          pkgs.kdePackages.qtdeclarative
-          pkgs.kdePackages.qt5compat # Included for wider QML component compatibility
-          pkgs.kdePackages.qtmultimedia
-          pkgs.kdePackages.qtvirtualkeyboard
-        ];
-        autoNumlock = true;
-        # theme = "sddm-astronaut-theme";
-        theme = "pixie";
-        settings = {
-          Theme = { CursorTheme = cfg.cursor.name; };
-          General = { InputMethod = "qtvirtualkeyboard"; };
-        };
       };
     };
   };

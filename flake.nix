@@ -52,8 +52,8 @@
       url = "github:MOIS3Y/KvLibadwaita?ref=gradience";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    pixie-sddm = {
-      url = "github:MOIS3Y/pixie-sddm?ref=feature/nix";
+    mdgreet = {
+      url = "github:MOIS3Y/mdgreet";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

@@ -77,7 +77,6 @@
     enable = true;
     displayManager = {
       enable = true;
-      sddm.enable = true;
     };
     compositors = [ "hyprland" ];
     games = {

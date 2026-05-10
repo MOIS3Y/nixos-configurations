@@ -189,6 +189,27 @@
         "type": "github"
       }
     },
+    "mdgreet": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778394464,
+        "narHash": "sha256-Og2ocYQNOxDrFCCU7tuUihZHmy7b5VuKjnfRsmFHhpM=",
+        "owner": "MOIS3Y",
+        "repo": "mdgreet",
+        "rev": "691fd43500f4ad866b57f860c6e303c2c6473f4d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MOIS3Y",
+        "repo": "mdgreet",
+        "type": "github"
+      }
+    },
     "nix-colors": {
       "inputs": {
         "base16-schemes": "base16-schemes",
@@ -261,7 +282,7 @@
     },
     "nix4nvchad": {
       "inputs": {
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -432,28 +453,6 @@
         "type": "github"
       }
     },
-    "pixie-sddm": {
-      "inputs": {
-        "flake-utils": "flake-utils_4",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1777378620,
-        "narHash": "sha256-XU4WTSiLC5eDoSTQjQPhkhwOupQNumrAW6W49/rOxFo=",
-        "owner": "MOIS3Y",
-        "repo": "pixie-sddm",
-        "rev": "ffcd63f615cc02637498073920da926d122742a0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "MOIS3Y",
-        "ref": "feature/nix",
-        "repo": "pixie-sddm",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "aladdin4nix": "aladdin4nix",
@@ -461,12 +460,12 @@
         "distro-grub-themes": "distro-grub-themes",
         "home-manager": "home-manager",
         "kvlibadwaita": "kvlibadwaita",
+        "mdgreet": "mdgreet",
         "nix-colors": "nix-colors",
         "nix-on-droid": "nix-on-droid",
         "nix4nvchad": "nix4nvchad",
         "nixpkgs": "nixpkgs_2",
         "nvchad-on-steroids": "nvchad-on-steroids",
-        "pixie-sddm": "pixie-sddm",
         "sops-nix": "sops-nix"
       }
     },

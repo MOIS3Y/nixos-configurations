@@ -11,6 +11,5 @@
     ./hyprsunset.nix
     ./nm-applet.nix
     ./swaync.nix
-    ./swayosd.nix
   ];
 }

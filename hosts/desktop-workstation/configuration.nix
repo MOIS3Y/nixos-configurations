@@ -90,8 +90,7 @@
     enable = true;
     displayManager = {
       enable = true;
-      greetd.enable = false;  # TODO: create custom greeter
-      sddm.enable = true;
+      greetd.enable = true;
     };
     compositors = [ "hyprland" ];
     games = {

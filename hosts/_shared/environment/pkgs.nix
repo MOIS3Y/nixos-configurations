@@ -2,11 +2,8 @@
 # ▄█ ░█░ ▄█ ░█░ ██▄ █░▀░█   █▀▀ █▀█ █▄▄ █░█ █▀█ █▄█ ██▄ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
-{ inputs, config, pkgs, lib, ... }: let
-  inherit (config.colorScheme)
-    palette;
+{ config, pkgs, lib, ... }: let
   inherit (config.desktop)
-    assets
     cursor
     games;
   inherit (config.host)
@@ -20,6 +17,7 @@ in {
     curl
     dnsutils
     docker-compose
+    duf
     git
     htop
     jq
@@ -40,7 +38,7 @@ in {
   # optional:
   ++ lib.optionals config.desktop.enable [
     appimage-run
-    at-spi2-atk         # !required for polkit-gnome-authentication-agent-1
+    at-spi2-atk         #! required for polkit-gnome-authentication-agent-1
     adwaita-icon-theme  #! required for most gnome apps
     evince
     file-roller
@@ -51,10 +49,9 @@ in {
     libnotify
     nautilus
     pavucontrol
-    # ? see: https://github.com/NixOS/nixpkgs/issues/280041
-    swayosd  # ! required for SwayOSD LibInput Backend
     xdg-utils
     xwayland-satellite
+    cursor.package  #! required for mdgreet
   ]
   ++ lib.optionals config.services.desktopManager.gnome.enable [
     dconf-editor
@@ -72,85 +69,5 @@ in {
   ]
   ++ lib.optionals (config.desktop.enable && virtualisation.libvirtd.enable) [
     virt-manager
-  ]
-  ++ lib.optionals (config.services.displayManager.sddm.enable) [
-    cursor.package
-    (inputs.pixie-sddm.packages.${stdenv.hostPlatform.system}.pixie-sddm.override {
-      background = "${assets.images.background}";
-      avatar = "${assets.images.background}";
-      primaryColor = "#${palette.base0E}";
-      accentColor = "#${palette.base0D}";
-      backgroundColor = "#${palette.base01}";
-      textColor = "#${palette.base05}";
-      fontFamily = "Ubuntu";
-      fontSize = 13;
-    })
-  ]
-  ++ lib.optionals (config.services.displayManager.sddm.enable) [
-    cursor.package
-    (pkgs.sddm-astronaut.override {
-      themeConfig = {
-        #################### General ####################
-        ScreenWidth = 1920;
-        ScreenHeight = 1080;
-        KeyboardSize = 0.4;
-        RoundCorners = 20;
-        HourFormat="HH:mm";
-        DateFormat = "dddd d MMMM yyyy";
-        HeaderText = "NixOS";
-
-        #################### Background ####################
-        Background = "${assets.images.background}";
-
-        #################### Colors ####################
-        HeaderTextColor = "#${palette.base05}";
-        DateTextColor = "#${palette.base05}";
-        TimeTextColor = "#${palette.base05}";
-
-        FormBackgroundColor = "#${palette.base01}";
-        BackgroundColor = "#${palette.base01}";
-        DimBackgroundColor = "#${palette.base00}";
-
-        LoginFieldBackgroundColor = "#${palette.base02}";
-        PasswordFieldBackgroundColor = "#${palette.base02}";
-        LoginFieldTextColor = "#${palette.base05}";
-        PasswordFieldTextColor = "#${palette.base05}";
-        UserIconColor = "#${palette.base05}";
-        PasswordIconColor = "#${palette.base05}";
-
-        PlaceholderTextColor = "#${palette.base03}";
-        WarningColor = "#${palette.base0A}";
-
-        LoginButtonTextColor = "#${palette.base05}";
-        LoginButtonBackgroundColor = "#${palette.base02}";
-        SystemButtonsIconsColor = "#${palette.base05}";
-        SessionButtonTextColor = "#${palette.base05}";
-        VirtualKeyboardButtonTextColor = "#${palette.base05}";
-
-        DropdownTextColor = "#${palette.base05}";
-        DropdownSelectedBackgroundColor = "#${palette.base02}";
-        DropdownBackgroundColor = "#${palette.base01}";
-
-        HighlightTextColor = "#${palette.base06}";
-        HighlightBackgroundColor = "#${palette.base03}";
-        HighlightBorderColor = "#${palette.base03}";
-
-        HoverUserIconColor = "#${palette.base0D}";
-        HoverPasswordIconColor = "#${palette.base0D}";
-        HoverSystemButtonsIconsColor = "#${palette.base0D}";
-        HoverSessionButtonTextColor = "#${palette.base0D}";
-        HoverVirtualKeyboardButtonTextColor = "#${palette.base0D}";
-
-        #################### Form ####################
-        PartialBlur = false;
-        FullBlur = true;
-        BlurMax = 64;
-        Blur = 1.0;
-        FormPosition = "center";
-
-        #################### Interface Behavior ####################
-        HideVirtualKeyboard = true;
-      };
-    })
   ];
 }
