@@ -7,7 +7,7 @@
     packages = [ ]
       #! MSI Monitor, Model:G2712
       ++ lib.optionals config.host.hardware.ddcci.enable [ pkgs.ddcutil ]
-      ++ lib.optionals config.desktop.wayland.enable [ pkgs.swayosd ]
+      ++ lib.optionals config.desktop.enable [ pkgs.swayosd ]
     ;
   };
 }

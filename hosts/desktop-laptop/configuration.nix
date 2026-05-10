@@ -79,20 +79,12 @@
       enable = true;
       sddm.enable = true;
     };
-    xorg = {
-      enable = false;
-      windowManagers = [ "awesome" ];
-    };
-    wayland = {
-      enable = true;
-      compositors = [ "hyprland" ];
-    };
+    compositors = [ "hyprland" ];
     games = {
       enable = true;
       xpadneo.enable = true;
       extraPackages = [
         pkgs.protonup-qt
-        pkgs.bottles
         (pkgs.retroarch.withCores (cores: with cores; [
           nestopia
         ]))

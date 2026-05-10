@@ -8,36 +8,22 @@ in {
   assertions = [
     {
       assertion = (
-        lib.lists.elem "niri" cfg.wayland.compositors -> cfg.wayland.enable
+        lib.lists.elem "niri" cfg.compositors ->
+        !config.services.desktopManager.gnome.enable
       );
       message = ''
-        [Configuration Error] Wayland must be enabled when using Niri!
+        [Configuration Error] Niri and GNOME are mutually exclusive!
 
         Problem detected:
-        - Niri found in wayland.compositors: 
-          [ ${lib.concatStringsSep " " cfg.wayland.compositors} ]
-        - But desktop.wayland.enable = ${lib.boolToString cfg.wayland.enable};
+        - Niri is requested in `desktop.compositors`.
+        - GNOME is enabled via `services.desktopManager.gnome.enable`.
 
         Required action:
-        1. Either enable Wayland:
-          `desktop.wayland.enable = true;`
-
-        2. Or remove Niri from compositors:
-          `desktop.wayland.compositors = (
-            lib.lists.remove "niri" config.desktop.wayland.compositors;
-          )`
-
-        Technical note:
-        desktop.wayland.enable flag controls
-        critical infrastructure required by Niri.
+        Disable GNOME to use Niri as a standalone compositor.
       '';
     }
   ];
   programs.niri = {
-    enable = (
-      cfg.wayland.enable &&
-      lib.lists.elem "niri" cfg.wayland.compositors &&
-      !config.services.desktopManager.gnome.enable
-    );
+    enable = lib.lists.elem "niri" cfg.compositors;
   };
 }

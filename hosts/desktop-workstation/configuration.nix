@@ -93,14 +93,7 @@
       greetd.enable = false;  # TODO: create custom greeter
       sddm.enable = true;
     };
-    xorg = {
-      enable = false;
-      windowManagers = [ "awesome" ];
-    };
-    wayland = {
-      enable = true;
-      compositors = [ "hyprland" ];
-    };
+    compositors = [ "hyprland" ];
     games = {
       enable = true;
       xpadneo.enable = true;

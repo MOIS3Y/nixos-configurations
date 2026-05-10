@@ -1,6 +1,6 @@
 # █░█░█ ▄▀█ █▄█ █▄▄ ▄▀█ █▀█ ▀
 # ▀▄▀▄▀ █▀█ ░█░ █▄█ █▀█ █▀▄ ▄
-# -- -- -- -- -- -- -- -- -- 
+# -- -- -- -- -- -- -- -- --
 
 { config, pkgs, ... }: let
   inherit (config.desktop.utils)
@@ -85,7 +85,7 @@
       get_waybar_output() {
         local status
         status=$(check_swallow_status)
-        
+
         case "$status" in
           enabled)
               echo '{"text": "󰊰", "tooltip": "Window swallow enabled", "class": "visible"}'
@@ -102,7 +102,7 @@
       toggle_swallow() {
         local current_status
         current_status=$(check_swallow_status)
-        
+
         case "$current_status" in
           enabled)
               ${hyprctl} keyword misc:enable_swallow false >/dev/null 2>&1
@@ -115,7 +115,7 @@
 
       process_command() {
         local command="$1"
-        
+
         case "$command" in
           toggle)
               toggle_swallow
@@ -134,7 +134,7 @@
         while true; do
           local command
           read -r command < "$receive_pipe"
-          
+
           if process_command "$command"; then
               get_waybar_output
           fi
@@ -181,7 +181,7 @@
       check_temperature_status() {
         local current_temp
         current_temp=$(get_current_temp)
-        
+
         if [ "$current_temp" = "$DAY_TEMP" ]; then
           echo "day"
         else
@@ -192,7 +192,7 @@
       get_waybar_output() {
         local status
         status=$(check_temperature_status)
-        
+
         case "$status" in
           day)
               echo '{"text": "", "tooltip": "Day mode", "class": "hidden"}'
@@ -209,7 +209,7 @@
       toggle_temperature() {
         local current_temp
         current_temp=$(get_current_temp)
-        
+
         if [ "$current_temp" = "$NIGHT_TEMP" ]; then
           ${hyprctl} hyprsunset temperature "$DAY_TEMP" >/dev/null 2>&1
         else
@@ -219,7 +219,7 @@
 
       process_command() {
         local command="$1"
-        
+
         case "$command" in
           toggle)
               toggle_temperature
@@ -238,7 +238,7 @@
         while true; do
           local command
           read -r command < "$receive_pipe"
-          
+
           if process_command "$command"; then
             get_waybar_output
           fi
@@ -252,7 +252,7 @@
 
       main() {
         trap cleanup EXIT INT TERM
-        
+
         setup_pipe
         get_waybar_output
         main_loop
@@ -272,15 +272,15 @@
       # src: https://gist.github.com/Ar7eniyan/42567870ad2ce47143ffeb41754b4484
 
       receive_pipe="/tmp/waybar-ddc-module-rx"
-      step=${builtins.toString devices.ddcci.step}
+      step=${toString devices.ddcci.step}
 
       ddcutil_fast() {
         # ! adjust the bus number and the multiplier for your display
         # ! multiplier should be chosen so that it both works reliably and fast enough
         ${ddcutil} \
         --noverify \
-        --bus ${builtins.toString devices.ddcci.busNumber} \
-        --sleep-multiplier .0${builtins.toString devices.ddcci.multiplier} "$@" 2>/dev/null
+        --bus ${toString devices.ddcci.busNumber} \
+        --sleep-multiplier .0${toString devices.ddcci.multiplier} "$@" 2>/dev/null
       }
 
       ddcutil_slow() {
@@ -310,10 +310,10 @@
                   ddcutil_fast setvcp 10 $command $step
                   ;;
               max)
-                  ddcutil_fast setvcp 10 ${builtins.toString devices.ddcci.bright} 
+                  ddcutil_fast setvcp 10 ${toString devices.ddcci.bright}
                   ;;
               min)
-                  ddcutil_fast setvcp 10 ${builtins.toString devices.ddcci.dark}
+                  ddcutil_fast setvcp 10 ${toString devices.ddcci.dark}
                   ;;
               *)
                   # Check if the command is a number from 0 to 100 (for swaync slider)

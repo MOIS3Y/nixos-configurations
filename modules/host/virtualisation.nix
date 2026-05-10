@@ -4,10 +4,7 @@
 
 { lib, ... }: let
   inherit (lib)
-    mkOption
-    mkEnableOption
-    types
-    literalExpression;
+    mkEnableOption;
 in {
   options.host.virtualisation = {
     libvirtd = {
@@ -28,14 +25,6 @@ in {
         Under the hood this removes wantedBy.
         docker.wantedBy = lib.mkForce [];
       '';
-      oci-containers = mkOption {
-        type = types.listOf (types.enum [ "portainer-agent" ]);
-        default = [];
-        description = "List of preconfigured oci-containers";
-        example = literalExpression ''
-          host.virtualisation.oci-containers = [ "portainer-agent" ];
-        '';
-      };
     };
   };
   config = {};

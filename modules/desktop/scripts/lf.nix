@@ -1,6 +1,6 @@
 # █░░ █▀▀ ▀
 # █▄▄ █▀░ ▄
-# -- -- -- 
+# -- -- --
 
 { config, pkgs, ... }: let
   inherit (config.desktop.utils)
@@ -8,7 +8,7 @@
     file
     kitty
     pistol
-    xdragon;
+    ;
   in {
   desktop.scripts.lf = {
     previewer =  pkgs.writeShellScript "lf-kitty-preview.sh" ''

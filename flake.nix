@@ -20,14 +20,6 @@
       inputs.home-manager.follows = "home-manager";
     };
     # Extra:
-    i3lock-color-wrapper = {
-      url = "github:MOIS3Y/i3lock-color-wrapper";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    xidlehook-caffeine = {
-      url = "github:MOIS3Y/xidlehook-caffeine";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-colors = {
       url = "github:misterio77/nix-colors";
       # inputs.base16-schemes.follows = "base16-schemes";

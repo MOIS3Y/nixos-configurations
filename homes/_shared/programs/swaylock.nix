@@ -15,12 +15,12 @@
 # ```
 # -- -- -- -- -- - -- -- -- -- -- --
 
-{ config, pkgs, lib, ... }: let 
+{ config, pkgs, lib, ... }: let
   inherit (config.colorScheme)
     palette;
   in {
   programs.swaylock = {
-    enable = lib.mkDefault config.desktop.wayland.enable;
+    enable = lib.mkDefault config.desktop.enable;
     package = pkgs.swaylock-effects;
     settings = {
       screenshots = true;
@@ -47,7 +47,7 @@
 
       bs-hl-color = "#${palette.base08}";
       key-hl-color = "#${palette.base0E}";
-      
+
       caps-lock-bs-hl-color = "#${palette.base09}";
       caps-lock-key-hl-color = "#${palette.base09}";
 

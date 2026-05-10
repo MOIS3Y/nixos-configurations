@@ -2,7 +2,7 @@
 # ▀▄▀ █ █▀▄ ░█░ █▄█ █▀█ █▄▄ █ █▄ █▀█ ░█░ █ █▄█ █░▀█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
-{ config, pkgs, lib, ... }: let
+{ config, ... }: let
   cfg = config.host.virtualisation;
 in {
   virtualisation.libvirtd = {
@@ -10,11 +10,5 @@ in {
   };
   virtualisation.docker = {
     enable = cfg.docker.enable;
-  };
-  virtualisation.oci-containers = {
-    backend = "docker";
-    containers = lib.attrsets.getAttrs cfg.docker.oci-containers (
-      import ./oci-containers.nix { inherit config pkgs;}
-    );
   };
 }
