@@ -1,20 +1,23 @@
 # █▀ █▀█ █▀█ █▀ ▀
 # ▄█ █▄█ █▀▀ ▄█ ▄
-# -- -- -- -- -- 
+# -- -- -- -- --
+# Configures SOPS secrets management for user-specific secrets and keys.
 
-{ inputs, config, lib, ... }: let
-  inherit (lib)
-    mkOption
-    types
-    attrsets;
-in {
-  imports = [
-    inputs.sops-nix.homeManagerModules.sops
-  ];
+{
+  inputs,
+  config,
+  lib,
+  ...
+}:
+let
+  inherit (lib) mkOption types attrsets;
+in
+{
+  imports = [ inputs.sops-nix.homeManagerModules.sops ];
   options.sops = {
     defaultUserSopsFile = mkOption {
       type = types.path;
-      example = secrets/secrets.yaml;
+      example = "secrets/secrets.yaml";
       description = "path to the file with secrets";
     };
     sharedSecrets = mkOption {
@@ -33,7 +36,7 @@ in {
         generateKey = true;
       };
       secrets = attrsets.attrByPath [ config.sops.sharedSecrets ] "stepan" (
-        import ./secrets.nix { inherit config;}
+        import ./secrets.nix { inherit config; }
       ); # stepan is a default value to return if the path does not exist in attrset
     };
     home.activation.setupEtc = config.lib.dag.entryAfter [ "writeBoundary" ] ''

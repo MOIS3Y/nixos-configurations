@@ -1,6 +1,7 @@
 # █▀▀ █▀▀ █▀▄▀█ █ █▄░█ █ ▄▄ █▀▀ █░░ █ ▀
 # █▄█ ██▄ █░▀░█ █ █░▀█ █ ░░ █▄▄ █▄▄ █ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -
+# Configures the Gemini CLI tool and its custom commands.
 
 { lib, ... }:
 let
@@ -25,7 +26,7 @@ in
       general = {
         enableAutoUpdate = false;
         enablePromptCompletion = true;
-        vimMode = false;  # not useful with RU keyboard layout
+        vimMode = false; # not useful with RU keyboard layout
         checkpointing = {
           enable = true;
         };

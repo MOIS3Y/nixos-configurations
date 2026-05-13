@@ -1,8 +1,10 @@
 # █▀▀ █▀█ █▀▀ ▄▄ ▄▀█ █▀▀ █▀▀ █▄░█ ▀█▀ ▀
-# █▄█ █▀▀ █▄█ ░░ █▀█ █▄█ ██▄ █░▀█ ░█░ ▄
+# █▄█ █▀ █▀▀ ██▄ █░▀█ ░█░ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -
+# Configures the GPG agent service with a TTY pinentry.
 
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   services.gpg-agent = {
     enable = true;
     pinentry = {

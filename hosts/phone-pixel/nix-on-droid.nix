@@ -1,6 +1,6 @@
-# █▄░█ █ ▀▄▀ ▄▄ █▀█ █▄░█ ▄▄ █▀▄ █▀█ █▀█ █ █▀▄ ▀
+# █▄░█ █ ▀▄▀ ▄▄ █▀█ █▄░█ ▄▄ █▀▄ █▀▄ █▄█ █ █▄▀ ▄
 # █░▀█ █ █░█ ░░ █▄█ █░▀█ ░░ █▄▀ █▀▄ █▄█ █ █▄▀ ▄
-# -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+# -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 # First configuration init by flake
 # If you want to use nix-shell:
@@ -10,13 +10,13 @@
 { pkgs, lib, home-config, ... }: {
   imports = [
     # Custom modules:
-    ../../modules/colors
+    ../../modules/appearance
     ../../modules/android
   ];
 
   android-integration = {
     am.enable = true;
-    termux-setup-storage.enable =true;
+    termux-setup-storage.enable = true;
     termux-open.enable = true;
     termux-open-url.enable = true;
     termux-reload-settings.enable = true;
@@ -28,7 +28,6 @@
   environment = {
     motd = null;
     etcBackupExtension = ".bak";
-    packages = [];
   };
 
   nix = {

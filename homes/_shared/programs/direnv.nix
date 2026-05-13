@@ -1,8 +1,10 @@
 # █▀▄ █ █▀█ █▀▀ █▄░█ █░█ ▀
 # █▄▀ █ █▀▄ ██▄ █░▀█ ▀▄▀ ▄
-# -- -- -- -- -- -- -- -- 
+# -- -- -- -- -- -- -- --
+# Configures Direnv for per-directory environment variables.
 
-{ lib, ... }: {
+{ lib, ... }:
+{
   programs.direnv = {
     enable = lib.mkDefault true;
     enableZshIntegration = true;

@@ -1,8 +1,10 @@
 # █▀ █░█░█ ▄▀█ █▀█ █▀█ █▄█ ▀
 # ▄█ ▀▄▀▄▀ █▀█ █▀▀ █▀▀ ░█░ ▄
 # -- -- -- -- -- -- -- -- --
+# Configures Swappy, a Wayland screenshot editing tool.
 
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
   programs.swappy = {
     enable = lib.mkDefault config.desktop.enable;
     settings = {

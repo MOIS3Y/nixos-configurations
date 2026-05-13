@@ -1,8 +1,15 @@
 # █░█ █▀ █▀▀ █▀█ █▀▄ █▀▀ ▀
 # ▀▄▀ ▄█ █▄▄ █▄█ █▄▀ ██▄ ▄
 # -- -- -- -- -- -- -- --
+# Configures Visual Studio Code with custom extensions and settings.
 
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   # TODO: make it more declaratively
   programs.vscode = {
     enable = lib.mkDefault config.desktop.enable;

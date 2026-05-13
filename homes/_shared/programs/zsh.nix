@@ -1,8 +1,10 @@
 # ▀█ █▀ █░█ ▀
 # █▄ ▄█ █▀█ ▄
 # -- -- -- --
+# Configures the Zsh shell, including aliases and Oh My Zsh plugins.
 
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
   programs.zsh = {
     enable = lib.mkDefault true;
     enableCompletion = true;

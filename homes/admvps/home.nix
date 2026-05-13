@@ -1,15 +1,16 @@
-# █░█ █▀█ █▀▄▀█ █▀▀ ▄▄ █▀▄▀█ ▄▀█ █▄░█ ▄▀█ █▀▀ █▀▀ █▀█ ▀
-# █▀█ █▄█ █░▀░█ ██▄ ░░ █░▀░█ █▀█ █░▀█ █▀█ █▄█ ██▄ █▀▄ ▄
-# -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+# ▄▀█ █▀▄ █▀▄▀█ █░█ █▀█ █▀ ▀
+# █▀█ █▄▀ █░▀░█ ▀▄▀ █▀▀ ▄█ ▄
+# -- -- -- -- -- -- -- -- -
+# User-specific Home Manager configuration for admvps.
 
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   imports = [
     # Custom modules:
-    ../../modules/colors
+    ../../modules/appearance
     # Shared configuration:
     ../_shared/programs/git.nix
     ../_shared/programs/htop.nix
-    ../_shared/programs/lf.nix
     ../_shared/programs/lsd.nix
     ../_shared/programs/nvchad.nix
     ../_shared/programs/zsh.nix
@@ -20,11 +21,13 @@
     homeDirectory = "/home/admvps";
   };
 
-  programs.nvchad.extraPackages = with pkgs; lib.mkForce [
-    bash-language-server
-    docker-compose-language-service
-    nixd
-  ];
+  programs.nvchad.extraPackages =
+    with pkgs;
+    lib.mkForce [
+      bash-language-server
+      docker-compose-language-service
+      nixd
+    ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

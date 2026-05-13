@@ -1,8 +1,10 @@
 # █░░ █▀ █▀▄ ▀
 # █▄▄ ▄█ █▄▀ ▄
-# -- -- -- -- 
+# -- -- -- --
+# Configures the lsd (Next gen ls command) program.
 
-{ lib, ... }: {
+{ lib, ... }:
+{
   programs.lsd = {
     enable = lib.mkDefault true;
   };

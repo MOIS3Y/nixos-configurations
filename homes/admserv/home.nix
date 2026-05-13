@@ -1,17 +1,17 @@
-# █░█ █▀█ █▀▄▀█ █▀▀ ▄▄ █▀▄▀█ ▄▀█ █▄░█ ▄▀█ █▀▀ █▀▀ █▀█ ▀
-# █▀█ █▄█ █░▀░█ ██▄ ░░ █░▀░█ █▀█ █░▀█ █▀█ █▄█ ██▄ █▀▄ ▄
-# -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+# ▄▀█ █▀▄ █▀▄▀█ █▀ █▀▀ █▀█ █░█ ▀
+# █▀█ █▄▀ █░▀░█ ▄█ ██▄ █▀▄ ▀▄▀ ▄
+# -- -- -- -- -- -- -- -- -- --
+# User-specific Home Manager configuration for admserv.
 
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   imports = [
     # Custom modules:
-    ../../modules/colors
+    ../../modules/appearance
     # Shared configuration:
-    ../_shared/programs/ssh
+    ../_shared/programs/ssh.nix
     ../_shared/programs/git.nix
-    ../_shared/programs/helix.nix
     ../_shared/programs/htop.nix
-    ../_shared/programs/lf.nix
     ../_shared/programs/lsd.nix
     ../_shared/programs/nvchad.nix
     ../_shared/programs/ruff.nix
@@ -24,22 +24,25 @@
   };
 
   # Override _shared configuration:
-  programs.nvchad.extraPackages = with pkgs; lib.mkForce [
-    # LSP servers
-    bash-language-server
-    docker-compose-language-service
-    dockerfile-language-server
-    vscode-langservers-extracted
-    nixd
-    (python3.withPackages(ps: with ps; [
-      python-lsp-server
-      python-lsp-ruff
-      flake8
-    ]))
-    # formatters
-    nixfmt
-    shfmt
-  ];
+  programs.nvchad.extraPackages =
+    with pkgs;
+    lib.mkForce [
+      # LSP servers
+      bash-language-server
+      docker-compose-language-service
+      dockerfile-language-server
+      vscode-langservers-extracted
+      nixd
+      (python3.withPackages (
+        ps: with ps; [
+          python-lsp-server
+          python-lsp-ruff
+        ]
+      ))
+      # formatters
+      nixfmt
+      shfmt
+    ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

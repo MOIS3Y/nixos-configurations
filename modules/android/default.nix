@@ -1,11 +1,13 @@
 # ▄▀█ █▄░█ █▀▄ █▀█ █▀█ █ █▀▄ ▀
 # █▀█ █░▀█ █▄▀ █▀▄ █▄█ █ █▄▀ ▄
 # -- -- -- -- -- -- -- -- -- -
+# Main entry point for Android specific configurations.
 
-{ ... }: {
+{ ... }:
+{
   imports = [
-    ./programs
-    ./services
-    ./terminal
-  ]; 
+    ./programs.nix
+    ./services.nix
+    ./terminal.nix
+  ];
 }

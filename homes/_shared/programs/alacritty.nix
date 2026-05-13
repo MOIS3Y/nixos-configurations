@@ -1,8 +1,19 @@
-  # ▄▀█ █░░ ▄▀█ █▀▀ █▀█ █ ▀█▀ ▀█▀ █▄█ ▀
-  # █▀█ █▄▄ █▀█ █▄▄ █▀▄ █ ░█░ ░█░ ░█░ ▄
-  # -- -- -- -- -- -- -- -- -- -- -- 
+# ▄▀█ █░░ ▄▀█ █▀▀ █▀█ █ ▀█▀ ▀█▀ █▄█ ▀
+# █▀█ █▄▄ █▀█ █▄▄ █▀▄ █ ░█░ ░█░ ░█░ ▄
+# -- -- -- -- -- -- -- -- -- -- --
+# Configures the Alacritty terminal emulator, including fonts and colors.
 
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  inherit (config.matugen) mode;
+  palette = config.matugen.theme.custom.palette.${mode};
+in
+{
   programs.alacritty = {
     package = pkgs.alacritty;
     enable = lib.mkDefault config.desktop.enable;
@@ -12,6 +23,11 @@
       };
       general = {
         live_config_reload = true;
+        # -- [ DMS auto colors ] --
+        # import = [
+        #   "~/.config/alacritty/dank-theme.toml"
+        # ];
+        # -------------------------
       };
       cursor = {
         unfocused_hollow = false;
@@ -43,81 +59,78 @@
           style = "Italic";
         };
       };
-      colors = with config.colorScheme.palette; {
+      # -- [ Manual Colors ] --
+      colors = {
         primary = {
-          background = "#${base00}";
-          foreground = "#${base05}";
-          dim_foreground = "#${base05}";
-          bright_foreground = "#${base05}";
+          background = palette.bg_base;
+          foreground = palette.fg_text;
+          dim_foreground = palette.fg_text;
+          bright_foreground = palette.fg_text;
         };
         cursor = {
-          text = "#${base00}";
-          cursor = "#${base05}";
+          text = palette.bg_base;
+          cursor = palette.fg_text;
         };
-        #.......
         vi_mode_cursor = {
-          text = "#${base00}";
-          cursor = "#${base05}";
+          text = palette.bg_base;
+          cursor = palette.fg_text;
         };
         search = {
           matches = {
-            foreground = "#${base00}";
-            background = "#${base04}";
+            foreground = palette.bg_base;
+            background = palette.bright_black;
           };
           focused_match = {
-            foreground = "#${base00}";
-            background = "#${base0B}";
+            foreground = palette.bg_base;
+            background = palette.green;
           };
-          # footer_bar = {
-          #   foreground = "#${base00}";
-          #   background = "#${base02}";
-          # };
         };
         hints = {
           start = {
-            foreground = "#${base00}";
-            background = "#${base0A}";
+            foreground = palette.bg_base;
+            background = palette.yellow;
           };
           end = {
-            foreground = "#${base00}";
-            background = "#${base02}";
+            foreground = palette.bg_base;
+            background = palette.black;
           };
         };
         selection = {
-          text = "#${base00}";
-          background = "#${base06}";
+          text = palette.bg_base;
+          background = palette.white;
         };
         normal = {
-          black = "#${base01}";
-          red = "#${base08}";
-          green = "#${base0B}";
-          yellow = "#${base0A}";
-          blue = "#${base0D}";
-          magenta = "#${base0E}";
-          cyan = "#${base0C}";
-          white = "#${base06}";
+          black = palette.black;
+          red = palette.red;
+          green = palette.green;
+          yellow = palette.yellow;
+          blue = palette.blue;
+          magenta = palette.magenta;
+          cyan = palette.cyan;
+          white = palette.white;
         };
         bright = {
-          black = "#${base04}";
-          red = "#${base05}";
-          green = "#${base0B}";
-          yellow = "#${base0A}";
-          blue = "#${base0D}";
-          magenta = "#${base0E}";
-          cyan = "#${base0C}";
-          white = "#${base06}";
+          black = palette.bright_black;
+          red = palette.bright_red;
+          green = palette.bright_green;
+          yellow = palette.bright_yellow;
+          blue = palette.bright_blue;
+          magenta = palette.bright_magenta;
+          cyan = palette.bright_cyan;
+          white = palette.bright_white;
         };
         dim = {
-          black = "#${base01}";
-          red = "#${base05}";
-          green = "#${base0B}";
-          yellow = "#${base0A}";
-          blue = "#${base0D}";
-          magenta = "#${base0E}";
-          cyan = "#${base0C}";
-          white = "#${base06}";
+          black = palette.black;
+          red = palette.red;
+          green = palette.green;
+          yellow = palette.yellow;
+          blue = palette.blue;
+          magenta = palette.magenta;
+          cyan = palette.cyan;
+          white = palette.white;
         };
       };
+      # -----------------------
     };
   };
 }

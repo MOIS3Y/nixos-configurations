@@ -1,8 +1,10 @@
 # █▀ █▀▀ █▀▀ █▀█ █▀▀ ▀█▀ █▀ ▀
 # ▄█ ██▄ █▄▄ █▀▄ ██▄ ░█░ ▄█ ▄
 # -- -- -- -- -- -- -- -- --
+# Defines the set of preconfigured secrets for different users.
 
-{ config, ... }: {
+{ config, ... }:
+{
   stepan = {
     # ssh-keys:
     "ssh/private-keys/self/allsave" = {
@@ -55,10 +57,10 @@
       path = "${config.home.homeDirectory}/.ssh/misc/github.pub";
     };
     # google calendar fetchers:
-    "google-calendar/fetch-id" = {};
-    "google-calendar/fetch-secret" = {};
+    "google-calendar/fetch-id" = { };
+    "google-calendar/fetch-secret" = { };
     # gemini-cli
-    "gemini-cli/gcp-id" = {};
+    "gemini-cli/gcp-id" = { };
     # ... add more secrets here:
   };
   # ... add more users with secrets here:

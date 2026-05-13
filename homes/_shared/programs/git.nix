@@ -1,8 +1,10 @@
 # █▀▀ █ ▀█▀ ▀
 # █▄█ █ ░█░ ▄
 # -- -- -- --
+# Configures Git version control system.
 
-{ lib, ... }: {
+{ lib, ... }:
+{
   programs.git = {
     enable = lib.mkDefault true;
     signing = {

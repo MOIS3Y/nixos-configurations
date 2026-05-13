@@ -1,40 +1,49 @@
 # █▀▄ █▀▀ █▀█ █▄░█ █▀▀ ▀
 # █▄▀ █▄▄ █▄█ █░▀█ █▀░ ▄
 # -- -- -- -- -- -- -- -- --
+# Configures dconf settings for GNOME, Virt-Manager and system theming.
 
-{ config, pkgs, lib, ... }: let
-  inherit (config.colorScheme)
-    palette
-    variant;
-  inherit (config.desktop.assets)
-    images;
-  in{
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  inherit (config.matugen) mode;
+  palette = config.matugen.theme.custom.palette.${mode};
+in
+{
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
     "org/gnome/desktop/interface" = {
       accent-color = "blue";
-      color-scheme = ''
-        ${ if variant == "dark" then "prefer-dark" else "default" }
-      '';
+      color-scheme = if mode == "dark" then "prefer-dark" else "default";
     };
     "org/gnome/desktop/background" = {
-      picture-uri = "file://${images.wallpaper}";
-      picture-uri-dark = "file://${images.wallpaper}";
-      primary-color = "#${palette.base0D}";
-      secondary-color = "#${palette.base0E}";
+      picture-uri = "file://${config.assets.backgrounds.cat-leaves}";
+      picture-uri-dark = "file://${config.assets.backgrounds.cat-leaves}";
+      primary-color = palette.blue;
+      secondary-color = palette.magenta;
     };
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "appmenu:close";
       num-workspaces = 9;
-      theme = "Adwaita";  # TODO: create custom
+      theme = "Adwaita"; # TODO: create custom
     };
     "org/gnome/desktop/input-sources" = {
       sources = lib.gvariant.mkArray [
-        (lib.gvariant.mkTuple [ "xkb" "us" ])
-        (lib.gvariant.mkTuple [ "xkb" "ru" ])
+        (lib.gvariant.mkTuple [
+          "xkb"
+          "us"
+        ])
+        (lib.gvariant.mkTuple [
+          "xkb"
+          "ru"
+        ])
       ];
       xkb-options = [ "grp:alt_shift_toggle" ];
     };
@@ -63,7 +72,7 @@
       close = [ "<Super>w" ];
     };
     "org/gnome/desktop/privacy" = {
-      remember-app-usage = false;  # ? not recorded mimeapps.list
+      remember-app-usage = false; # ? not recorded mimeapps.list
     };
     "org/gnome/shell" = {
       favorite-apps = [

@@ -1,18 +1,18 @@
 # █▀█ █▀█ █▀█ █▀▀ █▀█ ▄▀█ █▀▄▀█ █▀ ▀
 # █▀▀ █▀▄ █▄█ █▄█ █▀▄ █▀█ █░▀░█ ▄█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -
+# Aggregates all home-manager program configurations.
 
-{ ... }: {
+{ ... }:
+{
   imports = [
     # common:
-    ./ssh
+    ./ssh.nix
     ./direnv.nix
     ./gemini-cli.nix
     ./git.nix
     ./gpg.nix
-    ./helix.nix
     ./htop.nix
-    ./lf.nix
     ./lsd.nix
     ./nvchad.nix
     ./ruff.nix
@@ -20,18 +20,10 @@
 
     # desktop:
     ./alacritty.nix
-    ./hyprland.nix
-    ./hyprlock.nix
     ./kitty.nix
     ./mangohud.nix
     ./swappy.nix
-    ./swaylock.nix
     ./vscode.nix
-    ./wezterm.nix
-    ./waybar.nix
-    ./wayfire.nix
-    ./wlogout.nix
-    ./wofi.nix
     ./zed.nix
   ];
 }

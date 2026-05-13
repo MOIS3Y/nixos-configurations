@@ -1,8 +1,10 @@
 # ▀█ █▀▀ █▀▄ ▀
 # █▄ ██▄ █▄▀ ▄
 # -- -- -- --
+# Configures the Zed high-performance editor.
 
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.zed-editor = {
     enable = true;
     extensions = [
@@ -82,7 +84,6 @@
       # Autoupdate
       auto_update = false;
 
-
       # -- -- -- Appearance -- -- -- #
 
       # Theme
@@ -118,7 +119,6 @@
       # Highlighting
       current_line_highlight = "all";
 
-
       # -- -- -- Keymap -- -- -- #
 
       # Base Keymap
@@ -126,7 +126,6 @@
 
       # Modal Editing
       vim_mode = true;
-
 
       # -- -- -- Editor -- -- -- #
 
@@ -184,7 +183,6 @@
       extend_comment_on_newline = true;
       colorize_brackets = true;
 
-
       # -- -- -- Languages & tools -- -- -- #
 
       # LSP
@@ -218,7 +216,10 @@
           formatter = {
             external = {
               command = "nixfmt";
-              arguments = [ "--quiet" "--" ];
+              arguments = [
+                "--quiet"
+                "--"
+              ];
             };
           };
         };
@@ -227,7 +228,6 @@
           formatter = "language_server";
         };
       };
-
 
       # -- -- -- Window & Layout -- -- -- #
 
@@ -250,7 +250,6 @@
         show_diagnostics = "off";
       };
 
-
       # -- -- -- Panels -- -- -- #
 
       # Project Panel
@@ -270,7 +269,6 @@
         button = true;
       };
 
-
       # -- -- -- Version Control -- -- -- #
       git = {
         inline_blame = {
@@ -281,7 +279,6 @@
         };
       };
 
-
       # -- -- -- Terminal -- -- -- #
       terminal = {
         font_size = 15.0;
@@ -291,9 +288,8 @@
         cursor_shape = "underline";
       };
 
-
       # -- -- -- AI -- -- -- #
-      disable_ai = false;  # You were supposed to fight evil, not join it. :)
+      disable_ai = false; # You were supposed to fight evil, not join it. :)
       agent_servers = {
         opencode = {
           type = "registry";
@@ -308,7 +304,6 @@
           };
         };
       };
-
 
       # -- -- -- Network -- -- -- #
       proxy = "http://127.0.0.1:10809";

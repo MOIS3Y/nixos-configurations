@@ -1,10 +1,21 @@
 # █▀ █▄█ █▀ ▀█▀ █▀▀ █▀▄▀█ █▀▄ ▀
 # ▄█ ░█░ ▄█ ░█░ ██▄ █░▀░█ █▄▀ ▄
 # -- -- -- -- -- -- -- -- -- --
+# Configures custom user-level systemd services and targets.
 
-{ ... }: {
-  imports = [
-    ./targets.nix
-    ./services.nix
-  ];
+{ ... }:
+{
+  systemd.user.targets = {
+    # need to be fixed Error network-manager-applet.service:
+    # !Failed to start network-manager-applet.service: Unit tray.target not found.
+    # https://github.com/nix-community/home-manager/issues/2064
+    # alternative:
+    # used xsession.enable = true; in HM configuration
+    tray = {
+      Unit = {
+        Description = "Home Manager System Tray";
+        Requires = [ "graphical-session-pre.target" ];
+      };
+    };
+  };
 }

@@ -1,8 +1,15 @@
 # ▀▄▀ █▀▄ █▀▀ ▀
 # █░█ █▄▀ █▄█ ▄
 # -- -- -- -- -
+# Configures XDG Base Directories, default applications, and portals.
 
-{ config, pkgs, lib, ... }: let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
   # Shortcuts:
   # -- -- -- -
   amberol = [ "io.bassi.Amberol.desktop" ];
@@ -112,7 +119,8 @@
     "inode/directory" = [ "org.gnome.Nautilus.desktop;lf.desktop" ];
     "text/*" = nvim;
   };
-in {
+in
+{
   xdg = {
     enable = true;
     # xdg-user-dirs:
@@ -137,25 +145,10 @@ in {
     # portals:
     portal = {
       enable = true;
-      extraPortals = lib.mkForce ([
+      extraPortals = lib.mkForce [
         pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-gnome
-      ] ++ lib.optionals config.wayland.windowManager.hyprland.enable [
-        pkgs.xdg-desktop-portal-hyprland
-      ] ++ lib.optionals config.wayland.windowManager.wayfire.enable [
-        pkgs.xdg-desktop-portal-wlr
-      ]);
-      configPackages = lib.mkForce ([
-        pkgs.gnome-session
-      ] ++ lib.optionals config.wayland.windowManager.hyprland.enable [
-        pkgs.hyprland
-      ]);
-      # ? below meaning ~/.config/xdg-desktop-portal/portals.conf:
-      # ? [preferred]
-      # ? default=gtk
-      # ? this overrides the default portal
-      # ? may have a negative impact on xdg-desktop-portal-hyprland
-      # ? see: https://github.com/nix-community/home-manager/blob/master/modules/misc/xdg-portal.nix
+      ];
       config = {
         common = {
           default = [ "gtk" ];

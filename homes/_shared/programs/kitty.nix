@@ -1,12 +1,22 @@
 # █▄▀ █ ▀█▀ ▀█▀ █▄█ ▀
 # █░█ █ ░█░ ░█░ ░█░ ▄
 # -- -- -- -- -- -- -
+# Configures the Kitty terminal emulator, including fonts and colors.
 
-{ config, lib, ... }: {
+{
+  config,
+  lib,
+  ...
+}:
+let
+  inherit (config.matugen) mode;
+  palette = config.matugen.theme.custom.palette.${mode};
+in
+{
   programs.kitty = {
     enable = lib.mkDefault config.desktop.enable;
-    shellIntegration.enableZshIntegration = false;  # fix underline cursor
-    settings = with config.colorScheme.palette; {
+    shellIntegration.enableZshIntegration = false; # fix underline cursor
+    settings = {
       # Font:
       font_family = "JetBrains Mono Nerd Font";
       font_size = "11.0";
@@ -14,7 +24,7 @@
       bold_italic_font = "auto";
       italic_font = "auto";
       disable_ligatures = "never";
-      text_composition_strategy="legacy";  # fix too bold regular font
+      text_composition_strategy = "legacy"; # fix too bold regular font
       # Cursor:
       cursor_blink_interval = "-1";
       cursor_shape = "underline";
@@ -22,7 +32,6 @@
       cursor_underline_thickness = "1.0";
       # Scrollback:
       scrollback_lines = 3000;
-      scrollback_indicator_opacity = "0.4";
       touch_scroll_multiplier = "1.0";
       wheel_scroll_multiplier = "5.0";
       # Mouse:
@@ -32,62 +41,61 @@
       window_alert_on_bell = "yes";
       bell_on_tab = "🔔";
       # SSH:
-      share_connections = "no";
-      remote_kitty = "no";
-      delegate = "ssh";  # fix remote zsh
-      # Tab bar:
-      tab_bar_edge = "bottom";
-      tab_bar_min_tabs = 2;
-      tab_bar_style = "powerline";
-      tab_powerline_style = "slanted";
-      tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
-      active_tab_font_style = "bold";
-      inactive_tab_font_style = "normal";
+      allow_remote_control = "no";
       # Window layout:
       window_margin_width = 0;
-      window_padding_width = 15;      
+      window_padding_width = 15;
       inactive_text_alpha = "1.0";
       confirm_os_window_close = 0;
       hide_window_decorations = "no";
       placement_strategy = "center";
       resize_in_steps = "yes";
-      # The basic colors
-      background_opacity = "1.0";
-      foreground = "#${base05}";
-      background = "#${base00}";
-      selection_foreground = "#${base00}";
-      selection_background = "#${base05}";
-      # Cursor colors
-      cursor = "#${base05}";
-      cursor_text_color = "#${base01}";
-      # URL underline color
-      url_color = "#${base0E}";
-      # Tab bar colors
-      tab_bar_background = "#${base01}";
-      active_tab_foreground = "#${base05}";
-      active_tab_background = "#${base03}";
-      inactive_tab_foreground = "#${base04}";
-      inactive_tab_background = "#${base02}";
-      # The 16 terminal colors
-      color0 = "#${base01}";
-      color1 = "#${base08}";
-      color2 = "#${base0B}";
-      color3 = "#${base0A}";
-      color4 = "#${base0D}";
-      color5 = "#${base0E}";
-      color6 = "#${base0C}";
-      color7 = "#${base06}";
-      color8 = "#${base04}";
-      color9 = "#${base08}";
-      color10 = "#${base0B}";
-      color11 = "#${base0A}";
-      color12 = "#${base0D}";
-      color13 = "#${base0E}";
-      color14 = "#${base0C}";
-      color15 = "#${base06}";
       # Advanced:
       editor = "nvim";
+
+      # -- [ Manual Colors ] --
+      # The basic colors
+      background_opacity = "1.0";
+      foreground = palette.fg_text;
+      background = palette.bg_base;
+      selection_foreground = palette.bg_base;
+      selection_background = palette.fg_text;
+      # Cursor colors
+      cursor = palette.fg_text;
+      cursor_text_color = palette.black;
+      # URL underline color
+      url_color = palette.magenta;
+      # Tab bar colors
+      tab_bar_background = palette.black;
+      active_tab_foreground = palette.fg_text;
+      active_tab_background = palette.bg_surface;
+      inactive_tab_foreground = palette.fg_subtext;
+      inactive_tab_background = palette.bg_mantle;
+      # The 16 terminal colors
+      color0 = palette.black;
+      color1 = palette.red;
+      color2 = palette.green;
+      color3 = palette.yellow;
+      color4 = palette.blue;
+      color5 = palette.magenta;
+      color6 = palette.cyan;
+      color7 = palette.white;
+      color8 = palette.bright_black;
+      color9 = palette.bright_red;
+      color10 = palette.bright_green;
+      color11 = palette.bright_yellow;
+      color12 = palette.bright_blue;
+      color13 = palette.bright_magenta;
+      color14 = palette.bright_cyan;
+      color15 = palette.bright_white;
+      # -----------------------
     };
+    # -- [ DMS auto config ] --
+    # extraConfig = ''
+    #   include dank-tabs.conf
+    #   include dank-theme.conf
+    # '';
+    # -------------------------
     keybindings = {
       # Clipboard:
       "ctrl+shift+v" = "paste_from_clipboard";

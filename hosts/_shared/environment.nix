@@ -1,0 +1,87 @@
+# █▀▀ █▄░█ █░█ █ █▀█ █▀█ █▄░█ █▀▄▀█ █▀▀ █▄░█ ▀█▀ ▀
+# ██▄ █░▀█ ▀▄▀ █ █▀▄ █▄█ █░▀█ █░▀░█ ██▄ █░▀█ ░█░ ▄
+# -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+# Provides basic shell, environment variables and common system packages.
+
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  inherit (config.desktop) cursor games;
+  inherit (config.host) hardware virtualisation;
+in
+{
+  environment.systemPackages =
+    with pkgs;
+    [
+      # common:
+      bottom
+      cmatrix
+      curl
+      dnsutils
+      docker-compose
+      duf
+      git
+      htop
+      jq
+      lm_sensors
+      ncdu
+      fastfetch
+      nitch
+      nmap
+      ntfs3g
+      parted
+      rsync
+      ripgrep
+      tree
+      tty-clock
+      wget
+      unzip
+    ]
+    # optional:
+    ++ lib.optionals config.desktop.enable [
+      appimage-run
+      at-spi2-atk # ! required for polkit-gnome-authentication-agent-1
+      adwaita-icon-theme # ! required for most gnome apps
+      evince
+      file-roller
+      firefox
+      gnome-calculator
+      gnome-calendar
+      gnome-online-accounts-gtk
+      libnotify
+      nautilus
+      pavucontrol
+      pywalfox-native
+      xdg-utils
+      xwayland-satellite
+      cursor.package # ! required for mdgreet
+      extra.assets4nix
+    ]
+    ++ lib.optionals config.services.desktopManager.gnome.enable [
+      dconf-editor
+      gnomeExtensions.auto-move-windows
+      gnomeExtensions.appindicator
+      gnomeExtensions.caffeine
+      gnomeExtensions.system-monitor
+      gnomeExtensions.useless-gaps
+    ]
+    ++ lib.optionals (config.desktop.enable && games.enable) games.extraPackages
+    ++ lib.optionals (config.desktop.enable && hardware.gpu.enable) [
+      amdgpu_top
+      lact
+      nvtopPackages.amd
+    ]
+    ++ lib.optionals (config.desktop.enable && virtualisation.libvirtd.enable) [ virt-manager ];
+
+  environment.shells = [
+    pkgs.bash
+    pkgs.zsh
+  ];
+  environment.variables = {
+    "PYTHONDONTWRITEBYTECODE" = "1";
+  };
+}

@@ -1,13 +1,17 @@
 # █░█ ▀█▀ █▀█ █▀█ ▀
 # █▀█ ░█░ █▄█ █▀▀ ▄
 # -- -- -- -- -- --
+# Configures the htop interactive process viewer.
 
-{ config, lib, ... }: let
+{ config, lib, ... }:
+let
   cfg = config.programs.htop;
   inherit (lib)
     mkOption
-    types;
-in {
+    types
+    ;
+in
+{
   options.programs.htop = {
     os = mkOption {
       type = types.enum [
@@ -28,12 +32,32 @@ in {
     programs.htop = {
       enable = true;
       settings = {
-        fields = with config.lib.htop.fields;
-          if cfg.os != "android"
-            then [
-              USER PID PPID STATE PRIORITY NICE PERCENT_CPU PERCENT_MEM TIME COMM
+        fields =
+          with config.lib.htop.fields;
+          if cfg.os != "android" then
+            [
+              USER
+              PID
+              PPID
+              STATE
+              PRIORITY
+              NICE
+              PERCENT_CPU
+              PERCENT_MEM
+              TIME
+              COMM
             ]
-          else [ PID PPID STATE PRIORITY NICE PERCENT_MEM TIME COMM ];
+          else
+            [
+              PID
+              PPID
+              STATE
+              PRIORITY
+              NICE
+              PERCENT_MEM
+              TIME
+              COMM
+            ];
         header_margin = false;
         hide_threads = true;
         hide_kernel_threads = true;
@@ -44,28 +68,40 @@ in {
         show_cpu_frequency = true;
         show_program_path = false;
         sort_key = config.lib.htop.fields.PERCENT_MEM;
-      } // (with config.lib.htop; leftMeters (
-        if cfg.os != "android"
-        then [
-          (bar "LeftCPUs")
-          (bar "Memory")
-          (bar "Swap")
-        ] else [
-          (bar "Memory")
-          (bar "Swap")
-        ]
-      )) // (with config.lib.htop; rightMeters (
-        if cfg.os != "android"
-        then [
-          (bar "RightCPUs")
-          (bar "Battery")
-          (text "Tasks")
-          (text "LoadAverage")
-          (text "Uptime")
-        ] else [
-          (text "Tasks")
-        ]
-      ));
+      }
+      // (
+        with config.lib.htop;
+        leftMeters (
+          if cfg.os != "android" then
+            [
+              (bar "LeftCPUs")
+              (bar "Memory")
+              (bar "Swap")
+            ]
+          else
+            [
+              (bar "Memory")
+              (bar "Swap")
+            ]
+        )
+      )
+      // (
+        with config.lib.htop;
+        rightMeters (
+          if cfg.os != "android" then
+            [
+              (bar "RightCPUs")
+              (bar "Battery")
+              (text "Tasks")
+              (text "LoadAverage")
+              (text "Uptime")
+            ]
+          else
+            [
+              (text "Tasks")
+            ]
+        )
+      );
     };
   };
 }

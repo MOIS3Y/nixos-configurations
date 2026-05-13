@@ -1,18 +1,16 @@
-# █░█ █▀█ █▀▄▀█ █▀▀ ▄▄ █▀▄▀█ ▄▀█ █▄░█ ▄▀█ █▀▀ █▀▀ █▀█ ▀
-# █▀█ █▄█ █░▀░█ ██▄ ░░ █░▀░█ █▀█ █░▀█ █▀█ █▄█ ██▄ █▀▄ ▄
-# -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+# █▀ ▀█▀ █▀▀ █▀█ ▄▀█ █▄░█ ▀
+# ▄█ ░█░ ██▄ █▀▀ █▀█ █░▀█ ▄
+# -- -- -- -- -- -- -- -- -
+# User-specific Home Manager configuration for stepan.
 
-{ osConfig, ... }: {
+{ osConfig, ... }:
+{
   imports = [
     # Custom modules:
-    ../../modules/colors
+    ../../modules/appearance
     ../../modules/desktop
     # Shared configuration:
-    ../_shared/config
-    ../_shared/pkgs
-    ../_shared/programs
-    ../_shared/services
-    ../_shared/sops
+    ../_shared
   ];
 
   home = {
@@ -21,13 +19,12 @@
   };
 
   # ? inherit host configuration
-  colorSchemeName = osConfig.colorSchemeName;
   desktop = osConfig.desktop;
 
   # Override _shared configuration:
   sops = {
     defaultUserSopsFile = ../../secrets/homes/stepan/secrets.yaml;
-    sharedSecrets = "stepan";  # ? override default secrets option
+    sharedSecrets = "stepan"; # ? override default secrets option
   };
 
   programs.ssh.userMatchBlocks = "stepan";

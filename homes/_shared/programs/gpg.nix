@@ -1,8 +1,10 @@
 # █▀▀ █▀█ █▀▀ ▀
 # █▄█ █▀▀ █▄█ ▄
 # -- -- -- -- -
+# Configures GNU Privacy Guard (GPG).
 
-{ config, ... }: {
+{ config, ... }:
+{
   programs.gpg = {
     enable = true;
     mutableKeys = true;

@@ -1,8 +1,10 @@
 # █▀▀ █▀█ █▄░█ █▀▀ █ █▀▀ ▀
 # █▄▄ █▄█ █░▀█ █▀░ █ █▄█ ▄
 # -- -- -- -- -- -- -- --
+# Main entry point for user environment configurations (GTK, Qt, XDG, etc.).
 
-{  ... }: {
+{ ... }:
+{
   imports = [
     ./dconf.nix
     ./gtk.nix

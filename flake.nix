@@ -20,16 +20,16 @@
       inputs.home-manager.follows = "home-manager";
     };
     # Extra:
-    nix-colors = {
-      url = "github:misterio77/nix-colors";
-      # inputs.base16-schemes.follows = "base16-schemes";
+    distro-grub-themes = {
+      url = "github:AdisonCavani/distro-grub-themes";
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    distro-grub-themes = {
-      url = "github:AdisonCavani/distro-grub-themes";
+    matugen-nix = {
+      url = "github:MOIS3Y/matugen-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     aladdin4nix = {
       url = "github:MOIS3Y/aladdin4nix";
@@ -47,10 +47,6 @@
     nvchad-on-steroids = {
       url = "github:MOIS3Y/nvchad-on-steroids";
       flake = false;
-    };
-    kvlibadwaita = {
-      url = "github:MOIS3Y/KvLibadwaita?ref=gradience";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     mdgreet = {
       url = "github:MOIS3Y/mdgreet";
@@ -87,6 +83,7 @@
                 extraSpecialArgs = {
                   inherit system inputs;
                 };
+                backupFileExtension = "backup";
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users = {
@@ -108,6 +105,7 @@
                 extraSpecialArgs = {
                   inherit system inputs;
                 };
+                backupFileExtension = "backup";
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users = {
@@ -131,6 +129,7 @@
                 extraSpecialArgs = {
                   inherit system inputs;
                 };
+                backupFileExtension = "backup";
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users = {
@@ -154,6 +153,7 @@
                 extraSpecialArgs = {
                   inherit system inputs;
                 };
+                backupFileExtension = "backup";
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users = {
@@ -175,6 +175,7 @@
                 extraSpecialArgs = {
                   inherit system inputs;
                 };
+                backupFileExtension = "backup";
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users = {
