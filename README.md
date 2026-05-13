@@ -13,15 +13,12 @@
 
 ## :snowflake: <samp>Current setup for desktop devices</samp>
 
-- DM: `SDDM`
-- WM: `Hyprland`
-- Lock Screen: `Hyprlock`
-- Idle: `Hypridle`
-- Notification daemon: `SwayNotificationCenter`
-- Bar: `Waybar`
-- App Launcher: `Wofi`
-- Terminals: `Kitty`, `Alacritty`, `Wezterm`
-- Editors: `Nvim`, `VScode`
+- DM: `greetd` with `mdgreet`
+- Compositor: `Niri`
+- Shell: `Dank Material Shell`
+- Terminals: `Kitty`, `Alacritty`
+- File Managers: `Nautilus`, `Yazi`
+- Editors: `Nvim`, `Zed`
 - Browsers: `Firefox`, `Google-chrome`
 - Games: `Steam`, `Bottles`
 
