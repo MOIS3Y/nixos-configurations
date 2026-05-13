@@ -70,41 +70,20 @@
       ];
     };
     devices = {
-      monitors = [
-        {
-          name = "eDP-1"; # primary
-          width = 1920;
-          height = 1080;
-          refreshRate = 60;
-          x = 0;
-          y = 0;
-          enabled = true;
-        }
-        {
-          name = "HDMI-A-1"; # secondary
-          width = 1920;
-          height = 1080;
-          refreshRate = 60;
-          x = 1920; # connected to the right of eDP-1
-          y = 0;
-          enabled = true;
-        }
-      ];
-      keyboard = {
-        enable = true;
-        settings = {
-          name = "at-translated-set-2-keyboard";
-          kb_layout = "us,ru";
-          kb_model = "pc104";
-          kb_options = "grp:alt_shift_toggle";
+      monitors = {
+        "eDP-1" = {
+          mode = "1920x1080@60.000";
+          position = { x = 0; y = 0; };
+          focus-at-startup = true;
+        };
+        "HDMI-A-1" = {
+          mode = "1920x1080@60.000";
+          position = { x = 1920; y = 0; };
         };
       };
-      touchpad = {
-        enable = true;
-      };
       battery.enable = true;
-      lid.enable = true;
       bluetooth.enable = true;
+      lid.enable = true;
     };
     cursor = { }; # ? Default arrts from module
   };

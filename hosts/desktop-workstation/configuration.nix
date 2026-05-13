@@ -119,33 +119,15 @@
       ];
     };
     devices = {
-      monitors = [
-        {
-          name = "DP-1"; # primary
-          width = 1920;
-          height = 1080;
-          refreshRate = 144;
-          x = 0;
-          y = 0;
-          enabled = true;
-        }
-        {
-          name = "HDMI-A-1"; # secondary
-          width = 1920;
-          height = 1080;
-          refreshRate = 60;
-          x = 1920; # connected to the right of DP-1
-          y = 0;
-          enabled = true;
-        }
-      ];
-      keyboard = {
-        enable = true;
-        settings = {
-          name = "logitech-k370s/k375s";
-          kb_layout = "us,ru";
-          kb_model = "pc104";
-          kb_options = "grp:alt_shift_toggle";
+      monitors = {
+        "DP-1" = {
+          mode = "1920x1080@143.855";
+          position = { x = 0; y = 0; };
+          focus-at-startup = true;
+        };
+        "HDMI-A-1" = {
+          mode = "1920x1080@60.000";
+          position = { x = 1920; y = 0; };
         };
       };
       bluetooth.enable = true;

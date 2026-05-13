@@ -22,6 +22,7 @@
     ./alacritty.nix
     ./kitty.nix
     ./mangohud.nix
+    ./niri.nix
     ./swappy.nix
     ./vscode.nix
     ./zed.nix
