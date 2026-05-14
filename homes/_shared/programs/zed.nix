@@ -236,7 +236,7 @@
         show_sign_in = true;
         show_user_picture = true;
         show_project_items = true;
-        show_branch_icon = true;
+        show_branch_status_icon = true;
       };
 
       # Tab Bar
@@ -289,12 +289,19 @@
       };
 
       # -- -- -- AI -- -- -- #
-      disable_ai = false; # You were supposed to fight evil, not join it. :)
+      disable_ai = false;
+
       agent_servers = {
         opencode = {
           type = "registry";
         };
       };
+
+      agent = {
+        sidebar_side = "right";
+        dock = "right";
+      };
+
       context_servers = {
         mcp-server-context7 = {
           enabled = true;
