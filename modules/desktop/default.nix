@@ -41,8 +41,6 @@
         default = { };
         description = "Monitor configurations (attrset where key is monitor name)";
       };
-      battery.enable = mkEnableOption "Wether to enable battery power management";
-      bluetooth.enable = mkEnableOption "Wether to enable bluetooth management";
       lid.enable = mkEnableOption "Wether to enable lid switch";
     };
 

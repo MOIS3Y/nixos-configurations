@@ -81,11 +81,8 @@
           position = { x = 1920; y = 0; };
         };
       };
-      battery.enable = true;
-      bluetooth.enable = true;
       lid.enable = true;
     };
-    cursor = { }; # ? Default arrts from module
   };
 
   system.stateVersion = "22.11";

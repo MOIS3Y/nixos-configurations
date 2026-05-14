@@ -130,9 +130,7 @@
           position = { x = 1920; y = 0; };
         };
       };
-      bluetooth.enable = true;
     };
-    cursor = { }; # ? Default arrts from module
   };
 
   system.stateVersion = "22.11";
