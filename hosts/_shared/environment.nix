@@ -86,4 +86,5 @@ in
   environment.variables = {
     "PYTHONDONTWRITEBYTECODE" = "1";
   };
+  environment.pathsToLink = [ "/share/backgrounds" ];
 }
