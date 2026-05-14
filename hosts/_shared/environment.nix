@@ -60,6 +60,8 @@ in
       xwayland-satellite
       cursor.package # ! required for mdgreet
       extra.assets4nix
+      libsForQt5.qt5ct
+      qt6Packages.qt6ct
     ]
     ++ lib.optionals config.services.desktopManager.gnome.enable [
       dconf-editor
