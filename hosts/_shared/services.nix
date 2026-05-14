@@ -141,40 +141,23 @@ in
             export XCURSOR_SIZE=24
 
             ${lib.getExe pkgs.niri} --config ${pkgs.writeText "niri-greet-config.kdl" ''
-              output "DP-1" {
-                focus-at-startup
-                layout {
-                  background-color "${palette.bg_base}"
-                }
-              }
 
-              output "eDP-1" {
-                focus-at-startup
-                layout {
-                  background-color "${palette.bg_base}"
-                }
-              }
+              ${lib.concatStringsSep "\n" (
+                lib.mapAttrsToList (name: _m-cfg: ''
+                  output "${name}" {
+                    focus-at-startup
+                    layout {
+                      background-color "${palette.bg_base}"
+                    }
+                  }
+                '') cfg.devices.monitors
+              )}
 
-              output "HDMI-A-1" {
-                focus-at-startup
-                layout {
-                  background-color "${palette.bg_base}"
-                }
-              }
-
-              hotkey-overlay {
-                skip-at-startup
-              }
+              hotkey-overlay { skip-at-startup; }
 
               cursor {
                 xcursor-theme "${cursor.name}"
                 xcursor-size 24
-              }
-
-              layout {
-                focus-ring {
-                  off
-                }
               }
 
               window-rule {
@@ -266,10 +249,10 @@ in
     };
 
     udev = {
-      packages =
-        [ ]
-        ++ lib.optionals config.host.hardware.ddcci.enable [ pkgs.ddcutil ]
-        ++ lib.optionals config.desktop.enable [ pkgs.swayosd ];
+      packages = [
+        # add common udev packages here ...
+      ]
+      ++ lib.optionals config.host.hardware.ddcci.enable [ pkgs.ddcutil ];
     };
 
     upower = {
