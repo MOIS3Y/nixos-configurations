@@ -8,6 +8,7 @@
   imports = [
     # common:
     ./ssh.nix
+    ./bat.nix
     ./direnv.nix
     ./gemini-cli.nix
     ./git.nix
@@ -16,6 +17,7 @@
     ./lsd.nix
     ./nvchad.nix
     ./ruff.nix
+    ./yazi.nix
     ./zsh.nix
 
     # desktop:
