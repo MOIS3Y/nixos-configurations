@@ -195,10 +195,11 @@ in
           }
         }
 
-        // Browsers: Full width and 'main' workspace
+        // Browsers & Steam: Full width and 'main' workspace
         window-rule {
           match app-id=r#"^firefox$"#
           match app-id=r#"^google-chrome$"#
+          match app-id=r#"^steam$"#
           default-column-width { proportion 1.0; }
           open-focused true
         }
@@ -209,6 +210,18 @@ in
           match app-id=r#"^code$"#
           default-column-width { proportion 1.0; }
           open-focused true
+        }
+
+        // Media Players: Translucency and Blur
+        window-rule {
+          match app-id=r#"^feishin$"#
+          match app-id=r#"^space\.rirusha\.Cassette$"#
+          match app-id=r#"^io\.bassi\.Amberol$"#
+          opacity 0.9
+          background-effect {
+            blur true
+            xray true
+          }
         }
 
         // Communication: 'chat' workspace
