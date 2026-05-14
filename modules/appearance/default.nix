@@ -377,6 +377,118 @@
           ];
         };
       };
+      # mdgreet JSON export target:
+      # builtins.toJSON config.matugen.theme.custom.mdgreet
+      mdgreet = {
+        seed = "#89b4fa";
+        coreColors = {
+          primary = "#89b4fa";
+        };
+        schemes = {
+          dark = {
+            primary = "#89b4fa";
+            onPrimary = "#11111b";
+            primaryContainer = "#243f75";
+            onPrimaryContainer = "#cdd6f4";
+            primaryFixed = "#d8e2ff";
+            onPrimaryFixed = "#001a42";
+            primaryFixedDim = "#89b4fa";
+            onPrimaryFixedVariant = "#243f75";
+            secondary = "#b4befe";
+            onSecondary = "#11111b";
+            secondaryContainer = "#181825";
+            onSecondaryContainer = "#cdd6f4";
+            secondaryFixed = "#dbe2f9";
+            onSecondaryFixed = "#141b2c";
+            secondaryFixedDim = "#b4befe";
+            onSecondaryFixedVariant = "#181825";
+            tertiary = "#cba6f7";
+            onTertiary = "#11111b";
+            tertiaryContainer = "#313244";
+            onTertiaryContainer = "#cdd6f4";
+            tertiaryFixed = "#fcd7fb";
+            onTertiaryFixed = "#29132d";
+            tertiaryFixedDim = "#cba6f7";
+            onTertiaryFixedVariant = "#313244";
+            error = "#f38ba8";
+            onError = "#11111b";
+            errorContainer = "#181825";
+            onErrorContainer = "#f38ba8";
+            outline = "#45475a";
+            outlineVariant = "#585b70";
+            background = "#11111b";
+            onBackground = "#cdd6f4";
+            surface = "#11111b";
+            onSurface = "#cdd6f4";
+            surfaceVariant = "#181825";
+            onSurfaceVariant = "#bac2de";
+            surfaceTint = "#89b4fa";
+            inverseSurface = "#eff1f5";
+            inverseOnSurface = "#4c4f69";
+            inversePrimary = "#1e66f5";
+            scrim = "#000000";
+            shadow = "#000000";
+            surfaceBright = "#313244";
+            surfaceDim = "#11111b";
+            surfaceContainer = "#181825";
+            surfaceContainerHigh = "#1e1e2e";
+            surfaceContainerHighest = "#313244";
+            surfaceContainerLow = "#181825";
+            surfaceContainerLowest = "#11111b";
+          };
+          light = {
+            primary = "#1e66f5";
+            onPrimary = "#eff1f5";
+            primaryContainer = "#e0e9ff";
+            onPrimaryContainer = "#4c4f69";
+            primaryFixed = "#d8e2ff";
+            onPrimaryFixed = "#001a42";
+            primaryFixedDim = "#adc6ff";
+            onPrimaryFixedVariant = "#2b4678";
+            secondary = "#7287fd";
+            onSecondary = "#eff1f5";
+            secondaryContainer = "#e6e9ef";
+            onSecondaryContainer = "#4c4f69";
+            secondaryFixed = "#dbe2f9";
+            onSecondaryFixed = "#141b2c";
+            secondaryFixedDim = "#bfc6dc";
+            onSecondaryFixedVariant = "#3f4759";
+            tertiary = "#8839ef";
+            onTertiary = "#eff1f5";
+            tertiaryContainer = "#eadcff";
+            onTertiaryContainer = "#4c4f69";
+            tertiaryFixed = "#fcd7fb";
+            onTertiaryFixed = "#29132d";
+            tertiaryFixedDim = "#debcdf";
+            onTertiaryFixedVariant = "#583e5b";
+            error = "#d20f39";
+            onError = "#eff1f5";
+            errorContainer = "#e6e9ef";
+            onErrorContainer = "#d20f39";
+            outline = "#acb0be";
+            outlineVariant = "#bcc0cc";
+            background = "#eff1f5";
+            onBackground = "#4c4f69";
+            surface = "#eff1f5";
+            onSurface = "#4c4f69";
+            surfaceVariant = "#dce0e8";
+            onSurfaceVariant = "#5c5f77";
+            surfaceTint = "#1e66f5";
+            inverseSurface = "#11111b";
+            inverseOnSurface = "#cdd6f4";
+            inversePrimary = "#89b4fa";
+            scrim = "#000000";
+            shadow = "#000000";
+            surfaceBright = "#eff1f5";
+            surfaceDim = "#dce0e8";
+            surfaceContainer = "#e6e9ef";
+            surfaceContainerHigh = "#ccd0da";
+            surfaceContainerHighest = "#bcc0cc";
+            surfaceContainerLow = "#e6e9ef";
+            surfaceContainerLowest = "#eff1f5";
+          };
+        };
+      };
 
       # Universal semantic palette for terminals, UIs, and configs
       palette = {

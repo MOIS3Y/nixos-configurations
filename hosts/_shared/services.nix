@@ -171,9 +171,11 @@ in
                     greeting = "NixOS";
                     font_family = "Ubuntu";
                     theme = {
-                      mode = "dark";
-                      name = "seed";
-                      seed_color = palette.blue;
+                      mode = config.matugen.mode;
+                      name = "custom";
+                      path = "${pkgs.writeText "mdgreet-theme.json" (
+                        builtins.toJSON config.matugen.theme.custom.mdgreet
+                      )}";
                     };
                     background = {
                       color = palette.bg_base;
