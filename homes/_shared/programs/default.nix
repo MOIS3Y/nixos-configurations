@@ -20,6 +20,7 @@
 
     # desktop:
     ./alacritty.nix
+    ./dms.nix
     ./kitty.nix
     ./mangohud.nix
     ./niri.nix

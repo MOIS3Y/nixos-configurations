@@ -18,13 +18,13 @@
       # DMS JSON export target:
       # builtins.toJSON config.matugen.theme.custom.dms
       dms = {
-        id = "catppuccin-shifted";
-        name = "Catppuccin Mocha Shifted";
+        id = "catppuccino";
+        name = "Catppuccino";
         version = "1.0.0";
         author = "MOIS3Y";
         description = "Soothing shifted Catppuccin theme with perfect contrast";
         dark = {
-          name = "Catppuccin Mocha (Shifted)";
+          name = "Mocha";
           primary = "#89b4fa";
           primaryText = "#11111b";
           primaryContainer = "#243f75";
@@ -46,7 +46,7 @@
           matugen_type = "scheme-tonal-spot";
         };
         light = {
-          name = "Catppuccin Latte (Shifted)";
+          name = "Latte";
           primary = "#1e66f5";
           primaryText = "#eff1f5";
           primaryContainer = "#e0e9ff";
