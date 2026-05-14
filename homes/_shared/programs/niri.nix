@@ -291,10 +291,10 @@ in
 
           // Brightness Control
           XF86MonBrightnessUp allow-when-locked=true {
-            spawn "brightnessctl" "--class=backlight" "set" "+10%"
+            spawn "dms" "brightness" "set" "backlight" "+10" "--exponential";
           }
           XF86MonBrightnessDown allow-when-locked=true {
-            spawn "brightnessctl" "--class=backlight" "set" "10%-"
+            spawn "dms" "brightness" "set" "backlight" "-10" "--exponential";
           }
 
           // Layout & Windows
@@ -416,19 +416,18 @@ in
           Mod+Shift+Equal { set-window-height "+10%"; }
 
           // Screenshots
-          Print      { screenshot; }
+          Print      { spawn "dms" "screenshot"; }
+          Mod+Print  { spawn-sh "dms screenshot region --stdout | swappy -f -"; }
           Ctrl+Print { screenshot-screen; }
           Alt+Print  { screenshot-window; }
         }
 
         // --- MISCELLANEOUS
 
-        screenshot-path "~/Pictures/Screenshots/screenshot-%Y-%m-%d %H-%M-%S.png"
+        screenshot-path "~/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S.png"
         prefer-no-csd
 
-        hotkey-overlay {
-          skip-at-startup
-        }
+        hotkey-overlay { skip-at-startup; }
 
         // --- DANK MATERIAL SHELL (DMS)
 

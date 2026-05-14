@@ -5,6 +5,10 @@
 
 { pkgs, ... }:
 {
+  imports = [
+    ./scripts.nix
+  ];
+
   home.packages = with pkgs; [
     # AI tools:
     opencode
@@ -31,6 +35,10 @@
     insomnia
     sassc
     sqlitebrowser
+
+    # Desktop Utilities:
+    playerctl
+    wireplumber
 
     # Media:
     amberol
