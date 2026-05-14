@@ -1,148 +1,68 @@
-<!-- NixOS configuration -->
-<!-- https://github.com/MOIS3Y/nixos-configurations -->
+# nixos-configurations
+
+**Personal NixOS and Home Manager configurations for my devices, highly
+modular and themed with Catppuccin Mocha.**
+
+This repository contains my declarative configuration for laptops,
+workstations, and servers. Built on NixOS Unstable with a focus on
+Wayland, modern CLI tools, and a unified aesthetic powered by Matugen.
+
+<div align="center">
+
+[![Docs](https://img.shields.io/badge/docs-latest-89b4fa?style=for-the-badge&labelColor=101418)](https://mois3y.github.io/nixos-configurations/)
+![NixOS](https://img.shields.io/badge/NixOS-unstable-cba6f7?style=for-the-badge&logo=nixos&logoColor=white&labelColor=101418)
+![Niri](https://img.shields.io/badge/WM-Niri-a6e3a1?style=for-the-badge&labelColor=101418)
+![Shell](https://img.shields.io/badge/Shell-DMS-fab387?style=for-the-badge&labelColor=101418)
+[![License](https://img.shields.io/badge/License-MIT-f38ba8.svg?style=for-the-badge&labelColor=101418)](./LICENSE)
 
 <br>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/NixOS/nixos-artwork/master/logo/nixos-white.png" width="500px" alt="NixOS logo"/>
-</p>
-<br>
+<img src="docs/src/assets/lock-screen.png" width="32%" alt="Lock Screen">
+<img src="docs/src/assets/login-screen.png" width="32%" alt="Login Card">
+<img src="docs/src/assets/desktop-screen.png" width="32%" alt="Desktop Screen">
 
-<div>
-<br>
+</div>
 
-## :snowflake: <samp>Current setup for desktop devices</samp>
+## Key Features
 
-- DM: `greetd` with `mdgreet`
-- Compositor: `Niri`
-- Shell: `Dank Material Shell`
-- Terminals: `Kitty`, `Alacritty`
-- File Managers: `Nautilus`, `Yazi`
-- Editors: `Nvim`, `Zed`
-- Browsers: `Firefox`, `Google-chrome`
-- Games: `Steam`, `Bottles`
+- **Nix Flakes:** Pure, reproducible configurations for all devices.
+- **Wayland Native:** Centered around the **Niri** scrollable tiling compositor.
+- **Modern Login:** Lightweight **greetd** paired with a custom Material Design
+  greeter — [mdgreet](https://github.com/MOIS3Y/mdgreet).
+- **Dank Material Shell:** A polished desktop shell with a "fresh look" based
+  on Material Design 3. Comes with "batteries included" and strikes a perfect
+  balance between declarative configuration and imperative flexibility.
+- **Dynamic Theming:** Unified Catppuccin Mocha aesthetic powered by
+  [matugen-nix](https://github.com/MOIS3Y/matugen-nix).
+- **Modular Architecture:** Separation between hardware-specific settings,
+  shared system logic, and user-level Home Manager configurations.
+- **Secure Secrets:** Fully encrypted sensitive data using sops-nix and age.
 
+## Installation & Usage
 
-## :wrench: <samp>Installation</samp>
+Comprehensive guides on installation, architecture, and theming are available
+in the official **[Documentation](https://mois3y.github.io/nixos-configurations/)**.
 
-1. Download iso:
-   ```console
-   # Download latest NixOS release iso
-   wget -O nixos.iso https://channels.nixos.org/nixos-24.11/latest-nixos-gnome-x86_64-linux.iso
+## Tech Stack
 
-   # Write iso to a flash drive
-   # use your favorite util
-   # balenaetcher
-   # rufus
-   # .. etc
-   ```
+- **OS**: [NixOS Unstable](https://nixos.org)
+- **Display Manager**: greetd + [mdgreet](https://github.com/MOIS3Y/mdgreet)
+- **Compositor**: [Niri](https://github.com/niri-rblo/niri)
+- **Desktop Shell**: [DMS](https://github.com/MOIS3Y/aladdin4nix)
+- **Shell**: Zsh
+- **Terminals**: Kitty, Alacritty
+- **Theming**: [Catppuccin Mocha](https://catppuccin.com)
+- **Secrets**: [sops-nix](https://github.com/Mic92/sops-nix)
+- **Editors**: [Neovim](https://github.com/nix-community/nix4nvchad), Zed, VS Code
+- **Gaming**: Steam, Bottles, GameScope
 
-2. Boot into the installer
+## License
 
-    2.1. Connect to Network
-    
-    2.2. Open terminal
+This project is licensed under the **MIT** License. See the [LICENSE](./LICENSE)
+file for details.
 
-3. Switch to root user: `sudo -i`
+---
 
-4. Partitioning:
-    
-    I am using nvme disk (/dev/nvme0n1) with GPT partition label: 
-    ```console
-    # Final result:
-    nvme0n1          259:0    0 210,0G  0 disk
-    ├─nvme0n1p1      259:1    0     2G  0 part
-    └─nvme0n1p2      259:2    0   200G  0 part
-      ├─vg0-root     254:0    0    30G  0 lvm 
-      ├─vg0-home     254:1    0    30G  0 lvm
-      ├─vg0-docker   254:1    0    20G  0 lvm 
-      └─vg0-swap     254:4    0    10G  0 lvm
-    ```
-    
-    4.1. Create partitions
-    ```console
-    # cfdisk (gpt + 2 part: 10Gb and all left space) / write (type yes) quit:
-    cfdisk /dev/nvme0n1
-    parted /dev/nvme0n1 name 1 EFI
-    parted /dev/nvme0n1 name 2 SYSTEM
-    
-    # or only parted:
-    parted /dev/nvme0n1 mklabel gpt
-    parted /dev/nvme0n1 -- mkpart EFI fat32 1MB 10GB
-    parted /dev/nvme0n1 -- mkpart SYSTEM 10GB 100%
-    
-    # require flag  for EFI boot partition: 
-    parted /dev/nvme0n1 -- set 1 esp on
-    ```
-    
-    4.2. Create LVM:
-    ```console
-    pvcreate /dev/nvme0n1p2
-    vgcreate vg0 /dev/nvme0n1p2
-    lvcreate -L30G -n root vg0
-    lvcreate -L30G -n home vg0
-    lvcreate -L20G -n docker vg0
-    lvcreate -L10G -n swap vg0
-    ```
-    
-    4.3. Create filesystem:
-    ```baconsolesh
-    mkfs.ext4 -L root /dev/vg0/root
-    mkfs.ext4 -L home /dev/vg0/home
-    mkfs.ext4 -L docker /dev/vg0/docker
-    mkswap -L swap /dev/vg0/swap
-    ``` 
-    
-    4.4. Mount:
-    ```console
-
-    mount /dev/disk/by-label/root /mnt
-
-    mkdir -p /mnt/{boot,home,var}
-    mkdir -p /mnt/var/lib/docker
-    mkdir -p /mnt/boot/efi
-    
-    mount /dev/disk/by-label/EFI /mnt/boot/efi
-    mount /dev/disk/by-label/home /mnt/home
-    mount /dev/disk/by-label/docker /mnt/var/lib/docker
-
-    swapon /dev/disk/by-label/swap
-
-    # See final result:
-    lsblk
-    
-    ```
- 
-5. Enable flakes:
-    ```console
-    nix-shell -p nixFlakes
-    ```
-
-6. Install nixos from flake:
-    ```console
-    # laptop:
-    nixos-install --flake github:MOIS3Y/nixos-configurations#laptop --impure
-    # workstation:
-    nixos-install --flake github:MOIS3Y/nixos-configurations#workstation --impure
-    ```
-7. Fix GRUB (I have this trouble) after install:
-    ```console
-    mkdir /mnt/boot/efi/EFI/boot
-    # may be called differently grubx64.efi etc
-    cp /mnt/boot/efi/EFI/NixOS-boot-efi/grubx.efi /mnt/boot/efi/EFI/boot/bootx.efi
-    ```
-8. Umount:
-    ```console
-    umount /mnt/boot/efi
-    umount /mnt/var/lib/docker
-    umount /mnt/home
-    umount /mnt
-    swapoff --all
-    ```
-9. Reboot:
-    ```console
-    reboot
-    # remove flash drive
-    ```
-<br>
+<div align="center">
+  Made with ❤️ by MOIS3Y
 </div>
