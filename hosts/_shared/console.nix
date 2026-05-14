@@ -21,7 +21,7 @@ in
     packages = [ pkgs.terminus_font ];
     keyMap = "us";
     colors = map stripHash [
-      palette.black
+      palette.bg_base
       palette.red
       palette.green
       palette.yellow
