@@ -47,13 +47,13 @@ in the official **[Documentation](https://mois3y.github.io/nixos-configurations/
 
 - **OS**: [NixOS Unstable](https://nixos.org)
 - **Display Manager**: greetd + [mdgreet](https://github.com/MOIS3Y/mdgreet)
-- **Compositor**: [Niri](https://github.com/niri-rblo/niri)
-- **Desktop Shell**: [DMS](https://github.com/MOIS3Y/aladdin4nix)
+- **Compositor**: [Niri](https://github.com/niri-wm/niri)
+- **Desktop Shell**: [DMS](https://github.com/AvengeMedia/DankMaterialShell)
 - **Shell**: Zsh
 - **Terminals**: Kitty, Alacritty
 - **Theming**: [Catppuccin Mocha](https://catppuccin.com)
 - **Secrets**: [sops-nix](https://github.com/Mic92/sops-nix)
-- **Editors**: [Neovim](https://github.com/nix-community/nix4nvchad), Zed, VS Code
+- **Editors**: [Neovim (NvChad)](https://github.com/nix-community/nix4nvchad), Zed, VS Code
 - **Gaming**: Steam, Bottles, GameScope
 
 ## License
