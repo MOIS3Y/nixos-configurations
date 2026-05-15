@@ -5,4 +5,5 @@
 - [Appearance & Theming](./appearance.md)
 - [Secrets Management](./secrets.md)
 - [Installation](./installation.md)
+- [Changelog](./changelog.md)
 - [Afterword](./afterword.md)

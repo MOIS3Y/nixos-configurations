@@ -216,6 +216,7 @@
         default = nixpkgs.legacyPackages.${system}.mkShell {
           buildInputs = with nixpkgs.legacyPackages.${system}; [
             mdbook
+            git-cliff
           ];
         };
       };
