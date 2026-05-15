@@ -1,6 +1,6 @@
-# █░█ ▄▀█ █▀█ ▀█▀ █▀█ █▀█   █▄░█ █ ▀▄▀
-# █▀█ █▀█ █▀▀ ░█░ █▄█ █▀▀   █░▀█ █ █░█
-# -- -- -- -- -- -- -- -- -- -- -- -- -
+# █░░ ▄▀█ █▀█ ▀█▀ █▀█ █▀█   █▄░█ █ ▀▄▀ ▀
+# █▄▄ █▀█ █▀▀ ░█░ █▄█ █▀▀   █░▀█ █ █░█ ▄
+# -- -- -- -- -- -- -- -- -- -- -- -- --
 # NixOS configuration for the Huawei Honor MagicBook (laptop).
 
 { pkgs, ... }:
@@ -59,6 +59,7 @@
     enable = true;
     displayManager = {
       enable = true;
+      greetd.enable = true;
     };
     compositors = [ "niri" ];
     games = {

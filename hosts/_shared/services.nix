@@ -155,6 +155,18 @@ in
 
               hotkey-overlay { skip-at-startup; }
 
+              input {
+                touchpad {
+                  tap
+                  drag true
+                  natural-scroll
+                }
+              }
+
+              overview {
+                backdrop-color "${palette.bg_base}"
+              }
+
               cursor {
                 xcursor-theme "${cursor.name}"
                 xcursor-size 24

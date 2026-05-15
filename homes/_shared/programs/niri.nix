@@ -73,7 +73,7 @@ in
   config = {
     programs.niri = {
       enable = true;
-      backup = true;
+      backup = false;
       settings = ''
         // --- ENVIRONMENT VARIABLES
 
@@ -304,10 +304,10 @@ in
 
           // Brightness Control
           XF86MonBrightnessUp allow-when-locked=true {
-            spawn "dms" "brightness" "set" "backlight" "+10" "--exponential";
+            spawn "brightnessctl" "--class=backlight" "set" "+10%"
           }
           XF86MonBrightnessDown allow-when-locked=true {
-            spawn "dms" "brightness" "set" "backlight" "-10" "--exponential";
+            spawn "brightnessctl" "--class=backlight" "set" "10%-"
           }
 
           // Layout & Windows
