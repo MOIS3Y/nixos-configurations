@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [26.05.1] - 2026-05-16
+
+### 🛠️ Configuration
+
+- *(niri)* Migrate to brightnessctl and refine touchpad settings
+- *(niri)* Migrate media and brightness controls to dms IPC
+
+### 📚 Documentation
+
+- *(style)* Add docstrings and clean up ASCII headers
+
+
 ## [26.05.0] - 2026-05-15
 
 ### Changed
