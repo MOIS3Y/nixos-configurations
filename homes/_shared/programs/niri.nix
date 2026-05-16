@@ -78,8 +78,11 @@ in
         // --- ENVIRONMENT VARIABLES
 
         environment {
-          // Hint for Electron apps to use Wayland (Ozone)
-           ELECTRON_OZONE_PLATFORM_HINT "auto"
+          ELECTRON_OZONE_PLATFORM_HINT "auto"
+          XDG_CURRENT_DESKTOP "niri"
+          QT_QPA_PLATFORM "wayland"
+          QT_QPA_PLATFORMTHEME "gtk3"
+          QT_QPA_PLATFORMTHEME_QT6 "gtk3"
         }
 
         // --- INPUT DEVICES (Keyboard, Mouse, Touchpad)
@@ -274,40 +277,45 @@ in
             spawn "dms" "ipc" "call" "spotlight" "toggle"
           }
 
+          // Security
+          Mod+Alt+L hotkey-overlay-title="Lock Screen" {
+            spawn "dms" "ipc" "call" "lock" "lock"
+          }
+
           // Audio Control
           XF86AudioRaiseVolume allow-when-locked=true {
-            spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"
+            spawn "dms" "ipc" "call" "audio" "increment" "10"
           }
           XF86AudioLowerVolume allow-when-locked=true {
-            spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"
+            spawn "dms" "ipc" "call" "audio" "decrement" "10"
           }
           XF86AudioMute allow-when-locked=true {
-            spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+            spawn "dms" "ipc" "call" "audio" "mute"
           }
           XF86AudioMicMute allow-when-locked=true {
-            spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+            spawn "dms" "ipc" "call" "audio" "micmute"
           }
 
           // Media Control
           XF86AudioPlay allow-when-locked=true {
-            spawn-sh "playerctl play-pause"
+            spawn "dms" "ipc" "call" "mpris" "playPause"
           }
           XF86AudioStop allow-when-locked=true {
-            spawn-sh "playerctl stop"
+            spawn "dms" "ipc" "call" "mpris" "stop"
           }
           XF86AudioPrev allow-when-locked=true {
-            spawn-sh "playerctl previous"
+            spawn "dms" "ipc" "call" "mpris" "previous"
           }
           XF86AudioNext allow-when-locked=true {
-            spawn-sh "playerctl next"
+            spawn "dms" "ipc" "call" "mpris" "next"
           }
 
           // Brightness Control
           XF86MonBrightnessUp allow-when-locked=true {
-            spawn "brightnessctl" "--class=backlight" "set" "+10%"
+            spawn "dms" "ipc" "call" "brightness" "increment" "10" ""
           }
           XF86MonBrightnessDown allow-when-locked=true {
-            spawn "brightnessctl" "--class=backlight" "set" "10%-"
+            spawn "dms" "ipc" "call" "brightness" "decrement" "10" ""
           }
 
           // Layout & Windows

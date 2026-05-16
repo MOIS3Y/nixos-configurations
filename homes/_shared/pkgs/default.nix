@@ -36,10 +36,6 @@
     sassc
     sqlitebrowser
 
-    # Desktop Utilities:
-    playerctl
-    wireplumber
-
     # Media:
     amberol
     cassette
@@ -65,7 +61,6 @@
     # Society / Communication:
     mattermost-desktop
     telegram-desktop
-    zoom-us
 
     # Wine:
     wine

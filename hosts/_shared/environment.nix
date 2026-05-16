@@ -46,7 +46,6 @@ in
       appimage-run
       at-spi2-atk # ! required for polkit-gnome-authentication-agent-1
       adwaita-icon-theme # ! required for most gnome apps
-      brightnessctl
       evince
       file-roller
       firefox
