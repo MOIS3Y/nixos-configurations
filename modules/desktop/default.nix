@@ -1,6 +1,7 @@
 # █▀▄ █▀▀ █▀ █▄▀ ▀█▀ █▀█ █▀█ ▀
 # █▄▀ ██▄ ▄█ █░█ ░█░ █▄█ █▀▀ ▄
 # -- -- -- -- -- -- -- -- -- -
+# Global configuration options for the desktop setup.
 
 { pkgs, lib, ... }: let
   inherit (lib)

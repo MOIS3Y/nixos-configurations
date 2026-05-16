@@ -1,6 +1,7 @@
 # █░█ █▀█ █▀ ▀█▀ ▀
 # █▀█ █▄█ ▄█ ░█░ ▄
-# -- -- -- -- -- -- --
+# -- -- -- -- -- -
+# Global configuration options for host-specific hardware and services.
 
 { config, lib, ... }: let
   inherit (lib)
