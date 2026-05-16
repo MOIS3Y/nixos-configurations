@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'docs/**'
+      - 'CHANGELOG.md'
       - '.github/workflows/docs.yml'
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
