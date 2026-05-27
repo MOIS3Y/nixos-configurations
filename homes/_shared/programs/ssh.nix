@@ -18,103 +18,103 @@ let
       # TODO: create custom sops managment (can't install nix-sops on android)
       # isp:
       "services.isptech.ru" = {
-        user = "admserv";
-        identityFile = "${config.home.homeDirectory}/.ssh/ispsystem/go";
-        port = 2222;
-        hostname = "172.31.52.25";
+        User = "admserv";
+        IdentityFile = "${config.home.homeDirectory}/.ssh/ispsystem/go";
+        Port = 2222;
+        HostName = "172.31.52.25";
       };
       # self:
       "allsave" = {
-        user = "admserv";
-        identityFile = "${config.home.homeDirectory}/.ssh/self/allsave";
-        port = 22;
-        hostname = "192.168.1.100";
+        User = "admserv";
+        IdentityFile = "${config.home.homeDirectory}/.ssh/self/allsave";
+        Port = 22;
+        HostName = "192.168.1.100";
       };
       "gliese" = {
-        user = "admvps";
-        identityFile = "${config.home.homeDirectory}/.ssh/self/gliese";
-        port = 22;
-        hostname = "gliese.zhukovsky.me";
+        User = "admvps";
+        IdentityFile = "${config.home.homeDirectory}/.ssh/self/gliese";
+        Port = 22;
+        HostName = "gliese.zhukovsky.me";
       };
       "solar" = {
-        user = "admvps";
-        identityFile = "${config.home.homeDirectory}/.ssh/self/solar";
-        port = 2222;
-        hostname = "solar.zhukovsky.me";
+        User = "admvps";
+        IdentityFile = "${config.home.homeDirectory}/.ssh/self/solar";
+        Port = 2222;
+        HostName = "solar.zhukovsky.me";
       };
     };
     stepan = {
       # isp:
       "isp" = {
-        user = "s.zhukovskii";
-        identityFile = config.sops.secrets."ssh/private-keys/ispsystem/go".path;
-        certificateFile = "${config.home.homeDirectory}/.ssh/ispsystem/go-cert.pub";
-        port = 22;
-        hostname = "ssh.ispsystem.net";
+        User = "s.zhukovskii";
+        IdentityFile = config.sops.secrets."ssh/private-keys/ispsystem/go".path;
+        CertificateFile = "${config.home.homeDirectory}/.ssh/ispsystem/go-cert.pub";
+        Port = 22;
+        HostName = "ssh.ispsystem.net";
       };
       "isp-de" = {
-        user = "s.zhukovskii";
-        identityFile = config.sops.secrets."ssh/private-keys/ispsystem/go".path;
-        certificateFile = "${config.home.homeDirectory}/.ssh/ispsystem/go-cert.pub";
-        port = 22;
-        hostname = "ssh-de.ispsystem.net";
+        User = "s.zhukovskii";
+        IdentityFile = config.sops.secrets."ssh/private-keys/ispsystem/go".path;
+        CertificateFile = "${config.home.homeDirectory}/.ssh/ispsystem/go-cert.pub";
+        Port = 22;
+        HostName = "ssh-de.ispsystem.net";
       };
       "gitlab-dev.ispsystem.net" = {
-        identityFile = config.sops.secrets."ssh/private-keys/ispsystem/go".path;
-        identitiesOnly = true;
-        port = 22;
-        hostname = "gitlab-dev.ispsystem.net";
+        IdentityFile = config.sops.secrets."ssh/private-keys/ispsystem/go".path;
+        IdentitiesOnly = "yes";
+        Port = 22;
+        HostName = "gitlab-dev.ispsystem.net";
       };
       "services.isptech.ru" = {
-        user = "admserv";
-        identityFile = config.sops.secrets."ssh/private-keys/ispsystem/go".path;
-        port = 2222;
-        hostname = "172.31.52.25";
+        User = "admserv";
+        IdentityFile = config.sops.secrets."ssh/private-keys/ispsystem/go".path;
+        Port = 2222;
+        HostName = "172.31.52.25";
       };
       "git.isptech.ru" = {
-        identityFile = config.sops.secrets."ssh/private-keys/ispsystem/gitea".path;
-        identitiesOnly = true;
-        port = 1488;
-        hostname = "git.isptech.ru";
+        IdentityFile = config.sops.secrets."ssh/private-keys/ispsystem/gitea".path;
+        IdentitiesOnly = "yes";
+        Port = 1488;
+        HostName = "git.isptech.ru";
       };
       # misc:
       "github.com" = {
-        identityFile = config.sops.secrets."ssh/private-keys/misc/github".path;
-        identitiesOnly = true;
-        port = 22;
-        hostname = "github.com";
+        IdentityFile = config.sops.secrets."ssh/private-keys/misc/github".path;
+        IdentitiesOnly = "yes";
+        Port = 22;
+        HostName = "github.com";
       };
       # self:
       "allsave" = {
-        user = "admserv";
-        identityFile = config.sops.secrets."ssh/private-keys/self/allsave".path;
-        port = 22;
-        hostname = "192.168.1.100";
+        User = "admserv";
+        IdentityFile = config.sops.secrets."ssh/private-keys/self/allsave".path;
+        Port = 22;
+        HostName = "192.168.1.100";
       };
       "git.zhukovsky.me" = {
-        user = "git";
-        identityFile = config.sops.secrets."ssh/private-keys/self/gitea".path;
-        identitiesOnly = true;
-        port = 22;
-        hostname = "git.zhukovsky.me";
+        User = "git";
+        IdentityFile = config.sops.secrets."ssh/private-keys/self/gitea".path;
+        IdentitiesOnly = "yes";
+        Port = 22;
+        HostName = "git.zhukovsky.me";
       };
       "gliese" = {
-        user = "admvps";
-        identityFile = config.sops.secrets."ssh/private-keys/self/gliese".path;
-        port = 22;
-        hostname = "gliese.zhukovsky.me";
+        User = "admvps";
+        IdentityFile = config.sops.secrets."ssh/private-keys/self/gliese".path;
+        Port = 22;
+        HostName = "gliese.zhukovsky.me";
       };
       "solar" = {
-        user = "admvps";
-        identityFile = config.sops.secrets."ssh/private-keys/self/solar".path;
-        port = 2222;
-        hostname = "solar.zhukovsky.me";
+        User = "admvps";
+        IdentityFile = config.sops.secrets."ssh/private-keys/self/solar".path;
+        Port = 2222;
+        HostName = "solar.zhukovsky.me";
       };
       "pixel" = {
-        user = "nix-on-droid";
-        identityFile = config.sops.secrets."ssh/private-keys/self/pixel".path;
-        port = 8022;
-        hostname = "pixel.zhukovsky.me";
+        User = "nix-on-droid";
+        IdentityFile = config.sops.secrets."ssh/private-keys/self/pixel".path;
+        Port = 8022;
+        HostName = "pixel.zhukovsky.me";
       };
       # add more stepan matchers here ...
     };
@@ -142,7 +142,7 @@ in
       };
       enableDefaultConfig = false;
       # empty is a default value {} to return if the path does not exist in attrset;
-      matchBlocks = attrsets.attrByPath [ cfg.userMatchBlocks ] "empty" matchers;
+      settings = attrsets.attrByPath [ cfg.userMatchBlocks ] "empty" matchers;
     };
   };
 }
