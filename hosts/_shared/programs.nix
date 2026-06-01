@@ -57,7 +57,9 @@ in
 
     gamescope = {
       enable = config.desktop.games.enable;
-      capSysNice = true;
+      # ! broken: steam: setuid use of bubblewrap is not supported in this build
+      # ? see: https://github.com/NixOS/nixpkgs/issues/523200
+      capSysNice = false;
     };
 
     geary = {
