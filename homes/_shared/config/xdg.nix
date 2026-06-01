@@ -10,115 +10,114 @@
   ...
 }:
 let
-  # Shortcuts:
-  # -- -- -- -
-  amberol = [ "io.bassi.Amberol.desktop" ];
-  browser = [ "firefox.desktop" ];
-  chromium-browser = [ "chromium-browser.desktop" ];
-  discord = [ "discord.desktop" ];
-  file-roller = [ "org.gnome.FileRoller.desktop" ];
-  inkscape = [ "org.inkscape.Inkscape.desktop" ];
-  imv = [ "imv.desktop" ];
-  vlc = [ "vlc.desktop" ];
-  nvim = [ "nvim.desktop" ];
-  mattermost = [ "Mattermost.desktop" ];
-  steam = [ "steam.desktop" ];
-  telegram = [ "telegramdesktop.desktop" ];
-  transmission-gtk = [ "transmission-gtk.desktop" ];
-  # Associations:
+  # MIME lists:
   # -- -- -- -- -
-  associations = {
-    # Links:
-    "application/x-extension-htm" = browser;
-    "application/x-extension-html" = browser;
-    "application/x-extension-shtml" = browser;
-    "application/x-extension-xht" = browser;
-    "application/x-extension-xhtml" = browser;
-    "application/xhtml+xml" = browser;
-    # Texts:
-    "application/x-shellscript" = nvim;
-    "application/json" = browser;
-    "application/pdf" = browser;
-    "text/html" = browser;
-    "text/plain" = nvim;
-    # Archives:
-    "application/x-7z-compressed" = file-roller;
-    "application/x-7z-compressed-tar" = file-roller;
-    "application/x-ace" = file-roller;
-    "application/x-alz" = file-roller;
-    "application/x-ar" = file-roller;
-    "application/x-arj" = file-roller;
-    "application/x-bzip" = file-roller;
-    "application/x-bzip-compressed-tar" = file-roller;
-    "application/x-bzip1" = file-roller;
-    "application/x-bzip1-compressed-tar" = file-roller;
-    "application/x-cabinet" = file-roller;
-    "application/x-cd-image" = file-roller;
-    "application/x-compress" = file-roller;
-    "application/x-compressed-tar" = file-roller;
-    "application/x-cpio" = file-roller;
-    "application/x-deb" = file-roller;
-    "application/x-ear" = file-roller;
-    "application/x-ms-dos-executable" = file-roller;
-    "application/x-gtar" = file-roller;
-    "application/x-gzip" = file-roller;
-    "application/x-gzpostscript" = file-roller;
-    "application/x-java-archive" = file-roller;
-    "application/x-lha" = file-roller;
-    "application/x-lhz" = file-roller;
-    "application/x-lrzip" = file-roller;
-    "application/x-lrzip-compressed-tar" = file-roller;
-    "application/x-lz4" = file-roller;
-    "application/x-lzip" = file-roller;
-    "application/x-lzip-compressed-tar" = file-roller;
-    "application/x-lzma " = file-roller;
-    "application/x-lzma-compressed-tar" = file-roller;
-    "application/x-lzop " = file-roller;
-    "application/x-lz4-compressed-tar" = file-roller;
-    "application/x-lzop-compressed-tar" = file-roller;
-    "application/x-ms-wim application/x-rar" = file-roller;
-    "application/x-rar-compressed" = file-roller;
-    "application/x-rpm" = file-roller;
-    "application/x-source-rpm" = file-roller;
-    "application/x-rzip" = file-roller;
-    "application/x-rzip-compressed-tar" = file-roller;
-    "application/x-tar" = file-roller;
-    "application/x-tarz" = file-roller;
-    "application/x-stuffit" = file-roller;
-    "application/x-war" = file-roller;
-    "application/x-xz" = file-roller;
-    "application/x-xz-compressed-tar" = file-roller;
-    "application/x-zip" = file-roller;
-    "application/x-zip-compressed" = file-roller;
-    "application/x-zoo" = file-roller;
-    "application/zip" = file-roller;
-    "application/x-archive" = file-roller;
-    "application/vnd.ms-cab-compressed" = file-roller;
-    "application/vnd.debian.binary-package" = file-roller;
-    "application/gzip" = file-roller;
-    # Schemes:
-    "x-scheme-handler/about" = browser;
-    "x-scheme-handler/chrome" = chromium-browser;
-    "x-scheme-handler/ftp" = browser;
-    "x-scheme-handler/http" = browser;
-    "x-scheme-handler/https" = browser;
-    "x-scheme-handler/unknown" = browser;
-    "x-scheme-handler/discord" = discord;
-    "x-scheme-handler/tg" = telegram;
-    "x-scheme-handler/mattermost" = mattermost;
-    "x-scheme-handler/magnet" = transmission-gtk;
-    "x-scheme-handler/steam" = steam;
-    # Files & media:
-    "compressed/*" = file-roller;
-    "video/*" = vlc;
-    "audio/*" = amberol;
-    "audio/mpeg" = amberol;
-    "image/png" = imv;
-    "image/jpeg" = imv;
-    "image/svg+xml" = inkscape;
-    "inode/directory" = [ "org.gnome.Nautilus.desktop;lf.desktop" ];
-    "text/*" = nvim;
-  };
+  web = [
+    "application/x-extension-htm"
+    "application/x-extension-html"
+    "application/x-extension-shtml"
+    "application/x-extension-xht"
+    "application/x-extension-xhtml"
+    "application/xhtml+xml"
+    "application/json"
+    "application/pdf"
+    "text/html"
+    "x-scheme-handler/about"
+    "x-scheme-handler/ftp"
+    "x-scheme-handler/http"
+    "x-scheme-handler/https"
+    "x-scheme-handler/unknown"
+  ];
+
+  editor = [
+    "application/x-shellscript"
+    "text/plain"
+    "text/*"
+  ];
+
+  archives = [
+    "application/x-7z-compressed"
+    "application/x-7z-compressed-tar"
+    "application/x-ace"
+    "application/x-alz"
+    "application/x-ar"
+    "application/x-arj"
+    "application/x-bzip"
+    "application/x-bzip-compressed-tar"
+    "application/x-bzip1"
+    "application/x-bzip1-compressed-tar"
+    "application/x-cabinet"
+    "application/x-cd-image"
+    "application/x-compress"
+    "application/x-compressed-tar"
+    "application/x-cpio"
+    "application/x-deb"
+    "application/x-ear"
+    "application/x-ms-dos-executable"
+    "application/x-gtar"
+    "application/x-gzip"
+    "application/x-gzpostscript"
+    "application/x-java-archive"
+    "application/x-lha"
+    "application/x-lhz"
+    "application/x-lrzip"
+    "application/x-lrzip-compressed-tar"
+    "application/x-lz4"
+    "application/x-lzip"
+    "application/x-lzip-compressed-tar"
+    "application/x-lzma "
+    "application/x-lzma-compressed-tar"
+    "application/x-lzop "
+    "application/x-lz4-compressed-tar"
+    "application/x-lzop-compressed-tar"
+    "application/x-ms-wim application/x-rar"
+    "application/x-rar-compressed"
+    "application/x-rpm"
+    "application/x-source-rpm"
+    "application/x-rzip"
+    "application/x-rzip-compressed-tar"
+    "application/x-tar"
+    "application/x-tarz"
+    "application/x-stuffit"
+    "application/x-war"
+    "application/x-xz"
+    "application/x-xz-compressed-tar"
+    "application/x-zip"
+    "application/x-zip-compressed"
+    "application/x-zoo"
+    "application/zip"
+    "application/x-archive"
+    "application/vnd.ms-cab-compressed"
+    "application/vnd.debian.binary-package"
+    "application/gzip"
+    "compressed/*"
+  ];
+
+  # Helper to create associations:
+  # -- -- -- -- -- -- -- -- -- -- -
+  associate = mimes: app: lib.genAttrs mimes (_: [ app ]);
+
+  # Final mapping:
+  # -- -- -- -- -- -
+  associations =
+    (associate web "firefox.desktop")
+    // (associate editor "nvim.desktop")
+    // (associate archives "org.gnome.FileRoller.desktop")
+    // {
+      "inode/directory" = [ "org.gnome.Nautilus.desktop;yazi.desktop" ];
+      "video/*" = [ "io.github.celluloid_player.Celluloid.desktop" ];
+      "audio/*" = [ "io.bassi.Amberol.desktop" ];
+      "audio/mpeg" = [ "io.bassi.Amberol.desktop" ];
+      "image/png" = [ "imv.desktop" ];
+      "image/jpeg" = [ "imv.desktop" ];
+      "image/svg+xml" = [ "org.inkscape.Inkscape.desktop" ];
+      "x-scheme-handler/discord" = [ "discord.desktop" ];
+      "x-scheme-handler/tg" = [ "telegramdesktop.desktop" ];
+      "x-scheme-handler/mattermost" = [ "Mattermost.desktop" ];
+      "x-scheme-handler/magnet" = [ "transmission-gtk.desktop" ];
+      "x-scheme-handler/steam" = [ "steam.desktop" ];
+      "x-scheme-handler/chrome" = [ "chromium-browser.desktop" ];
+    };
 in
 {
   xdg = {
@@ -150,6 +149,9 @@ in
         pkgs.xdg-desktop-portal-gnome
       ];
       config = {
+        niri = {
+          default = [ "gnome" ];
+        };
         common = {
           default = [ "gtk" ];
         };
