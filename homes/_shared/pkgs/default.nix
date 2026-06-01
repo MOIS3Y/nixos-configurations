@@ -15,7 +15,7 @@
 
     # Development Languages:
     (lua.withPackages (ps: with ps; [ luarocks ]))
-    nodejs_25
+    nodejs_26
     poetry
     (python3.withPackages (ps: with ps; [ pip ]))
     uv
