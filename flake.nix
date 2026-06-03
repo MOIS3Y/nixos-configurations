@@ -190,7 +190,7 @@
             inherit system inputs;
           };
           modules = [
-            ./hosts/vps-solar/configuration.nix
+            ./hosts/vps-polaris/configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
