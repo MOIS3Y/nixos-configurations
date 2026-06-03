@@ -27,6 +27,7 @@
       bash-language-server
       docker-compose-language-service
       nixd
+      vscode-langservers-extracted
     ];
 
   # Let Home Manager install and manage itself.

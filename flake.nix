@@ -185,6 +185,28 @@
             }
           ];
         };
+        polaris = lib.nixosSystem {
+          specialArgs = {
+            inherit system inputs;
+          };
+          modules = [
+            ./hosts/vps-solar/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit system inputs;
+                };
+                backupFileExtension = "backup";
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = {
+                  admvps = ./homes/admvps/home.nix;
+                };
+              };
+            }
+          ];
+        };
       };
       # ! -- -- -- -- -- Android -- -- -- -- -- ! #
       nixOnDroidConfigurations = {
@@ -237,6 +259,7 @@
             "allsave"
             "gliese"
             "solar"
+            "polaris"
           ];
         in
         (builtins.listToAttrs (

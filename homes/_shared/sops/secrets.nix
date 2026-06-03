@@ -19,6 +19,9 @@
     "ssh/private-keys/self/solar" = {
       path = "${config.home.homeDirectory}/.ssh/self/solar";
     };
+    "ssh/private-keys/self/polaris" = {
+      path = "${config.home.homeDirectory}/.ssh/self/polaris";
+    };
     "ssh/private-keys/self/pixel" = {
       path = "${config.home.homeDirectory}/.ssh/self/pixel";
     };
@@ -43,6 +46,9 @@
     };
     "ssh/public-keys/self/solar" = {
       path = "${config.home.homeDirectory}/.ssh/self/solar.pub";
+    };
+    "ssh/public-keys/self/polaris" = {
+      path = "${config.home.homeDirectory}/.ssh/self/polaris.pub";
     };
     "ssh/public-keys/self/pixel" = {
       path = "${config.home.homeDirectory}/.ssh/self/pixel.pub";
