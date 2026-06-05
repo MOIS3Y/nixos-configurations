@@ -10,7 +10,6 @@
     ./ssh.nix
     ./bat.nix
     ./direnv.nix
-    ./gemini-cli.nix
     ./git.nix
     ./gpg.nix
     ./htop.nix

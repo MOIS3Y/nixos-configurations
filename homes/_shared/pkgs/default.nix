@@ -11,6 +11,7 @@
 
   home.packages = with pkgs; [
     # AI tools:
+    antigravity-cli
     opencode
 
     # Development Languages:

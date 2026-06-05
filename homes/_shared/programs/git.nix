@@ -40,7 +40,8 @@
       ".zed/"
       ".zed-settings.json"
 
-      # -- Gemini CLI & AI Context --
+      # -- Gemini & AI Context --
+      "AGENTS.md"
       "/GEMINI.md"
       ".geminiignore"
       ".gemini/"

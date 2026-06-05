@@ -24,10 +24,6 @@
     shellAliases = {
       docker = "sudo docker";
       docker-compose = "sudo docker-compose";
-      gemini = ''
-        HTTP_PROXY="http://127.0.0.1:10809" \
-        HTTPS_PROXY="http://127.0.0.1:10809" exec gemini "$@"
-      '';
     };
     oh-my-zsh = {
       enable = true;
