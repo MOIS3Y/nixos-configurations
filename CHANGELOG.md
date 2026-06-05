@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 
 - *(steam)* Disable gamescope capSysNice to resolve bubblewrap error
 - *(flake)* Use correct polaris host configuration path
+- *(ssh)* Remove legacy nix-on-droid matchers
 
 ### 🛠️ Configuration
 

@@ -50,7 +50,6 @@
 
   # Override _shared configuration:
   programs.htop.os = "android";
-  programs.ssh.userMatchBlocks = "nix-on-droid";
   programs.zsh.shellAliases = lib.mkForce { shutdown = "exec shutdown"; };
   programs.zsh.oh-my-zsh.plugins = lib.mkForce [
     "git"
