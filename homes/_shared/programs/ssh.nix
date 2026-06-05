@@ -14,35 +14,6 @@ let
 
   matchers = {
     empty = { };
-    nix-on-droid = {
-      # TODO: create custom sops managment (can't install nix-sops on android)
-      # isp:
-      "services.isptech.ru" = {
-        User = "admserv";
-        IdentityFile = "${config.home.homeDirectory}/.ssh/ispsystem/go";
-        Port = 2222;
-        HostName = "172.31.52.25";
-      };
-      # self:
-      "allsave" = {
-        User = "admserv";
-        IdentityFile = "${config.home.homeDirectory}/.ssh/self/allsave";
-        Port = 22;
-        HostName = "192.168.1.100";
-      };
-      "gliese" = {
-        User = "admvps";
-        IdentityFile = "${config.home.homeDirectory}/.ssh/self/gliese";
-        Port = 22;
-        HostName = "gliese.zhukovsky.me";
-      };
-      "solar" = {
-        User = "admvps";
-        IdentityFile = "${config.home.homeDirectory}/.ssh/self/solar";
-        Port = 2222;
-        HostName = "solar.zhukovsky.me";
-      };
-    };
     stepan = {
       # isp:
       "isp" = {
@@ -85,6 +56,12 @@ let
         HostName = "github.com";
       };
       # self:
+      "router" = {
+        User = "root";
+        IdentityFile = "${config.home.homeDirectory}/.ssh/self/router";
+        Port = 22;
+        HostName = "192.168.1.1";
+      };
       "allsave" = {
         User = "admserv";
         IdentityFile = config.sops.secrets."ssh/private-keys/self/allsave".path;
@@ -110,6 +87,12 @@ let
         Port = 2222;
         HostName = "solar.zhukovsky.me";
       };
+      "polaris" = {
+        User = "admvps";
+        IdentityFile = "${config.home.homeDirectory}/.ssh/self/polaris";
+        Port = 22;
+        HostName = "polaris.zhukovsky.me";
+      };
       "pixel" = {
         User = "nix-on-droid";
         IdentityFile = config.sops.secrets."ssh/private-keys/self/pixel".path;
@@ -126,8 +109,6 @@ in
     userMatchBlocks = mkOption {
       type = types.enum [
         "stepan"
-        "admserv"
-        "nix-on-droid"
         "empty" # ? if user doesn't use matchBlocks
       ];
       default = "empty";

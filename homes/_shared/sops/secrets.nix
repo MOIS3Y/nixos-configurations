@@ -25,6 +25,9 @@
     "ssh/private-keys/self/pixel" = {
       path = "${config.home.homeDirectory}/.ssh/self/pixel";
     };
+    "ssh/private-keys/self/router" = {
+      path = "${config.home.homeDirectory}/.ssh/self/router";
+    };
     "ssh/private-keys/ispsystem/go" = {
       path = "${config.home.homeDirectory}/.ssh/ispsystem/go";
     };
@@ -53,6 +56,9 @@
     "ssh/public-keys/self/pixel" = {
       path = "${config.home.homeDirectory}/.ssh/self/pixel.pub";
     };
+    "ssh/public-keys/self/router" = {
+      path = "${config.home.homeDirectory}/.ssh/self/router.pub";
+    };
     "ssh/public-keys/ispsystem/go" = {
       path = "${config.home.homeDirectory}/.ssh/ispsystem/go.pub";
     };
@@ -65,8 +71,6 @@
     # google calendar fetchers:
     "google-calendar/fetch-id" = { };
     "google-calendar/fetch-secret" = { };
-    # gemini-cli
-    "gemini-cli/gcp-id" = { };
     # ... add more secrets here:
   };
   # ... add more users with secrets here:
