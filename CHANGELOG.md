@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [26.06.0] - 2026-06-05
+
+### 🚀 Features
+
+- *(hosts/polaris)* Add new Polaris VPS configuration and secrets
+- *(vps-polaris)* Add xraymgr utility
+
+### 🐛 Bug Fixes
+
+- *(steam)* Disable gamescope capSysNice to resolve bubblewrap error
+- *(flake)* Use correct polaris host configuration path
+
+### 🛠️ Configuration
+
+- *(xdg)* Set Nautilus as primary file manager for directories
+- *(yazi)* Implement dynamic matugen theme and update config syntax
+- *(secrets)* Update host-specific encrypted values
+- *(ssh)* Update hosts and manage secrets
+
+### 🚜 Refactor
+
+- *(ssh)* Migrate from deprecated matchBlocks to settings
+
+### ⚙️ Miscellaneous Tasks
+
+- *(docs)* Trigger docs deployment on CHANGELOG.md changes
+- *(secrets)* Update desktop secrets
+
+
 ## [26.05.1] - 2026-05-16
 
 ### 🛠️ Configuration
