@@ -3,7 +3,11 @@
 # -- -- -- -- -- -- -- -- -- -- --
 # NixOS configuration for the Gliese VPS (Netherlands).
 
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  ...
+}:
 {
   imports = [
     # Custom modules:
@@ -19,8 +23,6 @@
     configurationLimit = 7;
   };
 
-  i18n.defaultLocale = "en_US.UTF-8";
-
   environment = {
     shells = [
       pkgs.bash
@@ -31,26 +33,42 @@
       curl
       dnsutils
       docker-compose
+      nitch
       git
       htop
-      ncdu
+      ipset
+      jq
       extra.nvchad
+      ncdu
       nitch
+      rsync
+      tree
+      unzip
       wget
     ];
   };
+  i18n.defaultLocale = "en_US.UTF-8";
 
   networking = {
     hostName = "gliese";
-    interfaces = {
-      ens3.ipv4.addresses = [
+    useDHCP = false;
+    interfaces.ens3 = {
+      useDHCP = false;
+      # Spoof/Hardcode the MAC address required by the hosting provider
+      macAddress = "52:54:00:73:F9:DD";
+      ipv4.addresses = [
         {
-          address = "89.110.70.126";
-          prefixLength = 24;
+          address = "157.22.182.183";
+          prefixLength = 32;
         }
       ];
     };
-    defaultGateway = "89.110.70.1";
+    # Explicitly specify the interface for the gateway
+    # since it's outside the /32 subnet
+    defaultGateway = {
+      address = "10.0.0.1";
+      interface = "ens3";
+    };
     nameservers = [
       "8.8.8.8"
       "1.1.1.1"
@@ -58,20 +76,15 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [
-        53
+        22
         80
         443
-        1500
-        24364
-        26042
+        53
       ];
       allowedUDPPorts = [
         53
         500
-        1500
         4500
-        24364
-        26042
       ];
     };
   };
@@ -82,13 +95,13 @@
       experimental-features = nix-command flakes
     '';
     settings = {
-      trusted-users = [ "admvps" ];
+      trusted-users = [ "@wheel" ];
     };
   };
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
-    (final: prev:{
+    (final: prev: {
       extra = {
         nvchad = inputs.nix4nvchad.packages."${pkgs.stdenv.hostPlatform.system}".nvchad;
       };
@@ -127,8 +140,8 @@
         PasswordAuthentication = false;
         LogLevel = "VERBOSE";
       };
-
     };
+    qemuGuest.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -139,6 +152,7 @@
         description = "Stepan Zhukovsky";
         extraGroups = [ "wheel" ];
         shell = pkgs.zsh;
+        packages = [ ];
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGtpBAY/JGXUQ8tGhgxvPoffWcK9jNY/B/YmasmN6Ykv gliese.zhukovsky.me"
         ];
@@ -153,7 +167,7 @@
       backend = "docker";
       containers = {
         portainer-agent = {
-          image = "portainer/agent:2.33.5-alpine";
+          image = "portainer/agent:2.39.3-alpine";
           hostname = "portainer-agent";
           autoStart = true;
           ports = [ "9001:9001" ];
@@ -169,5 +183,5 @@
 
   time.timeZone = "Europe/Amsterdam";
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "26.05";
 }

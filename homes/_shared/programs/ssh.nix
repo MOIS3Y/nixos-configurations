@@ -84,7 +84,7 @@ let
       "solar" = {
         User = "admvps";
         IdentityFile = config.sops.secrets."ssh/private-keys/self/solar".path;
-        Port = 2222;
+        Port = 22;
         HostName = "solar.zhukovsky.me";
       };
       "polaris" = {

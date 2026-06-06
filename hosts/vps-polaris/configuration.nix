@@ -117,7 +117,7 @@
       };
     };
 
-    qemuGuest.enable = true; # обязательно для VPS
+    qemuGuest.enable = true;
   };
 
   virtualisation.docker.enable = true;

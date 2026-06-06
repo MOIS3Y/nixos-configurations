@@ -85,7 +85,6 @@
         587 # SMTP (STARTTLS submission)
         143 # IMAP (STARTTLS)
         993 # IMAPS (Implicit TLS)
-        2222 # TODO: close it - backward compatibility
       ];
       allowedUDPPorts = [
         53
@@ -130,7 +129,7 @@
         sshd = {
           settings = {
             enable = true;
-            port = "22,2222";
+            port = "22";
           };
         };
         # ... TODO: add jails for new mail server
@@ -139,17 +138,14 @@
     openssh = {
       enable = true;
       allowSFTP = true;
-      ports = [
-        22
-        2222 # TODO: close it - backward compatibility
-      ];
+      ports = [ 22 ];
       settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = false;
         LogLevel = "VERBOSE";
       };
-
     };
+    qemuGuest.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
