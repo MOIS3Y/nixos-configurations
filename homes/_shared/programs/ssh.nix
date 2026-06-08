@@ -20,6 +20,7 @@ let
         User = "s.zhukovskii";
         IdentityFile = config.sops.secrets."ssh/private-keys/ispsystem/go".path;
         CertificateFile = "${config.home.homeDirectory}/.ssh/ispsystem/go-cert.pub";
+        IdentitiesOnly = "yes";
         Port = 22;
         HostName = "ssh.ispsystem.net";
       };
@@ -27,6 +28,7 @@ let
         User = "s.zhukovskii";
         IdentityFile = config.sops.secrets."ssh/private-keys/ispsystem/go".path;
         CertificateFile = "${config.home.homeDirectory}/.ssh/ispsystem/go-cert.pub";
+        IdentitiesOnly = "yes";
         Port = 22;
         HostName = "ssh-de.ispsystem.net";
       };
@@ -39,6 +41,7 @@ let
       "services.isptech.ru" = {
         User = "admserv";
         IdentityFile = config.sops.secrets."ssh/private-keys/ispsystem/go".path;
+        IdentitiesOnly = "yes";
         Port = 2222;
         HostName = "172.31.52.25";
       };
@@ -59,12 +62,14 @@ let
       "router" = {
         User = "root";
         IdentityFile = "${config.home.homeDirectory}/.ssh/self/router";
+        IdentitiesOnly = "yes";
         Port = 22;
         HostName = "192.168.1.1";
       };
       "allsave" = {
         User = "admserv";
         IdentityFile = config.sops.secrets."ssh/private-keys/self/allsave".path;
+        IdentitiesOnly = "yes";
         Port = 22;
         HostName = "192.168.1.100";
       };
@@ -78,24 +83,28 @@ let
       "gliese" = {
         User = "admvps";
         IdentityFile = config.sops.secrets."ssh/private-keys/self/gliese".path;
+        IdentitiesOnly = "yes";
         Port = 22;
         HostName = "gliese.zhukovsky.me";
       };
       "solar" = {
         User = "admvps";
         IdentityFile = config.sops.secrets."ssh/private-keys/self/solar".path;
+        IdentitiesOnly = "yes";
         Port = 22;
         HostName = "solar.zhukovsky.me";
       };
       "polaris" = {
         User = "admvps";
         IdentityFile = "${config.home.homeDirectory}/.ssh/self/polaris";
+        IdentitiesOnly = "yes";
         Port = 22;
         HostName = "polaris.zhukovsky.me";
       };
       "pixel" = {
         User = "nix-on-droid";
         IdentityFile = config.sops.secrets."ssh/private-keys/self/pixel".path;
+        IdentitiesOnly = "yes";
         Port = 8022;
         HostName = "pixel.zhukovsky.me";
       };
