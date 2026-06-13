@@ -56,6 +56,10 @@
       url = "github:MOIS3Y/xraymgr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    dsb = {
+      url = "github:MOIS3Y/dsb";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

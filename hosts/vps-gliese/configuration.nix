@@ -39,8 +39,10 @@
       ipset
       jq
       extra.nvchad
+      extra.dsb
       ncdu
       nitch
+      restic
       rsync
       tree
       unzip
@@ -104,6 +106,7 @@
     (final: prev: {
       extra = {
         nvchad = inputs.nix4nvchad.packages."${pkgs.stdenv.hostPlatform.system}".nvchad;
+        dsb = inputs.dsb.packages."${pkgs.stdenv.hostPlatform.system}".default;
       };
     })
   ];
