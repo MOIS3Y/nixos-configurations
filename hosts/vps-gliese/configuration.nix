@@ -6,6 +6,7 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -145,6 +146,62 @@
       };
     };
     qemuGuest.enable = true;
+  };
+
+  systemd = {
+    services = {
+      dsb-backup = {
+        description = "Docker Services Backup";
+        after = [
+          "network.target"
+          "docker.service"
+        ];
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+          Environment = [
+            "DSB_RESTIC_REPO=sftp://restic@83.234.160.93/backup/services"
+            "DSB_RESTIC_PW_FILE=/root/.restic_password"
+            "DSB_SSH_KEY=/root/.ssh/restic_ed25519"
+            "DSB_BACKUP_PATH=/services"
+          ];
+          ExecStart = "${lib.getExe pkgs.extra.dsb} backup";
+        };
+      };
+      dsb-prune = {
+        description = "Docker Services Backup Prune";
+        after = [ "network.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+          Environment = [
+            "DSB_RESTIC_REPO=sftp://restic@83.234.160.93/backup/services"
+            "DSB_RESTIC_PW_FILE=/root/.restic_password"
+            "DSB_SSH_KEY=/root/.ssh/restic_ed25519"
+            "DSB_BACKUP_PATH=/services"
+          ];
+          ExecStart = "${lib.getExe pkgs.extra.dsb} prune";
+        };
+      };
+    };
+    timers = {
+      dsb-backup = {
+        description = "Timer for Docker Services Backup";
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "20:00"; # Shifted for user's 03:00 AM GMT+9
+          Persistent = true;
+        };
+      };
+      dsb-prune = {
+        description = "Timer for Docker Services Backup Prune";
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "Sat 21:00"; # Shifted for user's 04:00 AM GMT+9
+          Persistent = true;
+        };
+      };
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
