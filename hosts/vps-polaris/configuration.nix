@@ -79,7 +79,7 @@
     (final: prev: {
       extra = {
         nvchad = inputs.nix4nvchad.packages."${pkgs.stdenv.hostPlatform.system}".nvchad;
-        xraymgr = inputs.nix4nvchad.packages."${pkgs.stdenv.hostPlatform.system}".default;
+        xraymgr = inputs.xraymgr.packages."${pkgs.stdenv.hostPlatform.system}".default;
       };
     })
   ];
