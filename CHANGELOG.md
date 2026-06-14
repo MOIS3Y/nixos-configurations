@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## [26.06.1] - 2026-06-14
+
+### 🚀 Features
+
+- *(vps-gliese)* Integrate dsb backup tool and restic
+
+### 🛠️ Configuration
+
+- *(gemini-cli)* Replace gemini-cli with antigravity-cli
+- *(vps-solar)* Migrate to new datacenter and update network settings
+- *(vps-gliese)* Migrate to new datacenter and sync host settings
+- *(server-allsave)* Update hardware configuration and mount points
+- *(ssh)* Enable IdentitiesOnly for all hosts to prevent agent auth exhaustion
+- *(secrets)* Update xray credentials for desktop devices
+- *(vps-gliese)* Automate docker backups with dsb and systemd
+- *(vps-gliese)* Update dsb configuration and ssh known hosts
+- *(vps-solar)* Automate docker backups with dsb and configure host secrets
+- Update dsb input to fix container parsing bug
+- *(vps)* Add xraymgr to all hosts and fix polaris overlay
+
+### ⚙️ Miscellaneous Tasks
+
+- *(vps-gliese)* Update dsb input to include missing runtime deps
+- *(vps-gliese)* Set up host secrets and update backup repository paths
+
+
 ## [26.06.0] - 2026-06-05
 
 ### 🚀 Features
