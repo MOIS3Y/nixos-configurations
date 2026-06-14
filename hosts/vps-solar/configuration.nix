@@ -5,7 +5,9 @@
 
 {
   inputs,
+  config,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -14,6 +16,7 @@
     ../../modules/appearance
     # Shared configuration:
     ../_shared/console.nix
+    ../_shared/sops.nix
     # Host autogenerate hardware configuration:
     ./hardware-configuration.nix # virtual
   ];
@@ -39,6 +42,7 @@
       ipset
       jq
       extra.nvchad
+      extra.dsb
       ncdu
       nitch
       rsync
@@ -107,6 +111,7 @@
     (final: prev: {
       extra = {
         nvchad = inputs.nix4nvchad.packages."${pkgs.stdenv.hostPlatform.system}".nvchad;
+        dsb = inputs.dsb.packages."${pkgs.stdenv.hostPlatform.system}".default;
       };
     })
   ];
@@ -115,6 +120,10 @@
     nh = {
       enable = true;
       flake = "/home/admvps/.setup";
+    };
+    ssh.knownHosts = {
+      "[83.234.160.93]:2022".publicKey =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDFc6AioPmPhYocNQkjs1KLUUcf0sXApd40PhZdxByh6";
     };
     zsh = {
       enable = true;
@@ -146,6 +155,72 @@
       };
     };
     qemuGuest.enable = true;
+  };
+
+  systemd = {
+    services = {
+      dsb-backup = {
+        description = "Docker Services Backup";
+        after = [
+          "network.target"
+          "docker.service"
+        ];
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+          Environment = [
+            "RESTIC_REPOSITORY_FILE=${config.sops.secrets."backups/restic-solar/repository".path}"
+            "RESTIC_PASSWORD_FILE=${config.sops.secrets."backups/restic-solar/password".path}"
+            "DSB_BACKUP_PATH=/services"
+          ];
+          ExecStart = "${pkgs.writeShellScript "dsb-backup" ''
+            ${lib.getExe pkgs.extra.dsb} \
+              -o sftp.args='-i ${
+                config.sops.secrets."backups/restic-solar/sftp/private_key".path
+              } -o BatchMode=yes' \
+              backup
+          ''}";
+        };
+      };
+      dsb-prune = {
+        description = "Docker Services Backup Prune";
+        after = [ "network.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+          Environment = [
+            "RESTIC_REPOSITORY_FILE=${config.sops.secrets."backups/restic-solar/repository".path}"
+            "RESTIC_PASSWORD_FILE=${config.sops.secrets."backups/restic-solar/password".path}"
+            "DSB_BACKUP_PATH=/services"
+          ];
+          ExecStart = "${pkgs.writeShellScript "dsb-prune" ''
+            ${lib.getExe pkgs.extra.dsb} \
+              -o sftp.args='-i ${
+                config.sops.secrets."backups/restic-solar/sftp/private_key".path
+              } -o BatchMode=yes' \
+              prune
+          ''}";
+        };
+      };
+    };
+    timers = {
+      dsb-backup = {
+        description = "Timer for Docker Services Backup";
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "20:00";
+          Persistent = true;
+        };
+      };
+      dsb-prune = {
+        description = "Timer for Docker Services Backup Prune";
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "Sat 21:00";
+          Persistent = true;
+        };
+      };
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -182,6 +257,15 @@
           extraOptions = [ "--privileged" ];
         };
       };
+    };
+  };
+
+  sops = {
+    defaultHostSopsFile = ../../secrets/hosts/vps-solar/secrets.yaml;
+    secrets = {
+      "backups/restic-solar/password" = { };
+      "backups/restic-solar/repository" = { };
+      "backups/restic-solar/sftp/private_key" = { };
     };
   };
 
