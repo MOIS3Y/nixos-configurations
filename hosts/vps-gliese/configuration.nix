@@ -119,6 +119,10 @@
       enable = true;
       flake = "/home/admvps/.setup";
     };
+    ssh.knownHosts = {
+      "[83.234.160.93]:2022".publicKey =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDFc6AioPmPhYocNQkjs1KLUUcf0sXApd40PhZdxByh6";
+    };
     zsh = {
       enable = true;
     };
@@ -162,12 +166,17 @@
           Type = "oneshot";
           User = "root";
           Environment = [
-            "DSB_RESTIC_REPO=sftp://restic-gliese@83.234.160.93/backups"
-            "DSB_RESTIC_PW_FILE=${config.sops.secrets."backups/restic-gliese/password".path}"
-            "DSB_SSH_KEY=${config.sops.secrets."backups/restic-gliese/sftp/private_key".path}"
+            "RESTIC_REPOSITORY_FILE=${config.sops.secrets."backups/restic-gliese/repository".path}"
+            "RESTIC_PASSWORD_FILE=${config.sops.secrets."backups/restic-gliese/password".path}"
             "DSB_BACKUP_PATH=/services"
           ];
-          ExecStart = "${lib.getExe pkgs.extra.dsb} backup";
+          ExecStart = "${pkgs.writeShellScript "dsb-backup" ''
+            ${lib.getExe pkgs.extra.dsb} \
+              -o sftp.args='-i ${
+                config.sops.secrets."backups/restic-gliese/sftp/private_key".path
+              } -o BatchMode=yes' \
+              backup
+          ''}";
         };
       };
       dsb-prune = {
@@ -177,12 +186,17 @@
           Type = "oneshot";
           User = "root";
           Environment = [
-            "DSB_RESTIC_REPO=sftp://restic-gliese@83.234.160.93/backups"
-            "DSB_RESTIC_PW_FILE=${config.sops.secrets."backups/restic-gliese/password".path}"
-            "DSB_SSH_KEY=${config.sops.secrets."backups/restic-gliese/sftp/private_key".path}"
+            "RESTIC_REPOSITORY_FILE=${config.sops.secrets."backups/restic-gliese/repository".path}"
+            "RESTIC_PASSWORD_FILE=${config.sops.secrets."backups/restic-gliese/password".path}"
             "DSB_BACKUP_PATH=/services"
           ];
-          ExecStart = "${lib.getExe pkgs.extra.dsb} prune";
+          ExecStart = "${pkgs.writeShellScript "dsb-prune" ''
+            ${lib.getExe pkgs.extra.dsb} \
+              -o sftp.args='-i ${
+                config.sops.secrets."backups/restic-gliese/sftp/private_key".path
+              } -o BatchMode=yes' \
+              prune
+          ''}";
         };
       };
     };
@@ -247,6 +261,7 @@
     defaultHostSopsFile = ../../secrets/hosts/vps-gliese/secrets.yaml;
     secrets = {
       "backups/restic-gliese/password" = { };
+      "backups/restic-gliese/repository" = { };
       "backups/restic-gliese/sftp/private_key" = { };
     };
   };
