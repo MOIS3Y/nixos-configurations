@@ -5,6 +5,7 @@
 
 {
   inputs,
+  config,
   pkgs,
   lib,
   ...
@@ -15,6 +16,7 @@
     ../../modules/appearance
     # Shared configuration:
     ../_shared/console.nix
+    ../_shared/sops.nix
     # Host autogenerate hardware configuration:
     ./hardware-configuration.nix # virtual
   ];
@@ -160,9 +162,9 @@
           Type = "oneshot";
           User = "root";
           Environment = [
-            "DSB_RESTIC_REPO=sftp://restic@83.234.160.93/backup/services"
-            "DSB_RESTIC_PW_FILE=/root/.restic_password"
-            "DSB_SSH_KEY=/root/.ssh/restic_ed25519"
+            "DSB_RESTIC_REPO=sftp://restic-gliese@83.234.160.93/backups"
+            "DSB_RESTIC_PW_FILE=${config.sops.secrets."backups/restic-gliese/password".path}"
+            "DSB_SSH_KEY=${config.sops.secrets."backups/restic-gliese/sftp/private_key".path}"
             "DSB_BACKUP_PATH=/services"
           ];
           ExecStart = "${lib.getExe pkgs.extra.dsb} backup";
@@ -175,9 +177,9 @@
           Type = "oneshot";
           User = "root";
           Environment = [
-            "DSB_RESTIC_REPO=sftp://restic@83.234.160.93/backup/services"
-            "DSB_RESTIC_PW_FILE=/root/.restic_password"
-            "DSB_SSH_KEY=/root/.ssh/restic_ed25519"
+            "DSB_RESTIC_REPO=sftp://restic-gliese@83.234.160.93/backups"
+            "DSB_RESTIC_PW_FILE=${config.sops.secrets."backups/restic-gliese/password".path}"
+            "DSB_SSH_KEY=${config.sops.secrets."backups/restic-gliese/sftp/private_key".path}"
             "DSB_BACKUP_PATH=/services"
           ];
           ExecStart = "${lib.getExe pkgs.extra.dsb} prune";
@@ -238,6 +240,14 @@
           extraOptions = [ "--privileged" ];
         };
       };
+    };
+  };
+
+  sops = {
+    defaultHostSopsFile = ../../secrets/hosts/vps-gliese/secrets.yaml;
+    secrets = {
+      "backups/restic-gliese/password" = { };
+      "backups/restic-gliese/sftp/private_key" = { };
     };
   };
 

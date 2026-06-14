@@ -6,7 +6,7 @@
 # /etc/ssh/ssh_host_ed25519_key
 
 # This means that when reinstalling the host or reconfiguring sshd,
-# the key will change and will not be able to decipher the secret. 
+# the key will change and will not be able to decipher the secret.
 # When reinstalling, you need to replace the public key here with the current one.
 # In order not to lose access to secret files, there is a primary key.
 # ! The primary key can decrypt any secret and must be stored in a safe place
@@ -44,6 +44,8 @@ keys:
   - &laptop age19jkshqf6qmk7kcjr5ux9agvfckcdt2gtntqn5njqlycmu73p2v2qhyqf8m
   # server:
   - &allsave age1rrsynr4y9d0n57q4ahjrukr5azspj954l4lndxx8e75njr0queksrctnv8
+  # vps:
+  - &gliese age1gqp9nhyg00028740lf50j7qww0vn7xfq7g50khpl5jumuajgw5lshgeu6g
   # user:
   - &stepan age1j20yg5zx3rjjt868phm72qaw2vetd23egux5v62plr06lwwfhg5s6tyjkn
 creation_rules:
@@ -63,6 +65,11 @@ creation_rules:
     - age:
       - *primary
       - *allsave
+  - path_regex: secrets/hosts/vps-gliese/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *primary
+      - *gliese
   # users:
   - path_regex: secrets/homes/stepan/[^/]+\.(yaml|json|env|ini)$
     key_groups:
