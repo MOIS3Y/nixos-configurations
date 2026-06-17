@@ -9,6 +9,16 @@
   lib,
   ...
 }:
+let
+  inherit (builtins) readFile;
+  raw = ../../raw/fail2ban;
+  f2b = type: name: {
+    name = "fail2ban/${type}.d/${name}.conf";
+    value = {
+      text = readFile "${raw}/${type}.d/${name}.conf";
+    };
+  };
+in
 {
   imports = [
     # Custom modules:
@@ -99,6 +109,14 @@
       wget
       unzip
     ];
+    etc = lib.listToAttrs [
+      # ? Gitea fail2ban filters and actions:
+      (f2b "filter" "gitea-bad-auth")
+      (f2b "filter" "gitea-bots")
+      (f2b "filter" "gitea-ssh")
+      (f2b "action" "gitea-docker-action")
+      (f2b "action" "gitea-docker-action-net")
+    ];
   };
 
   services = {
@@ -141,6 +159,54 @@
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
+    };
+    fail2ban = {
+      enable = true;
+      extraPackages = [ pkgs.ipset ];
+      jails = {
+        gitea-bad-auth = {
+          settings = {
+            enabled = true;
+            backend = "systemd";
+            filter = "gitea-bad-auth";
+            journalmatch = "SYSLOG_IDENTIFIER=gitea";
+            bantime = 3600;
+            findtime = 600;
+            maxretry = 5;
+            action = "gitea-docker-action";
+          };
+        };
+        gitea-bots = {
+          settings = {
+            enabled = true;
+            backend = "systemd";
+            filter = "gitea-bots";
+            journalmatch = "SYSLOG_IDENTIFIER=gitea";
+            bantime = 86400;
+            findtime = 3600;
+            maxretry = 5;
+            action = "gitea-docker-action-net";
+          };
+        };
+        gitea-ssh = {
+          settings = {
+            enabled = true;
+            backend = "systemd";
+            filter = "gitea-ssh";
+            journalmatch = "SYSLOG_IDENTIFIER=gitea";
+            bantime = 7200;
+            findtime = 3600;
+            maxretry = 10;
+            action = "gitea-docker-action";
+          };
+        };
+        sshd = {
+          settings = {
+            enable = true;
+            port = "22,2222";
+          };
+        };
+      };
     };
   };
 
