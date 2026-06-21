@@ -31,6 +31,8 @@
 #     │   └── secrets.yaml
 #     ├── vps-gliese
 #     │   └── secrets.yaml
+#     ├── vps-proxima
+#     │   └── secrets.yaml
 #     └── vps-solar
 #         └── secrets.yaml
 # -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -47,6 +49,7 @@ keys:
   # vps:
   - &gliese age1gqp9nhyg00028740lf50j7qww0vn7xfq7g50khpl5jumuajgw5lshgeu6g
   - &solar age1zwk68jcdv6yxz7nlp7dz8e0caz9q4kudztrlkqvnt39et95wmynqrhtyj4
+  # - &proxima TODO:add-key
   # user:
   - &stepan age1j20yg5zx3rjjt868phm72qaw2vetd23egux5v62plr06lwwfhg5s6tyjkn
 creation_rules:
@@ -71,6 +74,11 @@ creation_rules:
     - age:
       - *primary
       - *gliese
+  - path_regex: secrets/hosts/vps-proxima/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *primary
+      # - *proxima
   - path_regex: secrets/hosts/vps-solar/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:

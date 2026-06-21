@@ -16,6 +16,9 @@
     "ssh/private-keys/self/gliese" = {
       path = "${config.home.homeDirectory}/.ssh/self/gliese";
     };
+    "ssh/private-keys/self/proxima" = {
+      path = "${config.home.homeDirectory}/.ssh/self/proxima";
+    };
     "ssh/private-keys/self/solar" = {
       path = "${config.home.homeDirectory}/.ssh/self/solar";
     };
@@ -46,6 +49,9 @@
     };
     "ssh/public-keys/self/gliese" = {
       path = "${config.home.homeDirectory}/.ssh/self/gliese.pub";
+    };
+    "ssh/public-keys/self/proxima" = {
+      path = "${config.home.homeDirectory}/.ssh/self/proxima.pub";
     };
     "ssh/public-keys/self/solar" = {
       path = "${config.home.homeDirectory}/.ssh/self/solar.pub";

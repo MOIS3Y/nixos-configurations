@@ -1,7 +1,7 @@
 # █▀▄▀█ ▄▀█ █ █▄░█   █▀▀ █░░ ▄▀█ █▄▀ █▀▀ ▀
 # █░▀░█ █▀█ █ █░▀█   █▀░ █▄▄ █▀█ █░█ ██▄ ▄
-# https://github.com/MOIS3Y/nixos-configurations
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -
+# https://github.com/MOIS3Y/nixos-configurations
 
 {
   description = "NixOS configurations for my devices";
@@ -171,6 +171,28 @@
             }
           ];
         };
+        proxima = lib.nixosSystem {
+          specialArgs = {
+            inherit system inputs;
+          };
+          modules = [
+            ./hosts/vps-proxima/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit system inputs;
+                };
+                backupFileExtension = "backup";
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = {
+                  admvps = ./homes/admvps/home.nix;
+                };
+              };
+            }
+          ];
+        };
         solar = lib.nixosSystem {
           specialArgs = {
             inherit system inputs;
@@ -266,6 +288,7 @@
             "workstation"
             "allsave"
             "gliese"
+            "proxima"
             "solar"
             "polaris"
           ];

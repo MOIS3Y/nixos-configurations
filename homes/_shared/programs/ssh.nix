@@ -77,7 +77,7 @@ let
         User = "git";
         IdentityFile = config.sops.secrets."ssh/private-keys/self/gitea".path;
         IdentitiesOnly = "yes";
-        Port = 22;
+        Port = 2222;
         HostName = "git.zhukovsky.me";
       };
       "gliese" = {
@@ -86,6 +86,13 @@ let
         IdentitiesOnly = "yes";
         Port = 22;
         HostName = "gliese.zhukovsky.me";
+      };
+      "proxima" = {
+        User = "admvps";
+        IdentityFile = config.sops.secrets."ssh/private-keys/self/proxima".path;
+        IdentitiesOnly = "yes";
+        Port = 22;
+        HostName = "proxima.zhukovsky.me";
       };
       "solar" = {
         User = "admvps";
