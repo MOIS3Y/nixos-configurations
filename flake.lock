@@ -576,11 +576,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781450002,
-        "narHash": "sha256-hPaknzMbao2K6MyRW2FE/W0mWYC+oMBAK7cBLXT4u6E=",
+        "lastModified": 1782227417,
+        "narHash": "sha256-cdXzyQ87aL9pCVhFtQQimj9ey7TyvveDVTdBeF/RvUI=",
         "owner": "MOIS3Y",
         "repo": "xraymgr",
-        "rev": "927ddca031ed681d8cfba6570c7c9a974bdbe44f",
+        "rev": "d9f836ee2ef2be52879683fe932fc48852c9ff9c",
         "type": "github"
       },
       "original": {
