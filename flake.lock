@@ -218,11 +218,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781450082,
-        "narHash": "sha256-uEN7r7m6XqRvV8gTErZZO0S3mC5BHdg/noyCPGlXlJU=",
+        "lastModified": 1782227926,
+        "narHash": "sha256-GbvkHBrLaiUUwNJTuPNU/64tOyl2B1gA26HU7GBnyD8=",
         "owner": "MOIS3Y",
         "repo": "mdgreet",
-        "rev": "d92cea615c6a2245edd674e82d08e0159cc2266e",
+        "rev": "a2d6fa6ff246b9bba322588af92ae0f143d84e28",
         "type": "github"
       },
       "original": {
