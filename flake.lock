@@ -197,11 +197,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781449926,
-        "narHash": "sha256-Q+al9n1JIImcZYdHA4AJ/MIaU6KobvKcabTw/+AunEU=",
+        "lastModified": 1782228019,
+        "narHash": "sha256-dGTSsrSJN/loUjvuE48lw50zlB5lcd5MfIlq/ErtBSQ=",
         "owner": "MOIS3Y",
         "repo": "matugen-nix",
-        "rev": "d1e8d16bf6309a76f5aba4bc762a7c8bbebda1e8",
+        "rev": "2367bdc0408dba9efcf19cddb6987f85d220ff2b",
         "type": "github"
       },
       "original": {
