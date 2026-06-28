@@ -87,6 +87,13 @@ let
         Port = 22;
         HostName = "gliese.zhukovsky.me";
       };
+      "lyra" = {
+        User = "admvps";
+        IdentityFile = config.sops.secrets."ssh/private-keys/self/lyra".path;
+        IdentitiesOnly = "yes";
+        Port = 22;
+        HostName = "lyra.zhukovsky.me";
+      };
       "proxima" = {
         User = "admvps";
         IdentityFile = config.sops.secrets."ssh/private-keys/self/proxima".path;
