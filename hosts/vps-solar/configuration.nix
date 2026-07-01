@@ -1,7 +1,7 @@
 # █▀ █▀█ █░░ ▄▀█ █▀█   █▄░█ █ ▀▄▀
 # ▄█ █▄█ █▄▄ █▀█ █▀▄   █░▀█ █ █░█
 # -- -- -- -- -- -- -- -- -- -- -
-# NixOS configuration for the Solar VPS (Netherlands).
+# NixOS configuration for the Solar VPS (Helsinki).
 
 {
   inputs,
@@ -22,7 +22,8 @@
   ];
 
   boot.loader.grub = {
-    device = "/dev/vda";
+    enable = true;
+    device = "/dev/sda";
     configurationLimit = 7;
   };
 
@@ -56,28 +57,7 @@
 
   networking = {
     hostName = "solar";
-    useDHCP = false;
-    interfaces.ens3 = {
-      useDHCP = false;
-      # Spoof/Hardcode the MAC address required by the hosting provider
-      macAddress = "52:54:00:73:63:A6";
-      ipv4.addresses = [
-        {
-          address = "132.243.115.92";
-          prefixLength = 32;
-        }
-      ];
-    };
-    # Explicitly specify the interface for the gateway
-    # since it's outside the /32 subnet
-    defaultGateway = {
-      address = "10.0.0.1";
-      interface = "ens3";
-    };
-    nameservers = [
-      "8.8.8.8"
-      "1.1.1.1"
-    ];
+    useDHCP = true;
     firewall = {
       enable = true;
       allowedTCPPorts = [
@@ -90,9 +70,28 @@
         587 # SMTP (STARTTLS submission)
         143 # IMAP (STARTTLS)
         993 # IMAPS (Implicit TLS)
+        2056
+        2096
+        9001
+        45876
       ];
       allowedUDPPorts = [
         53
+        500
+        4500
+        45876
+      ];
+      allowedTCPPortRanges = [
+        {
+          from = 49152;
+          to = 65535;
+        }
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 49152;
+          to = 65535;
+        }
       ];
     };
   };
@@ -133,6 +132,7 @@
   };
 
   services = {
+    qemuGuest.enable = true;
     fail2ban = {
       enable = true;
       extraPackages = [ pkgs.ipset ];
@@ -156,7 +156,6 @@
         LogLevel = "VERBOSE";
       };
     };
-    qemuGuest.enable = true;
   };
 
   systemd = {
@@ -210,7 +209,7 @@
         description = "Timer for Docker Services Backup";
         wantedBy = [ "timers.target" ];
         timerConfig = {
-          OnCalendar = "20:00";
+          OnCalendar = "03:00 Asia/Chita";
           Persistent = true;
         };
       };
@@ -218,7 +217,7 @@
         description = "Timer for Docker Services Backup Prune";
         wantedBy = [ "timers.target" ];
         timerConfig = {
-          OnCalendar = "Sat 21:00";
+          OnCalendar = "Sat 04:00 Asia/Chita";
           Persistent = true;
         };
       };
@@ -271,7 +270,7 @@
     };
   };
 
-  time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "UTC";
 
   system.stateVersion = "26.05";
 }
