@@ -47,7 +47,7 @@ keys:
   # server:
   - &allsave age1rrsynr4y9d0n57q4ahjrukr5azspj954l4lndxx8e75njr0queksrctnv8
   # vps:
-  - &gliese age1gqp9nhyg00028740lf50j7qww0vn7xfq7g50khpl5jumuajgw5lshgeu6g
+  - &gliese age1lufvvhf0lgmqg9v6ygxrt54kfztspjxeuqme5352664ql4d6nadshssp3h
   - &solar age1zwk68jcdv6yxz7nlp7dz8e0caz9q4kudztrlkqvnt39et95wmynqrhtyj4
   - &proxima age1v3qswq8tphmj6cwd3d4zvmeh8euu3zqkv8jp7jf9up3787qrlqzq3enysw
   # user:
