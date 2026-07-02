@@ -1,7 +1,7 @@
 # █▀█ █▀█ █▀█ ▀▄▀ █ █▀▄▀█ ▄▀█   █▄░█ █ ▀▄▀ ▀
 # █▀▀ █▀▄ █▄█ █░█ █ █░▀░█ █▀█   █░▀█ █ █░█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- -- --
-# NixOS configuration for the Proxima VPS (Russia).
+# NixOS configuration for the Proxima VPS (Moscow).
 
 {
   inputs,
@@ -22,6 +22,7 @@
   ];
 
   boot.loader.grub = {
+    enable = true;
     device = "/dev/vda";
     configurationLimit = 7;
   };
@@ -58,23 +59,15 @@
   networking = {
     hostName = "proxima";
     useDHCP = false;
-    interfaces.ens3 = {
-      useDHCP = false;
-      # Spoof/Hardcode the MAC address required by the hosting provider
-      macAddress = "52:54:00:11:2C:B1";
-      ipv4.addresses = [
+    interfaces = {
+      ens3.ipv4.addresses = [
         {
-          address = "157.22.187.246";
-          prefixLength = 32;
+          address = "138.16.185.2";
+          prefixLength = 24;
         }
       ];
     };
-    # Explicitly specify the interface for the gateway
-    # since it's outside the /32 subnet
-    defaultGateway = {
-      address = "10.0.0.1";
-      interface = "ens3";
-    };
+    defaultGateway = "138.16.185.1";
     nameservers = [
       "8.8.8.8"
       "1.1.1.1"
@@ -85,19 +78,33 @@
         22
         80
         443
-        3478
-        4443
-        5223
         53
+        25 # SMTP (Server-to-server routing)
+        465 # SMTPS (Implicit TLS submission)
+        587 # SMTP (STARTTLS submission)
+        143 # IMAP (STARTTLS)
+        993 # IMAPS (Implicit TLS)
+        2056
+        2096
+        9001
+        45876
       ];
       allowedUDPPorts = [
         53
-        3478
+        500
+        4500
+        45876
+      ];
+      allowedTCPPortRanges = [
+        {
+          from = 49152;
+          to = 65535;
+        }
       ];
       allowedUDPPortRanges = [
         {
           from = 49152;
-          to = 49200;
+          to = 65535;
         }
       ];
     };
@@ -116,7 +123,7 @@
   nixpkgs.overlays = [
     (final: prev: {
       extra = {
-        nvchad = inputs.nix4nvchad.packages."${pkgs.stdenv.hostPlatform.system}".nvchad;
+        nvchad = inputs.nix4nvchad.packages."${pkgs.stdenv.hostPlatform.system}".default;
         dsb = inputs.dsb.packages."${pkgs.stdenv.hostPlatform.system}".default;
         xraymgr = inputs.xraymgr.packages."${pkgs.stdenv.hostPlatform.system}".default;
       };
@@ -138,6 +145,7 @@
   };
 
   services = {
+    qemuGuest.enable = true;
     fail2ban = {
       enable = true;
       extraPackages = [ pkgs.ipset ];
@@ -160,7 +168,6 @@
         LogLevel = "VERBOSE";
       };
     };
-    qemuGuest.enable = true;
   };
 
   systemd = {
@@ -214,7 +221,7 @@
         description = "Timer for Docker Services Backup";
         wantedBy = [ "timers.target" ];
         timerConfig = {
-          OnCalendar = "22:00"; # Shifted for user's 04:00 AM GMT+9
+          OnCalendar = "03:00 Asia/Chita";
           Persistent = true;
         };
       };
@@ -222,7 +229,7 @@
         description = "Timer for Docker Services Backup Prune";
         wantedBy = [ "timers.target" ];
         timerConfig = {
-          OnCalendar = "Sat 23:00"; # Shifted for user's 05:00 AM GMT+9
+          OnCalendar = "Sat 04:00 Asia/Chita";
           Persistent = true;
         };
       };
@@ -237,7 +244,6 @@
         description = "Stepan Zhukovsky";
         extraGroups = [ "wheel" ];
         shell = pkgs.zsh;
-        packages = [ ];
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG6U1y4O0AdQ2EHhgBbQYtghcBzsHNRQx214+0JBHo/U proxima.zhukovsky.me"
         ];
@@ -275,7 +281,7 @@
     };
   };
 
-  time.timeZone = "Europe/Moscow";
+  time.timeZone = "UTC";
 
   system.stateVersion = "26.05";
 }
