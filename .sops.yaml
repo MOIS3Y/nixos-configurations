@@ -49,7 +49,7 @@ keys:
   # vps:
   - &gliese age1lufvvhf0lgmqg9v6ygxrt54kfztspjxeuqme5352664ql4d6nadshssp3h
   - &solar age1z7d2gg8adcl2xq9c2hhvt8zuez3kuzlepnzmfw28rek63dfkvucqx6rr94
-  - &proxima age1v3qswq8tphmj6cwd3d4zvmeh8euu3zqkv8jp7jf9up3787qrlqzq3enysw
+  - &proxima age1px4qs575l2yf857sft3jvgjy73p5hm9nljtajy7t87f83gapfarsyr3aps
   # user:
   - &stepan age1j20yg5zx3rjjt868phm72qaw2vetd23egux5v62plr06lwwfhg5s6tyjkn
 creation_rules:
