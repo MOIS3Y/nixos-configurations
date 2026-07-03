@@ -67,11 +67,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781446550,
-        "narHash": "sha256-i3G3M/98s6knHPyPYz0teAyOPa2RVHS5/oNAyChh8z4=",
+        "lastModified": 1782181731,
+        "narHash": "sha256-pfbKtMgZvTQRdt/S5W6dYc7K2oaLd40cJ1REgYDJhtw=",
         "owner": "MOIS3Y",
         "repo": "dsb",
-        "rev": "f43c9abb5b66fd89c41d3b580851e9b998edc54d",
+        "rev": "84ae276846800c1ec88b5a2d329b7b68fb675d33",
         "type": "github"
       },
       "original": {
