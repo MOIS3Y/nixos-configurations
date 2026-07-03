@@ -171,6 +171,50 @@
             }
           ];
         };
+        lyra = lib.nixosSystem {
+          specialArgs = {
+            inherit system inputs;
+          };
+          modules = [
+            ./hosts/vps-lyra/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit system inputs;
+                };
+                backupFileExtension = "backup";
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = {
+                  admvps = ./homes/admvps/home.nix;
+                };
+              };
+            }
+          ];
+        };
+        polaris = lib.nixosSystem {
+          specialArgs = {
+            inherit system inputs;
+          };
+          modules = [
+            ./hosts/vps-polaris/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit system inputs;
+                };
+                backupFileExtension = "backup";
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = {
+                  admvps = ./homes/admvps/home.nix;
+                };
+              };
+            }
+          ];
+        };
         proxima = lib.nixosSystem {
           specialArgs = {
             inherit system inputs;
@@ -199,28 +243,6 @@
           };
           modules = [
             ./hosts/vps-solar/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                extraSpecialArgs = {
-                  inherit system inputs;
-                };
-                backupFileExtension = "backup";
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users = {
-                  admvps = ./homes/admvps/home.nix;
-                };
-              };
-            }
-          ];
-        };
-        polaris = lib.nixosSystem {
-          specialArgs = {
-            inherit system inputs;
-          };
-          modules = [
-            ./hosts/vps-polaris/configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -288,9 +310,10 @@
             "workstation"
             "allsave"
             "gliese"
+            "lyra"
+            "polaris"
             "proxima"
             "solar"
-            "polaris"
           ];
         in
         (builtins.listToAttrs (
