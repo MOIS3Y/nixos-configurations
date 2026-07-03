@@ -21,13 +21,10 @@
 
   boot = {
     loader.grub = {
-      device = "/dev/sda";
+      enable = true;
+      device = "/dev/vda";
       configurationLimit = 7;
     };
-    kernelParams = [
-      "console=tty0"
-      "console=ttyS0,115200"
-    ];
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -44,24 +41,54 @@
       git
       htop
       extra.nvchad
-      extra.xraymgr
     ];
   };
 
   networking = {
     hostName = "polaris";
-    useDHCP = true;
-    useNetworkd = true;
-
+    useDHCP = false;
+    interfaces = {
+      ens3.ipv4.addresses = [
+        {
+          address = "46.151.31.83";
+          prefixLength = 24;
+        }
+      ];
+    };
+    defaultGateway = "46.151.31.1";
+    nameservers = [
+      "8.8.8.8"
+      "1.1.1.1"
+    ];
     firewall = {
       enable = true;
       allowedTCPPorts = [
+        22
         80
         443
+        53
+        2056
+        2096
+        9001
+        45876
       ];
       allowedUDPPorts = [
+        53
         500
         4500
+        45876
+      ];
+      allowedTCPPortRanges = [
+        {
+          from = 49152;
+          to = 65535;
+        }
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 49152;
+          to = 65535;
+        }
       ];
     };
   };
@@ -78,8 +105,7 @@
   nixpkgs.overlays = [
     (final: prev: {
       extra = {
-        nvchad = inputs.nix4nvchad.packages."${pkgs.stdenv.hostPlatform.system}".nvchad;
-        xraymgr = inputs.xraymgr.packages."${pkgs.stdenv.hostPlatform.system}".default;
+        nvchad = inputs.nix4nvchad.packages."${pkgs.stdenv.hostPlatform.system}".default;
       };
     })
   ];
@@ -95,6 +121,7 @@
   };
 
   services = {
+    qemuGuest.enable = true;
     fail2ban = {
       enable = true;
       extraPackages = [ pkgs.ipset ];
@@ -116,8 +143,6 @@
         LogLevel = "VERBOSE";
       };
     };
-
-    qemuGuest.enable = true;
   };
 
   virtualisation.docker.enable = true;
@@ -132,7 +157,7 @@
     ];
   };
 
-  time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "UTC";
 
   system.stateVersion = "26.05";
 }
