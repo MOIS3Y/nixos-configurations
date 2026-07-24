@@ -21,11 +21,7 @@
     };
     openrazer = {
       # ? needed for Razer Leviathan V2
-      # ? waiting: https://github.com/openrazer/openrazer/pull/2644
-      # enable = lib.elem config.networking.hostName [ "workstation" ];
-
-      # ! build failure: https://github.com/NixOS/nixpkgs/issues/414604
-      enable = false;
+      enable = lib.elem config.networking.hostName [ "workstation" ];
       users = [ "stepan" ];
     };
     xone = {

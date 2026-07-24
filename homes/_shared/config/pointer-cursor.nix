@@ -6,6 +6,7 @@
 { config, ... }:
 {
   home.pointerCursor = {
+    enable = true;
     name = config.desktop.cursor.name;
     package = config.desktop.cursor.package;
     size = 24;
