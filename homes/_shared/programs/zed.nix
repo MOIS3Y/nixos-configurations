@@ -292,6 +292,9 @@
       disable_ai = false;
 
       agent_servers = {
+        codex-acp = {
+          type = "registry";
+        };
         opencode = {
           type = "registry";
         };
