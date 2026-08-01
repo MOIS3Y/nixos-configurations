@@ -6,6 +6,13 @@
 {
   description = "NixOS configurations for my devices";
 
+  nixConfig = {
+    extra-substituters = [ "https://mois3y.cachix.org" ];
+    extra-trusted-public-keys = [
+      "mois3y.cachix.org-1:DdCvRmrGrXyR+lG9dPP9n+IQh7v6aa/mL2kJ22gFKII="
+    ];
+  };
+
   inputs = {
     # Default:
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -50,7 +57,6 @@
     };
     mdgreet = {
       url = "github:MOIS3Y/mdgreet";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     xraymgr = {
       url = "github:MOIS3Y/xraymgr";

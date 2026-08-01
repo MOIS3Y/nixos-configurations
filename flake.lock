@@ -213,16 +213,14 @@
     "mdgreet": {
       "inputs": {
         "flake-utils": "flake-utils_3",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1785168673,
-        "narHash": "sha256-Vt62EhSGBB9Jq/mgXXul4j33Fqvipu2BYgBuQfqXM4Q=",
+        "lastModified": 1785556515,
+        "narHash": "sha256-Z+fojJFc/r0NvTkKMywhmXo2d4eVSqWITh2JBkAE2To=",
         "owner": "MOIS3Y",
         "repo": "mdgreet",
-        "rev": "3b27ef7d5fa5bc2704551453ae757fdda9b825f0",
+        "rev": "843c969a1e8923664e8907e508fe793a70536805",
         "type": "github"
       },
       "original": {
@@ -360,6 +358,22 @@
       "locked": {
         "lastModified": 1785454630,
         "narHash": "sha256-LQy14TZp77TwbQf40gg1V3jo8FwJG0jGDkAH+zRHqg8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1559d3daa3ecc813a650b79375ea61b6741b8746",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1785454630,
+        "narHash": "sha256-LQy14TZp77TwbQf40gg1V3jo8FwJG0jGDkAH+zRHqg8=",
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "1559d3daa3ecc813a650b79375ea61b6741b8746",
@@ -437,7 +451,7 @@
         "mdgreet": "mdgreet",
         "nix-on-droid": "nix-on-droid",
         "nix4nvchad": "nix4nvchad",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "nvchad-on-steroids": "nvchad-on-steroids",
         "sops-nix": "sops-nix",
         "xraymgr": "xraymgr"
