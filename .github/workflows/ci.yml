@@ -33,4 +33,4 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@v14
 
       - name: Check Flake Evaluation
-        run: nix flake check --no-build
+        run: nix flake check --no-build --accept-flake-config
