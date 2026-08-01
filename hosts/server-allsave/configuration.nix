@@ -78,7 +78,31 @@ in
       enp7s0.useDHCP = true;
     };
     firewall = {
-      enable = false;
+      enable = true;
+      allowedTCPPorts = [
+        22 # OpenSSH
+        80 # HTTP reverse proxy
+        443 # HTTPS reverse proxy
+        445 # SMB file sharing
+        631 # CUPS printing
+        2022 # SFTPGo SFTP service
+        2222 # Gitea SSH
+        8096 # Jellyfin web interface
+        8200 # MiniDLNA web interface
+        32400 # Plex Media Server
+        51413 # BitTorrent peer traffic
+      ];
+      allowedUDPPorts = [
+        1900 # MiniDLNA and Plex SSDP discovery
+        1901 # Plex DLNA discovery
+        5353 # Avahi and Plex mDNS discovery
+        7359 # Jellyfin discovery
+        32410 # Plex GDM discovery
+        32412 # Plex GDM discovery
+        32413 # Plex GDM discovery
+        32414 # Plex GDM discovery
+        51413 # BitTorrent peer traffic
+      ];
     };
   };
 
@@ -229,7 +253,8 @@ in
           tls = true;
           tls_starttls = false;
           from = "allsave@zhukovsky.me";
-          host = "mail.zhukovsky.me";
+          host = "smtp.zhukovsky.me";
+          port = 465;
           user = "allsave@zhukovsky.me";
           passwordeval = "cat ${config.sops.secrets."passwords/msmtp".path}";
         };
