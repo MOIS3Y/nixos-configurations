@@ -19,11 +19,7 @@
     (lua.withPackages (ps: with ps; [ luarocks ]))
     nodejs_26
     (python3.withPackages (ps: with ps; [ pip ]))
-    #! poetry build is broken
-    #? see: https://github.com/NixOS/nixpkgs/issues/544083
-    (poetry.overridePythonAttrs (old: {
-      doCheck = false;
-    }))
+    poetry
     uv
 
     # Development Rust Env (for quick use without nix develop or shell):
