@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784881750,
-        "narHash": "sha256-z//4yTw8wb/zgoechrJYlDtUOvHsk9b9B1Qzok+1K8I=",
+        "lastModified": 1785898599,
+        "narHash": "sha256-+VwaLIh7KvZSLaBP5UjsDyIdr2iNI4YZgy+Ja3iXYYQ=",
         "owner": "MOIS3Y",
         "repo": "assets4nix",
-        "rev": "ff77ed01289da7082b200111cf47990fed2267ae",
+        "rev": "dbd418562462dbdcccc73399d15ac11218674272",
         "type": "github"
       },
       "original": {
