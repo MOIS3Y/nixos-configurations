@@ -14,36 +14,40 @@
   };
 
   inputs = {
-    # Default:
+    # Core:
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Android:
+
+    # Platforms:
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    # Extra:
+
+    # Appearance:
     distro-grub-themes = {
       url = "github:AdisonCavani/distro-grub-themes";
-    };
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     matugen-nix = {
       url = "github:MOIS3Y/matugen-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    aladdin4nix = {
-      url = "github:MOIS3Y/aladdin4nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     assets4nix = {
       url = "github:MOIS3Y/assets4nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Programs:
+    aladdin-nix = {
+      url = "github:MOIS3Y/aladdin-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dion-nix = {
+      url = "github:MOIS3Y/dion-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix4nvchad = {
@@ -57,6 +61,12 @@
     };
     mdgreet = {
       url = "github:MOIS3Y/mdgreet";
+    };
+
+    # Services:
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     xraymgr = {
       url = "github:MOIS3Y/xraymgr";

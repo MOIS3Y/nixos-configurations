@@ -1,22 +1,22 @@
 {
   "nodes": {
-    "aladdin4nix": {
+    "aladdin-nix": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1735875501,
-        "narHash": "sha256-222CVkuEiPUgw2Eva/ZScn4k5z8e1747YfpHpw7Fr68=",
+        "lastModified": 1786864832,
+        "narHash": "sha256-CVuRMMPZONQLMdwQNZV4DPFi+JfmyfHShDEiPp5pHNs=",
         "owner": "MOIS3Y",
-        "repo": "aladdin4nix",
-        "rev": "d161d1d693340d9c2a17ae652efb1c38289912e4",
+        "repo": "aladdin-nix",
+        "rev": "fddf638a55c3360e3f662d600515a06016f8bb0d",
         "type": "github"
       },
       "original": {
         "owner": "MOIS3Y",
-        "repo": "aladdin4nix",
+        "repo": "aladdin-nix",
         "type": "github"
       }
     },
@@ -37,6 +37,26 @@
       "original": {
         "owner": "MOIS3Y",
         "repo": "assets4nix",
+        "type": "github"
+      }
+    },
+    "dion-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786863637,
+        "narHash": "sha256-yMzQTS7ac7G7dCJwalZC3jM9GMaJI01WljPpqLHL14A=",
+        "owner": "MOIS3Y",
+        "repo": "dion-nix",
+        "rev": "aae895cbf95f732944f5a1646434e9ee8fc4f3cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MOIS3Y",
+        "repo": "dion-nix",
         "type": "github"
       }
     },
@@ -423,8 +443,9 @@
     },
     "root": {
       "inputs": {
-        "aladdin4nix": "aladdin4nix",
+        "aladdin-nix": "aladdin-nix",
         "assets4nix": "assets4nix",
+        "dion-nix": "dion-nix",
         "distro-grub-themes": "distro-grub-themes",
         "dsb": "dsb",
         "home-manager": "home-manager",
