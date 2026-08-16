@@ -57,10 +57,12 @@
 
     # Security:
     age
+    extra.aladdin-nix
     sops
     totp-cli
 
     # Society / Communication:
+    extra.dion-nix
     mattermost-desktop
     telegram-desktop
 
