@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## [26.08.0] - 2026-08-24
+
+### 🚀 Features
+
+- *(hosts)* Add lyra vps configuration
+
+### 🐛 Bug Fixes
+
+- *(secrets)* Add missing age key to proxima secrets
+
+### 🛠️ Configuration
+
+- *(server-allsave)* Configure fail2ban for gitea and ssh
+- *(hosts)* Add Proxima VPS configuration
+- *(sops)* Add Proxima age key for decryption
+- *(ssh)* Add lyra host keys and configuration
+- *(vps-gliese)* Migrate to Nuremberg datacenter
+- *(vps-gliese)* Update sops age key and re-encrypt secrets
+- *(vps-solar)* Migrate to Helsinki datacenter
+- *(vps-solar)* Update sops age key and re-encrypt secrets
+- *(vps-proxima)* Migrate to Moscow datacenter
+- *(vps-proxima)* Update sops age key and re-encrypt secrets
+- *(vps-polaris)* Migrate to new datacenter
+- Update flake inputs and shared configurations
+- *(ai)* Add Codex CLI and Zed ACP integration
+- *(inputs)* Adapt shared packages and nvchad to updated inputs
+- *(allsave)* Enable firewall and update SMTP endpoint
+- *(android)* Track nix-on-droid master
+- *(mdgreet)* Enable Cachix binary substitutions
+- *(flake)* Add aladdin-nix and dion-nix inputs
+- *(home)* Add Aladdin and Dion packages
+
+### ⚙️ Miscellaneous Tasks
+
+- Accept flake cache configuration
+
+
 ## [26.06.1] - 2026-06-14
 
 ### 🚀 Features
