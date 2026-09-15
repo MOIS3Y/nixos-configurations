@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786864832,
-        "narHash": "sha256-CVuRMMPZONQLMdwQNZV4DPFi+JfmyfHShDEiPp5pHNs=",
+        "lastModified": 1788270893,
+        "narHash": "sha256-vLTQh9bGNjslQTdzc3cPNx3Wm8M/H6LauIHHbbA5UbE=",
         "owner": "MOIS3Y",
         "repo": "aladdin-nix",
-        "rev": "fddf638a55c3360e3f662d600515a06016f8bb0d",
+        "rev": "eac91e1018308cd49e2fdc7025ce8faa30506aa0",
         "type": "github"
       },
       "original": {
