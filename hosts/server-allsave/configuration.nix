@@ -56,27 +56,11 @@ in
         MAILFROM allsave@zhukovsky.me
       '';
     };
-    extraModprobeConfig = ''
-      options kvm_amd nested=1
-    '';
-    kernel.sysctl = {
-      "net.bridge.bridge-nf-call-ip6tables" = 0;
-      "net.bridge.bridge-nf-call-iptables" = 0;
-      "net.bridge.bridge-nf-call-arptables" = 0;
-    };
-    kernelModules = [ "br_netfilter" ];
   };
 
   networking = {
     hostName = "allsave";
-    useDHCP = false; # DHCP is enabled in the configuration of each interface
-    bridges = {
-      vmbr0.interfaces = [ "enp5s0" ];
-    };
-    interfaces = {
-      vmbr0.useDHCP = true;
-      enp7s0.useDHCP = true;
-    };
+    useDHCP = true;
     firewall = {
       enable = true;
       allowedTCPPorts = [
@@ -266,10 +250,7 @@ in
     admserv = {
       isNormalUser = true;
       description = "Stepan Zhukovsky";
-      extraGroups = [
-        "wheel"
-        "libvirtd"
-      ];
+      extraGroups = [ "wheel" ];
       shell = pkgs.zsh;
       packages = [ ];
       openssh.authorizedKeys.keys = [
@@ -278,14 +259,7 @@ in
     };
   };
 
-  virtualisation = {
-    docker = {
-      enable = true;
-    };
-    libvirtd = {
-      enable = true;
-    };
-  };
+  virtualisation.docker.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
 

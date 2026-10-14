@@ -17,7 +17,7 @@
     # Shared configuration:
     ../_shared
     # Host autogenerate hardware configuration:
-    ./hardware-configuration.nix # msi-z390-a-pro
+    ./hardware-configuration.nix # MSI B850 GAMING PRO WIFI6E
   ];
 
   # Override _shared configuration:
@@ -26,7 +26,6 @@
       grubTheme = "msi";
     };
     hardware = {
-      motherboard.cpu = "intel";
       gpu.enable = true;
       graphics.enable = true;
       bluetooth.enable = true;
@@ -69,6 +68,23 @@
   networking.hostName = "workstation";
 
   time.timeZone = "Asia/Chita";
+
+  boot = {
+    extraModulePackages = [
+      config.boot.kernelPackages.nct6687d
+      config.boot.kernelPackages.ddcci-driver
+    ];
+    kernelModules = [
+      "k10temp"
+      "nct6687"
+      "i2c-piix4"
+      "ddcci_backlight"
+      "i2c-dev"
+    ];
+    extraModprobeConfig = ''
+      options nct6687 msi_fan_brute_force=1
+    '';
+  };
 
   # Set desktop configuration:
   desktop = {

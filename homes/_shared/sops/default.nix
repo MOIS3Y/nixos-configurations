@@ -39,8 +39,5 @@ in
         import ./secrets.nix { inherit config; }
       ); # stepan is a default value to return if the path does not exist in attrset
     };
-    home.activation.setupEtc = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-      /run/current-system/sw/bin/systemctl start --user sops-nix
-    '';
   };
 }

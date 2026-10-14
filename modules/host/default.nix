@@ -3,14 +3,16 @@
 # -- -- -- -- -- -
 # Global configuration options for host-specific hardware and services.
 
-{ config, lib, ... }: let
+{ lib, ... }:
+let
   inherit (lib)
     mkOption
     mkEnableOption
     types
-    literalMD
-    literalExpression;
-in {
+    literalExpression
+    ;
+in
+{
   options.host = {
     boot = {
       grubTheme = mkOption {
@@ -36,23 +38,6 @@ in {
     };
 
     hardware = {
-      motherboard = {
-        cpu = mkOption {
-          type = types.nullOr (types.enum [ "amd" "intel" ]);
-          default = if config.hardware.cpu.intel.updateMicrocode then "intel"
-            else if config.hardware.cpu.amd.updateMicrocode then "amd"
-            else null;
-          defaultText = literalMD ''
-            if config.hardware.cpu.intel.updateMicrocode then "intel"
-            else if config.hardware.cpu.amd.updateMicrocode then "amd"
-            else null;
-          '';
-          description = ''
-            CPU family of motherboard.
-            Allows for addition motherboard i2c support.
-          '';
-        };
-      };
       bluetooth = {
         enable = mkEnableOption "Whether to enable bluetooth services";
       };
@@ -65,7 +50,7 @@ in {
       openRGB = {
         enable = mkEnableOption "Whether to enable openRGB service";
       };
-      coolercontrol= {
+      coolercontrol = {
         enable = mkEnableOption "Whether to enable coolercontrol program";
       };
       ddcci = {
@@ -103,5 +88,5 @@ in {
     };
   };
 
-  config = {};
+  config = { };
 }

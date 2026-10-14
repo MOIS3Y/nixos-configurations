@@ -81,14 +81,7 @@ in
       };
     };
     evolution-alarm-notify = {
-      description = "evolution-alarm-notify daemon for get alarm reminders";
       wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.evolution-data-server}/libexec/evolution-data-server/evolution-alarm-notify";
-      };
     };
   };
 }

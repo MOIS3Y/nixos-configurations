@@ -22,7 +22,6 @@
       grubTheme = "huawei";
     };
     hardware = {
-      motherboard.cpu = "intel";
       graphics.enable = true;
       bluetooth.enable = true;
     };
