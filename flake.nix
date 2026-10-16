@@ -50,6 +50,10 @@
       url = "github:MOIS3Y/dion-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    yandex-music-nix = {
+      url = "github:MOIS3Y/yandex-music-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";

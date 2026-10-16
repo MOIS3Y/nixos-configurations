@@ -43,6 +43,7 @@
     cassette
     celluloid
     delfin
+    extra.yandex-music-nix
     feishin
     imv
     shotwell

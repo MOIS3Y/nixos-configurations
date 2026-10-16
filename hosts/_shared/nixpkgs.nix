@@ -24,6 +24,7 @@ in
           dion-nix = inputs.dion-nix.packages.${system}.default;
           nvchad = inputs.nix4nvchad.packages.${system}.default;
           mdgreet = inputs.mdgreet.packages.${system}.default;
+          yandex-music-nix = inputs.yandex-music-nix.packages.${system}.default;
         };
       })
     ];

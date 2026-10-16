@@ -456,7 +456,8 @@
         "nixpkgs": "nixpkgs_3",
         "nvchad-on-steroids": "nvchad-on-steroids",
         "sops-nix": "sops-nix",
-        "xraymgr": "xraymgr"
+        "xraymgr": "xraymgr",
+        "yandex-music-nix": "yandex-music-nix"
       }
     },
     "scss-reset": {
@@ -573,6 +574,26 @@
       "original": {
         "owner": "MOIS3Y",
         "repo": "xraymgr",
+        "type": "github"
+      }
+    },
+    "yandex-music-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792080088,
+        "narHash": "sha256-PVUmT4xfBpLjsmdLER0nxe+YNlRm7J27UOSJOfR4dR4=",
+        "owner": "MOIS3Y",
+        "repo": "yandex-music-nix",
+        "rev": "a4948f19543fac2aae54bd23888cacd18f08ee59",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MOIS3Y",
+        "repo": "yandex-music-nix",
         "type": "github"
       }
     }
