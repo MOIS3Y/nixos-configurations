@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [26.10.0] - 2026-10-16
+
+### 🐛 Bug Fixes
+
+- *(boot)* Use removable EFI path on workstation
+
+### 🛠️ Configuration
+
+- *(hosts)* Update workstation and allsave after hardware changes
+- *(home)* Add Yandex Music
+
+
 ## [26.08.0] - 2026-08-24
 
 ### 🚀 Features
