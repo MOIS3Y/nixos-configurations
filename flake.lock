@@ -47,11 +47,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789454516,
-        "narHash": "sha256-0IerkWpxASkM93BaNXRxIY1k55EM5J9Afcw0yej8icQ=",
+        "lastModified": 1791025588,
+        "narHash": "sha256-MbdxBoAavfzAQjX7rZcAlag0G480GqpknjB6HVUcDfM=",
         "owner": "MOIS3Y",
         "repo": "dion-nix",
-        "rev": "ad6a9071af347e2fa8eeeb721fe88150139a66f4",
+        "rev": "3c85324d0bcb357b27b2852d917b5a686c10a3e2",
         "type": "github"
       },
       "original": {
