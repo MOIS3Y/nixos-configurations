@@ -5,6 +5,7 @@
 
 {
   config,
+  lib,
   pkgs,
   ...
 }:
@@ -70,6 +71,10 @@
   time.timeZone = "Asia/Chita";
 
   boot = {
+    loader = {
+      efi.canTouchEfiVariables = lib.mkForce false;
+      grub.efiInstallAsRemovable = true;
+    };
     extraModulePackages = [
       config.boot.kernelPackages.nct6687d
       config.boot.kernelPackages.ddcci-driver
