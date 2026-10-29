@@ -39,7 +39,9 @@
     sqlitebrowser
 
     # Media:
-    amberol
+    # !TODO: Re-enable Amberol once the sphinxHook fix reaches nixos-unstable:
+    # see: https://github.com/NixOS/nixpkgs/pull/573479
+    # amberol
     cassette
     celluloid
     delfin
