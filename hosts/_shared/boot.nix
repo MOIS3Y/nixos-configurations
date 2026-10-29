@@ -16,7 +16,6 @@ let
 in
 {
   boot = {
-    initrd.verbose = false;
     consoleLogLevel = 0;
     kernelParams = [
       "quiet"
