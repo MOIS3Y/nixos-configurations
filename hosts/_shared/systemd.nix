@@ -70,6 +70,24 @@ in
     # add base systemd user services here ...
   }
   // optionalAttrs (config.desktop.enable && !desktopManager.gnome.enable) {
+    dcal = {
+      description = "Dux Calendar";
+      wantedBy = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      path = [ pkgs.quickshell ];
+      unitConfig = {
+        StartLimitIntervalSec = 60;
+        StartLimitBurst = 5;
+      };
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${lib.getExe pkgs.dux-calendar} run --session --hidden";
+        Restart = "on-failure";
+        RestartSec = 2;
+        Slice = "app.slice";
+      };
+    };
     polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
       wantedBy = [ "graphical-session.target" ];
