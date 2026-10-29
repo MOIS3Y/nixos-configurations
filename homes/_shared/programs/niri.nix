@@ -293,7 +293,7 @@ in
             spawn "dms" "ipc" "call" "audio" "mute"
           }
           XF86AudioMicMute allow-when-locked=true {
-            spawn "dms" "ipc" "call" "audio" "micmute"
+            spawn "dms" "ipc" "call" "mic" "mute"
           }
 
           // Media Control
@@ -438,7 +438,7 @@ in
 
           // Screenshots
           Print      { spawn "dms" "screenshot"; }
-          Mod+Print  { spawn-sh "dms screenshot region --stdout | swappy -f -"; }
+          Mod+Print  { spawn-sh "dms screenshot --stdout | swappy -f -"; }
           Ctrl+Print { screenshot-screen; }
           Alt+Print  { screenshot-window; }
         }

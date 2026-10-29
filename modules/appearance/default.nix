@@ -37,6 +37,8 @@
           background = "#11111b";
           backgroundText = "#cdd6f4";
           outline = "#45475a";
+          surfaceContainerLowest = "#11111b";
+          surfaceContainerLow = "#181825";
           surfaceContainer = "#181825";
           surfaceContainerHigh = "#1e1e2e";
           surfaceContainerHighest = "#313244";
@@ -59,6 +61,8 @@
           background = "#eff1f5";
           backgroundText = "#4c4f69";
           outline = "#acb0be";
+          surfaceContainerLowest = "#eff1f5";
+          surfaceContainerLow = "#e6e9ef";
           surfaceContainer = "#e6e9ef";
           surfaceContainerHigh = "#ccd0da";
           surfaceContainerHighest = "#bcc0cc";
@@ -91,6 +95,8 @@
                 background = "#11111b";
                 backgroundText = "#cdd6f4";
                 outline = "#45475a";
+                surfaceContainerLowest = "#11111b";
+                surfaceContainerLow = "#181825";
                 surfaceContainer = "#181825";
                 surfaceContainerHigh = "#1e1e2e";
                 surfaceContainerHighest = "#313244";
@@ -112,6 +118,8 @@
                 background = "#eff1f5";
                 backgroundText = "#4c4f69";
                 outline = "#acb0be";
+                surfaceContainerLowest = "#eff1f5";
+                surfaceContainerLow = "#e6e9ef";
                 surfaceContainer = "#e6e9ef";
                 surfaceContainerHigh = "#ccd0da";
                 surfaceContainerHighest = "#bcc0cc";

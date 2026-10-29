@@ -88,11 +88,11 @@ spawn-sh-at-startup "${pkgs.extra.mdgreet} --config ${
 
 ### Example C: Desktop Shell (DMS)
 
-Similarly, the **Dank Material Shell** consumes its theme from a JSON file generated from the `custom.dms` set:
+Similarly, **Dux Shell (DMS)** consumes its theme from a JSON file generated from the `custom.dms` set:
 
 ```nix
 # homes/_shared/programs/dms.nix
-xdg.configFile."DankMaterialShell/theme.json".text = 
+xdg.configFile."dms/themes/${cfg.theme.id}/theme.json".text =
   builtins.toJSON config.matugen.theme.custom.dms;
 ```
 

@@ -17,14 +17,14 @@ in
     {
       assertion = ((cfg.compositors != [ ]) -> !config.services.desktopManager.gnome.enable);
       message = ''
-        [Configuration Error] dms-shell and GNOME are mutually exclusive!
+        [Configuration Error] Dux Shell and GNOME are mutually exclusive!
 
         Problem detected:
-        - Standalone compositors are requested in `desktop.compositors` (triggering dms-shell).
+        - Standalone compositors are requested in `desktop.compositors` (triggering Dux Shell).
         - GNOME is enabled via `services.desktopManager.gnome.enable`.
 
         Required action:
-        Disable GNOME to use standalone compositors with dms-shell.
+        Disable GNOME to use standalone compositors with Dux Shell.
       '';
     }
     {
@@ -51,7 +51,7 @@ in
       enable = lib.mkDefault config.desktop.enable;
     };
 
-    dms-shell = {
+    dux-shell = {
       enable = (cfg.compositors != [ ] && !config.services.desktopManager.gnome.enable);
     };
 

@@ -48,7 +48,7 @@ in the official **[Documentation](https://mois3y.github.io/nixos-configurations/
 - **OS**: [NixOS Unstable](https://nixos.org)
 - **Display Manager**: greetd + [mdgreet](https://github.com/MOIS3Y/mdgreet)
 - **Compositor**: [Niri](https://github.com/niri-wm/niri)
-- **Desktop Shell**: [DMS](https://github.com/AvengeMedia/DankMaterialShell)
+- **Desktop Shell**: [Dux Shell (DMS)](https://github.com/duxlabs-dev/dux-shell)
 - **Shell**: Zsh
 - **Terminals**: Kitty, Alacritty
 - **Theming**: [Catppuccin Mocha](https://catppuccin.com)
