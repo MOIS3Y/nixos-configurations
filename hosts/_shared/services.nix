@@ -256,6 +256,15 @@ in
       };
     };
 
+    power-profiles-daemon = {
+      enable = lib.mkDefault (
+        config.desktop.enable
+        && !config.services.tlp.enable
+        && !config.services.auto-cpufreq.enable
+        && !config.services.tuned.enable
+      );
+    };
+
     printing = {
       enable = true;
       startWhenNeeded = true;
