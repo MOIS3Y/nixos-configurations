@@ -117,7 +117,11 @@
     devices = {
       monitors = {
         "DP-1" = {
-          mode = "1920x1080@143.855";
+          mode = "1920x1080@165.003";
+          variable-refresh-rate = {
+            enable = true;
+            on-demand = true;
+          };
           position = {
             x = 0;
             y = 0;

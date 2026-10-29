@@ -44,6 +44,10 @@ let
   mkMonitor = name: cfg: ''
     output "${name}" {
       ${optionalString (cfg.focus-at-startup or false) "focus-at-startup"}
+      ${optionalString (cfg.variable-refresh-rate.enable or false) (
+        "variable-refresh-rate"
+        + optionalString (cfg.variable-refresh-rate.on-demand or false) " on-demand=true"
+      )}
       mode "${cfg.mode}"
       scale ${toString (cfg.scale or 1)}
       position x=${toString cfg.position.x} y=${toString cfg.position.y}
@@ -239,6 +243,14 @@ in
           match app-id=r#"^org\.gnome\.Calculator$"#
           open-floating true
           open-focused true
+        }
+
+        // Games: Enable on-demand VRR
+        window-rule {
+          match app-id=r#"^steam_app_\d+$"#
+          match app-id=r#"^gamescope$"#
+          match app-id=r#"^(com\.libretro\.RetroArch|retroarch)$"#
+          variable-refresh-rate true
         }
 
         // --- GESTURES
