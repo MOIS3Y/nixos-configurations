@@ -22,6 +22,7 @@ in
           aladdin-nix = inputs.aladdin-nix.packages.${system}.default;
           assets4nix = inputs.assets4nix.packages.${system}.default;
           dion-nix = inputs.dion-nix.packages.${system}.default;
+          dms-plugins = inputs.dms-plugin-registry.packages.${system};
           nvchad = inputs.nix4nvchad.packages.${system}.default;
           mdgreet = inputs.mdgreet.packages.${system}.default;
           yandex-music-nix = inputs.yandex-music-nix.packages.${system}.default;

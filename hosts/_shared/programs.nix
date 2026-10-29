@@ -53,6 +53,16 @@ in
 
     dux-shell = {
       enable = (cfg.compositors != [ ] && !config.services.desktopManager.gnome.enable);
+      plugins = {
+        dankActions = {
+          enable = true;
+          src = pkgs.extra.dms-plugins.dankActions;
+        };
+        quickCapture = {
+          enable = true;
+          src = pkgs.extra.dms-plugins.quickCapture;
+        };
+      };
     };
 
     gamescope = {

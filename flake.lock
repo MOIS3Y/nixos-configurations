@@ -79,6 +79,26 @@
         "type": "github"
       }
     },
+    "dms-plugin-registry": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793156972,
+        "narHash": "sha256-H+HzU0rnqNEgACisaGfBR5CqU0jatBAO0lexFr6cEl8=",
+        "owner": "duxlabs-dev",
+        "repo": "dux-plugin-registry",
+        "rev": "0fb79ce25b21a6dabac87f4211bf65becab68ae3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "duxlabs-dev",
+        "repo": "dux-plugin-registry",
+        "type": "github"
+      }
+    },
     "dsb": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -447,6 +467,7 @@
         "assets4nix": "assets4nix",
         "dion-nix": "dion-nix",
         "distro-grub-themes": "distro-grub-themes",
+        "dms-plugin-registry": "dms-plugin-registry",
         "dsb": "dsb",
         "home-manager": "home-manager",
         "matugen-nix": "matugen-nix",

@@ -10,7 +10,7 @@
   ...
 }:
 let
-  inherit (config.desktop) cursor games;
+  inherit (config.desktop) compositors cursor games;
   inherit (config.host) hardware virtualisation;
 in
 {
@@ -70,6 +70,16 @@ in
       gnomeExtensions.caffeine
       gnomeExtensions.system-monitor
       gnomeExtensions.useless-gaps
+    ]
+    # Dux Shell plugin dependencies:
+    ++ lib.optionals (compositors != [ ]) [
+      ffmpeg
+      gpu-screen-recorder
+      imagemagick
+      img2pdf
+      tesseract
+      wf-recorder
+      zbar
     ]
     ++ lib.optionals (config.desktop.enable && games.enable) games.extraPackages
     ++ lib.optionals (config.desktop.enable && hardware.gpu.enable) [
