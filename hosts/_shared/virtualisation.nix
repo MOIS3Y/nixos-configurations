@@ -3,15 +3,15 @@
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 # Configures libvirtd and docker.
 
-{ config, ... }:
-let
-  cfg = config.host.virtualisation;
-in
+{ lib, ... }:
 {
-  virtualisation.libvirtd = {
-    enable = cfg.libvirtd.enable;
-  };
-  virtualisation.docker = {
-    enable = cfg.docker.enable;
+  virtualisation = {
+    libvirtd = {
+      enable = lib.mkDefault true;
+    };
+    docker = {
+      enable = lib.mkDefault true;
+      enableOnBoot = lib.mkDefault false;
+    };
   };
 }

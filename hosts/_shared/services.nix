@@ -208,7 +208,7 @@ in
     };
 
     lact = {
-      enable = config.host.hardware.gpu.enable;
+      enable = lib.mkDefault (lib.elem config.networking.hostName [ "workstation" ]);
     };
 
     logind = {
@@ -221,13 +221,6 @@ in
           HandleLidSwitchExternalPower = "suspend";
           HandleLidSwitchDocked = "ignore";
         };
-      };
-    };
-
-    hardware = {
-      openrgb = {
-        enable = config.host.hardware.openRGB.enable;
-        package = pkgs.openrgb-with-all-plugins;
       };
     };
 
@@ -273,8 +266,7 @@ in
     udev = {
       packages = [
         # add common udev packages here ...
-      ]
-      ++ lib.optionals config.host.hardware.ddcci.enable [ pkgs.ddcutil ];
+      ];
     };
 
     upower = {

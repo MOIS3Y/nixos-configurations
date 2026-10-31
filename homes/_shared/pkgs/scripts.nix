@@ -11,7 +11,7 @@
 }:
 {
   home.packages =
-    lib.optionals osConfig.host.hardware.coolercontrol.enable [
+    lib.optionals osConfig.programs.coolercontrol.enable [
       (pkgs.writeShellScriptBin "cct" ''
         set -euo pipefail
 

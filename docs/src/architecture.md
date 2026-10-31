@@ -16,7 +16,6 @@ While I use custom abstractions to keep the host configurations clean, everythin
 The `modules` directory contains shared configurations that define custom options. These options act as a "public API" for each host, wrapping complex logic into simple toggles.
 
 - **Desktop Modules:** Settings for compositors, display managers, and gaming.
-- **Host Modules:** Hardware-level settings (GPU, CPU, DDCCI), boot, and system services.
 - **Android Modules:** Configurations for `nix-on-droid`.
 
 ---
@@ -25,43 +24,39 @@ The `modules` directory contains shared configurations that define custom option
 
 The modularity is built on a two-step pattern.
 
-### 1. Setting the Option (Host Level)
+### 1. Shared Defaults and Host Overrides
 
-Each machine in `hosts/` selects its features by setting options defined in the modules. This keeps the host's `configuration.nix` declarative and high-level.
+Hardware and system services use native NixOS options directly. Shared modules set common defaults with `lib.mkDefault`; each host overrides them in its own `configuration.nix` with ordinary assignments. `lib.mkForce` is reserved for overriding stronger definitions or replacing merged lists.
 
 ```nix
-# In hosts/desktop-workstation/configuration.nix
+# In hosts/_shared/hardware.nix
+{ lib, ... }: {
+  hardware.bluetooth.enable = lib.mkDefault true;
+}
+
+# In a host's configuration.nix, when Bluetooth is not needed
 {
-  host.hardware.ddcci.enable = true; # Enable monitor control
-  desktop.games.enable = true;      # Enable Steam & Gaming tools
+  hardware.bluetooth.enable = false;
 }
 ```
 
-### 2. Implementation Logic (Shared Level)
+The desktop hosts share enabled Bluetooth, graphics, Docker, and libvirt. Docker uses `enableOnBoot = false` for socket activation. Libvirt's service and guest restoration are removed from boot targets while its sockets remain enabled.
 
-The shared modules in `hosts/_shared/` use these options to conditionally apply configurations. This is where the actual "heavy lifting" happens.
+GRUB defaults to the NixOS theme. Each host selects its own theme with `boot.loader.grub.theme`; the shared splash image follows the selected theme.
 
-#### Example: Hardware Activation (`hosts/_shared/boot.nix`)
+### 2. Device-Specific Hardware
 
-When `host.hardware.ddcci.enable` is set to `true`, the shared boot module automatically includes the necessary kernel drivers and modules:
+Settings such as AMD overdrive, LACT, CoolerControl, and DDC/CI are enabled explicitly on the workstation. DDC/CI drivers and udev rules are kept together in its `configuration.nix`:
 
 ```nix
-# In hosts/_shared/boot.nix
-{ config, lib, ... }: {
-  boot = {
-    extraModulePackages = [ ] 
-      ++ lib.optionals config.host.hardware.ddcci.enable [ 
-        config.boot.kernelPackages.ddcci-driver 
-      ];
-
-    kernelModules = [ ]
-      ++ lib.optionals config.host.hardware.ddcci.enable [ 
-        "ddcci_backlight" 
-        "i2c-dev" 
-      ];
-  };
+{ config, pkgs, ... }: {
+  boot.extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
+  boot.kernelModules = [ "ddcci_backlight" "i2c-dev" ];
+  services.udev.packages = [ pkgs.ddcutil ];
 }
 ```
+
+Custom `desktop` options remain useful where one feature configures several related programs.
 
 #### Example: Feature Flagging (`hosts/_shared/programs.nix`)
 
@@ -80,6 +75,6 @@ Similarly, the `desktop.games.enable` flag triggers the installation and configu
 ## Folder Structure Summary
 
 - `modules/`: **The Definitions**. Defines *what* options exist and what types they have.
-- `hosts/_shared/`: **The Logic**. Defines *how* system state changes based on those options.
-- `hosts/<machine>/`: **The Consumption**. Decides *which* options to enable for a specific device.
+- `hosts/_shared/`: **The Defaults and Logic**. Sets native NixOS defaults and implements desktop features.
+- `hosts/<machine>/`: **The Host Settings**. Overrides shared defaults and configures device-specific hardware.
 - `homes/`: **The User**. Isolated Home Manager configurations for users, keeping system and user logic separate.

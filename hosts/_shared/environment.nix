@@ -11,7 +11,7 @@
 }:
 let
   inherit (config.desktop) compositors cursor games;
-  inherit (config.host) hardware virtualisation;
+  inherit (config) virtualisation;
 in
 {
   environment.systemPackages =
@@ -83,7 +83,7 @@ in
       zbar
     ]
     ++ lib.optionals (config.desktop.enable && games.enable) games.extraPackages
-    ++ lib.optionals (config.desktop.enable && hardware.gpu.enable) [
+    ++ lib.optionals (config.desktop.enable && config.services.lact.enable) [
       amdgpu_top
       lact
       nvtopPackages.amd

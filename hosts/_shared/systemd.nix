@@ -10,8 +10,7 @@
   ...
 }:
 let
-  cfgVirt = config.host.virtualisation;
-  inherit (lib) mkForce mkIf optionalAttrs;
+  inherit (lib) mkForce optionalAttrs;
   inherit (config.services) desktopManager;
 in
 {
@@ -43,9 +42,12 @@ in
   ];
 
   systemd.services = {
-    libvirtd.wantedBy = mkIf cfgVirt.libvirtd.startWhenNeeded (mkForce [ ]);
-    libvirt-guests.wantedBy = mkIf cfgVirt.libvirtd.startWhenNeeded (mkForce [ ]);
-    docker.wantedBy = mkIf cfgVirt.docker.startWhenNeeded (mkForce [ ]);
+    # add base systemd services here ...
+  }
+  // optionalAttrs config.virtualisation.libvirtd.enable {
+    # Keep socket activation without starting libvirt or restoring guests at boot.
+    libvirtd.wantedBy = mkForce [ ];
+    libvirt-guests.wantedBy = mkForce [ ];
   };
 
   systemd.tmpfiles.settings = {

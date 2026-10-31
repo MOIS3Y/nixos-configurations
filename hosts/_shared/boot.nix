@@ -7,12 +7,12 @@
   inputs,
   config,
   pkgs,
+  lib,
   ...
 }:
 let
   system = pkgs.stdenv.hostPlatform.system;
-  cfg = config.host.boot;
-  theme = inputs.distro-grub-themes.packages.${system}."${cfg.grubTheme}-grub-theme";
+  theme = inputs.distro-grub-themes.packages.${system}.nixos-grub-theme;
 in
 {
   boot = {
@@ -32,8 +32,8 @@ in
         useOSProber = true;
         configurationLimit = 5;
         gfxmodeEfi = "1920x1080";
-        splashImage = "${theme}/splash_image.jpg";
-        inherit theme;
+        splashImage = "${config.boot.loader.grub.theme}/splash_image.jpg";
+        theme = lib.mkDefault theme;
       };
     };
     plymouth = {

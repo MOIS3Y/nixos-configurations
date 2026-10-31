@@ -44,7 +44,7 @@ in
 
   programs = {
     coolercontrol = {
-      enable = config.host.hardware.coolercontrol.enable;
+      enable = lib.mkDefault (lib.elem config.networking.hostName [ "workstation" ]);
     };
 
     dconf = {
@@ -78,7 +78,7 @@ in
 
     nh = {
       enable = true;
-      flake = config.host.flake;
+      flake = lib.mkDefault "/home/stepan/.setup";
     };
 
     niri = {

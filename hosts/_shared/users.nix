@@ -3,14 +3,9 @@
 # -- -- -- -- -- -- -
 # Configures global users and their default groups.
 
+{ pkgs, ... }:
 {
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-let
-  allUsers = {
+  users.users = {
     stepan = {
       isNormalUser = true;
       description = "Stepan Zhukovsky";
@@ -25,7 +20,5 @@ let
       shell = pkgs.zsh;
     };
   };
-in
-{
-  users.users = lib.attrsets.getAttrs config.host.users allUsers;
+  # add more users here ...
 }

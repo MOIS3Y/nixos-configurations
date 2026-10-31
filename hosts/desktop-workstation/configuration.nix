@@ -4,50 +4,27 @@
 # NixOS configuration for the primary workstation.
 
 {
+  inputs,
   config,
   lib,
   pkgs,
   ...
 }:
+let
+  system = pkgs.stdenv.hostPlatform.system;
+in
 {
   imports = [
     # Custom modules:
     ../../modules/appearance
     ../../modules/desktop
-    ../../modules/host
     # Shared configuration:
     ../_shared
     # Host autogenerate hardware configuration:
-    ./hardware-configuration.nix # MSI B850 GAMING PRO WIFI6E
+    ./hardware-configuration.nix
   ];
 
-  # Override _shared configuration:
-  host = {
-    boot = {
-      grubTheme = "msi";
-    };
-    hardware = {
-      gpu.enable = true;
-      graphics.enable = true;
-      bluetooth.enable = true;
-      ddcci.enable = true;
-      openRGB.enable = false;
-      coolercontrol.enable = true;
-    };
-    virtualisation = {
-      docker = {
-        enable = true;
-        startWhenNeeded = true;
-      };
-      libvirtd = {
-        enable = true;
-        startWhenNeeded = true;
-      };
-    };
-    users = [ "stepan" ];
-    flake = "/home/stepan/.setup";
-  };
-
+  # override shared configuration:
   sops = {
     defaultHostSopsFile = ../../secrets/hosts/desktop-workstation/secrets.yaml;
     secrets = {
@@ -66,14 +43,13 @@
     };
   };
 
-  networking.hostName = "workstation";
-
-  time.timeZone = "Asia/Chita";
-
   boot = {
     loader = {
+      grub = {
+        theme = inputs.distro-grub-themes.packages.${system}.msi-grub-theme;
+        efiInstallAsRemovable = true;
+      };
       efi.canTouchEfiVariables = lib.mkForce false;
-      grub.efiInstallAsRemovable = true;
     };
     extraModulePackages = [
       config.boot.kernelPackages.nct6687d
@@ -90,6 +66,18 @@
       options nct6687 msi_fan_brute_force=1
     '';
   };
+
+  hardware = {
+    amdgpu.overdrive.enable = true;
+  };
+
+  services = {
+    udev.packages = [ pkgs.ddcutil ];
+  };
+
+  networking.hostName = "workstation";
+
+  time.timeZone = "Asia/Chita";
 
   # Set desktop configuration:
   desktop = {

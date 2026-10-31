@@ -1,44 +1,28 @@
 # █░░ ▄▀█ █▀█ ▀█▀ █▀█ █▀█   █▄░█ █ ▀▄▀ ▀
 # █▄▄ █▀█ █▀▀ ░█░ █▄█ █▀▀   █░▀█ █ █░█ ▄
 # -- -- -- -- -- -- -- -- -- -- -- -- --
-# NixOS configuration for the Huawei Honor MagicBook (laptop).
+# NixOS configuration for the Lenovo ThinkBook 14 G7 ARP.
 
-{ pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  ...
+}:
+let
+  system = pkgs.stdenv.hostPlatform.system;
+in
 {
   imports = [
     # Custom modules:
     ../../modules/appearance
     ../../modules/desktop
-    ../../modules/host
     # Shared configuration:
     ../_shared
     # Host autogenerate hardware configuration:
-    ./hardware-configuration.nix # honor-vlr-w09
+    ./hardware-configuration.nix
   ];
 
-  # Override _shared configuration:
-  host = {
-    boot = {
-      grubTheme = "lenovo";
-    };
-    hardware = {
-      graphics.enable = true;
-      bluetooth.enable = true;
-    };
-    virtualisation = {
-      docker = {
-        enable = true;
-        startWhenNeeded = true;
-      };
-      libvirtd = {
-        enable = true;
-        startWhenNeeded = true;
-      };
-    };
-    users = [ "stepan" ];
-    flake = "/home/stepan/.setup";
-  };
-
+  # override shared configuration:
   sops = {
     defaultHostSopsFile = ../../secrets/hosts/desktop-laptop/secrets.yaml;
     secrets = {
@@ -49,13 +33,21 @@
     };
   };
 
-  networking.hostName = "laptop";
-
-  time.timeZone = "Asia/Chita";
+  boot = {
+    loader = {
+      grub = {
+        theme = inputs.distro-grub-themes.packages.${system}.lenovo-grub-theme;
+      };
+    };
+  };
 
   services = {
     fprintd.enable = true;
   };
+
+  networking.hostName = "laptop";
+
+  time.timeZone = "Asia/Chita";
 
   # Set desktop configuration:
   desktop = {

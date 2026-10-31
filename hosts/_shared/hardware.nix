@@ -10,14 +10,14 @@
 }:
 {
   hardware = {
-    amdgpu.overdrive.enable = config.host.hardware.gpu.enable;
+    amdgpu.overdrive.enable = lib.mkDefault false;
     bluetooth = {
-      enable = config.host.hardware.bluetooth.enable;
+      enable = lib.mkDefault true;
       powerOnBoot = true;
     };
-    graphics = lib.mkIf config.host.hardware.graphics.enable {
-      enable = true;
-      enable32Bit = true;
+    graphics = {
+      enable = lib.mkDefault true;
+      enable32Bit = lib.mkDefault true;
     };
     openrazer = {
       # ? needed for Razer Leviathan V2
