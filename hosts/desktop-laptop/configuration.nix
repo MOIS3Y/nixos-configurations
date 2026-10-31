@@ -19,7 +19,7 @@
   # Override _shared configuration:
   host = {
     boot = {
-      grubTheme = "huawei";
+      grubTheme = "lenovo";
     };
     hardware = {
       graphics.enable = true;
@@ -72,13 +72,19 @@
     devices = {
       monitors = {
         "eDP-1" = {
-          mode = "1920x1080@60.000";
-          position = { x = 0; y = 0; };
+          mode = "1920x1200@60.003";
+          position = {
+            x = 0;
+            y = 0;
+          };
           focus-at-startup = true;
         };
         "HDMI-A-1" = {
           mode = "1920x1080@60.000";
-          position = { x = 1920; y = 0; };
+          position = {
+            x = 1920;
+            y = 0;
+          };
         };
       };
       lid.enable = true;

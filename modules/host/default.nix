@@ -19,6 +19,7 @@ in
         type = types.enum [
           "gigabyte"
           "huawei"
+          "lenovo"
           "msi"
           "nixos"
         ];
