@@ -34,6 +34,9 @@ in
   };
 
   boot = {
+    # Work around the ACPI power-button regression in Linux 6.18.57/6.18.58.
+    # Tracking issue: https://github.com/NixOS/nixpkgs/issues/577729
+    blacklistedKernelModules = [ "tiny_power_button" ];
     loader = {
       grub = {
         theme = inputs.distro-grub-themes.packages.${system}.lenovo-grub-theme;
