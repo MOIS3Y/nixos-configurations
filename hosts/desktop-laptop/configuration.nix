@@ -53,6 +53,10 @@
 
   time.timeZone = "Asia/Chita";
 
+  services = {
+    fprintd.enable = true;
+  };
+
   # Set desktop configuration:
   desktop = {
     enable = true;
