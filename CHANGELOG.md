@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file.
 
+## [26.11.0] - 2026-11-03
+
+### 🚀 Features
+
+- *(dms)* Migrate configuration to Dux Shell 2.0
+- *(dms)* Manage plugins declaratively
+- *(calendar)* Add Dux Calendar integration
+- *(laptop)* Enable fingerprint authentication with fprintd
+- *(laptop)* Enable fingerprint in mdgreet
+- *(files)* Default to Dux Files outside GNOME
+- *(dms)* Enable the calculator plugin
+- *(desktop)* Install Dux GOP
+- *(scripts)* Add UPower battery charge limit toggle for laptop
+
+### 🐛 Bug Fixes
+
+- *(boot)* Remove obsolete initrd verbosity option
+- *(packages)* Disable Amberol until sphinxHook is fixed
+- *(qt)* Use Dux-generated palettes and portal dialogs
+- *(laptop)* Blacklist tiny_power_button to prevent shutdown on resume
+- *(nvim)* Update config to use IblIndent
+
+### 🛠️ Configuration
+
+- *(power)* Enable power profiles on desktop hosts
+- *(display)* Enable 165 Hz and on-demand VRR
+- *(laptop)* Configure Lenovo ThinkBook hardware
+- *(desktop)* Retire GNOME account services
+- *(polkit)* Use the Dux Shell agent
+- *(gamescope)* Restore CAP_SYS_NICE
+- *(media)* Restore Amberol
+- *(storage)* Consolidate workstation volumes and clean /tmp on boot
+
+### 🚜 Refactor
+
+- *(hosts)* Replace custom host options with native NixOS settings
+- *(nh)* Derive flake path from user home
+- *(services)* Simplify shared declarations
+
+
 ## [26.10.0] - 2026-10-16
 
 ### 🐛 Bug Fixes
