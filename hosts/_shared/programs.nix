@@ -54,6 +54,10 @@ in
     dux-shell = {
       enable = (cfg.compositors != [ ] && !config.services.desktopManager.gnome.enable);
       plugins = {
+        calculator = {
+          enable = true;
+          src = pkgs.extra.dms-plugins.calculator;
+        };
         dankActions = {
           enable = true;
           src = pkgs.extra.dms-plugins.dankActions;
