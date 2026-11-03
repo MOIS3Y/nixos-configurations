@@ -97,6 +97,12 @@ let
   # -- -- -- -- -- -- -- -- -- -- -
   associate = mimes: app: lib.genAttrs mimes (_: [ app ]);
 
+  fileManager =
+    if config.desktop.desktopManager.gnome.enable or false then
+      "org.gnome.Nautilus.desktop"
+    else
+      "dev.duxlabs.files.desktop";
+
   # Final mapping:
   # -- -- -- -- -- -
   associations =
@@ -104,7 +110,7 @@ let
     // (associate editor "nvim.desktop")
     // (associate archives "org.gnome.FileRoller.desktop")
     // {
-      "inode/directory" = [ "org.gnome.Nautilus.desktop;yazi.desktop" ];
+      "inode/directory" = [ fileManager "yazi.desktop" ];
       "video/*" = [ "io.github.celluloid_player.Celluloid.desktop" ];
       "audio/*" = [ "io.bassi.Amberol.desktop" ];
       "audio/mpeg" = [ "io.bassi.Amberol.desktop" ];

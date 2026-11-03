@@ -285,6 +285,7 @@ in
           Mod+Return hotkey-overlay-title="Open a Terminal: Kitty" { spawn "kitty"; }
           Mod+T hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
           Mod+B hotkey-overlay-title="Run an Application: Firefox" { spawn "firefox"; }
+          Mod+E hotkey-overlay-title="Open File Manager: Dux Files" { spawn "dfiles"; }
           Mod+M repeat=false hotkey-overlay-title="App Launcher: Toggle" {
             spawn "dms" "ipc" "call" "spotlight" "toggle"
           }

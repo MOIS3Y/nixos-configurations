@@ -46,12 +46,12 @@ in
       appimage-run
       adwaita-icon-theme # ! required for most gnome apps
       dux-calendar
+      dux-files
       evince
       file-roller
       firefox
       gnome-calculator
       libnotify
-      nautilus
       pavucontrol
       pywalfox-native
       xdg-utils
@@ -63,6 +63,7 @@ in
     ]
     ++ lib.optionals config.services.desktopManager.gnome.enable [
       dconf-editor
+      nautilus
       gnomeExtensions.auto-move-windows
       gnomeExtensions.appindicator
       gnomeExtensions.caffeine
