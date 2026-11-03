@@ -76,7 +76,7 @@ in
 
     nh = {
       enable = true;
-      flake = lib.mkDefault "/home/stepan/.setup";
+      flake = lib.mkDefault "${config.users.users.stepan.home}/.setup";
     };
 
     niri = {
