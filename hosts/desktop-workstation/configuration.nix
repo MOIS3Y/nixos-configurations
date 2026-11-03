@@ -44,6 +44,7 @@ in
   };
 
   boot = {
+    tmp.cleanOnBoot = true;
     loader = {
       grub = {
         theme = inputs.distro-grub-themes.packages.${system}.msi-grub-theme;

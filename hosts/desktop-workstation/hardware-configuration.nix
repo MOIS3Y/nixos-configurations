@@ -45,18 +45,6 @@
     fsType = "ext4";
   };
 
-  fileSystems."/var/lib/docker" = {
-    device = "/dev/disk/by-label/docker";
-    fsType = "ext4";
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-label/nix";
-    fsType = "ext4";
-    neededForBoot = true;
-    options = [ "noatime" ];
-  };
-
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
