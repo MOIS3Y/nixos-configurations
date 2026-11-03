@@ -47,6 +47,7 @@ in
       adwaita-icon-theme # ! required for most gnome apps
       dux-calendar
       dux-files
+      dux-gop
       evince
       file-roller
       firefox
