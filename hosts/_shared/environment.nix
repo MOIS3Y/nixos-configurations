@@ -44,7 +44,6 @@ in
     # optional:
     ++ lib.optionals config.desktop.enable [
       appimage-run
-      at-spi2-atk # ! required for polkit-gnome-authentication-agent-1
       adwaita-icon-theme # ! required for most gnome apps
       dux-calendar
       evince
