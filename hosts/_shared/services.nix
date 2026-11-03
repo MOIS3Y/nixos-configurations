@@ -179,6 +179,11 @@ in
 
               spawn-sh-at-startup "${lib.getExe pkgs.extra.mdgreet} --config ${
                 (pkgs.formats.toml { }).generate "mdgreet.toml" {
+                  auth = {
+                    fingerprint = {
+                      enable = config.networking.hostName == "laptop";
+                    };
+                  };
                   appearance = {
                     greeting = "NixOS";
                     font_family = "Ubuntu";

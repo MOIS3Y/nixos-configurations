@@ -48,6 +48,11 @@ in
     fprintd.enable = true;
   };
 
+  security.pam.services.login.rules.auth.fprintd.settings = {
+    max-tries = 3;
+    timeout = 10;
+  };
+
   networking.hostName = "laptop";
 
   time.timeZone = "Asia/Chita";
