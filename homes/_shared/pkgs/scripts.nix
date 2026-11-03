@@ -101,7 +101,67 @@
         esac
       '')
     ]
-    ++ [
-      # Add new custom scripts here...
+    ++ lib.optionals (
+      (osConfig.services.upower.enable or false) && osConfig.networking.hostName == "laptop"
+    ) [
+      (pkgs.writeShellApplication {
+        name = "bct";
+        runtimeInputs = [ pkgs.systemd ];
+        text = ''
+          service="org.freedesktop.UPower"
+          device="/org/freedesktop/UPower/devices/battery_BAT0"
+          interface="org.freedesktop.UPower.Device"
+
+          get_property() {
+            local result
+            result=$(busctl --system get-property "$service" "$device" "$interface" "$1")
+            case "$result" in
+              "b true") echo true ;;
+              "b false") echo false ;;
+              *) echo "Unexpected UPower response: $result" >&2; return 1 ;;
+            esac
+          }
+
+          set_limit() {
+            if [[ $(get_property ChargeThresholdSupported) != true ]]; then
+              echo "Battery charge limiting is not supported by UPower." >&2
+              return 1
+            fi
+            busctl --system call "$service" "$device" "$interface" \
+              EnableChargeThreshold b "$1"
+          }
+
+          if (( $# != 1 )); then
+            echo "Usage: bct [--toggle|-t|--status|-s|--on|--off]" >&2
+            exit 1
+          fi
+
+          case "$1" in
+            -s|--status)
+              current=$(get_property ChargeThresholdEnabled)
+              if [[ "$current" == true ]]; then
+                echo ON
+              else
+                echo OFF
+              fi
+              ;;
+            -t|--toggle)
+              current=$(get_property ChargeThresholdEnabled)
+              if [[ "$current" == true ]]; then
+                set_limit false
+              else
+                set_limit true
+              fi
+              ;;
+            --on) set_limit true ;;
+            --off) set_limit false ;;
+            -h|--help)
+              echo "Usage: bct [--toggle|-t|--status|-s|--on|--off]"
+              echo "Toggle battery charge limiting via UPower (BAT0)."
+              ;;
+            *) echo "Unknown option: $1" >&2; exit 1 ;;
+          esac
+        '';
+      })
     ];
 }
