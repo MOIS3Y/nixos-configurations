@@ -111,18 +111,10 @@ in
     };
 
     gnome = {
-      at-spi2-core = {
-        enable = lib.mkDefault config.desktop.enable;
-      };
-      sushi = {
-        enable = lib.mkDefault config.desktop.enable;
-      };
-      gnome-keyring = {
-        enable = config.services.desktopManager.gnome.enable;
-      };
-      localsearch = {
-        enable = lib.mkDefault config.desktop.enable;
-      };
+      at-spi2-core.enable = lib.mkDefault config.desktop.enable;
+      sushi.enable = lib.mkDefault config.desktop.enable;
+      gnome-keyring.enable = config.services.desktopManager.gnome.enable;
+      localsearch.enable = lib.mkDefault config.desktop.enable;
     };
 
     greetd = {
@@ -260,12 +252,6 @@ in
     printing = {
       enable = true;
       startWhenNeeded = true;
-    };
-
-    udev = {
-      packages = [
-        # add common udev packages here ...
-      ];
     };
 
     upower = {
