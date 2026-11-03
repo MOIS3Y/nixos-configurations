@@ -72,10 +72,6 @@ in
       capSysNice = false;
     };
 
-    geary = {
-      enable = lib.mkDefault config.desktop.enable;
-    };
-
     nh = {
       enable = true;
       flake = lib.mkDefault "/home/stepan/.setup";

@@ -100,8 +100,5 @@ in
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       };
     };
-    evolution-alarm-notify = {
-      wantedBy = [ "graphical-session.target" ];
-    };
   };
 }

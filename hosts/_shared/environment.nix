@@ -51,8 +51,6 @@ in
       file-roller
       firefox
       gnome-calculator
-      gnome-calendar
-      gnome-online-accounts-gtk
       libnotify
       nautilus
       pavucontrol

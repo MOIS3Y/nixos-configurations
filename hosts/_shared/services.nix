@@ -118,13 +118,7 @@ in
         enable = lib.mkDefault config.desktop.enable;
       };
       gnome-keyring = {
-        enable = lib.mkDefault config.desktop.enable;
-      };
-      evolution-data-server = {
-        enable = lib.mkDefault config.desktop.enable;
-      };
-      gnome-online-accounts = {
-        enable = lib.mkDefault config.desktop.enable;
+        enable = config.services.desktopManager.gnome.enable;
       };
       localsearch = {
         enable = lib.mkDefault config.desktop.enable;
