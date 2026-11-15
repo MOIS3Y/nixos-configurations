@@ -30,6 +30,7 @@
     rustfmt
 
     # Development Tools:
+    freecad-wayland
     gettext
     gimp
     gnumake
