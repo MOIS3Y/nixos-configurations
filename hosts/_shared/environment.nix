@@ -81,7 +81,17 @@ in
       wf-recorder
       zbar
     ]
-    ++ lib.optionals (config.desktop.enable && games.enable) games.extraPackages
+    ++ lib.optionals (config.desktop.enable && games.enable) (
+      games.extraPackages
+      ++ [
+        # Gamescope exposes SteamOS' "Switch to Desktop" action, but a regular
+        # NixOS session needs this helper to terminate Steam and return to greetd.
+        # https://github.com/ValveSoftware/steam-for-linux/issues/11749
+        (writeShellScriptBin "steamos-session-select" ''
+          exec ${lib.getExe config.programs.steam.package} -shutdown
+        '')
+      ]
+    )
     ++ lib.optionals (config.desktop.enable && config.services.lact.enable) [
       amdgpu_top
       lact

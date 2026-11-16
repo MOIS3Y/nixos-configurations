@@ -98,6 +98,11 @@ in
       };
       gamescopeSession = {
         enable = true;
+        steamArgs = [
+          "-steamos3"
+          "-gamepadui"
+          "-pipewire-dmabuf"
+        ];
       };
     };
 
