@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [26.11.1] - 2026-11-16
+
+### 🚀 Features
+
+- *(packages)* Add FreeCAD
+
+### 🐛 Bug Fixes
+
+- *(gamescope)* Return to greetd from Steam session
+
+
 ## [26.11.0] - 2026-11-03
 
 ### 🚀 Features
